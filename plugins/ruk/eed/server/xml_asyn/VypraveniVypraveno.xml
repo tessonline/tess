@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VypraveniVypraveno xmlns="http://nsess.public.cz/erms/v_01_00" xmlns:ess="http://mvcr.cz/ess/v_1.0.0.0" xmlns:isds="http://isds.czechpoint.cz/v20" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://nsess.public.cz/erms/v_01_00/ermsAsynU.xsd" UdalostId="0">
+	<DokumentVypravenoVypraveni>
+		<IdDokument>
+			<Identifikator>
+				<ess:HodnotaID>String</ess:HodnotaID>
+				<ess:ZdrojID>String</ess:ZdrojID>
+			</Identifikator>
+			<DoplnujiciData/>
+		</IdDokument>
+		<DoplnujiciData/>
+		<Vypraveni>
+			<Identifikator>
+				<ess:HodnotaID>String</ess:HodnotaID>
+				<ess:ZdrojID>String</ess:ZdrojID>
+			</Identifikator>
+			<ZasilkaInfo>
+				<TextAdresy>
+					<AdresaRadek1>String</AdresaRadek1>
+					<AdresaRadek2>String</AdresaRadek2>
+					<AdresaRadek3>String</AdresaRadek3>
+					<AdresaRadek4>String</AdresaRadek4>
+					<AdresaRadek5>String</AdresaRadek5>
+					<AdresaRadek6>String</AdresaRadek6>
+					<AdresaRadek7>String</AdresaRadek7>
+					<AdresaRadek8>String</AdresaRadek8>
+				</TextAdresy>
+				<ZpusobManipulaceId>Posta</ZpusobManipulaceId>
+				<ZpusobZachazeniId>BezDoplnkoveSluzby</ZpusobZachazeniId>
+				<DruhZasilkyId>Balik</DruhZasilkyId>
+				<DatumVypraveni>1967-08-13</DatumVypraveni>
+				<Vaha>3.141</Vaha>
+				<Poplatek>3.14</Poplatek>
+				<PodaciCislo>String</PodaciCislo>
+				<IdZasilky>String</IdZasilky>
+				<StavZasilky>nevypraveno</StavZasilky>
+				<Poznamka>String</Poznamka>
+				<DatumDoruceni>1967-08-13</DatumDoruceni>
+				<Soubory>
+					<dmFile dmMimeType="String" dmFileMetaType="main" dmFileGuid="String" dmUpFileGuid="String" dmFileDescr="String" dmFormat="String">
+						<isds:dmXMLContent/>
+						<Identifikator>
+							<ess:HodnotaID>String</ess:HodnotaID>
+							<ess:ZdrojID>String</ess:ZdrojID>
+						</Identifikator>
+					</dmFile>
+				</Soubory>
+				<dmID>String</dmID>
+			</ZasilkaInfo>
+		</Vypraveni>
+	</DokumentVypravenoVypraveni>
+	<Autorizace>
+		<provedlKdo>String</provedlKdo>
+		<provedlKdy>2001-12-17T09:30:47-05:00</provedlKdy>
+	</Autorizace>
+</VypraveniVypraveno>

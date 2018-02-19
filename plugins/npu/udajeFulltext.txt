@@ -1,0 +1,83 @@
+
+[id] => 50539790
+[jmeno] => oltáø hlavní
+[url] => http://iispptest.npu.cz/katalog_ext?presenter=LegalStatesResults&action=legalState&legalState=50539790
+[relevance] => 4.0790467
+[uzemniIdentifikace] => [rozsahID] => 0
+[metadata] => Array
+        [nazev] => typEntity
+        [codebookID] => 1123
+        [codebookValue] => 8
+        [hodnota] => Památkový katalog - právní stav
+
+        [nazev] => anotace
+        [codebookID] => 0
+        [codebookValue] => 0
+
+        [nazev] => stavOchrany
+        [codebookID] => 0
+        [codebookValue] => 0
+        [hodnota] => zapsáno do státního seznamu pøed r.1988
+
+        [nazev] => upresneniTypuOchrany
+        [codebookID] => 0
+        [codebookValue] => 0
+        [hodnota] => MOV
+
+        [nazev] => stavOchrany
+        [codebookID] => 0
+        [codebookValue] => 0
+        [hodnota] => 34001671->34-1671
+
+        [nazev] => stavOchrany
+        [codebookID] => 0
+        [codebookValue] => 0
+        [hodnota] => zapsáno do státního seznamu pøed r.1988
+
+        [nazev] => lokalita
+        [codebookID] => 0
+        [codebookValue] => 0
+
+
+
+[id] => 1886898
+[jmeno] => oltáø hlavní
+[url] => http://iispptest.npu.cz/katalog_ext?presenter=ElementsResults&action=element&element=1886898
+[popis] =>
+[relevance] => 0.8275651
+[uzemniIdentifikace] => Array [rozsahID] => 0
+[metadata] => Array
+        [nazev] => typEntity
+        [codebookID] => 1123
+        [codebookValue] => 5
+        [hodnota] => Památkový katalog - prvek
+
+        [nazev] => anotace
+        [codebookID] => 0
+        [codebookValue] => 0
+        [hodnota] =>
+
+        [nazev] => popis
+        [codebookID] => 0
+        [codebookValue] => 0
+        [hodnota] => Døevìný, støední velikosti, s è?etnými plastikami, s cenným obrazem v nástavci.
+
+        [nazev] => kategoriePrvku
+        [codebookID] => 0
+        [codebookValue] => 0
+        [hodnota] => Objekt
+
+        [nazev] => druhPrvku
+        [codebookID] => 0
+        [codebookValue] => 0
+        [hodnota] => movitost/souèást nemovitosti
+
+        [nazev] => pristup
+        [codebookID] => 0
+        [codebookValue] => 0
+        [hodnota] => neveøejný
+        [typ] => string
+
+        [nazev] => lokalita
+        [codebookID] => 0
+        [codebookValue] => 0

@@ -1,0 +1,2 @@
+--pridani main_doc pro plugin deniky
+ alter table posta_cis_ceskaposta add main_doc int4 default 1;

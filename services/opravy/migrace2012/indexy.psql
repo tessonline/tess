@@ -1,0 +1,7 @@
+CREATE  INDEX "spis_id_cis_posta_spisy_key" on "cis_posta_spisy" (SPIS_ID);
+CREATE  INDEX "dalsi_spis_id_cis_posta_spisy_key" on "cis_posta_spisy" (DALSI_SPIS_ID);
+
+CREATE  INDEX "id_odbor_cis_posta_odbory_key" on "cis_posta_odbory" (ID_ODBOR);
+CREATE  INDEX "id_cis_posta_odbory_key" on "cis_posta_odbory" (ID);
+
+CREATE  INDEX "posta_id_posta_odmitnuti_key" on "posta_odmitnuti" (POSTA_ID);

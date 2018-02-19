@@ -1,0 +1,159 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is Oracle JAX-WS 2.1.5. -->
+<xs:schema xmlns:tns="http://ess.bbm/" xmlns:ns1="http://mvcr.cz/ess/v_1.0.0.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://ess.bbm/">
+  <xs:import namespace="http://mvcr.cz/ess/v_1.0.0.0" schemaLocation="http://esstest.is.cuni.cz/ost/posta/plugins/ruk/eed/server/mvcr.cz_ess_v_1.0.0.0.wsdl"/>
+  <xs:element name="vlozDokument" type="tns:vlozDokument"/>
+  <xs:element name="vlozDokumentResponse" type="tns:vlozDokumentResponse"/>
+  <xs:element name="vlozPrilohu" type="tns:vlozPrilohu"/>
+  <xs:element name="vlozPrilohuResponse" type="tns:vlozPrilohuResponse"/>
+  <xs:complexType name="upravDokument">
+    <xs:sequence>
+      <xs:element name="Dokument" type="ns1:tDokument" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="upravDokumentResponse">
+    <xs:sequence>
+      <xs:element name="SpslStatus" type="ns1:spslStatus" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="vlozDokument">
+    <xs:sequence>
+      <xs:element name="Dokument" type="ns1:tDokument" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="vlozDokumentResponse">
+    <xs:sequence>
+      <xs:element name="SpslStatus" type="ns1:spslStatus" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="dejData">
+    <xs:sequence>
+      <xs:element name="FileLinksArray" type="ns1:tFileLinksArray" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="dejDataResponse">
+    <xs:sequence>
+      <xs:element name="GetDataOutput" type="ns1:tGetDataOutput" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="dejToken">
+    <xs:sequence>
+      <xs:element name="arg0" type="xs:string" minOccurs="0"/>
+      <xs:element name="arg1" type="xs:int"/>
+      <xs:element name="arg2" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="dejTokenResponse">
+    <xs:sequence>
+      <xs:element name="Stav" type="ns1:tStav" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="dejSpisH">
+    <xs:sequence>
+      <xs:element name="Identifikatory" type="ns1:tIdentifikatory" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="dejSpisHResponse">
+    <xs:sequence>
+      <xs:element name="GetMetadataOutput" type="ns1:tGetMetadataOutput" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="zrusDokument">
+    <xs:sequence>
+      <xs:element name="Identifikatory" type="ns1:tIdentifikatory" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="zrusDokumentResponse">
+    <xs:sequence>
+      <xs:element name="SpslStatus" type="ns1:spslStatus" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="zrusSpis">
+    <xs:sequence>
+      <xs:element name="Identifikatory" type="ns1:tIdentifikatory" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="zrusSpisResponse">
+    <xs:sequence>
+      <xs:element name="SpslStatus" type="ns1:spslStatus" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="vlozSpis">
+    <xs:sequence>
+      <xs:element name="Spis" type="ns1:tSpis" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="vlozSpisResponse">
+    <xs:sequence>
+      <xs:element name="SpslStatus" type="ns1:spslStatus" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="upravSpis">
+    <xs:sequence>
+      <xs:element name="Spis" type="ns1:tSpis" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="upravSpisResponse">
+    <xs:sequence>
+      <xs:element name="SpslStatus" type="ns1:spslStatus" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="upravDokumentSimple">
+    <xs:sequence>
+      <xs:element name="DokumentSimple" type="ns1:tDokumentSimple" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="upravDokumentSimpleResponse">
+    <xs:sequence>
+      <xs:element name="SpslStatus" type="ns1:spslStatus" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="checkWs">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:complexType name="checkWsResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="upravSpisSimple">
+    <xs:sequence>
+      <xs:element name="SpisSimple" type="ns1:tSpisSimple" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="upravSpisSimpleResponse">
+    <xs:sequence>
+      <xs:element name="SpslStatus" type="ns1:spslStatus" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="vlozPrilohu">
+    <xs:sequence>
+      <xs:element name="Dokument" type="ns1:tDokument" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="vlozPrilohuResponse">
+    <xs:sequence>
+      <xs:element name="SpslStatus" type="ns1:spslStatus" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="dejDokument">
+    <xs:sequence>
+      <xs:element name="Identifikatory" type="ns1:tIdentifikatory" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="dejDokumentResponse">
+    <xs:sequence>
+      <xs:element name="GetMetadataOutput" type="ns1:tGetMetadataOutput" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="dejSpis">
+    <xs:sequence>
+      <xs:element name="Identifikatory" type="ns1:tIdentifikatory" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="dejSpisResponse">
+    <xs:sequence>
+      <xs:element name="GetMetadataOutput" type="ns1:tGetMetadataOutput" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

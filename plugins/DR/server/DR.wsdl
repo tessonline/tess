@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions 
+        xmlns:wssutil="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+        xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy"
+        xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" 
+        xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" 
+        xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" 
+        xmlns:tns="http://tempuri.org/" 
+        xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+        xmlns:s="http://www.w3.org/2001/XMLSchema" 
+        xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" 
+        xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" 
+        targetNamespace="http://tempuri.org/" 
+        xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+        xmlns:ess="http://mvcr.cz/ess/v_1.0.0.0"
+        xmlns:dbs="http://isds.czechpoint.cz/v20">
+        
+        <wsp:UsingPolicy wssutil:Required="true" />
+
+    <wsp:Policy wssutil:Id="Wssp1.2-2007-Https-UsernameToken-Plain.xml">
+        <ns1:TransportBinding xmlns:ns1="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+            <wsp:Policy>
+                <ns1:TransportToken>
+                    <wsp:Policy>
+                        <ns1:HttpsToken />
+                    </wsp:Policy>
+                </ns1:TransportToken>
+                <ns1:AlgorithmSuite>
+                    <wsp:Policy>
+                        <ns1:Basic256 />
+                    </wsp:Policy>
+                </ns1:AlgorithmSuite>
+                <ns1:Layout>
+                    <wsp:Policy>
+                        <ns1:Lax />
+                    </wsp:Policy>
+                </ns1:Layout>
+                <ns1:IncludeTimestamp />
+            </wsp:Policy>
+        </ns1:TransportBinding>
+        <ns2:SupportingTokens xmlns:ns2="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+            <wsp:Policy>
+                <ns2:UsernameToken ns2:IncludeToken="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702/IncludeToken/AlwaysToRecipient">
+                    <wsp:Policy>
+                        <ns2:WssUsernameToken10 />
+                    </wsp:Policy>
+                </ns2:UsernameToken>
+            </wsp:Policy>
+        </ns2:SupportingTokens>
+    </wsp:Policy>
+        
+  <wsdl:types>
+    <s:schema >
+      <s:import namespace="http://mvcr.cz/ess/v_1.0.0.0" schemaLocation="ess_ext.xsd"  id="ess"/>
+      <s:import namespace="http://isds.czechpoint.cz/v20" schemaLocation="dbTypes.xsd"  id="dbs"/>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="vlozDokumentSoapIn">
+    <wsdl:part name="parameters" type="ess:tDokument"/>
+  </wsdl:message>
+  <wsdl:message name="vlozDokumentSoapOut">
+    <wsdl:part name="parameters" type="ess:spslStatus"/>
+  </wsdl:message>
+  <wsdl:message name="FindDataBoxSoapIn">
+    <wsdl:part name="parameters" type="dbs:tFindDBInput"/>
+  </wsdl:message>
+  <wsdl:message name="FindDataBoxSoapOut">
+    <wsdl:part name="parameters" type="dbs:tFindDBOuput"/>
+  </wsdl:message>
+  <wsdl:message name="odesliDokumentSoapIn">
+    <wsdl:part name="parameters" type="ess:tIdentifikator"/>
+  </wsdl:message>
+  <wsdl:message name="odesliDokumentSoapOut">
+    <wsdl:part name="parameters" type="ess:spslStatus"/>
+  </wsdl:message>
+  <wsdl:message name="vlozAOdesliDokumentSoapIn">
+    <wsdl:part name="parameters" type="ess:tDokument"/>
+  </wsdl:message>
+  <wsdl:message name="vlozAOdesliDokumentSoapOut">
+    <wsdl:part name="parameters" type="ess:spslStatus"/>
+  </wsdl:message>
+  <wsdl:portType name="WebServiceSoap">
+   <wsdl:operation name="vlozDokument">
+      <wsdl:input message="tns:vlozDokumentSoapIn"/>
+      <wsdl:output message="tns:vlozDokumentSoapOut"/>
+    </wsdl:operation>
+   <wsdl:operation name="FindDataBox">
+      <wsdl:input message="tns:FindDataBoxSoapIn"/>
+      <wsdl:output message="tns:FindDataBoxSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="odesliDokument">
+      <wsdl:input message="tns:odesliDokumentSoapIn"/>
+      <wsdl:output message="tns:odesliDokumentSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="vlozAOdesliDokument">
+      <wsdl:input message="tns:vlozAOdesliDokumentSoapIn"/>
+      <wsdl:output message="tns:vlozAOdesliDokumentSoapOut"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WebServiceSoap" type="tns:WebServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+  <wsdl:operation name="vlozDokument">
+      <soap:operation soapAction="http://tempuri.org/vlozDokument" style="rpc"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindDataBox">
+      <soap:operation soapAction="http://tempuri.org/FindDataBox" style="rpc"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="odesliDokument">
+      <soap:operation soapAction="http://tempuri.org/odesliDokument" style="rpc"/>
+      <wsdl:input>
+        <soap:body use="literal"  />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="vlozAOdesliDokument">
+      <soap:operation soapAction="http://tempuri.org/vlozAOdesliDokument" style="rpc"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WebServiceSoap12" type="tns:WebServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+   <wsdl:operation name="vlozDokument">
+      <soap12:operation soapAction="http://tempuri.org/vlozDokument" style="rpc"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+   <wsdl:operation name="FindDataBox">
+      <soap12:operation soapAction="http://tempuri.org/FindDataBox" style="rpc"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="odesliDokument">
+      <soap12:operation soapAction="http://tempuri.org/odesliDokument" style="rpc"/>
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="vlozAOdesliDokument">
+      <soap12:operation soapAction="http://tempuri.org/vlozAOdesliDokument" style="rpc"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WebService">
+    <wsdl:port name="WebServiceSoap" binding="tns:WebServiceSoap">
+      <soap:address location="WEBSERVICE_ENDPOINT"/>
+    </wsdl:port>
+    <wsdl:port name="WebServiceSoap12" binding="tns:WebServiceSoap12">
+      <soap12:address location="WEBSERVICE_ENDPOINT"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

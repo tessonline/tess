@@ -1,0 +1,610 @@
+<?xml version="1.0" encoding="ISO-8859-2"?>
+<xsd:schema xmlns:tns="http://mvcr.cz/ess/v_1.0.0.0" xmlns:isds="http://isds.czechpoint.cz/v20" elementFormDefault="qualified" targetNamespace="http://mvcr.cz/ess/v_1.0.0.0" id="ess_ext" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:oraxdb="http://xmlns.oracle.com/xdb" oraxdb:schemaURL="ess_ext2.xsd"
+            xmlns:xml="http://www.w3.org/XML/1998/namespace">
+  <xsd:import schemaLocation="dmBaseTypes.xsd" namespace="http://isds.czechpoint.cz/v20" />
+  <xsd:include schemaLocation="ess.xsd"/>
+  <xsd:complexType oraxdb:maintainDOM="false" name="tStatusList" oraxdb:SQLType="ESS_STATUSLIST_T" >
+    <xsd:sequence>
+      <xsd:element name="Status" type="tns:spslStatus" maxOccurs="unbounded" oraxdb:SQLName="Status" oraxdb:SQLType="ESS_STATUS_T" oraxdb:SQLCollType="ESS_STATUS_COLL" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType oraxdb:maintainDOM="false" name="tStav" oraxdb:SQLType="ESS_STAV_T">
+    <xsd:sequence>
+      <xsd:element name="kod" type="xsd:string" form="qualified" oraxdb:SQLName="kod" oraxdb:SQLType="VARCHAR2"/>
+      <xsd:element name="zprava" type="xsd:string" form="qualified" oraxdb:SQLName="zprava" oraxdb:SQLType="VARCHAR2"/>
+      <xsd:element name="id" type="xsd:string" form="qualified" minOccurs="0" oraxdb:SQLName="id" oraxdb:SQLType="VARCHAR2"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType oraxdb:maintainDOM="false" name="tStavList" oraxdb:SQLType="ESS_STAVLIST_T">
+    <xsd:sequence>
+      <xsd:element name="Stav" type="tns:tStav" maxOccurs="unbounded" oraxdb:SQLName="Stav" oraxdb:SQLType="ESS_STAV_T" oraxdb:SQLCollType="ESS_STAV_COLL"/>
+    </xsd:sequence>
+    <xsd:attribute name="LStav" type="xsd:string" use="required" oraxdb:SQLName="LStav" oraxdb:SQLType="VARCHAR2"/>
+  </xsd:complexType>
+  <xsd:complexType oraxdb:maintainDOM="false" name="tStavPrenosu" oraxdb:SQLType="ESS_STAVPRENOSU_T">
+    <xsd:sequence>
+      <xsd:element name="DokumentGuide" type="xsd:string" minOccurs="0" oraxdb:SQLName="DokumentGuide" oraxdb:SQLType="VARCHAR2"/>
+      <xsd:element name="StavData" type="tns:tStav" minOccurs="0" oraxdb:SQLName="StavData" oraxdb:SQLType="ESS_STAV_T"/>
+      <xsd:element name="StavMetaData" type="tns:spslStatus" minOccurs="0" oraxdb:SQLName="StavMetaData" oraxdb:SQLType="ESS_STATUS_T"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType oraxdb:maintainDOM="false" name="tListOfStavPrenosu" oraxdb:SQLType="ESS_LISTOFSTAVPRENOSU_T">
+    <xsd:sequence>
+      <xsd:element name="stavPrenosu" type="tns:tStavPrenosu" nillable="true" minOccurs="0" maxOccurs="unbounded" oraxdb:SQLName="stavPrenosu" oraxdb:SQLType="ESS_STAVPRENOSU_T" oraxdb:SQLCollType="ESS_STAVPRENOSU_COLL"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType oraxdb:maintainDOM="false" name="dokumentyStavPrenosu" oraxdb:SQLType="ESS_DOKUMENTYSTAVPRENOSU_T">
+    <xsd:sequence>
+      <xsd:element name="Stav" type="tns:tStav" minOccurs="0" oraxdb:SQLName="Stav" oraxdb:SQLType="ESS_STAV_T"/>
+      <xsd:element name="Seznam" type="tns:tListOfStavPrenosu" minOccurs="0" oraxdb:SQLName="Seznam" oraxdb:SQLType="ESS_LISTOFSTAVPRENOSU_T"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType oraxdb:maintainDOM="false" name="spslStatus"
+                   oraxdb:SQLType="ESS_STATUS_T">
+    <xsd:sequence>
+      <xsd:element name="StatusCode" type="xsd:string"
+                   oraxdb:SQLName="StatusCode" oraxdb:SQLType="VARCHAR2">
+        <xsd:annotation>
+          <xsd:documentation>
+            kód chyby nebo stavu
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="StatusMessage" type="xsd:string"
+                   oraxdb:SQLName="StatusMessage" oraxdb:SQLType="VARCHAR2">
+        <xsd:annotation>
+          <xsd:documentation>
+            popis chyby
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="PID" minOccurs="0" type="xsd:string"
+                   oraxdb:SQLName="PID" oraxdb:SQLType="VARCHAR2">
+        <xsd:annotation>
+          <xsd:documentation>
+            PID identifikátor záznamu ve spisové službě iFIS
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="Identifikatory" type="tns:tIdentifikatory"
+                   oraxdb:SQLName="Identifikatory" oraxdb:SQLType="ESS_IDENTIFIKATORY_T"
+                   minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType oraxdb:maintainDOM="false" name="tGetDataOutput" oraxdb:SQLType="ESS_GETDATAOUTPUT_T">
+    <xsd:sequence>
+      <xsd:element name="Files" minOccurs="0" type="isds:tFilesArray" oraxdb:SQLName="Files" oraxdb:SQLType="DS_FILESARRAY_T"/>
+      <xsd:element name="StavList" minOccurs="1" type="tns:tStavList" oraxdb:SQLName="StavList" oraxdb:SQLType="ESS_STAVLIST_T"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType oraxdb:maintainDOM="false" name="tGetMetadataOutput" oraxdb:SQLType="ESS_GETMETADATAOUTPUT_T">
+    <xsd:sequence>
+      <xsd:choice minOccurs="0">
+        <xsd:element name="Spis" type="tns:tSpis" minOccurs="0"/>
+        <xsd:element name="Dokument" type="tns:tDokument" minOccurs="0"
+                     oraxdb:SQLName="Dokument"
+                     oraxdb:SQLType="ESS_DOKUMENT_T"/>
+      </xsd:choice>
+      <xsd:element name="Status" type="tns:spslStatus" oraxdb:SQLName="Status" oraxdb:SQLType="ESS_STATUS_T"/>
+      <xsd:element name="StavList" type="tns:tStavList" minOccurs="0"
+                   oraxdb:SQLName="StavList" oraxdb:SQLType="ESS_STAVLIST_T"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="tInsDataOutput" oraxdb:maintainDOM="false" oraxdb:SQLType="ESS_INSDATAOUTPUT_T">
+    <xsd:sequence>
+      <xsd:element name="FileLinks" type="tns:tFileLinksArray" minOccurs="0"/>
+      <xsd:element name="Stav" type="tns:tStav"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType oraxdb:maintainDOM="false" name="tIdentifikatory"
+                   oraxdb:SQLType="ESS_IDENTIFIKATORY_T">
+    <xsd:sequence>
+      <xsd:element minOccurs="1" maxOccurs="unbounded" name="Identifikator"
+                   type="tns:tIdentifikator"
+                   oraxdb:SQLCollType="ESS_IDENTIFIKATOR2_COLL"
+                   oraxdb:SQLType="ESS_IDENTIFIKATOR_T"
+                   oraxdb:SQLName="Identifikator"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType oraxdb:maintainDOM="false" name="tVyrizeno"
+                   oraxdb:SQLType="ESS_VYRIZENO_T">
+    <xsd:annotation>
+      <xsd:documentation>
+        Informace o vyřízení dokumentu nebo spisu
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="DatVyrSkut" type="xsd:date" minOccurs="1"
+                   oraxdb:SQLName="DatVyrSkut">
+        <xsd:annotation>
+          <xsd:documentation>
+            Skutečné datum vyřízení.
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:sequence>
+        <xsd:element name="ZpusobVyrId"
+                     oraxdb:SQLName="ZpusobVyrId" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>
+              Identifikace způsobu vyřízení.
+            </xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:integer">
+              <xsd:totalDigits value="10"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="ZpusobVyrText"
+                     oraxdb:SQLName="ZpusobVyrText" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>
+              Způsob vyřízení.
+            </xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:maxLength value="255"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType oraxdb:maintainDOM="false" name="tVyrizeni"
+                   oraxdb:SQLType="ESS_VYRIZENI_T">
+    <xsd:annotation>
+      <xsd:documentation>
+        Informace o vyřizování a případném vyřízení dokumentu. 
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="DatVyrPozad" type="xsd:date" minOccurs="0"
+                   oraxdb:SQLName="DatVyrPozad">
+        <xsd:annotation>
+          <xsd:documentation>
+            Požadované datum vyřízení.
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:choice minOccurs="0">
+        <xsd:element name="ZodpOsobaId" minOccurs="0"
+                     oraxdb:SQLName="ZodpOsobaId">
+          <xsd:annotation>
+            <xsd:documentation>
+              Identifikace osoby zodpovědné za vyřízení.
+            </xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:integer">
+              <xsd:totalDigits value="10"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="ZodpOsobaText" minOccurs="0"
+                     oraxdb:SQLName="ZodpOsobaText">
+          <xsd:annotation>
+            <xsd:documentation>
+              Osoba zodpovědná za vyřízení.
+            </xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:maxLength value="255"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+      </xsd:choice>
+      <xsd:element name="Vyrizeno" type="tns:tVyrizeno" minOccurs="0"
+                   oraxdb:SQLType="ESS_VYRIZENO_T"
+                   oraxdb:SQLName="Vyrizeno">
+        <xsd:annotation>
+          <xsd:documentation>
+            Informace o vyřízení dokumentu nebo spisu.
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="tZpusobDoruceni"
+                   oraxdb:maintainDOM="false"
+                   oraxdb:SQLType="ESS_ZPUSOBDORUCENI_T">
+    <xsd:annotation>
+      <xsd:documentation>
+        Informace o způsobu doručení dokumentu. 
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="ZpusobDoruceniId" minOccurs="0"
+                   oraxdb:SQLName="ZpusobDoruceniId">
+          <xsd:annotation>
+            <xsd:documentation>
+              Identifikace způsobu doručení.
+            </xsd:documentation>
+          </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:integer">
+            <xsd:totalDigits value="10"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="ZpusobDoruceniText" minOccurs="0" oraxdb:SQLName="ZpusobDoruceniText">
+        <xsd:annotation>
+          <xsd:documentation>
+            Způsob vyřízení
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="100"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="tTypDokumentu"
+                   oraxdb:maintainDOM="false"
+                   oraxdb:SQLType="ESS_TYPDOKUMENTU_T">
+    <xsd:annotation>
+      <xsd:documentation>
+        Informace o typu dokumentu. 
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="TypDokumentuId" minOccurs="0"
+                   oraxdb:SQLName="TypDokumentuId">
+        <xsd:annotation>
+          <xsd:documentation>
+            Identifikace typu dokumentu.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:integer">
+            <xsd:totalDigits value="10"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="TypDokumentuText" minOccurs="0" oraxdb:SQLName="TypDokumentuText">
+        <xsd:annotation>
+          <xsd:documentation>
+            Typ dokumentu
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="100"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="tPripojenyDoklad"
+                   oraxdb:maintainDOM="false"
+                   oraxdb:SQLType="ESS_PRIPOJENYDOKLAD_T">
+    <xsd:sequence>
+      <xsd:element name="EkjId" oraxdb:SQLName="EkjId">
+        <xsd:annotation>
+          <xsd:documentation>
+            Identifikace ekonomické jednotky
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:integer">
+            <xsd:totalDigits value="10"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="UlohaId" oraxdb:SQLName="UlohaId">
+        <xsd:annotation>
+          <xsd:documentation>
+            Identifikace úlohy
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="3"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="DokladId" oraxdb:SQLName="DokladId">
+        <xsd:annotation>
+          <xsd:documentation>
+            Interní identifikace dokladu
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:integer">
+            <xsd:totalDigits value="10"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="DokladIdExt" oraxdb:SQLName="DokladIdExt">
+        <xsd:annotation>
+          <xsd:documentation>
+            Externí identifikace dokladu
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="100"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="tPripojeneDoklady"
+                   oraxdb:maintainDOM="false"
+                   oraxdb:SQLType="ESS_PRIPOJENEDOKLADY_T">
+    <xsd:sequence>
+      <xsd:element name="PripojenyDoklad" type="tns:tPripojenyDoklad"
+                   maxOccurs="unbounded"
+                   oraxdb:SQLName="PripojenyDoklad"
+                   oraxdb:SQLType="ESS_PRIPOJENYDOKLAD_T"
+                   oraxdb:SQLCollType="ESS_PRIPOJENYDOKLAD_COLL"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="tLokace"
+                   oraxdb:maintainDOM="false"
+                   oraxdb:SQLType="ESS_LOKACE_T">
+    <xsd:annotation>
+      <xsd:documentation>
+        Informace o umístění dokumentu/spisu v SPS. 
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="SpisovyUzelId" minOccurs="1"
+                   oraxdb:SQLName="SpisovyUzelId">
+        <xsd:annotation>
+          <xsd:documentation>
+            Identifikace spisového uzlu.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:integer">
+            <xsd:totalDigits value="10"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="SpisovyUzelText" minOccurs="1" oraxdb:SQLName="SpisovyUzelText">
+        <xsd:annotation>
+          <xsd:documentation>
+            Název spisového uzlu.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="100"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="GetMetadataOutput" type="tns:tGetMetadataOutput" oraxdb:SQLName="GetMetadataOutput" oraxdb:SQLType="ESS_GETMETADATAOUTPUT_T"/>
+  <xsd:element name="Spis" type="tns:tSpis" oraxdb:SQLName="Spis" oraxdb:SQLType="ESS_SPIS_T"/>
+  <xsd:element name="Dokument" type="tns:tDokument" oraxdb:SQLName="Dokument" oraxdb:SQLType="ESS_DOKUMENT_T"/>
+  <xsd:annotation>
+    <xsd:documentation>
+            Rozšíření XML schématu ess.xsd o root element Status pro použití
+            jako návratové hodnoty ve webové službě.
+       </xsd:documentation>
+  </xsd:annotation>
+  <xsd:element name="ExistentMessage" type="tns:tIdentifikator" oraxdb:SQLName="ExistentMessage" oraxdb:SQLType="ESS_IDENTIFIKATOR_T">
+    <xsd:annotation>
+      <xsd:documentation>
+        Dotaz na existenci záznamu (Dokumentu) ve spisové službě dle zadaného
+        identifikátoru.
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Status" type="tns:spslStatus" oraxdb:SQLName="Status" oraxdb:SQLType="ESS_STATUS_T">
+    <xsd:annotation>
+      <xsd:documentation>
+        Stav zápisu dokumentu do iFIS.
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Identifikatory" oraxdb:SQLName="Identifikatory"
+               oraxdb:SQLType="ESS_IDENTIFIKATORY_T" type="tns:tIdentifikatory">
+  </xsd:element>
+  <xsd:element name="DoplnujiciDataSPSL" oraxdb:maintainDOM="false"
+               oraxdb:SQLType="ESS_DATA_SPSL_T"
+               oraxdb:SQLName="DoplnujiciDataSPSL">
+    <xsd:annotation>
+      <xsd:documentation>
+        Doplňující data spisové služby iFIS*SPS
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="PID" oraxdb:SQLName="PID" oraxdb:SQLType="VARCHAR2"
+                     minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>
+              Identifikace dokumentu SPS.
+            </xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:maxLength value="30"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+
+
+        <xsd:element name="SpisZnackaOdesilatele" oraxdb:SQLName="SpisZnackaOdesilatele" oraxdb:SQLType="VARCHAR2"
+                     minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>
+              SpisZnackaOdesilatele.
+            </xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:maxLength value="100"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+
+
+        <xsd:element name="KRukam" minOccurs="0" oraxdb:SQLName="KRukam">
+          <xsd:annotation>
+            <xsd:documentation>
+              příznak K Rukam (dmToHands)
+            </xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:maxLength value="1"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="DoVlastnichRukou" minOccurs="0" oraxdb:SQLName="DoVlastnichRukou">
+          <xsd:annotation>
+            <xsd:documentation>
+              příznak DoVlastnichRukou (dmPersonalDelivery)
+            </xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:maxLength value="1"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="DoruceniFikci" minOccurs="0" oraxdb:SQLName="DoruceniFikci">
+          <xsd:annotation>
+            <xsd:documentation>
+              příznak DoruceniFikci (dmAllowSubstDelivery)
+            </xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:maxLength value="1"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+
+
+        <xsd:element name="Stav" minOccurs="0" maxOccurs="1"
+                     oraxdb:SQLName="Stav" oraxdb:SQLType="VARCHAR2">
+          <xsd:annotation>
+            <xsd:documentation>
+              Stav dokumentu nebo spisu. Spis může nabývat pouze hodnot A, B a X
+            </xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:maxLength value="1"/>
+              <xsd:enumeration value="A">
+                <xsd:annotation>
+                  <xsd:documentation>
+                    Archivováno
+                  </xsd:documentation>
+                </xsd:annotation>
+              </xsd:enumeration>
+              <xsd:enumeration value="B">
+                <xsd:annotation>
+                  <xsd:documentation>
+                    Skartováno
+                  </xsd:documentation>
+                </xsd:annotation>
+              </xsd:enumeration>
+              <xsd:enumeration value="C">
+                <xsd:annotation>
+                  <xsd:documentation>
+                    Spisovna
+                  </xsd:documentation>
+                </xsd:annotation>
+              </xsd:enumeration>
+              <xsd:enumeration value="D">
+                <xsd:annotation>
+                  <xsd:documentation>
+                    Zapůjčeno
+                  </xsd:documentation>
+                </xsd:annotation>
+              </xsd:enumeration>
+              <xsd:enumeration value="E">
+                <xsd:annotation>
+                  <xsd:documentation>
+                    Skartovat ihned
+                  </xsd:documentation>
+                </xsd:annotation>
+              </xsd:enumeration>
+              <xsd:enumeration value="F">
+                <xsd:annotation>
+                  <xsd:documentation>
+                    Chybná evidence
+                  </xsd:documentation>
+                </xsd:annotation>
+              </xsd:enumeration>
+              <xsd:enumeration value="G">
+                <xsd:annotation>
+                  <xsd:documentation>
+                    Skartacní návrh
+                  </xsd:documentation>
+                </xsd:annotation>
+              </xsd:enumeration>
+              <xsd:enumeration value="X">
+                <xsd:annotation>
+                  <xsd:documentation>
+                    Aktivní
+                  </xsd:documentation>
+                </xsd:annotation>
+              </xsd:enumeration>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="SenderType" oraxdb:SQLName="SenderType"
+                     oraxdb:SQLType="VARCHAR2" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>
+              Typ datové schránky ISDS.
+            </xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:maxLength value="5"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="Vyrizeni" type="tns:tVyrizeni"
+                     oraxdb:SQLType="ESS_VYRIZENI_T"
+                     oraxdb:SQLName="Vyrizeni" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>
+              Informace o vyřizování a případném vyřízení dokumentu nebo spisu.
+            </xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ZpusobDoruceni" type="tns:tZpusobDoruceni"
+                     minOccurs="0"
+                     oraxdb:SQLType="ESS_ZPUSOBDORUCENI_T"
+                     oraxdb:SQLName="ZpusobDoruceni">
+          <xsd:annotation>
+            <xsd:documentation>
+              Informace o způsobu doručení dokumentu. 
+            </xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="TypDokumentu" type="tns:tTypDokumentu"
+                     minOccurs="0"
+                     oraxdb:SQLType="ESS_TYPDOKUMENTU_T"
+                     oraxdb:SQLName="TypDokumentu">
+          <xsd:annotation>
+            <xsd:documentation>
+              Informace o typu dokumentu. 
+            </xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="PripojeneDoklady" type="tns:tPripojeneDoklady"
+                     oraxdb:SQLType="ESS_PRIPOJENEDOKLADY_T"
+                     oraxdb:SQLName="PripojeneDoklady" minOccurs="0">
+        </xsd:element>
+        <xsd:element name="Lokace" type="tns:tLokace"
+                     oraxdb:SQLType="ESS_LOKACE_T"
+                     oraxdb:SQLName="Lokace" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

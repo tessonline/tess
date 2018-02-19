@@ -1,0 +1,3 @@
+alter table posta_spisovna add lokace_id int;
+alter table posta_spisovna_h add lokace_id int;
+

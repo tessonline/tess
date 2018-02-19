@@ -1,0 +1,208 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<!--  *********************************************************************
+     WSDL pro sluĹžby
+        1. OvÄĹenĂ­ neporuĹĄenĂ­ datovĂŠ zprĂĄvy - VerifyMessage
+        2. StaĹženĂ­ obĂĄlky pĹijatĂŠ zprĂĄvy v ÄitelnĂŠ podobÄ - MessageEnvelopeDownload
+        3. OznaÄenĂ­ pĹijatĂŠ zprĂĄvy jako PĹeÄtenĂŠ - MarkMessageAsDownloaded
+        4. OznĂĄmenĂ­ o dodĂĄnĂ­, doruÄenĂ­, nedoruÄenĂ­ datovĂŠ zprĂĄvy (Dodejka, DoruÄenka, NedoruÄenka) - GetDeliveryInfo
+        5. PodepsanĂŠ oznĂĄmenĂ­ o dodĂĄnĂ­, doruÄenĂ­, nedoruÄenĂ­ datovĂŠ zprĂĄvy (Dodejka, DoruÄenka, NedoruÄenka) - GetSignedDeliveryInfo
+        6. StaĹženĂ­ seznamĹŻ odeslanĂ˝ch datovĂ˝ch zprĂĄv - GetListOfSentMessages
+        7. StaĹženĂ­ seznamĹŻ pĹijatĂ˝ch datovĂ˝ch zprĂĄv - GetListOfReceivedMessages
+        
+              
+                 8.4.2009   verze 1.2 pilot
+
+   ZmÄny:  
+     4.02.2009 verze 0.1
+    20.03.2009 verze 1.0   - formĂĄlnĂ­ Ăşpravy vyhovujĂ­cĂ­ WS-I Basic Profile   
+     8.04.2009 verze 1.2   - zmÄna nĂĄzvĹŻ WSDL, rozloĹženĂ­ operacĂ­ mezi WSDL                               
+************************************************************************ -->
+
+<definitions name="ISDS_dmMessCreate" targetNamespace="http://isds.czechpoint.cz" 
+                                  xmlns="http://schemas.xmlsoap.org/wsdl/" 
+                                  xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+                                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+                                  xmlns:tns="http://isds.czechpoint.cz">
+                                
+  <types>
+    <xs:schema targetNamespace="http://isds.czechpoint.cz">
+      <xs:include schemaLocation="dmBaseTypes.xsd" />
+    </xs:schema>
+  </types>
+  
+  <!-- ******************************************************************* -->
+
+  <message name="MessageVerifyRequest">
+    <part name="parameter" element="tns:VerifyMessage" />        
+  </message>
+  <message name="MessageVerifyResponse">
+    <part name="parameter" element="tns:VerifyMessageResponse" />        
+  </message>
+
+  <message name="MessageEnvelopeDownloadRequest">
+    <part name="parameter" element="tns:MessageEnvelopeDownload" />        
+  </message>
+  <message name="MessageEnvelopeDownloadResponse">
+    <part name="parameter" element="tns:MessageEnvelopeDownloadResponse" />        
+  </message>
+
+  <message name="MarkMessageAsDownloadedRequest">
+    <part name="parameter" element="tns:MarkMessageAsDownloaded" />        
+  </message>
+  <message name="MarkMessageAsDownloadedResponse">
+    <part name="parameter" element="tns:MarkMessageAsDownloadedResponse" />        
+  </message>
+
+  <message name="DeliveryMessageRequest">
+    <part name="parameter" element="tns:GetDeliveryInfo" />        
+  </message>
+  <message name="DeliveryMessageResponse">
+    <part name="parameter" element="tns:GetDeliveryInfoResponse" />        
+  </message>
+
+  <message name="SignedDeliveryMessageRequest">
+    <part name="parameter" element="tns:GetSignedDeliveryInfo" />        
+  </message>
+  <message name="SignedDeliveryMessageResponse">
+    <part name="parameter" element="tns:GetSignedDeliveryInfoResponse" />        
+  </message>
+
+  <message name="ListOfSentMessagesRequest">
+    <part name="parameter" element="tns:GetListOfSentMessages" />        
+  </message>
+  <message name="ListOfSentMessagesResponse">
+    <part name="parameter" element="tns:GetListOfSentMessagesResponse" />        
+  </message>
+
+  <message name="ListOfReceivedMessagesRequest">
+    <part name="parameter" element="tns:GetListOfReceivedMessages" />        
+  </message>
+  <message name="ListOfReceivedMessagesResponse">
+    <part name="parameter" element="tns:GetListOfReceivedMessagesResponse" />        
+  </message>
+  
+<!-- ******************************************************************* -->
+  <portType name="dmInfoPortType">
+
+    <operation name="VerifyMessage">
+      <input message="tns:MessageVerifyRequest"/>
+      <output message="tns:MessageVerifyResponse"/>
+    </operation>
+
+    <operation name="MessageEnvelopeDownload">
+      <input  message="tns:MessageEnvelopeDownloadRequest"/>
+      <output message="tns:MessageEnvelopeDownloadResponse"/>
+    </operation>
+
+    <operation name="MarkMessageAsDownloaded">
+      <input  message="tns:MarkMessageAsDownloadedRequest"/>
+      <output message="tns:MarkMessageAsDownloadedResponse"/>
+    </operation>
+
+    <operation name="GetDeliveryInfo">
+      <input  message="tns:DeliveryMessageRequest"/>
+      <output message="tns:DeliveryMessageResponse"/>
+    </operation>
+
+    <operation name="GetSignedDeliveryInfo">
+      <input  message="tns:SignedDeliveryMessageRequest"/>
+      <output  message="tns:SignedDeliveryMessageResponse"/>
+    </operation>
+
+    <operation name="GetListOfSentMessages">
+      <input  message="tns:ListOfSentMessagesRequest"/>
+      <output message="tns:ListOfSentMessagesResponse"/>
+    </operation>
+
+    <operation name="GetListOfReceivedMessages">
+      <input  message="tns:ListOfReceivedMessagesRequest"/>
+      <output message="tns:ListOfReceivedMessagesResponse"/>
+    </operation>
+
+  </portType>
+
+  <!-- ******************************************************************* -->
+ <binding name="dmInfoBinding" type="tns:dmInfoPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+    <operation name="VerifyMessage">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+
+    <operation name="MessageEnvelopeDownload">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+
+    <operation name="MarkMessageAsDownloaded">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+
+    <operation name="GetDeliveryInfo">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+
+    <operation name="GetSignedDeliveryInfo">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+
+    <operation name="GetListOfSentMessages">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+ 
+    <operation name="GetListOfReceivedMessages">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+ 
+  </binding>
+
+  <!-- ******************************************************************* -->
+  <service name="dmInfoWebService">
+    <port name="dmInfoPortType" binding="tns:dmInfoBinding">
+      <soap:address location="https://www.czebox.cz/DS/dx"/>
+    </port>
+  </service>
+
+</definitions>
+

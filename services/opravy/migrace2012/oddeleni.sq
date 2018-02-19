@@ -1,0 +1,1 @@
+ update posta set odbor=oddeleni where oddeleni>0 and rok=2015;

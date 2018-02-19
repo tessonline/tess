@@ -1,0 +1,50 @@
+body {
+  padding: 0px;
+}
+
+p {
+  font-size: 14pt;
+}
+
+.header td {
+  line-height: 12px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 18pt;
+}
+
+.header td.first {
+  width: 70%;
+  background-color: #999;
+}
+
+.header td.second {
+  width: 20%;
+  background-color: #bbb;
+}
+
+.header td.third {
+  width: 10%;
+  background-color: #ddd;
+}
+
+.block table {
+  margin: 0px;
+  border: 1px solid black;
+  border-spacing: 6px;
+}
+
+.block td.label {
+  width: 30%;
+}
+
+.block td.value {
+  width: 70%;
+  font-weight: bold;
+  background-color: #ccc;
+}
+
+span {
+  font-weight: bold;
+  background-color: #ccc;
+}

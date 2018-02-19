@@ -1,0 +1,12 @@
+CREATE SEQUENCE posta_cis_skartacni_rezimy_id_seq START 1;
+
+create table posta_cis_skartacni_rezimy (
+	id int,
+	jid varchar(50),
+	skar_znak varchar(1),
+	skar_lhuta int4
+);
+
+
+alter table posta_spisovna add rezim_id int;
+alter table posta_spisovna_h add rezim_id int;

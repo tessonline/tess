@@ -1,0 +1,10 @@
+alter table posta add odesl_titul_za varchar(20);
+alter table posta_h add odesl_titul_za varchar(20);
+
+alter table posta add odesl_stat varchar(80);
+alter table posta_h add odesl_stat varchar(80);
+
+alter table posta add odesl_jine varchar(80);
+alter table posta_h add odesl_jine varchar(80);
+
+

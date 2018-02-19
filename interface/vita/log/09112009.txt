@@ -1,0 +1,21 @@
+09:02:01 - insert into posta (ev_cislo,rok,odbor,oddeleni,typ_posty,odes_typ,vec,odesl_prijmeni,odesl_jmeno,odesl_titul,odesl_ico,odesl_ulice,odesl_cp,odesl_cor,
+odesl_psc,  odesl_posta,odesl_datschranka,datum_podatelna_prijeti,referent,odeslana_posta,doporucene,vlastnich_rukou,dorucenka,cislo_spisu1,cislo_spisu2,id_puvodni,
+odesl_odd,  odesl_osoba,last_date,last_time,last_user_id,owner_id,skartace,dalsi_prijemci,cislo_jednaci1,cislo_jednaci2,odbor_spisu,obyvatel_kod,obalka_nevracet,obalka_10dni)  values 
+(0,2009,13,0,0,'0','','','','','','','','',
+'','','','',5,'t','','1','',0,0,0,
+'','','2009-11-09','09:11',5,5,'0','',0,0,'',0,0,0)09:41:53 - insert into posta (ev_cislo,rok,odbor,oddeleni,typ_posty,odes_typ,vec,odesl_prijmeni,odesl_jmeno,odesl_titul,odesl_ico,odesl_ulice,odesl_cp,odesl_cor,
+odesl_psc,  odesl_posta,odesl_datschranka,datum_podatelna_prijeti,referent,odeslana_posta,doporucene,vlastnich_rukou,dorucenka,cislo_spisu1,cislo_spisu2,id_puvodni,
+odesl_odd,  odesl_osoba,last_date,last_time,last_user_id,owner_id,skartace,dalsi_prijemci,cislo_jednaci1,cislo_jednaci2,odbor_spisu,obyvatel_kod,obalka_nevracet,obalka_10dni)  values 
+(0,2009,18,0,0,'P','A - souhlas - umístění stavby - územní souhlas: stavba pro zemědělství o rozměrech 6,2m x 5,2m se s','VITA sw','','','','','','',
+'12345','','','31.12.2100 00:00',71,'t','1','1','',0,0,0,
+'','','2009-11-09','09:11',71,71,'0','',0,0,'',0,0,0)09:43:45 - insert into posta (ev_cislo,rok,odbor,oddeleni,typ_posty,odes_typ,vec,odesl_prijmeni,odesl_jmeno,odesl_titul,odesl_ico,odesl_ulice,odesl_cp,odesl_cor,
+odesl_psc,  odesl_posta,odesl_datschranka,datum_podatelna_prijeti,referent,odeslana_posta,doporucene,vlastnich_rukou,dorucenka,cislo_spisu1,cislo_spisu2,id_puvodni,
+odesl_odd,  odesl_osoba,last_date,last_time,last_user_id,owner_id,skartace,dalsi_prijemci,cislo_jednaci1,cislo_jednaci2,odbor_spisu,obyvatel_kod,obalka_nevracet,obalka_10dni)  values 
+(0,2009,18,0,0,'P','A - souhlas - umístění stavby - územní souhlas: stavba pro zemědělství o rozměrech 6,2m x 5,2m se s','VITA sw','','','','','','',
+'12345','','','31.12.2100 00:00',71,'t','1','1','',0,0,0,
+'','','2009-11-09','09:11',71,71,'0','',0,0,'',0,0,0)09:45:12 - insert into posta (ev_cislo,rok,odbor,oddeleni,typ_posty,odes_typ,vec,odesl_prijmeni,odesl_jmeno,odesl_titul,odesl_ico,odesl_ulice,odesl_cp,odesl_cor,
+odesl_psc,  odesl_posta,odesl_datschranka,datum_podatelna_prijeti,referent,odeslana_posta,doporucene,vlastnich_rukou,dorucenka,cislo_spisu1,cislo_spisu2,id_puvodni,
+odesl_odd,  odesl_osoba,last_date,last_time,last_user_id,owner_id,skartace,dalsi_prijemci,cislo_jednaci1,cislo_jednaci2,odbor_spisu,obyvatel_kod,obalka_nevracet,obalka_10dni)  values 
+(0,2009,18,0,0,'P','A - souhlas - umístění stavby - územní souhlas: stavba pro zemědělství o rozměrech 6,2m x 5,2m se s','VITA sw','','','','','','',
+'12345','','','31.12.2100 00:00',71,'t','1','1','',4850,2007,0,
+'','','2009-11-09','09:11',71,71,'267','',0,0,'',0,0,0)

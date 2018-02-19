@@ -1,0 +1,4 @@
+alter table POSTA_CIS_DENIKY add STAV int4;
+alter table POSTA_CIS_DENIKY add VYRIZENO varchar(50);
+alter table POSTA_CIS_DENIKY add DATUM_VYRIZENI int2;
+alter table POSTA_CIS_DENIKY add SPIS_VYRIZEN int2;

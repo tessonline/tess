@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Created with Liquid XML 2015 Designer Edition (Trial) 13.2.1.5996 (http://www.liquid-technologies.com) -->
+<ns:SpisZalozeni xmlns:ess="http://mvcr.cz/ess/v_1.0.0.0" xmlns:isds="http://isds.czechpoint.cz/v20" xmlns:ns="http://nsess.public.cz/erms/v_01_01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://nsess.public.cz/erms/v_01_01 file:///D:/spis_sluzba/RZP/unispis%203.1/best%20Practices/Xsd/ermsAsynU.xsd" UdalostId="1818">
+    <ns:ProfilSpisu>
+        <ns:Identifikator>
+            <ess:HodnotaID>string</ess:HodnotaID>
+            <ess:ZdrojID>string</ess:ZdrojID>
+        </ns:Identifikator>
+        <ns:Nazev>string</ns:Nazev>
+        <ns:PodaciDenikRok>2013</ns:PodaciDenikRok>
+        <ns:PodaciDenik>string</ns:PodaciDenik>
+        <ns:DatumCasVytvoreni>2016-09-04T06:47:21.85</ns:DatumCasVytvoreni>
+        <ns:SpisovyZnak>string</ns:SpisovyZnak>
+        <ns:SkartacniLhuta>998</ns:SkartacniLhuta>
+        <ns:Zmocneni>
+            <ess:LegalTitleLaw>895356800</ess:LegalTitleLaw>
+            <ess:LegalTitleYear>5053</ess:LegalTitleYear>
+            <ess:LegalTitleSect>string</ess:LegalTitleSect>
+            <ess:LegalTitlePar>string</ess:LegalTitlePar>
+            <ess:LegalTitlePoint>string</ess:LegalTitlePoint>
+        </ns:Zmocneni>
+        <ns:ZpusobVedeni>SbernyArch</ns:ZpusobVedeni>
+        <ns:DoplnujiciData />
+        <ns:DokumentyVlozene>
+            <ns:DokumentUplnyVlozeny>
+                <ns:ProfilDokumentu>
+                    <ns:Identifikator>
+                        <ess:HodnotaID>string</ess:HodnotaID>
+                        <ess:ZdrojID>string</ess:ZdrojID>
+                    </ns:Identifikator>
+                    <ns:PocetListu>5714</ns:PocetListu>
+                    <ns:PocetPriloh>8078</ns:PocetPriloh>
+                    <ns:DruhPriloh>string</ns:DruhPriloh>
+                    <ns:SouvisejiciDokument>
+                        <ns:Identifikator>
+                            <ess:HodnotaID>string</ess:HodnotaID>
+                            <ess:ZdrojID>string</ess:ZdrojID>
+                        </ns:Identifikator>
+                        <ns:DuvodId>odpoved</ns:DuvodId>
+                    </ns:SouvisejiciDokument>
+                    <ns:VlastniKdo>string</ns:VlastniKdo>
+                    <ns:StavDokumentu>vyrizen</ns:StavDokumentu>
+                </ns:ProfilDokumentu>
+                <ns:PoradiVeSpisu>1250213440</ns:PoradiVeSpisu>
+                <ns:StavZarazeniDoSpisu>Vlozen</ns:StavZarazeniDoSpisu>
+            </ns:DokumentUplnyVlozeny>
+        </ns:DokumentyVlozene>
+        <ns:VlastniKdo>string</ns:VlastniKdo>
+        <ns:StavSpisu>predanDoArchivuNeboSkartovan</ns:StavSpisu>
+        <ns:DatumCasUzavreni>1998-03-20T17:23:30.46</ns:DatumCasUzavreni>
+    </ns:ProfilSpisu>
+    <ns:Autorizace>
+        <ns:provedlKdo>string</ns:provedlKdo>
+        <ns:provedlKdy>1993-10-05T14:28:57.62</ns:provedlKdy>
+    </ns:Autorizace>
+</ns:SpisZalozeni>

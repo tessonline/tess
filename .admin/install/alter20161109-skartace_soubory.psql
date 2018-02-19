@@ -1,0 +1,8 @@
+create table posta_skartace_soubory (
+  id serial,
+  rizeni_id int4,
+  spisovna_id int4
+);
+
+
+  

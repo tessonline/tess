@@ -1,0 +1,5 @@
+tiskarna se musi pripojit pres COM port
+nastavit hodnotY COM port s tim, ze stejne hodnoty musi byt nastaveny i v tiskarne
+Do setupu tiskarny se dostaneme tak, ze pri zapnute tiskarne zmackneme sipky nahoru a dolu
+a vypneme tlacitkem tiskarnu. Sipky drzime, zmackneme tlacitko pro zapnuti a pustime sipky.
+Dostaneme se do nastaveni COM portu tiskarny.

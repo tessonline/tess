@@ -1,0 +1,35 @@
+DROP FUNCTION posta_before_insert2() CASCADE;
+
+CREATE FUNCTION posta_before_insert2() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+DECLARE 
+max_num int4; 
+BEGIN 
+IF NEW.ODESLANA_POSTA=false AND (NEW.CISLO_JEDNACI1 is null or NEW.CISLO_JEDNACI1=0) THEN   
+    max_num = nextval('"posta_cislo_jednaci_seq"'); 
+    NEW.CISLO_JEDNACI1 = max_num; 
+    NEW.CISLO_SPISU1 = max_num; 
+    NEW.CISLO_JEDNACI2 = NEW.ROK; 
+    NEW.CISLO_SPISU2 = NEW.ROK; 
+    NEW.MAIN_DOC = 1; 
+  RETURN NEW;
+ELSE
+  If NEW.CISLO_JEDNACI1 is null or NEW.CISLO_JEDNACI1=0 THEN
+    max_num = nextval('"posta_cislo_jednaci_seq"'); 
+    NEW.CISLO_JEDNACI1 = max_num; 
+    NEW.CISLO_SPISU1 = max_num; 
+    NEW.CISLO_JEDNACI2 = NEW.ROK; 
+    NEW.CISLO_SPISU2 = NEW.ROK; 
+    NEW.MAIN_DOC = 1; 
+  END IF;  
+  RETURN NEW;
+END IF;
+END;
+$$; 
+
+CREATE TRIGGER posta_before_insert2
+    BEFORE INSERT ON posta
+    FOR EACH ROW
+    EXECUTE PROCEDURE posta_before_insert2();
+ 

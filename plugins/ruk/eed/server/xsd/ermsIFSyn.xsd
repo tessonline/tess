@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2009 (http://www.altova.com) by Vladimir Dinus (ICZ) -->
+<!--
+	SchĂŠma definujĂ­cĂ­ udĂĄlosti a objekty vzniklĂŠ v jednom ERMS a pĹenĂĄĹĄejĂ­cĂ­ se do ERMS druhĂŠho.
+	Toto schĂŠma popisuje synchronĂ­ vĂ˝mÄnu udĂĄlostĂ­, napĹ. formou webovĂ˝ch sluĹžeb.
+-->
+<xs:schema xmlns="http://nsess.public.cz/erms/v_01_00" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ess="http://mvcr.cz/ess/v_1.0.0.0" xmlns:isds="http://isds.czechpoint.cz/v20" targetNamespace="http://nsess.public.cz/erms/v_01_00" elementFormDefault="qualified" id="ermsIFAsyn">
+	<xs:import namespace="http://mvcr.cz/ess/v_1.0.0.0" schemaLocation="ess_ns.xsd"/>
+	<xs:import namespace="http://isds.czechpoint.cz/v20" schemaLocation="dmBaseTypes.xsd"/>
+	<!--xs:import namespace="http://isds.czechpoint.cz/v20" schemaLocation="dbTypes.xsd"/-->
+	<xs:include schemaLocation="ermsTypes.xsd"/>
+	<xs:include schemaLocation="ermsAsynU.xsd"/>
+
+  <xs:complexType name="tUdalostiSyn">
+		<xs:sequence maxOccurs="10">
+			<xs:group ref="gUdalost"/>
+		</xs:sequence>
+	</xs:complexType>
+
+  <xs:element name="DorucenyDokumentZalozeniRequest">
+		<xs:annotation>
+			<xs:documentation>ZaevidovĂĄnĂ­ novĂŠho dokumentu pĹijatĂŠho / vzniklĂŠho v agendÄ.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+        <xs:element name="UdalostiPredchazejici" type="tUdalostiSyn" minOccurs="0"/>
+				<xs:element name="DorucenyDokument" type="tDorucenyDokument"/>
+				<xs:element name="Autorizace" type="tAutorizace"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DorucenyDokumentZalozeniResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="DorucenyDokument" type="tDorucenyDokument" minOccurs="0"/>
+				<xs:element name="OperaceStatus" type="tOperaceStatus"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="VlastniDokumentZalozeniRequest">
+		<xs:annotation>
+			<xs:documentation>ZaevidovĂĄnĂ­ novĂŠho dokumentu pĹijatĂŠho / vzniklĂŠho v agendÄ</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+        <xs:element name="UdalostiPredchazejici" type="tUdalostiSyn" minOccurs="0"/>
+				<xs:element name="VlastniDokument" type="tVlastniDokument"/>
+				<xs:element name="Autorizace" type="tAutorizace"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="VlastniDokumentZalozeniResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="VlastniDokument" type="tVlastniDokument" minOccurs="0"/>
+				<xs:element name="OperaceStatus" type="tOperaceStatus"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SpisZalozeniRequest">
+		<xs:annotation>
+			<xs:documentation>ZaloĹženĂ­ spisu nad dokumentem. Je moĹžnĂŠ zaloĹžit celĂ˝ spis i s dokumenty v nÄm, nebo je spis zaloĹžen nad existujĂ­cĂ­m dokumentem.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+        <xs:element name="UdalostiPredchazejici" type="tUdalostiSyn" minOccurs="0"/>
+				<xs:element name="ProfilSpisu" type="tProfilSpisu" nillable="false"/>
+				<xs:element name="DokumentyVlozene" nillable="false">
+					<xs:annotation>
+						<xs:documentation>Je-li pouĹžit element VlozenyDokumentUplny, pak jsou jsou nejprve zaloĹženy dokumenty uvedenĂŠ v tomto elementu, potĂŠ je zaloĹžen spis kde iniciaÄnĂ­m dokumentem je ten, kterĂ˝ mĂĄ  PoradiVeSpisu rovno 1 a potĂŠ jsou do spisu vloĹženy i dalĹĄĂ­ dokumenty.
+					PĹi variantÄ VlozenyDokumentId je pĹedpoklĂĄdĂĄno, Ĺže  je spis zĂĄklĂĄdĂĄn na jiĹž existujĂ­cĂ­m dokumentem (PoradiVeSpisu = 1), jsou-li uvedeny i jinĂŠ idDokument, jsou vloĹženy do zaloĹženĂŠho spisu.
+					</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence maxOccurs="unbounded">
+							<xs:choice>
+								<xs:element name="DokumentUplnyVlozeny">
+									<!--xs:annotation>Je-li pouĹžit element VlozenyDokumentUplny, pak jsou jsou nejprve zaloĹženy dokumenty uvedenĂŠ v tomto elementu, potĂŠ je zaloĹžen spis kde iniciaÄnĂ­m dokumentem je ten, kterĂ˝ mĂĄ  PoradiVeSpisu rovno 1 a potĂŠ jsou do spisu vloĹženy i dalĹĄĂ­ dokumenty.</xs:annotation-->
+									<xs:complexType>
+										<xs:sequence>
+											<xs:choice>
+												<xs:element name="VlastniDokument" type="tVlastniDokument"/>
+												<xs:element name="DorucenyDokument" type="tDorucenyDokument"/>
+											</xs:choice>
+                      <xs:element name="PoradiVeSpisu" nillable="false">
+                        <xs:annotation>
+                          <xs:documentation>PoĹadĂ­, v jakĂŠm byl dokument vloĹžen do spisu. ZaÄĂ­nĂĄ vĹždy od 1.</xs:documentation>
+                        </xs:annotation>
+                        <xs:simpleType>
+                          <xs:restriction base="xs:int">
+                            <xs:minInclusive value="1"/>
+                            <xs:maxInclusive value="2147483647"/>
+                          </xs:restriction>
+                        </xs:simpleType>
+                      </xs:element>
+                      <xs:element name="StavZarazeniDoSpisu">
+                        <xs:annotation>
+                          <xs:documentation>VĂ˝ÄtovĂ˝ typ, kterĂ˝ urÄuje, zda je dokument aktuĂĄlnÄ vloĹžen do spisu.</xs:documentation>
+                        </xs:annotation>
+                        <xs:simpleType>
+                          <xs:restriction base="xs:string">
+                            <xs:enumeration value="Vlozen"/>
+                            <xs:enumeration value="Vyjmut"/>
+                          </xs:restriction>
+                        </xs:simpleType>
+                      </xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="DokumentIdVlozeny">
+									<!--xs:annotation>PĹi tĂŠto variantÄ je pĹedpoklĂĄdĂĄno, Ĺže  je spis zĂĄklĂĄdĂĄn na jiĹž existujĂ­cĂ­m dokumentem (PoradiVeSpisu = 1), jsou-li uvedeny i jinĂŠ idDokument, jsou vloĹženy do zaloĹženĂŠho spisu.</xs:annotation-->
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="IdDokument" type="tIdDokument" nillable="false"/>
+                      <xs:element name="PoradiVeSpisu" nillable="false">
+                        <xs:annotation>
+                          <xs:documentation>PoĹadĂ­, v jakĂŠm byl dokument vloĹžen do spisu. ZaÄĂ­nĂĄ vĹždy od 1.</xs:documentation>
+                        </xs:annotation>
+                        <xs:simpleType>
+                          <xs:restriction base="xs:int">
+                            <xs:minInclusive value="1"/>
+                            <xs:maxInclusive value="2147483647"/>
+                          </xs:restriction>
+                        </xs:simpleType>
+                      </xs:element>
+                      <xs:element name="StavZarazeniDoSpisu">
+                        <xs:annotation>
+                          <xs:documentation>VĂ˝ÄtovĂ˝ typ, kterĂ˝ urÄuje, zda je dokument aktuĂĄlnÄ vloĹžen do spisu.</xs:documentation>
+                        </xs:annotation>
+                        <xs:simpleType>
+                          <xs:restriction base="xs:string">
+                            <xs:enumeration value="Vlozen"/>
+                            <xs:enumeration value="Vyjmut"/>
+                          </xs:restriction>
+                        </xs:simpleType>
+                      </xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+							</xs:choice>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Autorizace" type="tAutorizace"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SpisZalozeniResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="ProfilSpisu" type="tProfilSpisu" nillable="false" minOccurs="0"/>
+				<xs:element name="DokumentyVlozene" nillable="false" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence maxOccurs="unbounded">
+							<xs:element name="DokumentZkracenyVlozeny">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="IdDokument" type="tIdDokument" nillable="false"/>
+										<xs:element name="CisloJednaci">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:maxLength value="50"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="PodaciDenikPoradi" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>PoĹadĂ­ v rĂĄmci roku (zaÄĂ­nĂĄ od 1) a podacĂ­ho denĂ­ku (Äi jinĂŠ evidenÄnĂ­ pomĹŻcky)</xs:documentation>
+											</xs:annotation>
+											<xs:simpleType>
+												<xs:restriction base="xs:int">
+													<xs:minInclusive value="1"/>
+													<xs:maxInclusive value="2147483647"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="PodaciDenikRok" type="xs:gYear" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Rok podacĂ­ho denĂ­ku.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="PodaciDenik" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>OznaÄenĂ­ podacĂ­ho denĂ­ku Äi jinĂŠ evidenÄnĂ­ pomĹŻcky ( vÄtĹĄinou se pro oznaÄenĂ­ vyuĹžĂ­vĂĄ vĂ˝stiĹžnĂĄ zkratka )</xs:documentation>
+											</xs:annotation>
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:maxLength value="12"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<!-- xs:element name="PoradiVeSpisu" nillable="false">
+								<xs:annotation>
+									<xs:documentation>PoĹadĂ­, v jakĂŠm byl dokument vloĹžen do spisu. ZaÄĂ­nĂĄ vĹždy od 1.</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:int">
+										<xs:minInclusive value="1"/>
+										<xs:maxInclusive value="2147483647"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="StavZarazeniDoSpisu">
+								<xs:annotation>
+									<xs:documentation>VĂ˝ÄtovĂ˝ typ, kterĂ˝ urÄuje, zda je dokument aktuĂĄlnÄ vloĹžen do spisu.</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:enumeration value="Vlozen"/>
+										<xs:enumeration value="Vyjmut"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element -->
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="OperaceStatus" type="tOperaceStatus"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!--
+	<xs:element name="FindDataBoxRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="dbOwnerInfo" type="isds:tDbOwnerInfo"/>
+				<xs:element name="Autorizace" type="tAutorizace"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="FindDataBoxResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="dbResults" type="isds:tDbOwnersArray" maxOccurs="0"/>
+				<xs:element name="OperaceStatus" type="tOperaceStatus"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	-->
+  <xs:element name="UdalostiRequest">
+		<xs:annotation>
+			<xs:documentation>Pozadavek na synchronni zpracovani udalosti.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+        <xs:element name="Udalosti" type="tUdalostiSyn"/>
+			</xs:sequence>
+		</xs:complexType>
+  </xs:element>
+  <xs:element name="UdalostiResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Zpravy">
+					<xs:complexType>
+						<xs:sequence maxOccurs="unbounded">
+							<xs:element ref="Zprava"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+  </xs:element>
+</xs:schema>

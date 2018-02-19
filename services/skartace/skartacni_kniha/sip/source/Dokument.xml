@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nsesss:Dokument ID="idvalue0" xmlns:nsesss="http://www.mvcr.cz/nsesss/v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mvcr.cz/nsesss/v2 nsesss.xsd ">
+  <nsesss:EvidencniUdaje>
+    <nsesss:Evidence>
+      <nsesss:EvidencniCislo>nsesss:EvidencniCislo</nsesss:EvidencniCislo>
+      <nsesss:UrceneCasoveObdobi/>
+      <nsesss:NazevEvidenceDokumentu>nsesss:NazevEvidenceDokumentu</nsesss:NazevEvidenceDokumentu>
+    </nsesss:Evidence>
+    <nsesss:Puvod>
+      <nsesss:DorucenyDokument>
+        <nsesss:DatumDoruceni>2001-01-01</nsesss:DatumDoruceni>
+        <nsesss:Odesilatel>
+          <nsesss:Subjekt/>
+        </nsesss:Odesilatel>
+      </nsesss:DorucenyDokument>
+    </nsesss:Puvod>
+    <nsesss:Trideni>
+      <nsesss:JednoduchySpisovyZnak>nsesss:JednoduchySpisovyZnak</nsesss:JednoduchySpisovyZnak>
+      <nsesss:PlneUrcenySpisovyZnak>nsesss:PlneUrcenySpisovyZnak</nsesss:PlneUrcenySpisovyZnak>
+      <nsesss:TypDokumentu>
+        <nsesss:Identifikator zdroj="">nsesss:Identifikator</nsesss:Identifikator>
+        <nsesss:Nazev>nsesss:Nazev</nsesss:Nazev>
+      </nsesss:TypDokumentu>
+    </nsesss:Trideni>
+    <nsesss:Vyrazovani>
+      <nsesss:SkartacniRezim>
+        <nsesss:Identifikator zdroj="">nsesss:Identifikator</nsesss:Identifikator>
+        <nsesss:Nazev>nsesss:Nazev</nsesss:Nazev>
+        <nsesss:Oduvodneni>nsesss:Oduvodneni</nsesss:Oduvodneni>
+        <nsesss:SkartacniZnak>A</nsesss:SkartacniZnak>
+        <nsesss:SkartacniLhuta>0</nsesss:SkartacniLhuta>
+        <nsesss:SpousteciUdalost>nsesss:SpousteciUdalost</nsesss:SpousteciUdalost>
+      </nsesss:SkartacniRezim>
+      <nsesss:DataceVyrazeni>
+        <nsesss:RokSpousteciUdalosti>2001</nsesss:RokSpousteciUdalosti>
+        <nsesss:RokSkartacniOperace>2001</nsesss:RokSkartacniOperace>
+      </nsesss:DataceVyrazeni>
+    </nsesss:Vyrazovani>
+    <nsesss:Manipulace>
+      <nsesss:NezbytnyDokument>ano</nsesss:NezbytnyDokument>
+      <nsesss:AnalogovyDokument>ano</nsesss:AnalogovyDokument>
+    </nsesss:Manipulace>
+  </nsesss:EvidencniUdaje>
+</nsesss:Dokument>

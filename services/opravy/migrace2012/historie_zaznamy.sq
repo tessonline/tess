@@ -1,0 +1,4 @@
+delete from posta_stare_zaznamy where id in (select id from posta);
+insert into posta select * from posta_stare_zaznamy;
+
+

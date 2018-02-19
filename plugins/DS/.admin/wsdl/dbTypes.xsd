@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--Created with Liquid XML Studio - FREE Community Edition 7.0.4.795 (http://www.liquid-technologies.com)-->
+<!-- ************************************************************************
+   XSD schema typĹŻ pouĹžitĂ˝ch ve WSDL pro manipulaci s datovĂ˝mi schrĂĄnkami a ve WSDL pro vyhledĂĄvĂĄnĂ­ DS
+                       verze 1.5    13.5.2009 pilot     
+
+ zmÄny:
+  9.2.2009  verze 0.1
+ 23.2.2009  verze 0.2  - odstranÄn element corporateRegistrationState z tDbOwnerInfo
+                       - ve skupinÄ gBirthInfo byly tĹi integer elementy pro den, mÄsĂ­c a rok nahrazeny jednĂ­m biDate typu date
+                       - pĹidĂĄn typ tDbType (enumerace FO, PO atd. - zkratky asi zĹŻstanou Äesky) pro element dbType
+                       - pĹejmenovĂĄn element dbOwner na dbOwnerInfo a dbUser na dbUserInfo
+ 24.2.2009  verze 0.3  - zmÄnÄn zĂĄkladnĂ­ namespace na http://isds.czechpoint.cz
+  4.3.2009  verze 0.4  - do typu tDbUserInfo pĹidĂĄny 2 elementy biDate a userPrivils                      
+  5.3.2009  verze 0.5  - doplnÄny enumerace typ DS a typ osoby
+ 17.3.2009  verze 0.6  - doplnÄny 2 elementy (email a telNumber) do tDbOwnerInfo
+ 20.3.2009  verze 1.0  - pĹidĂĄny elementy (na prvnĂ­ Ăşrovni) k jednotlivĂ˝m typĹŻm pro pouĹžitĂ­ jako parametry ve WSDL (document/literal)+komplexnĂ­ typy pro tyto elementy popisujĂ­cĂ­ jednotlivĂŠ parametry operacĂ­
+ 25.3.2009  verze 1.1  - do vĂ˝stupnĂ­ch parametrĹŻ CreateDataBox pĹidĂĄn element dbID pro ÄĂ­slo vytvĂĄĹenĂŠ DS, pĹidĂĄn complex type tCreateDBOutput jako typ pro CreateDataBoxResponse
+ 21.4.2009  verze 1.2  - zmÄnÄn typ elementu u adNumberInStreet a adNumberInMunicipality z int na string
+ 28.4.2009  verze 1.3  - v dbOwnerInfo byla doplnÄna u elementu biDate a dbType vlastnosti nillable = TRUE (pro FindDataBox se nemusĂ­ vyplnit, pokud je zadĂĄno ID DS)
+                       - pĹidĂĄny elementy a typy pro WS CheckDataBox   
+ 11.5.2009  verze 1.4. - novĂ˝ vstupnĂ­ parametr u WS DisableDataBoxExternally - dbOwnerDisableDate typu xs:date pro datum znepĹĂ­stupnÄnĂ­
+ 13.5 2009  verze 1.5  - odstranÄn nepotĹebnĂ˝ element GetOwnerInfoFromLogin  					
+                       - doplnÄna kardinalita nÄkterĂ˝ch elementĹŻ v odpovÄdĂ­ch od serveru - pĹi vĂ˝skytu nÄkterĂ˝ch chyb se vracĂ­ pouze Status
+                       - doplnÄna vlastnosti nillable = TRUE u nÄkterĂ˝ch elementĹŻ vÄ. stringovĂ˝ch
+**** ************************************************************************ -->
+<xs:schema xmlns:tns="http://isds.czechpoint.cz" elementFormDefault="qualified" targetNamespace="http://isds.czechpoint.cz" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="tIdDb">
+    <xs:annotation>
+      <xs:documentation>ID datovĂŠ schrĂĄnky</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:length value="7" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="tIdDbInput">
+    <xs:sequence>
+      <xs:element name="dbID" type="tns:tIdDb" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="tReqStatusOutput">
+    <xs:sequence>
+      <xs:element name="dbStatus" type="tns:tDbReqStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="tDbType">
+    <xs:annotation>
+      <xs:documentation>typ DS - vĂ˝Äet FO,PO,FPO a OVM. NÄkterĂŠ majĂ­ podtypy, napĹ. FPO_ADVOK aj.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="FO" />
+      <xs:enumeration value="PFO" />
+      <xs:enumeration value="PFO_ADVOK" />
+      <xs:enumeration value="PFO_DANPOR" />
+      <xs:enumeration value="PFO_INSSPR" />
+      <xs:enumeration value="PO" />
+      <xs:enumeration value="PO_ZAK" />
+      <xs:enumeration value="PO_REQ" />
+      <xs:enumeration value="OVM" />
+      <xs:enumeration value="OVM_NOTAR" />
+      <xs:enumeration value="OVM_EXEKUT" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="tIdentificationNumber">
+    <xs:annotation>
+      <xs:documentation>IÄ </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string" />
+  </xs:simpleType>
+  <xs:simpleType name="tUserType">
+    <xs:annotation>
+      <xs:documentation>typ uĹživatele DZ - vĂ˝Äet</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="PRIMARY_USER" />
+      <xs:enumeration value="ENTRUSTED_USER" />
+      <xs:enumeration value="ADMINISTRATOR" />
+      <xs:enumeration value="OFFICIAL" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="tUserID">
+    <xs:annotation>
+      <xs:documentation>ID uĹživatele</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string" />
+  </xs:simpleType>
+  <xs:simpleType name="tDbAccessDataId">
+    <xs:restriction base="xs:string" />
+  </xs:simpleType>
+  <xs:group name="gDbReqStatus">
+    <xs:sequence>
+      <xs:element name="dbStatusCode" type="xs:string" />
+      <xs:element name="dbStatusMessage" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="dbStatusRefNumber" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:group>
+  <xs:complexType name="tDbReqStatus">
+    <xs:annotation>
+      <xs:documentation>nĂĄvratovĂ˝ typ WS</xs:documentation>
+    </xs:annotation>
+    <xs:group ref="tns:gDbReqStatus" />
+  </xs:complexType>
+  <xs:element name="dbStatus" type="tns:tDbReqStatus" />
+  <xs:group name="gBirthInfo">
+    <xs:annotation>
+      <xs:documentation>skupina elementĹŻ pro datum a mĂ­sto narozenĂ­</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="biDate" nillable="true" type="xs:date" />
+      <xs:element name="biCity" nillable="true" type="xs:string" />
+      <xs:element name="biCounty" nillable="true" type="xs:string" />
+      <xs:element name="biState" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="gPersonName">
+    <xs:annotation>
+      <xs:documentation>skupina elementĹŻ pro jmĂŠno</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="pnFirstName" nillable="true" type="xs:string" />
+      <xs:element name="pnMiddleName" nillable="true" type="xs:string" />
+      <xs:element name="pnLastName" nillable="true" type="xs:string" />
+      <xs:element name="pnLastNameAtBirth" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="gAddress">
+    <xs:annotation>
+      <xs:documentation>skupina elementĹŻ pro adresu</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="adCity" nillable="true" type="xs:string" />
+      <xs:element name="adStreet" nillable="true" type="xs:string" />
+      <xs:element name="adNumberInStreet" nillable="true" type="xs:string" />
+      <xs:element name="adNumberInMunicipality" nillable="true" type="xs:string" />
+      <xs:element name="adZipCode" nillable="true" type="xs:string" />
+      <xs:element name="adState" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:group>
+  <xs:complexType name="tDbOwnerInfo">
+    <xs:annotation>
+      <xs:documentation>typ pro veĹĄkerĂŠ informace o DS, pro nÄkterĂŠ typy budou nÄkterĂŠ elementy nevyplnÄnĂŠ</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="dbID" nillable="true" type="tns:tIdDb" />
+      <xs:element name="dbType" nillable="true" type="tns:tDbType" />
+      <xs:element name="ic" nillable="true" type="tns:tIdentificationNumber" />
+      <xs:group ref="tns:gPersonName" />
+      <xs:element name="firmName" nillable="true" type="xs:string" />
+      <xs:group ref="tns:gBirthInfo" />
+      <xs:group ref="tns:gAddress" />
+      <xs:element name="nationality" nillable="true" type="xs:string" />
+      <xs:element name="email" nillable="true" type="xs:string" />
+      <xs:element name="telNumber" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="tDbOwnersArray">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="dbOwnerInfo" type="tns:tDbOwnerInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="tDbUserInfo">
+    <xs:annotation>
+      <xs:documentation>typ pro veĹĄkerĂŠ informace o uĹživateli schrĂĄnky</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:group ref="tns:gPersonName" />
+      <xs:group ref="tns:gAddress" />
+      <xs:element name="biDate" nillable="true" type="xs:date" />
+      <xs:element name="userID" nillable="true" type="tns:tUserID" />
+      <xs:element name="userType" nillable="true" type="tns:tUserType" />
+      <xs:element name="userPrivils" nillable="true" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="tDbUsersArray">
+    <xs:sequence minOccurs="1" maxOccurs="unbounded">
+      <xs:element name="dbUserInfo" type="tns:tDbUserInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="tFindDBInput">
+    <xs:sequence>
+      <xs:element name="dbOwnerInfo" type="tns:tDbOwnerInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="FindDataBox" type="tns:tFindDBInput" />
+  <xs:complexType name="tFindDBOuput">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="dbResults" type="tns:tDbOwnersArray" />
+      <xs:element name="dbStatus" type="tns:tDbReqStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="FindDataBoxResponse" type="tns:tFindDBOuput" />
+  <xs:complexType name="tCreateDBInput">
+    <xs:sequence>
+      <xs:element name="dbOwnerInfo" type="tns:tDbOwnerInfo" />
+      <xs:element name="dbPrimaryUsers" type="tns:tDbUsersArray" />
+      <xs:element name="dbFormerNames" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CreateDataBox" type="tns:tCreateDBInput" />
+  <xs:complexType name="tCreateDBOutput">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="dbID" type="tns:tIdDb" />
+      <xs:element name="dbStatus" type="tns:tDbReqStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CreateDataBoxResponse" type="tns:tCreateDBOutput" />
+  <xs:complexType name="tDeleteDBInput">
+    <xs:sequence>
+      <xs:element name="dbOwnerInfo" type="tns:tDbOwnerInfo" />
+      <xs:element name="dbOwnerTerminationDate" type="xs:date" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DeleteDataBox" type="tns:tDeleteDBInput" />
+  <xs:element name="DeleteDataBoxResponse" type="tns:tReqStatusOutput" />
+  <xs:complexType name="tUpdateDBInput">
+    <xs:sequence>
+      <xs:element name="dbOldOwnerInfo" type="tns:tDbOwnerInfo" />
+      <xs:element name="dbNewOwnerInfo" type="tns:tDbOwnerInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UpdateDataBoxDescr" type="tns:tUpdateDBInput" />
+  <xs:element name="UpdateDataBoxDescrResponse" type="tns:tReqStatusOutput" />
+  <xs:complexType name="tAddDBUserInput">
+    <xs:sequence>
+      <xs:element name="dbOwnerInfo" type="tns:tDbOwnerInfo" />
+      <xs:element name="dbUserInfo" type="tns:tDbUserInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AddDataBoxUser" type="tns:tAddDBUserInput" />
+  <xs:element name="AddDataBoxUserResponse" type="tns:tReqStatusOutput" />
+  <xs:element name="DeleteDataBoxUser" type="tns:tAddDBUserInput" />
+  <xs:element name="DeleteDataBoxUserResponse" type="tns:tReqStatusOutput" />
+  <xs:complexType name="tUpdDBUserInput">
+    <xs:sequence>
+      <xs:element name="dbOwnerInfo" type="tns:tDbOwnerInfo" />
+      <xs:element name="dbOldUserInfo" type="tns:tDbUserInfo" />
+      <xs:element name="dbNewUserInfo" type="tns:tDbUserInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UpdateDataBoxUser" type="tns:tUpdDBUserInput" />
+  <xs:element name="UpdateDataBoxUserResponse" type="tns:tReqStatusOutput" />
+  <xs:complexType name="tNewAccDataInput">
+    <xs:sequence>
+      <xs:element name="dbOwnerInfo" type="tns:tDbOwnerInfo" />
+      <xs:element name="dbUserInfo" type="tns:tDbUserInfo" />
+      <xs:element name="dbAccessDataId" type="tns:tDbAccessDataId" />
+      <xs:element name="dbFeePaid" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="NewAccessData" type="tns:tNewAccDataInput" />
+  <xs:element name="NewAccessDataResponse" type="tns:tReqStatusOutput" />
+  <xs:complexType name="tOwnerInfoInput">
+    <xs:sequence>
+      <xs:element name="dbOwnerInfo" type="tns:tDbOwnerInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="tDisableExternallyInput">
+    <xs:sequence>
+      <xs:element name="dbOwnerInfo" type="tns:tDbOwnerInfo" />
+      <xs:element name="dbOwnerDisableDate" nillable="true" type="xs:date" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DisableDataBoxExternally" type="tns:tDisableExternallyInput" />
+  <xs:element name="DisableDataBoxExternallyResponse" type="tns:tReqStatusOutput" />
+  <xs:element name="DisableOwnDataBox" type="tns:tOwnerInfoInput" />
+  <xs:element name="DisableOwnDataBoxResponse" type="tns:tReqStatusOutput" />
+  <xs:element name="EnableOwnDataBox" type="tns:tOwnerInfoInput" />
+  <xs:element name="GetDataBoxUsers" type="tns:tIdDbInput" />
+  <xs:complexType name="tGetDBUsersOutput">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="dbUsers" type="tns:tDbUsersArray" />
+      <xs:element name="dbStatus" type="tns:tDbReqStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetDataBoxUsersResponse" type="tns:tGetDBUsersOutput" />
+  <xs:complexType name="tStoreDelivDateInput">
+    <xs:sequence>
+      <xs:element name="dbOwnerInfo" type="tns:tDbOwnerInfo" />
+      <xs:element name="dbDeliveryDate" type="xs:date" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="StoreAccessDataDeliveryInfo" type="tns:tStoreDelivDateInput" />
+  <xs:element name="StoreAccessDataDeliveryInfoResponse" type="tns:tReqStatusOutput" />
+  <xs:element name="EnableOwnDataBoxResponse" type="tns:tReqStatusOutput" />
+  <xs:element name="CheckDataBox" type="tns:tIdDbInput" />
+  <xs:complexType name="tCheckDBOutput">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="dbState" type="xs:int" />
+      <xs:element name="dbStatus" type="tns:tDbReqStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CheckDataBoxResponse" type="tns:tCheckDBOutput" />
+</xs:schema>

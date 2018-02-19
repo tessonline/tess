@@ -1,0 +1,22 @@
+<?php
+include_once(FileUp2(".admin/agenda_func.inc"));
+require_once(FileUp2(".admin/security_obj.inc"));
+
+
+//$PROPERTIES["MENU2L"]["new"] = true;
+//$PROPERTIES["MENU2L"]["new"] = false;
+
+If ($GLOBALS["POSTA_SECURITY"]->IsUserInGroups(array("posta-spravce-ruid","posta-podatelna-ruid","access_all")))
+{
+$PROPERTIES["MENU2L"]["new"] = array("Vlož příchozí", "javascript:NewWindow('edit.php?insert&cacheid=');");
+}
+else
+{
+$PROPERTIES["MENU2L"]["new"] = false;
+}
+
+//$PROPERTIES["MENU2P"]["to_group"] = array("Přechod do spisů", GetAgendaPath("MUMNMN_POSTA_SPIS"),"_top");		
+
+
+$PROPERTIES["MENU2L"]["to_group"] = array("Vlož odchozí", "javascript:NewWindow('edit.php?insert&odeslana=t&cacheid=');");
+?>

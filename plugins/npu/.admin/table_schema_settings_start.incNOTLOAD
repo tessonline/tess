@@ -1,0 +1,10 @@
+<?php
+
+$TABLE_CONFIG['schema'][] = array(
+  field => 'Ukaz(ODESLANA_POSTA)',
+  width => '1%',
+  label => 'smìr',
+  'class' => '',
+  ident => 'smer',
+  settings => 'default'
+);

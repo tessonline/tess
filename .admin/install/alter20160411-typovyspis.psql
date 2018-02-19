@@ -1,0 +1,19 @@
+create table posta_cis_typovy_spis (
+  id serial,
+  nazev varchar(100),
+  odbor int,
+  platny boolean
+);
+
+create table posta_cis_typ_spis_soucasti (
+  id serial,
+  spis_id int,
+  nazev varchar(100)
+);
+
+
+CREATE  INDEX "spis_id_posta_cis_typ_spis_soucasti_key" on "posta_cis_typ_spis_soucasti" (spis_id);
+
+alter table cis_posta_spisy add typovy_spis int DEFAULT 0;
+alter table cis_posta_spisy add soucast int DEFAULT 0;
+

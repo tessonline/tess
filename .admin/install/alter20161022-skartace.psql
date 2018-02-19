@@ -1,0 +1,3 @@
+alter table posta_skartace add jid varchar(50);
+update posta_skartace set jid='UKRUKSR'||id where jid is null;
+

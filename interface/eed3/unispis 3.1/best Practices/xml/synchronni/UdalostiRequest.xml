@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Created with Liquid XML 2015 Designer Edition (Trial) 13.2.1.5996 (http://www.liquid-technologies.com) -->
+<ns:UdalostiRequest xmlns:isds="http://isds.czechpoint.cz/v20" xmlns:ess="http://mvcr.cz/ess/v_1.0.0.0" xmlns:ns="http://nsess.public.cz/erms/v_01_01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://nsess.public.cz/erms/v_01_01 file:///D:/spis_sluzba/RZP/unispis%203.1/best%20Practices/Xsd/ermsIFSyn.xsd" Zdroj="string" Cil="string">
+    <ns:Udalosti>
+        <ns:DokumentPostoupeni UdalostId="3524">
+            <ns:Autorizace>
+                <ns:provedlKdo>string</ns:provedlKdo>
+                <ns:provedlKdy>1980-11-19T20:32:52.97</ns:provedlKdy>
+            </ns:Autorizace>
+        </ns:DokumentPostoupeni>
+        <ns:VypraveniVypraveno UdalostId="-3892">
+            <ns:Obalka>
+                <ns:Identifikator>
+                    <ess:HodnotaID>string</ess:HodnotaID>
+                    <ess:ZdrojID>string</ess:ZdrojID>
+                </ns:Identifikator>
+                <ns:Adresat>
+                    <ess:Subjekt>
+                        <ess:TypSubjektu>Fyzicka</ess:TypSubjektu>
+                    </ess:Subjekt>
+                    <ess:Adresa>
+                        <ess:AdresaElektronicka>
+                            <ess:Typ>mail</ess:Typ>
+                            <ess:Kontakt>string</ess:Kontakt>
+                        </ess:AdresaElektronicka>
+                    </ess:Adresa>
+                </ns:Adresat>
+                <ns:ZasilkaInfo />
+                <ns:ObalkaObsah>
+                    <ns:Vypraveni>
+                        <ns:Identifikator>
+                            <ess:HodnotaID>string</ess:HodnotaID>
+                            <ess:ZdrojID>string</ess:ZdrojID>
+                        </ns:Identifikator>
+                    </ns:Vypraveni>
+                </ns:ObalkaObsah>
+            </ns:Obalka>
+            <ns:Autorizace>
+                <ns:provedlKdo>string</ns:provedlKdo>
+                <ns:provedlKdy>2002-07-15T20:38:00.00</ns:provedlKdy>
+            </ns:Autorizace>
+        </ns:VypraveniVypraveno>
+        <ns:SpisZmenaZpracovatele UdalostId="-8473">
+            <ns:SpisPredani>
+                <ns:IdSpis>
+                    <ns:Identifikator>
+                        <ess:HodnotaID>string</ess:HodnotaID>
+                        <ess:ZdrojID>string</ess:ZdrojID>
+                    </ns:Identifikator>
+                </ns:IdSpis>
+            </ns:SpisPredani>
+            <ns:Prebirajici>
+                <ns:novyZpracovatel>string</ns:novyZpracovatel>
+            </ns:Prebirajici>
+            <ns:Autorizace>
+                <ns:provedlKdo>string</ns:provedlKdo>
+                <ns:provedlKdy>1971-08-18T02:27:33.86</ns:provedlKdy>
+            </ns:Autorizace>
+        </ns:SpisZmenaZpracovatele>
+        <ns:SouborZruseni UdalostId="9051">
+            <ns:ZruseniSouboru>
+                <ns:Soubor>
+                    <ns:Identifikator>
+                        <ess:HodnotaID>string</ess:HodnotaID>
+                        <ess:ZdrojID>string</ess:ZdrojID>
+                    </ns:Identifikator>
+                </ns:Soubor>
+            </ns:ZruseniSouboru>
+            <ns:Autorizace>
+                <ns:provedlKdo>string</ns:provedlKdo>
+                <ns:provedlKdy>1996-09-14T13:44:20.58</ns:provedlKdy>
+            </ns:Autorizace>
+        </ns:SouborZruseni>
+        <ns:DokumentVyjmutiZeSpisu UdalostId="-6732">
+            <ns:SpisId>
+                <ns:Identifikator>
+                    <ess:HodnotaID>string</ess:HodnotaID>
+                    <ess:ZdrojID>string</ess:ZdrojID>
+                </ns:Identifikator>
+            </ns:SpisId>
+            <ns:DokumentyVlozene>
+                <ns:DokumentIdVlozeny>
+                    <ns:IdDokument>
+                        <ns:Identifikator>
+                            <ess:HodnotaID>string</ess:HodnotaID>
+                            <ess:ZdrojID>string</ess:ZdrojID>
+                        </ns:Identifikator>
+                    </ns:IdDokument>
+                </ns:DokumentIdVlozeny>
+            </ns:DokumentyVlozene>
+            <ns:Autorizace>
+                <ns:provedlKdo>string</ns:provedlKdo>
+                <ns:provedlKdy>2014-10-05T08:37:00.75</ns:provedlKdy>
+            </ns:Autorizace>
+        </ns:DokumentVyjmutiZeSpisu>
+    </ns:Udalosti>
+</ns:UdalostiRequest>

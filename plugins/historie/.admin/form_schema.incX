@@ -1,0 +1,7 @@
+<?php
+include(FileUp2(".admin/config.inc"));
+include_once(FileUp2(".admin/table_funkce.inc"));
+$GLOBALS["VCETNE_HISTORIE"] = 2;
+$path_posta = GetAgendaPath("POSTA",0,1);
+include_once(FileUp2("$path_posta/.admin/form_schema.inc"));
+?>

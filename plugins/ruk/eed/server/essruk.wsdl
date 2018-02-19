@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<definitions xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="tns:eed_konektor" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://isds.czechpoint.cz/v20" xmlns:ns2="http://mvcr.cz/ess/v_1.0.0.0" xmlns:ns3="http://ess.bbm/" xmlns:ns4="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="tns:eed_konektor">
+  <types>
+    <xsd:schema targetNamespace="tns:eed_konektor">
+      <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+      <xsd:import namespace="http://schemas.xmlsoap.org/wsdl/"/>
+      <xsd:import namespace="http://isds.czechpoint.cz/v20" schemaLocation="http://esstest.is.cuni.cz/ost/posta/plugins/ruk/eed/server/isds.czechpoint.cz_v20.wsdl"/>
+      <xsd:complexType name="tAutorizace">
+        <xsd:sequence>
+          <xsd:element name="provedlKdo" type="xsd:string" maxLength="50" nillable="false"/>
+          <xsd:element name="provedlKdy" type="xsd:dateTime" maxLength="50" nillable="false"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="tDoplnujiciDataDokument">
+        <xsd:sequence>
+          <xsd:element name="PocetListu" type="xsd:int"/>
+          <xsd:element name="PocetPriloh" type="xsd:int"/>
+          <xsd:element name="DruhPriloh" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="tDorucenyDokument">
+        <xsd:sequence>
+          <xsd:element name="Identifikator" type="tns:tIdentifikator"/>
+          <xsd:element name="Nazev" type="xsd:string" maxLength="100"/>
+          <xsd:element name="Popis" type="xsd:string" maxLength="255" minOccurs="0"/>
+          <xsd:element name="CisloJednaci" type="xsd:string" maxLength="50" minOccurs="0"/>
+          <xsd:element name="SpisovaZnacka" type="xsd:string" maxLength="50" minOccurs="0"/>
+          <xsd:element name="PodaciDenikPoradi" type="xsd:int" maxLength="50" minOccurs="0" minInclusive="1" maxInclusive="2147483647"/>
+          <xsd:element name="PodaciDenikRok" type="xsd:gYear" maxLength="50" minOccurs="0" minInclusive="1" maxInclusive="2147483647"/>
+          <xsd:element name="PodaciDenik" type="xsd:string" maxLength="12" minOccurs="0" minInclusive="1" maxInclusive="2147483647"/>
+          <xsd:element name="DatumCasVytvoreni" type="xsd:dateTime" maxLength="12" minOccurs="0" minInclusive="1" maxInclusive="2147483647"/>
+          <xsd:element name="TypDokumentu" type="xsd:string" maxLength="100" minOccurs="0" minInclusive="1" maxInclusive="2147483647"/>
+          <xsd:element name="SpisovyPlan" type="xsd:string" maxLength="100" minOccurs="0" minInclusive="1" maxInclusive="2147483647"/>
+          <xsd:element name="SpisovyZnak" type="xsd:string" maxLength="255" minOccurs="0" minInclusive="1" maxInclusive="2147483647"/>
+          <xsd:element name="SkartacniZnak" type="xsd:string" maxLength="255" minOccurs="0" minInclusive="1" maxInclusive="2147483647" length="1"/>
+          <xsd:element name="SkartacniLhuta" type="xsd:unsignedShort" maxLength="255" minOccurs="0" minInclusive="1" maxInclusive="999" length="1"/>
+          <xsd:element name="Poznamka" type="xsd:string" maxLength="255" minOccurs="0" minInclusive="1" maxInclusive="999" length="1"/>
+          <xsd:element name="CjOdesilatel" type="xsd:string" maxLength="50" minOccurs="0" minInclusive="1" maxInclusive="999" length="1"/>
+          <xsd:element name="DoplnujiciData" type="tns:tDoplnujiciDataDokument" maxLength="50" minOccurs="0" minInclusive="1" maxInclusive="999" length="1"/>
+          <xsd:element name="Doruceni" type="tns:ttDoruceni" maxLength="50" minOccurs="0" minInclusive="1" maxInclusive="999" length="1" nillable="false"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="tVlastniDokument">
+        <xsd:sequence>
+          <xsd:element name="Identifikator" type="tns:tIdentifikator"/>
+          <xsd:element name="Nazev" type="xsd:string" maxLength="100"/>
+          <xsd:element name="Popis" type="xsd:string" maxLength="255" minOccurs="0"/>
+          <xsd:element name="CisloJednaci" type="xsd:string" maxLength="50" minOccurs="0"/>
+          <xsd:element name="SpisovaZnacka" type="xsd:string" maxLength="50" minOccurs="0"/>
+          <xsd:element name="PodaciDenikPoradi" type="xsd:int" maxLength="50" minOccurs="0" minInclusive="1" maxInclusive="2147483647"/>
+          <xsd:element name="PodaciDenikRok" type="xsd:gYear" maxLength="50" minOccurs="0" minInclusive="1" maxInclusive="2147483647"/>
+          <xsd:element name="PodaciDenik" type="xsd:string" maxLength="12" minOccurs="0" minInclusive="1" maxInclusive="2147483647"/>
+          <xsd:element name="DatumCasVytvoreni" type="xsd:dateTime" maxLength="12" minOccurs="0" minInclusive="1" maxInclusive="2147483647"/>
+          <xsd:element name="TypDokumentu" type="xsd:string" maxLength="100" minOccurs="0" minInclusive="1" maxInclusive="2147483647"/>
+          <xsd:element name="SpisovyPlan" type="xsd:string" maxLength="100" minOccurs="0" minInclusive="1" maxInclusive="2147483647"/>
+          <xsd:element name="SpisovyZnak" type="xsd:string" maxLength="255" minOccurs="0" minInclusive="1" maxInclusive="2147483647"/>
+          <xsd:element name="SkartacniZnak" type="xsd:string" maxLength="255" minOccurs="0" minInclusive="1" maxInclusive="2147483647" length="1"/>
+          <xsd:element name="SkartacniLhuta" type="xsd:unsignedShort" maxLength="255" minOccurs="0" minInclusive="1" maxInclusive="999" length="1"/>
+          <xsd:element name="Poznamka" type="xsd:string" maxLength="255" minOccurs="0" minInclusive="1" maxInclusive="999" length="1"/>
+          <xsd:element name="SouvisejiciSubjekty" type="tns:tSouvisejiciSubjekty" maxLength="255" minOccurs="0" minInclusive="1" maxInclusive="999" length="1"/>
+          <xsd:element name="CjOdesilatel" type="xsd:string" maxLength="50" minOccurs="0" minInclusive="1" maxInclusive="999" length="1"/>
+          <xsd:element name="DoplnujiciData" type="tns:tDoplnujiciDataDokument" maxLength="50" minOccurs="0" minInclusive="1" maxInclusive="999" length="1"/>
+          <xsd:element name="Vypraveni" type="tns:ttVypraveni" maxLength="50" minOccurs="0" minInclusive="1" maxInclusive="999" length="1" nillable="false"/>
+          <xsd:element name="Soubory" type="ns1:tFilesArray" minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="tCelyDokument">
+        <xsd:sequence>
+          <xsd:element name="Identifikator" type="tns:tIdentifikator"/>
+          <xsd:element name="Nazev" type="xsd:string" maxLength="100"/>
+          <xsd:element name="Popis" type="xsd:string" maxLength="255" minOccurs="0"/>
+          <xsd:element name="CisloJednaci" type="xsd:string" maxLength="50" minOccurs="0"/>
+          <xsd:element name="SpisovaZnacka" type="xsd:string" maxLength="50" minOccurs="0"/>
+          <xsd:element name="PodaciDenikPoradi" type="xsd:int" maxLength="50" minOccurs="0" minInclusive="1" maxInclusive="2147483647"/>
+          <xsd:element name="PodaciDenikRok" type="xsd:gYear" maxLength="50" minOccurs="0" minInclusive="1" maxInclusive="2147483647"/>
+          <xsd:element name="PodaciDenik" type="xsd:string" maxLength="12" minOccurs="0" minInclusive="1" maxInclusive="2147483647"/>
+          <xsd:element name="DatumCasVytvoreni" type="xsd:dateTime" maxLength="12" minOccurs="0" minInclusive="1" maxInclusive="2147483647"/>
+          <xsd:element name="TypDokumentu" type="xsd:string" maxLength="100" minOccurs="0" minInclusive="1" maxInclusive="2147483647"/>
+          <xsd:element name="SpisovyPlan" type="xsd:string" maxLength="100" minOccurs="0" minInclusive="1" maxInclusive="2147483647"/>
+          <xsd:element name="SpisovyZnak" type="xsd:string" maxLength="255" minOccurs="0" minInclusive="1" maxInclusive="2147483647"/>
+          <xsd:element name="SkartacniZnak" type="xsd:string" maxLength="255" minOccurs="0" minInclusive="1" maxInclusive="2147483647" length="1"/>
+          <xsd:element name="SkartacniLhuta" type="xsd:unsignedShort" maxLength="255" minOccurs="0" minInclusive="1" maxInclusive="999" length="1"/>
+          <xsd:element name="Poznamka" type="xsd:string" maxLength="255" minOccurs="0" minInclusive="1" maxInclusive="999" length="1"/>
+          <xsd:element name="CjOdesilatel" type="xsd:string" maxLength="50" minOccurs="0" minInclusive="1" maxInclusive="999" length="1"/>
+          <xsd:element name="DoplnujiciData" type="tns:tDoplnujiciDataDokument" maxLength="50" minOccurs="0" minInclusive="1" maxInclusive="999" length="1"/>
+          <xsd:element name="Vypraveni" type="tns:ttVypraveni" maxLength="50" minOccurs="0" minInclusive="1" maxInclusive="999" length="1"/>
+          <xsd:element name="Doruceni" type="tns:ttDoruceni" maxLength="50" minOccurs="0" minInclusive="1" maxInclusive="999" length="1"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ttDoruceni">
+        <xsd:sequence>
+          <xsd:element name="Odesilatel" type="tns:tAdresat" nillable="false"/>
+          <xsd:element name="Adresat" type="tns:tAdresat" nillable="false" minOccurs="0"/>
+          <xsd:element name="ZasilkaInfo" type="tns:tZasilkaInfo" nillable="false" minOccurs="0"/>
+          <xsd:element name="Soubory" type="ns1:tFilesArray" minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ttVypraveni">
+        <xsd:sequence>
+          <xsd:element name="Odesilatel" type="tns:tAdresat" nillable="false"/>
+          <xsd:element name="Adresat" type="tns:tAdresat" nillable="false" minOccurs="0"/>
+          <xsd:element name="ZasilkaInfo" type="tns:tZasilkaInfo" nillable="false" minOccurs="0"/>
+          <xsd:element name="Soubory" type="ns1:tFilesArray" minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="tZasilka">
+        <xsd:sequence>
+          <xsd:element name="Odesilatel" type="tns:tAdresat" minOccurs="0"/>
+          <xsd:element name="Adresat" type="tns:tAdresat" minOccurs="0"/>
+          <xsd:element name="ZasilkaInfo" type="tns:tZasilkaInfo" minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="tZasilkaInfo">
+        <xsd:sequence>
+          <xsd:element name="IdZasilky" type="xsd:string" maxLength="50" nillable="false"/>
+          <xsd:element name="ZpusobManipulaceId" type="xsd:string" maxLength="50" nillable="false"/>
+          <xsd:element name="DatumVypraveni" type="xsd:dateTime" maxLength="50" nillable="false"/>
+          <xsd:element name="DatumDoruceni" type="xsd:dateTime" maxLength="50" nillable="false"/>
+          <xsd:element name="Poznamka" type="xsd:string" maxLength="50" nillable="false"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="tOperaceStatus">
+        <xsd:sequence>
+          <xsd:element name="StatusCode" type="xsd:string" maxLength="20" nillable="false"/>
+          <xsd:element name="Popis" type="xsd:string" maxLength="200" nillable="true"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="tProfilSpisu">
+        <xsd:sequence>
+          <xsd:element name="Identifikator" type="tns:tIdentifikator"/>
+          <xsd:element name="Nazev" type="xsd:string" maxLength="100"/>
+          <xsd:element name="Popis" type="xsd:string" maxLength="255" minOccurs="0"/>
+          <xsd:element name="CisloJednaci" type="xsd:string" maxLength="50" minOccurs="0"/>
+          <xsd:element name="SpisovaZnacka" type="xsd:string" maxLength="50" minOccurs="0"/>
+          <xsd:element name="PodaciDenikPoradi" type="xsd:int" maxLength="50" minOccurs="0" minInclusive="1" maxInclusive="2147483647"/>
+          <xsd:element name="PodaciDenikRok" type="xsd:gYear" maxLength="50" minOccurs="0" minInclusive="1" maxInclusive="2147483647"/>
+          <xsd:element name="PodaciDenik" type="xsd:string" maxLength="12" minOccurs="0" minInclusive="1" maxInclusive="2147483647"/>
+          <xsd:element name="DatumCasVytvoreni" type="xsd:dateTime" maxLength="12" minOccurs="0" minInclusive="1" maxInclusive="2147483647"/>
+          <xsd:element name="TypDokumentu" type="xsd:string" maxLength="100" minOccurs="0" minInclusive="1" maxInclusive="2147483647"/>
+          <xsd:element name="SpisovyPlan" type="xsd:string" maxLength="100" minOccurs="0" minInclusive="1" maxInclusive="2147483647"/>
+          <xsd:element name="SpisovyZnak" type="xsd:string" maxLength="255" minOccurs="0" minInclusive="1" maxInclusive="2147483647"/>
+          <xsd:element name="SkartacniZnak" type="xsd:string" maxLength="255" minOccurs="0" minInclusive="1" maxInclusive="2147483647" length="1"/>
+          <xsd:element name="SkartacniLhuta" type="xsd:unsignedShort" maxLength="255" minOccurs="0" minInclusive="1" maxInclusive="999" length="1"/>
+          <xsd:element name="Poznamka" type="xsd:string" maxLength="255" minOccurs="0" minInclusive="1" maxInclusive="999" length="1"/>
+          <xsd:element name="DoplnujiciData" type="tns:tDoplnujiciDataSpis" maxLength="255" minOccurs="0" minInclusive="1" maxInclusive="999" length="1"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="tDoplnujiciDataSpis">
+        <xsd:sequence>
+          <xsd:element name="ZpusobVedeni" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="tIdDokument">
+        <xsd:sequence>
+          <xsd:element name="Identifikator" type="tns:tIdentifikator"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="tIdentifikator">
+        <xsd:sequence>
+          <xsd:element name="HodnotaID" type="xsd:string" maxLength="50"/>
+          <xsd:element name="ZdrojID" type="xsd:string" maxLength="50"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="tAdresat">
+        <xsd:sequence>
+          <xsd:element name="Subjekt" type="tns:tSubjekt"/>
+          <xsd:element name="Adresa" type="tns:tAdresa"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="tSubjekt">
+        <xsd:sequence>
+          <xsd:element name="Identifikator" type="tns:tIdentifikator" minOccurs="0" maxOccurs="unbounded"/>
+          <xsd:element name="TypSubjektu" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+          <xsd:element name="ObchodniNazev" type="xsd:string" minOccurs="0" maxOccurs="unbounded" maxLength="255"/>
+          <xsd:element name="DatumNarozeni" type="xsd:date" minOccurs="0" maxOccurs="unbounded" maxLength="255"/>
+          <xsd:element name="MistoNarozeni" type="xsd:string" minOccurs="0" maxOccurs="unbounded" maxLength="48"/>
+          <xsd:element name="Jmeno" type="xsd:string" minOccurs="0" maxOccurs="unbounded" maxLength="24"/>
+          <xsd:element name="Prijmeni" type="xsd:string" minOccurs="0" maxOccurs="unbounded" maxLength="35"/>
+          <xsd:element name="Osloveni" type="xsd:string" minOccurs="0" maxOccurs="unbounded" maxLength="50"/>
+          <xsd:element name="TitulPred" type="xsd:string" minOccurs="0" maxOccurs="unbounded" maxLength="35"/>
+          <xsd:element name="TitulZa" type="xsd:string" minOccurs="0" maxOccurs="unbounded" maxLength="10"/>
+          <xsd:element name="FunkceUtvarPopis" type="xsd:string" minOccurs="0" maxOccurs="unbounded" maxLength="100"/>
+          <xsd:element name="FunkceUtvarIdentifikator" type="xsd:string" minOccurs="0" maxOccurs="unbounded" maxLength="100"/>
+          <xsd:element name="Poznamka" type="xsd:string" minOccurs="0" maxOccurs="unbounded" maxLength="255"/>
+          <xsd:element name="Adresy" type="tns:tAdresa" minOccurs="0" maxOccurs="unbounded" maxLength="255"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="tSouvisejiciSubjekty">
+        <xsd:sequence>
+          <xsd:element name="SouvisejiciSubjekt" type="tns:tSouvisejiciSubjekt" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="tSouvisejiciSubjekt">
+        <xsd:sequence>
+          <xsd:element name="Subjekt" type="tns:tSubjekt"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="tDokument">
+        <xsd:sequence>
+          <xsd:element name="Identifikator" type="tns:tIdentifikator"/>
+          <xsd:element name="Nazev" type="xsd:string" maxLength="100"/>
+          <xsd:element name="Popis" type="xsd:string" maxLength="255" minOccurs="0"/>
+          <xsd:element name="CisloJednaci" type="xsd:string" maxLength="50" minOccurs="0"/>
+          <xsd:element name="SpisovaZnacka" type="xsd:string" maxLength="50" minOccurs="0"/>
+          <xsd:element name="PodaciDenikPoradi" type="xsd:int" maxLength="50" minOccurs="0" minInclusive="1" maxInclusive="2147483647"/>
+          <xsd:element name="PodaciDenikRok" type="xsd:gYear" maxLength="50" minOccurs="0" minInclusive="1" maxInclusive="2147483647"/>
+          <xsd:element name="PodaciDenik" type="xsd:string" maxLength="12" minOccurs="0" minInclusive="1" maxInclusive="2147483647"/>
+          <xsd:element name="DatumCasVytvoreni" type="xsd:dateTime" maxLength="12" minOccurs="0" minInclusive="1" maxInclusive="2147483647"/>
+          <xsd:element name="TypDokumentu" type="xsd:string" maxLength="100" minOccurs="0" minInclusive="1" maxInclusive="2147483647"/>
+          <xsd:element name="SpisovyPlan" type="xsd:string" maxLength="100" minOccurs="0" minInclusive="1" maxInclusive="2147483647"/>
+          <xsd:element name="SpisovyZnak" type="xsd:string" maxLength="255" minOccurs="0" minInclusive="1" maxInclusive="2147483647"/>
+          <xsd:element name="SkartacniZnak" type="xsd:string" maxLength="255" minOccurs="0" minInclusive="1" maxInclusive="2147483647" length="1"/>
+          <xsd:element name="SkartacniLhuta" type="xsd:unsignedShort" maxLength="255" minOccurs="0" minInclusive="1" maxInclusive="999" length="1"/>
+          <xsd:element name="Poznamka" type="xsd:string" maxLength="255" minOccurs="0" minInclusive="1" maxInclusive="999" length="1"/>
+          <xsd:element name="CjOdesilatel" type="xsd:string" maxLength="50" minOccurs="0" minInclusive="1" maxInclusive="999" length="1"/>
+          <xsd:element name="Vypraveni" type="tns:tZasilka" maxLength="50" minOccurs="0" minInclusive="1" maxInclusive="999" length="1"/>
+          <xsd:element name="Doruceni" type="tns:tZasilka" maxLength="50" minOccurs="0" minInclusive="1" maxInclusive="999" length="1" nillable="false"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="tAdresa">
+        <xsd:choice>
+          <xsd:element name="AdresaPostovni" type="tns:tAdresaPostovni"/>
+          <xsd:element name="AdresaDS" type="tns:tAdresaDS"/>
+          <xsd:element name="AdresaElektronicka" type="tns:tAdresaElektronicka"/>
+        </xsd:choice>
+      </xsd:complexType>
+      <xsd:complexType name="tAdresy"/>
+      <xsd:complexType name="tAdresaPostovni">
+        <xsd:sequence>
+          <xsd:element name="Identifikator" type="tns:tIdentifikator" minOccurs="0"/>
+          <xsd:element name="Obec" type="xsd:string" minOccurs="0" maxLength="48"/>
+          <xsd:element name="CastObce" type="xsd:string" minOccurs="0" maxLength="48"/>
+          <xsd:element name="MestskaCast" type="xsd:string" minOccurs="0" maxLength="48"/>
+          <xsd:element name="Ulice" type="xsd:string" minOccurs="0" maxLength="48"/>
+          <xsd:element name="EvidencniCislo" type="xsd:string" minOccurs="0" maxLength="4"/>
+          <xsd:element name="OrientacniCislo" type="xsd:string" minOccurs="0" maxLength="6"/>
+          <xsd:element name="PopisneCislo" type="xsd:string" minOccurs="0" maxLength="6"/>
+          <xsd:element name="Psc" type="xsd:string" minOccurs="0" maxLength="10"/>
+          <xsd:element name="Zeme" type="xsd:string" minOccurs="0" maxLength="3" minLength="2"/>
+          <xsd:element name="RuianVazba" type="xsd:string" minOccurs="0" maxLength="100" minLength="2"/>
+          <xsd:element name="Poznamka" type="xsd:string" minOccurs="0" maxLength="255" minLength="2"/>
+          <xsd:element name="POBOX" type="xsd:string" minOccurs="0" maxLength="10" minLength="2"/>
+          <xsd:element name="TypAdresy" type="xsd:string" minOccurs="0" maxLength="10" minLength="2"/>
+          <xsd:element name="DodaciPosta" type="xsd:string" minOccurs="0" maxLength="10" minLength="2"/>
+          <xsd:element name="Okres" type="xsd:string" minOccurs="0" maxLength="48" minLength="2"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="tAdresaDS">
+        <xsd:sequence>
+          <xsd:element name="IdDb" type="xsd:string"/>
+          <xsd:element name="OrgUnitNum" type="xsd:string"/>
+          <xsd:element name="OrgUnit" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="tAdresaElektronicka">
+        <xsd:sequence>
+          <xsd:element name="Identifikator" type="tns:tIdentifikator" minOccurs="0"/>
+          <xsd:element name="Typ" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="Kontakt" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="tZprava">
+        <xsd:sequence>
+          <xsd:element name="Kod" type="xsd:string" maxLength="8" nillable="false"/>
+          <xsd:element name="Popis" type="xsd:string" maxLength="255" nillable="true"/>
+        </xsd:sequence>
+        <xsd:attribute name="UdalostId" type="tns:tUdalostId" use="required"/>
+        <xsd:attribute name="Poradi" type="xsd:string" use="required"/>
+        <xsd:attribute name="DatumVzniku" type="xsd:dateTime" use="required"/>
+      </xsd:complexType>
+      <xsd:complexType name="ttDokumentyVlozene_response">
+        <xsd:sequence>
+          <xsd:element name="DokumentZkracenyVlozeny" type="tns:ttDokumentZkracenyVlozeny"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ttDokumentZkracenyVlozeny">
+        <xsd:sequence>
+          <xsd:element name="IdDokument" type="tns:tIdDokument" nillable="false"/>
+          <xsd:element name="CisloJednaci" type="xsd:string" nillable="false" maxLength="50"/>
+          <xsd:element name="PodaciDenikPoradi" type="xsd:int" nillable="false" maxLength="50" minOccurs="0" minInclusive="1" maxInclusive="2147483647"/>
+          <xsd:element name="PodaciDenikRok" type="xsd:gYear" nillable="false" maxLength="50" minOccurs="0" minInclusive="1" maxInclusive="2147483647"/>
+          <xsd:element name="PodaciDenik" type="xsd:string" nillable="false" maxLength="12" minOccurs="0" minInclusive="1" maxInclusive="2147483647"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="tDbOwnerInfo">
+        <xsd:all>
+          <xsd:element name="dbID" type="xsd:string" nillable="true"/>
+          <xsd:element name="dbType" type="xsd:string" nillable="true"/>
+          <xsd:element name="ic" type="xsd:string" nillable="true"/>
+          <xsd:element name="pnFirstName" type="xsd:string" nillable="true"/>
+          <xsd:element name="pnMiddleName" type="xsd:string" nillable="true"/>
+          <xsd:element name="pnLastName" type="xsd:string" nillable="true"/>
+          <xsd:element name="pnLastNameAtBirth" type="xsd:string" nillable="true"/>
+          <xsd:element name="firmName" type="xsd:string" nillable="true"/>
+          <xsd:element name="biDate" type="xsd:string" nillable="true"/>
+          <xsd:element name="biCity" type="xsd:string" nillable="true"/>
+          <xsd:element name="biCounty" type="xsd:string" nillable="true"/>
+          <xsd:element name="biState" type="xsd:string" nillable="true"/>
+          <xsd:element name="adCity" type="xsd:string" nillable="true"/>
+          <xsd:element name="adStreet" type="xsd:string" nillable="true"/>
+          <xsd:element name="adNumberInStreet" type="xsd:string" nillable="true"/>
+          <xsd:element name="adNumberInMunicipality" type="xsd:string" nillable="true"/>
+          <xsd:element name="adZipCode" type="xsd:string" nillable="true"/>
+          <xsd:element name="adState" type="xsd:string" nillable="true"/>
+          <xsd:element name="nationality" type="xsd:string" nillable="true"/>
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="tDbOwnersArray">
+        <xsd:sequence>
+          <xsd:element name="DbOwnerInfo" type="tns:tDbOwnerInfo" maxOccurs="unbounded" minOccurs="0" nillable="true"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="tUdalosti"/>
+      <xsd:complexType name="tZpravy">
+        <xsd:sequence>
+          <xsd:element name="Zprava" type="tns:tZprava" nillable="false"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="vlozDokumentRequestType">
+        <xsd:all>
+          <xsd:element name="Dokument" type="tns:tVlastniDokument"/>
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="vlozDokumentResponseType">
+        <xsd:all>
+          <xsd:element name="SpslStatus" type="tns:tOperaceStatus"/>
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="vlozPrilohuRequestType">
+        <xsd:all>
+          <xsd:element name="Dokument" type="tns:tDorucenyDokument"/>
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="vlozPrilohuResponseType">
+        <xsd:all>
+          <xsd:element name="Dokument" type="tns:tVlastniDokument"/>
+          <xsd:element name="SpslStatus" type="tns:tOperaceStatus"/>
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:simpleType name="tUdalostId">
+        <xsd:restriction base="xsd:int"/>
+      </xsd:simpleType>
+      <xsd:element name="vlozDokument" type="tns:vlozDokumentRequestType"/>
+      <xsd:element name="vlozDokumentResponse" type="tns:vlozDokumentResponseType"/>
+      <xsd:element name="vlozPrilohu" type="tns:vlozPrilohuRequestType"/>
+      <xsd:element name="vlozPrilohuResponse" type="tns:vlozPrilohuResponseType"/>
+    </xsd:schema>
+  </types>
+  <message name="vlozDokumentRequest">
+    <part name="parameters" element="tns:vlozDokument"/>
+  </message>
+  <message name="vlozDokumentResponse">
+    <part name="parameters" element="tns:vlozDokumentResponse"/>
+  </message>
+  <message name="vlozPrilohuRequest">
+    <part name="parameters" element="tns:vlozPrilohu"/>
+  </message>
+  <message name="vlozPrilohuResponse">
+    <part name="parameters" element="tns:vlozPrilohuResponse"/>
+  </message>
+  <portType name="eed_konektorPortType">
+    <operation name="vlozDokument">
+      <documentation>vlozDokumenttZalozeni Parametry: Vstup: Odpoved:</documentation>
+      <input message="tns:vlozDokumentRequest"/>
+      <output message="tns:vlozDokumentResponse"/>
+    </operation>
+    <operation name="vlozPrilohu">
+      <documentation>vlozPrilohuZalozeni Parametry: Vstup: Odpoved:</documentation>
+      <input message="tns:vlozPrilohuRequest"/>
+      <output message="tns:vlozPrilohuResponse"/>
+    </operation>
+  </portType>
+  <binding name="eed_konektorBinding" type="tns:eed_konektorPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="vlozDokument">
+      <soap:operation soapAction="http://esstest.is.cuni.cz/ost/posta/plugins/ruk/eed/server/soap.php/vlozDokument" style="document"/>
+      <input>
+        <soap:body use="literal" namespace="tns"/>
+      </input>
+      <output>
+        <soap:body use="literal" namespace="tns"/>
+      </output>
+    </operation>
+    <operation name="vlozPrilohu">
+      <soap:operation soapAction="http://esstest.is.cuni.cz/ost/posta/plugins/ruk/eed/server/soap.php/vlozPrilohu" style="document"/>
+      <input>
+        <soap:body use="literal" namespace="tns"/>
+      </input>
+      <output>
+        <soap:body use="literal" namespace="tns"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="eed_konektor">
+    <port name="eed_konektorPort" binding="tns:eed_konektorBinding">
+      <soap:address location="http://esstest.is.cuni.cz/ost/posta/plugins/ruk/eed/server/soap.php"/>
+    </port>
+  </service>
+</definitions>

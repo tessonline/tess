@@ -1,0 +1,6 @@
+Co je potreba udelat pro rozchozeni konektoru RZP:
+
+ - do DB pridat atributy (DB.sql)
+ - doplnit podporu "responseMethodname" do tridy nusoap.php (tmapy\lib\nusoap.php - zatim neni v CVS)
+ - doplnit podporu pro smazani pouze urcitych ID priloh (tmapy\upload\table.inc - zatim neni v CVS)
+

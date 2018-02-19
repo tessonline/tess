@@ -1,0 +1,57 @@
+alter table posta disable trigger all;
+drop view posta_view_spisy;
+
+alter table posta alter column datum_podatelna_prijeti type timestamp USING datum_podatelna_prijeti::timestamp without time zone;
+alter table posta_h alter column datum_podatelna_prijeti type timestamp USING datum_podatelna_prijeti::timestamp without time zone;
+
+update posta set datum_referent_prijeti=NULL where datum_referent_prijeti='';
+update posta_h set datum_referent_prijeti=NULL where datum_referent_prijeti='';
+alter table posta alter column datum_referent_prijeti type timestamp USING datum_referent_prijeti::timestamp without time zone;
+alter table posta_h alter column datum_referent_prijeti type timestamp USING datum_referent_prijeti::timestamp without time zone;
+
+
+update posta set datum_vyrizeni=NULL where datum_vyrizeni='';
+update posta_h set datum_vyrizeni=NULL where datum_vyrizeni='';
+alter table posta alter column datum_vyrizeni type timestamp USING datum_vyrizeni::timestamp without time zone;
+alter table posta_h alter column datum_vyrizeni type timestamp USING datum_vyrizeni::timestamp without time zone;
+
+
+update posta set datum_vypraveni=NULL where datum_vypraveni='';
+update posta_h set datum_vypraveni=NULL where datum_vypraveni='';
+alter table posta alter column datum_vypraveni type timestamp USING datum_vypraveni::timestamp without time zone;
+alter table posta_h alter column datum_vypraveni type timestamp USING datum_vypraveni::timestamp without time zone;
+
+update posta set datum_doruceni=NULL where datum_doruceni='';
+update posta_h set datum_doruceni=NULL where datum_doruceni='';
+alter table posta alter column datum_doruceni type timestamp USING datum_doruceni::timestamp without time zone;
+alter table posta_h alter column datum_doruceni type timestamp USING datum_doruceni::timestamp without time zone;
+
+update posta set datum_pm=NULL where datum_pm='';
+update posta_h set datum_pm=NULL where datum_pm='';
+alter table posta alter column datum_pm type timestamp USING datum_pm::timestamp without time zone;
+alter table posta_h alter column datum_pm type timestamp USING datum_pm::timestamp without time zone;
+
+update posta set datum_predani=NULL where datum_predani='';
+update posta_h set datum_predani=NULL where datum_predani='';
+alter table posta alter column datum_predani type timestamp USING datum_predani::timestamp without time zone;
+alter table posta_h alter column datum_predani type timestamp USING datum_predani::timestamp without time zone;
+
+update posta set datum_predani_ven=NULL where datum_predani_ven='';
+update posta_h set datum_predani_ven=NULL where datum_predani_ven='';
+alter table posta alter column datum_predani_ven type timestamp USING datum_predani_ven::timestamp without time zone;
+alter table posta_h alter column datum_predani_ven type timestamp USING datum_predani_ven::timestamp without time zone;
+
+
+update posta_DS set datum_odeslani=NULL where datum_odeslani='';
+update posta_DS set datum_doruceni=NULL where datum_doruceni='';
+update posta_DS set datum_precteni=NULL where datum_precteni='';
+alter table posta_DS alter column datum_odeslani type timestamp USING datum_odeslani::timestamp without time zone;
+alter table posta_DS alter column datum_doruceni type timestamp USING datum_doruceni::timestamp without time zone;
+alter table posta_DS alter column datum_precteni type timestamp USING datum_precteni::timestamp without time zone;
+
+
+
+-- create view posta_view_spisy;
+
+alter table posta enable trigger all;
+

@@ -1,0 +1,2 @@
+alter table posta_konfigurace add superodbor int4;
+alter table posta_konfigurace_h add superodbor int4;

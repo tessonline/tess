@@ -1,0 +1,16 @@
+10:12:48 - insert into posta (ev_cislo,rok,odbor,oddeleni,typ_posty,odes_typ,vec,odesl_prijmeni,odesl_jmeno,odesl_titul,odesl_ico,odesl_ulice,odesl_cp,odesl_cor,
+odesl_psc,  odesl_posta,odesl_datschranka,datum_podatelna_prijeti,referent,odeslana_posta,doporucene,vlastnich_rukou,dorucenka,cislo_spisu1,cislo_spisu2,id_puvodni,
+odesl_odd,  odesl_osoba,last_date,last_time,last_user_id,owner_id,skartace,dalsi_prijemci,cislo_jednaci1,cislo_jednaci2,odbor_spisu,obyvatel_kod,obalka_nevracet,obalka_10dni)  values 
+(77410,2009,18,0,0,'O','A - rozhodnutí - kolaudační rozhodnutí: nástavba bytového domu č.p. 1971 na ulici Dlouhá č.o. 14 v ','Buňka','Zdeněk','','490710210','Dlouhá','1971','14',
+'74101','Nový Jičín 1','','19.11.2009 09:56',47,'t','4','1','',76756,2007,5875960,
+'','','2009-11-20','10:11',47,47,'231','',77410,2009,'ÚPS',0,0,1)10:14:27 - insert into posta (ev_cislo,rok,odbor,oddeleni,typ_posty,odes_typ,vec,odesl_prijmeni,odesl_jmeno,odesl_titul,odesl_ico,odesl_ulice,odesl_cp,odesl_cor,
+odesl_psc,  odesl_posta,odesl_datschranka,datum_podatelna_prijeti,referent,odeslana_posta,doporucene,vlastnich_rukou,dorucenka,cislo_spisu1,cislo_spisu2,id_puvodni,
+odesl_odd,  odesl_osoba,last_date,last_time,last_user_id,owner_id,skartace,dalsi_prijemci,cislo_jednaci1,cislo_jednaci2,odbor_spisu,obyvatel_kod,obalka_nevracet,obalka_10dni)  values 
+(77410,2009,18,0,0,'O','A - rozhodnutí - kolaudační rozhodnutí: nástavba bytového domu č.p. 1971 na ulici Dlouhá č.o. 14 v ','Buňka','Zdeněk','','490710210','Dlouhá','1971','14',
+'74101','Nový Jičín 1','','19.11.2009 09:56',47,'t','4','1','',76756,2007,0,
+'','','2009-11-20','10:11',47,47,'231','',77410,2009,'ÚPS',0,0,1)10:14:51 - insert into posta (ev_cislo,rok,odbor,oddeleni,typ_posty,odes_typ,vec,odesl_prijmeni,odesl_jmeno,odesl_titul,odesl_ico,odesl_ulice,odesl_cp,odesl_cor,
+odesl_psc,  odesl_posta,odesl_datschranka,datum_podatelna_prijeti,referent,odeslana_posta,doporucene,vlastnich_rukou,dorucenka,cislo_spisu1,cislo_spisu2,id_puvodni,
+odesl_odd,  odesl_osoba,last_date,last_time,last_user_id,owner_id,skartace,dalsi_prijemci,cislo_jednaci1,cislo_jednaci2,odbor_spisu,obyvatel_kod,obalka_nevracet,obalka_10dni)  values 
+(77410,2009,18,0,0,'O','A - rozhodnutí - kolaudační rozhodnutí: nástavba bytového domu č.p. 1971 na ulici Dlouhá č.o. 14 v ','Buňka','Zdeněk','','490710210','Dlouhá','1971','14',
+'74101','Nový Jičín 1','','19.11.2009 09:56',47,'t','4','1','',76756,2007,0,
+'','','2009-11-20','10:11',47,47,'231','',77410,2009,'ÚPS',0,0,0)

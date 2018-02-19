@@ -1,0 +1,1 @@
+ALTER TABLE posta_dokumentace add TEXT TEXT;

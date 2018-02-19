@@ -1,0 +1,5 @@
+alter table posta_spisovna add registratura text;
+alter table posta_spisovna_h add registratura text;
+
+
+insert into posta_konfigurace (kategorie,typ,parametr,popis) VALUES ('EMAILY','textarea','nova_posta_precteni','text emailu informace o novém dokumentu k přečtení. Zástupné znaky jsou $DATUM$, $VEC$, $ID$');

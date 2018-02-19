@@ -1,0 +1,215 @@
+<?php
+session_start();
+require("tmapy_config.inc");
+require(FileUp2(".admin/brow_.inc"));
+include_once(FileUp2(".admin/config.inc"));
+include_once(FileUp2(".admin/oth_funkce.inc"));
+include_once(FileUp2(".admin/form_func_ev.inc"));
+include(FileUp2('.admin/form_func.inc'));
+include_once(FileUp2(".admin/security_name.inc"));
+require(FileUp2("html_header_posta.inc"));
+
+
+
+$ID=$GLOBALS["SELECT_ID"];
+//echo "IPD".$IDPcko;
+
+$q = new DB_POSTA;
+
+$sql='SELECT odbor,ev_cislo,rok,cislo_spisu1,cislo_spisu2,nazev_spisu,podcislo_spisu,skartace,referent FROM posta WHERE id='.$ID;
+
+/*
+Table(array(
+  "sql"=>"select * from posta where id=".$ID,
+  "agenda"=>"POSTA_C_JEDNACI",
+  "caption"=>"Vybraná písmenost",
+  "showaccess"=>false, 
+  "showinfo"=>false,
+  "showedit"=>false,
+  "showdelete"=>false,
+  "showhistory"=>false,
+//  "setvars"=>true,
+   ));
+*/
+$q->query($sql);
+$q->next_record();
+$EV_CISLO=$q->Record["EV_CISLO"];
+$ROK=$q->Record["ROK"];
+$ODBOR=$q->Record["ODBOR"];
+$CISLO_JEDNACI1=$q->Record["CISLO_SPISU1"];
+$CISLO_JEDNACI2=$q->Record["CISLO_SPISU2"];
+$NAZEV_SPISU=$q->Record["NAZEV_SPISU"];
+$SKARTACE=$q->Record["SKARTACE"];
+$REFERENT=$q->Record["REFERENT"];
+$PODCISLO_SPISU=$q->Record["PODCISLO_SPISU"]?$q->Record["PODCISLO_SPISU"]:0;
+$ID_PUVODNI=$ID;
+$text_spisu=$CISLO_JEDNACI1."/".$CISLO_JEDNACI2;
+If ($NAZEV_SPISU) $text_spisu.=" - ".$NAZEV_SPISU;
+$text_spisu.=" ";
+
+$first_adr=0;
+if ($GLOBALS[IDPSPISU]=='99999999')
+{
+  $adresat=array();
+  $sql="select * from posta where odeslana_posta='t' and cislo_spisu1=$CISLO_JEDNACI1 and cislo_spisu2=$CISLO_JEDNACI2 order by id asc";
+  $q->query($sql);
+  while ($q->Next_Record())
+  {
+    $id=$q->Record[ID];
+    if ($first_adr==0) $first_adr=$id;
+    else
+      $adresat[$id]=UkazAdresu($id,',', 'posta'); //tohle bude dalsi prijemce
+  }
+  $adresat = array_unique ($adresat); 
+  //print_r($adresat);  
+
+
+//  Die($adr);
+
+}
+ 
+
+$zkratka=UkazOdbor($ODBOR,true);
+
+//echo "$CISLO_SPISU1 $CISLO_SPISU2";
+
+$adresa='aaaaa';
+//die("aa".$ID_PUVODNI."aa");
+$OBJEKT_KOD=$ID;
+
+echo "
+<script language=\"JavaScript\" type=\"text/javascript\">
+<!--
+  window.opener.document.getElementById('OBJEKT_KOD_SPAN').innerHTML = '".$text_spisu."';
+  window.opener.document.frm_edit.CISLO_SPISU1.value = '".$CISLO_JEDNACI1."';
+  window.opener.document.frm_edit.CISLO_SPISU2.value = '".$CISLO_JEDNACI2."';
+  window.opener.document.frm_edit.CISLO_JEDNACI1.value = '".$CISLO_JEDNACI1."';
+  window.opener.document.frm_edit.CISLO_JEDNACI2.value = '".$CISLO_JEDNACI2."';
+  window.opener.document.frm_edit.NAZEV_SPISU.value = '".$NAZEV_SPISU."';
+  window.opener.document.frm_edit.SKARTACE.value = '".$SKARTACE."';
+
+//   if (confirm('Chcete ponechat stávající pomlčku?!!'))
+//   {
+      window.opener.document.frm_edit.PODCISLO_SPISU.value = '".$PODCISLO_SPISU."';
+//   }
+
+";
+//jdeme pridat pripadne vsechny prijemce
+if ($GLOBALS[IDPSPISUx]=='99999999')
+{
+  echo " 
+
+   if (confirm('Chcete založit všechny příjemce ze spisu?!!')) 
+   {
+";
+if ($first_adr>0)
+{
+  $sql="SELECT * from posta where id=".$first_adr;
+  //echo $sql;
+  $q=new DB_POSTA;
+  $q->query($sql);
+  $q->Next_Record();
+  $kod=$q->Record["ODESL_UIRADR"];
+  $typ=$q->Record["ODES_TYP"];
+  $osloveni=$q->Record["ODESL_OSLOVENI"];
+  $prijmeni=$q->Record["ODESL_PRIJMENI"];
+  $jmeno=$q->Record["ODESL_JMENO"];
+  $titul=$q->Record["ODESL_TITUL"];
+  $ico=$q->Record["ODESL_ICO"];
+  $odd=$q->Record["ODESL_ODD"];
+  $osoba=$q->Record["ODESL_OSOBA"];
+  $ulice=$q->Record["ODESL_ULICE"];
+  $cp=$q->Record["ODESL_CP"];
+  $cor=$q->Record["ODESL_COR"];
+  $psc=$q->Record["ODESL_PSC"];
+  $mesto=$q->Record["ODESL_POSTA"];
+  $datnar=CZDate($q->Record["ODESL_DATNAR"]);
+  $ds=$q->Record["ODESL_DATSCHRANKA"];
+  $obalka=$q->Record["DOPORUCENE"];
+  $doruceni=$q->Record["VLASTNICH_RUKOU"];
+  echo "
+  window.opener.document.frm_edit.ODESL_ADRKOD.value = '".$kod."';
+  window.opener.document.frm_edit.ODES_TYP.value = '".$typ."';
+  
+  ";
+  if ($typ=='U' || $typ=='P')  
+  echo "
+    window.opener.document.frm_edit.ODESL_PRIJMENI_FIRMA.value = '".$prijmeni."';
+    window.opener.document.frm_edit.ODESL_PRIJMENI_FIRMA.style.color='red';
+  ";
+  else
+  echo "
+    window.opener.document.frm_edit.ODESL_OSLOVENI.value = '".$osloveni."';
+    window.opener.document.frm_edit.ODESL_OSLOVENI.style.color='red';
+    window.opener.document.frm_edit.ODESL_PRIJMENI.value = '".$prijmeni."';
+    window.opener.document.frm_edit.ODESL_PRIJMENI.style.color='red';
+    window.opener.document.frm_edit.ODESL_JMENO.value = '".$jmeno."';
+    window.opener.document.frm_edit.ODESL_JMENO.style.color='red';
+    window.opener.document.frm_edit.ODESL_TITUL.value = '".$titul."';
+    window.opener.document.frm_edit.ODESL_TITUL.style.color='red';
+        window.opener.document.frm_edit.ODESL_DATNAR.value = '".$datnar."';
+        window.opener.document.frm_edit.ODESL_DATNAR.style.color='red';
+  ";
+  
+  echo "
+    window.opener.document.frm_edit.ODESL_ICO.value = '".$ico."';
+    window.opener.document.frm_edit.ODESL_ICO.style.color='red';
+    window.opener.document.frm_edit.ODESL_ODD.value = '".$odd."';
+    window.opener.document.frm_edit.ODESL_ODD.style.color='red';
+    window.opener.document.frm_edit.ODESL_OSOBA.value = '".$osoba."';
+    window.opener.document.frm_edit.ODESL_OSOBA.style.color='red';
+    
+    
+    window.opener.document.frm_edit.ODESL_ULICE.value = '".$ulice."';
+    window.opener.document.frm_edit.ODESL_ULICE.style.color='red';
+  
+    window.opener.document.frm_edit.ODESL_CP.value = '".$cp."';
+    window.opener.document.frm_edit.ODESL_CP.style.color='red';
+  
+    window.opener.document.frm_edit.ODESL_COR.value = '".$cor."';
+    window.opener.document.frm_edit.ODESL_COR.style.color='red';
+  
+    window.opener.document.frm_edit.ODESL_POSTA.value = '".$mesto."';
+    window.opener.document.frm_edit.ODESL_POSTA.style.color='red';
+  
+    window.opener.document.frm_edit.ODESL_PSC.value = '".$psc."';
+    window.opener.document.frm_edit.ODESL_PSC.style.color='red';
+  
+    window.opener.document.frm_edit.ODESL_DATSCHRANKA.value = '".$ds."';
+    window.opener.document.frm_edit.ODESL_DATSCHRANKA.style.color='red';
+     
+    window.opener.document.frm_edit.DOPORUCENE.value = '".$obalka."';
+    window.opener.document.frm_edit.VLASTNICH_RUKOU.value = '".$doruceni."';
+
+    window.opener.document.frm_edit.ODES_TYP.onchange();
+
+    ";
+
+    if (count($adresat)>0)
+    {
+       $prijemci=",";
+  
+       while (list ($key, $val) = each ($adresat)) {
+        $ID=$key;
+        $retezec=','.$ID.','; 
+         If (!strstr($prijemci,$retezec)) 
+         {
+          $prijemci.="X_".$ID.",";
+         }
+       }
+      $textprijemci="<table><tr><td>".UkazAdresaty($prijemci,'a')."</td></tr></table>";
+    echo "
+    window.opener.document.getElementById('PRIJEMCI_SPAN').innerHTML = '$textprijemci';
+    window.opener.document.frm_edit.DALSI_PRIJEMCI.value = '$prijemci';
+     ";
+//print_r($textprijemci);
+    }
+  }
+echo "}";
+}
+echo "
+  window.close();
+//-->
+</script>
+";
+

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://nsess.public.cz/erms/v_02_00" elementFormDefault="qualified" id="uk">
+
+    
+    
+    <xs:complexType name="tParametryZdroje">
+        <xs:sequence>
+            <xs:element name="idOrg"  base="xs:int" minOccurs="0">
+            </xs:element>
+        </xs:sequence>
+     </xs:complexType>
+
+	<!--CHANGE 2011-04-28 Položky PocetListu, PocetPriloh, DruhPriloh byly přesunuty do komplexních typů tProfilDokumentuUprava a tProfilDokumentu. -->
+	<xs:complexType name="tDoplnujiciDataDokument">
+		<xs:annotation>
+			<xs:documentation>Jakákoliv další doprovodná data, která nejsou součástí této specifikace. Např. zde mohou být data potřebná pro výměnu informací s agendovým systémem.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence minOccurs="0">
+            <xs:element name="whoisNumber"  base="xs:int" minOccurs="0">
+            </xs:element>
+            <xs:element name="idOrg"  base="xs:int" minOccurs="0">
+            </xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+
+</xs:schema>

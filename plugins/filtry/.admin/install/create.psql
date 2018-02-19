@@ -1,0 +1,8 @@
+--DROP TABLE posta_user_filtry;
+create table posta_user_filtry (
+  id serial,
+  owner_id int,
+  nazev varchar(100),
+  nastaveni text
+);
+

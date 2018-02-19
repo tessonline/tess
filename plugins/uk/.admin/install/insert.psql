@@ -1,0 +1,2 @@
+insert into posta_cis_adresati (kod,nazev,aktivni,poradi) VALUES ('C','Student UK',1,20);
+insert into posta_cis_adresati (kod,nazev,aktivni,poradi) VALUES ('G','Pracovník UK',1,20);

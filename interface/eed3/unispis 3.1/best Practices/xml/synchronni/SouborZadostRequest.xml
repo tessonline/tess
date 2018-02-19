@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Created with Liquid XML 2015 Designer Edition (Trial) 13.2.1.5996 (http://www.liquid-technologies.com) -->
+<ns:SouborZadostRequest xmlns:isds="http://isds.czechpoint.cz/v20" xmlns:ess="http://mvcr.cz/ess/v_1.0.0.0" xmlns:ns="http://nsess.public.cz/erms/v_01_01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://nsess.public.cz/erms/v_01_01 file:///D:/spis_sluzba/RZP/unispis%203.1/best%20Practices/Xsd/ermsIFSyn.xsd" Zdroj="string" Cil="string">
+    <ns:Soubor>
+        <ns:Identifikator>
+            <ess:HodnotaID>string</ess:HodnotaID>
+            <ess:ZdrojID>string</ess:ZdrojID>
+        </ns:Identifikator>
+    </ns:Soubor>
+    <ns:Autorizace>
+        <ns:provedlKdo>string</ns:provedlKdo>
+        <ns:provedlKdy>1993-01-01T20:02:14.71</ns:provedlKdy>
+    </ns:Autorizace>
+</ns:SouborZadostRequest>

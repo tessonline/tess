@@ -1,0 +1,2 @@
+alter table posta_plugins_dr_app add klient_authen int2 default 0;
+

@@ -1,0 +1,17 @@
+PravniAkt 
+dokumentace prAktId - ale v prikladu je
+pravniAktId
+
+
+PravniStavAplicationBinding
+•	Testovací prostøedí: 
+dtpktest01:8080/w4pk/service/pkpravnistavapplicationbinding?wsdl
+ale ma byt
+•	Testovací prostøedí: 
+dtpktest01:8080/w4pk/service/PravniStavApplicationBindingService?wsdl
+
+
+stejna chyba v url jako u 
+PravniAktAplicationBinding
+i u
+UdalostplicationBinding

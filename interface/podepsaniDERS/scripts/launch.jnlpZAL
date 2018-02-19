@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jnlp
+    spec="1.0+"
+    codebase="https://www.ders.cz/pkisigner/"
+    href="launch.jnlp">
+  <information>
+    <title>v000102_201708021206</title>
+    <description>201708021206</description>
+  </information>
+  <security>
+     <all-permissions/>
+  </security>
+  <resources>
+    <j2se version="1.5+"/>
+         
+    <jar href="lib/WebSign-v000102_201708021206.jar" main="true"/>
+    <jar href="lib/gson-2.8.0.jar"/>
+    <jar href="lib/websocket-api-9.4.5.v20170502.jar"/>
+    <jar href="lib/websocket-server-9.4.5.v20170502.jar"/>
+    <jar href="lib/websocket-common-9.4.5.v20170502.jar"/>
+    <jar href="lib/websocket-client-9.4.5.v20170502.jar"/>
+    <jar href="lib/websocket-servlet-9.4.5.v20170502.jar"/>
+    <jar href="lib/pdfbox-2.0.6.jar"/>
+    <jar href="lib/fontbox-2.0.6.jar"/>
+    <jar href="lib/commons-logging-1.2.jar"/>
+    <jar href="lib/bcprov-jdk15on-1.57.jar"/>
+    <jar href="lib/bcmail-jdk15on-1.57.jar"/>
+    <jar href="lib/bcpkix-jdk15on-1.57.jar"/>
+    <jar href="lib/jetty-util-9.4.5.v20170502.jar"/>
+    <jar href="lib/jetty-security-9.4.5.v20170502.jar"/>
+    <jar href="lib/jetty-server-9.4.5.v20170502.jar"/>
+    <jar href="lib/jetty-servlet-9.4.5.v20170502.jar"/>
+    <jar href="lib/jetty-http-9.4.5.v20170502.jar"/>
+    <jar href="lib/jetty-io-9.4.5.v20170502.jar"/>
+    <jar href="lib/jetty-client-9.4.5.v20170502.jar"/>
+    <jar href="lib/javax.servlet-api-4.0.0-b05.jar"/>
+    <jar href="lib/jdom2-2.0.6.jar"/>
+    <jar href="lib/kernel-7.0.2.jar"/>
+    <jar href="lib/slf4j-api-1.7.13.jar"/>
+    <jar href="lib/io-7.0.2.jar"/>
+    <jar href="lib/layout-7.0.2.jar"/>
+    <jar href="lib/pdfa-7.0.2.jar"/>
+    <jar href="lib/sign-7.0.2.jar"/>
+    <jar href="lib/forms-7.0.2.jar"/>
+    <jar href="lib/itextpdf-5.5.11.jar"/>
+
+     
+  </resources>
+  <application-desc main-class="cz.gajatech.WebSign.WebSign">
+      
+  </application-desc>
+</jnlp>
+

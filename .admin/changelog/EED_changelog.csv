@@ -1,0 +1,160 @@
+~6.3.1|2018-01-04 13:31:12||- pøidán nový parametr v konfiguraci ESSS - ADRESA_RAZITKO. Po uvedení tohoto parametru se údaj tiskne jako název organizace na podacím razítku.
+- pøidán nový objekt do obálek - Adresát bez IÈ
+- pøidán nový objekt do obálek - Adresát roku narození
+|
+~6.2.2|2017-09-14 12:06:10|||- V nastavení šablon opravena funkcionalita pro TEST šablony
+~6.2.2|2017-09-14 11:48:00|uk||- opraveny práva pro synchronizaci typových spisù zamìstnancù
+~6.2.2|2017-09-07 15:19:00|uk|- pøidána synchronizace typových spisù zamìstnancù
+- umožnìno vyhledávání dle jména a pøíjmení u synchronizace typových spisù
+- u synchronizace typových spisù studentù pøidáno omezení na druh studia|
+~6.2.2|2017-08-30 15:23:41|||- oprava generování údajù v tagu SU_WEB
+- ve Workflow - odchozí - Interní pošta: Adresát - lze vybrat i neaktivní spisový uzel
+~6.2.2|2017-08-18 13:17:07|DS||- pøi vyžádání aktualizace metadat se již nyní nestahují pøílohy (dojde k rychlejší aktualizaci)
+~6.2.2|2017-08-09 17:10:41||- v SSK v hromadné editaci je dostupný  výbìr fyzické lokace
+- v SSK ve výbìru je dostupný výbìr fyzické lokace|- oprava zobrazení spisových uzlù v SSK pro roli spisovna-odbor
+- oprava uložení rozhodnutí z archivu (import XML)
+
+
+~6.2.2|2017-08-07 09:30:25|DR||- oprava stránkování pøi výbìru pøes Vlastní filtr
+~6.2.2|2017-08-07 09:30:20|||- oprava delimitovaných spisù, které nešlo vrátit do spisovny
+- oprava zobrazení historie souborù (u souborù pøevedených do výstupního formátu)
+~6.2.2|2017-07-31 14:57:30||
+|- opraven select pro výbìr roku - nenabízel se aktuální rok
+~6.2.2|2017-07-27 09:23:21|||- oprava funkcionality Vlož pøíchozí ze souboru v pøípadì, kdy se vkládá PDF dokument
+~6.2.2|2017-07-24 11:55:37||- pøidán podrobný výpis verzí pro správce aplikace
+|- pøi zadání workflow v Druhu dokumentu je možné vybrat i neaktivní spisové uzly
+~6.2.2|2017-07-20 13:38:05||
+|- opraveno hledání v tranksaèním protokolu
+
+~6.2.2|2017-06-16 14:03:27||- drobné úpravy Unispis konektoru verze 3 (chyby reportované QCM)|
+~6.2.2|2017-06-15 10:51:24|DR|- pøidána nová možnost pro autentizaci pomocí Basic authentification
+- odstranìn pøíznak Do vlastních rukou pøi pøedání DZ|
+~6.2.2|2017-06-14 11:55:37||nový stav pøedáno k vypravení
+- založený odchozí dokument je ve stavu "chybí vypravení"
+- po pøedání na podatelnu (pomocí seznamu nebo ÈK) se zmìní stav na "pøedáno k vypravení"|
+~6.2.1|2017-06-07 11:58:29|||- upraveny metody v konektoru Best practices, aby vracely korektní hodnoty
+~6.2.1|2017-06-01 11:58:29||- ve Vlastním nastavení lze zapnout sloupec Ev. èíslo
+- v Exportu pøidána volba Køížová vazba - do exportu jsou poté vloženy i spisy z køížových vazeb|v Tisku podacích razítek vrácena volba pro tisk ev. èísel - pro umožnìní pøedtištìní èárových kódu pro skenování na arch.
+- oprava funkcionality Pøedání dokumentu na jiný odbor
+- oprava vyhodnocení práv viditelnosti ètení
+~6.2.1|2017-05-30 12:15:37|workflow|- pøidána volba pro checkbox - Jen 10 dní
+- pøidána volba pro checkbox - Nevracet, vložit do schránky
+|
+~6.2.1|2017-05-23 10:02:45||- ve Vlastním nastavení pøidány nové volby
+-- zobrazit jen èíslo jednací
+-- zobrazit jen spis|- oprava generování èj. v pøípadì uvedení zkratky zpracovatele v èj (odstranìna duplicita lomítka)
+- oprava stránkování pøi výbìru Spisového uzlu v rychlém pøehledu
+~6.2.1|2017-05-04 14:07:13||- umožnìní editace dokumentu pro podatelnu u dokumentù pøedaných na jiné pracovištì (které lze vyhledat podle Filtru - "dokument, který byl pøedán na jiné zaøízení"
+- filtr "dokument, který byl pøedán na jiné zaøízení" se nyní nabízí jen pro právo cteni_vse_pracoviste a cteni_admin|- oprava uložení dokumentu s el. podpisem (oprava jádra)
+- oprava práv pøi uložení souborù u kopie s novým poøadovým èíslem v sbìrném archu
+~6.2.1|2017-05-04 11:58:35|filtry|- správce má nyní možnost kopírovat filtry 
+- správce má nyní možnost mìnit vlastníka filtru|
+~6.2.1|2017-05-04 11:44:14|npu||- oprava èeštiny v ukládací znaèce
+~6.2.1|2017-05-04 11:43:17|DR|- pøidáno pole EMAILY|
+~6.2.1|2017-05-04 11:42:21|schvalovani||- oprava ikon
+- oprava ukládacích tlaèítek
+- oprava dohledání uživatele jménem
+~6.2.1|2017-05-04 11:40:18||- do verzování pøidán sloupec plugin a opravy.
+|
+~6.2.1|2017-05-03 12:20:17||- lokální správce ma nyní možnost Pøedat èj. jinému odboru
+|- oprava naètení bezpeènosti v pøípadì, kdy uživatel nemá zadán oddìlení ve Správì skupin
+- opraven sloupec Vyøízeno (zalomení textu, èeské datum)
+
+~6.2.1|2017-05-02 11:40:18|||- zobrazení agend pro podatelnu
+- filtr - dokument pøedán na jiné zaøízení
+- zrušení omezení velikosti textu položky popis v aplikaci Verze aplikace
+
+~6.2|2017-04-04 11:48:19|uk|- nový typ adresáta - Student UK
+- synchronizace typových spisù|- oprava pracovištì u pracovníkù
+~6.2|2017-02-03 11:46:38||- nový plugin hromadný import
+
+
+|- vyhodnocení práv
+~6.1|2016-11-24 08:33:57||- nový modul pro správu více dokumentací
+- UNISPIS - napojení na eZAK (QCM)
+- Fulltextové vyhledávání v metadatech
+- vyhledávání ve Výbìru pomocí AND, OR, NOT, XOR
+- úpravy vyžádané podle souladu s NSESSS
+- možnost definování skartaèního režimu
+|- oprava dopoèítání lhùty v pøípadì, kdy datrum vyøízení vyjde na nedìli
+
+~6.0|2016-10-13 14:32:53|uk||- rùzné opravy
+~6.0|2016-10-11 10:38:50|||- uprava rozhrani unispis
+~6.0|2016-10-11 10:18:39|||- pravo pristup pridano do skupiny prav v SSK
+~6.0|2016-10-10 17:50:04|||opravy cestiny v identifikatory vecnych skupin - vyhledavani
+~6.0|2016-10-09 23:08:14|||oprava cestiny
+~6.0|2016-10-09 17:39:23|||automat DS
+~6.0|2016-10-09 17:38:03|||automat DS
+~6.0|2016-10-09 17:37:13|||automat DS
+~6.0|2016-10-09 17:34:39|DS||drobná oprava automatu
+~6.0|2016-10-09 17:33:25|DS|- pøidán automat DS|
+~6.0|2016-10-09 17:30:44||- pøidán automat eed|
+~6.0|2016-10-09 17:08:54||- pøepsána funkcionalita køízových vazeb spisù|aktualizace dokumentace
+~6.0|2016-10-09 15:05:00|||oprava importu spisoveho planu
+~6.0|2016-10-09 13:49:46|epodatelna||drobné opravy
+~6.0|2016-10-09 13:49:36|epodatelna|- do konfigurace EED pøidány parametry pro epodatelnu|
+~6.0|2016-10-09 11:34:47|||oprava epodatelny, aby se neposilal mail na adresu FROM
+~6.0|2016-10-09 10:19:21|||hromadny tisk podacich razitek - oprava hledani dle datumu
+~6.0|2016-10-07 16:20:45|||upravy exportu a importu spisovych planu
+~6.0|2016-10-07 15:30:06|||uprava zobrazeni GIT logu
+~6.0|2016-10-07 15:27:16|||GIT zobrazeni
+~6.0|2016-10-07 15:24:25|||import skartacniho rozhodnuti
+~6.0|2016-10-07 12:23:47|||oprava èeštiny u typového spisu
+~6.0|2016-10-07 12:13:25|||oprava vkladani do typoveho spisu
+~6.0|2016-10-07 09:48:23|||oprava error emailu
+~6.0|2016-10-07 09:38:55|||oprava epodatelny, force parametr
+~6.0|2016-10-06 17:55:33|||transakcni protokol
+~6.0|2016-10-06 17:39:29|DS|rozšíøení polí v položce Filtry|
+~6.0|2016-10-06 17:32:28|||oprava SIP balicku, oprava prop_menu
+~6.0|2016-10-06 16:50:03|||uprava DS
+~6.0|2016-10-05 20:00:11|||oprava fpdf
+~6.0|2016-10-05 19:58:33|||fpdf v utf8
+~6.0|2016-10-05 19:32:55|||opravy
+~6.0|2016-10-05 17:11:35|||oprava stitku
+~6.0|2016-10-05 17:07:47|||opravy
+~6.0|2016-10-05 15:09:05|||oprava UTF-8
+~6.0|2016-10-05 14:48:49|||opravy
+~6.0|2016-10-05 12:01:28|||oprava ePodatelny
+~6.0|2016-10-05 10:39:14|||oprava SIP balicku
+~6.0|2016-10-05 10:24:04|||priradit k cj
+~6.0|2016-10-04 18:08:26|||oprava prevzeti CK, oprava typoveho spisu
+~6.0|2016-10-04 18:03:36|||oprava epodatelny, ukladani naprimo, antivirova kontrola
+~6.0|2016-10-04 18:02:18|||opravy tcpdf knihovny, upravy datumovych polozek, opravy PDF
+~6.0|2016-10-04 16:48:43|||oprava tcpdflib knihovny, oprava modulu DS, oprava epodatelny
+~6.0|2016-10-04 08:59:56|||opravy vyhledavani
+~6.0|2016-10-03 15:18:53|||vypis gitu
+~6.0|2016-10-03 14:48:37|||uprava exportu do PDF/A
+~6.0|2016-10-03 14:37:55|||opravy
+~6.0|2016-10-03 13:01:32|||opravy pro exemplare
+~6.0|2016-10-03 08:45:14|||aktualizacni skripty pro datumy s datetime
+~6.0|2016-10-02 11:33:06|||oprava pro datetime v DB
+~6.0|2016-09-29 15:13:48|||oprava ciselniku lokace
+~6.0|2016-09-29 14:48:58|||ulozeni do sberneho archu
+~6.0|2016-09-29 14:48:44|||sberne archy, oprava ciselniku lokace
+~6.0|2016-09-29 13:05:31|||oprava typoveho spisu
+~6.0|2016-09-29 11:33:08|||novy configDB
+~6.0|2016-09-29 11:23:26|||oprava
+~6.0|2016-09-29 11:23:01|||Merge: 1ab5379 bcb3c0eMerge branch master of https://tmapy.visualstudio.com/DefaultCollection/_git/
+~6.0|2016-09-29 11:21:23|||uprava zobrazeni ciselniku Lokace
+~6.0|2016-09-29 11:04:48|||aktualizace obrazku
+~6.0|2016-09-29 10:55:34|||nova konfigurace EED
+~6.0|2016-09-29 10:46:54|||Deleted /.config/config_plugins.inc
+~6.0|2016-09-29 10:41:02|||oprava cz_UTF-8 na cz_utf-8
+~6.0|2016-09-29 10:38:51|||uprava prav, fyzicka lokace ve spisovne
+~6.0|2016-09-28 17:15:42|||spisove znaky do transakcniho protokolu
+~6.0|2016-09-28 13:38:20|||pridani typovych spisu
+~6.0|2016-09-27 17:19:17|||import spisoveho planu
+~6.0|2016-09-26 11:33:17|||aktualizace Vita, pridano a_pocetlistu, a_pocetpriloh, a_druhpriloh
+~6.0|2016-09-26 10:40:58|||uprava vecnych skupin - zobrazeni ve stromu
+~6.0|2016-09-23 16:35:08|||cislenik spisovych znaku - rozdeleni na vecne skupiny
+~6.0|2016-09-21 12:06:16|||zmena security, nyni se bude pouzivat jen CEU
+~6.0|2016-09-21 11:01:57|||prevod do UTF-8
+~6.0|2016-09-12 09:00:25|||aktualizace z MU Decin
+~6.0|2016-09-09 11:56:42||- øízení práv pøes CEU, rozdìlení práv na ètení/editaci/mazání
+- úprava datumových položek v databázi pro rychlejší zpracování
+- nahrazení èíselníku skartace èíselníkem vìcných skupin a skartaèních znakù
+- UNISPIS - napojení na MPManager (FFTECH)
+- Konfigurace EED - pøidána možnost definování vlastního tvaru èj.
+- ukládání pøíloh do CUL úložištì (DERS)|- oprava exportu a importu XML dle pøílohy è. 1 NSESSS
+- oprava generování SIP balíèku do Národního archivu, oprava importu rozhodnutí z NA
+

@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mets:mets xmlns:mets="http://www.loc.gov/METS/" xmlns:nsesss="http://www.mvcr.cz/nsesss/v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" LABEL="Datový balíček pro provedení skartačního řízení" OBJID="MV0000001_000564" xsi:schemaLocation="http://www.loc.gov/METS/ http://www.loc.gov/standards/mets/mets.xsd http://www.mvcr.cz/nsesss/v2 http://www.mvcr.cz/nsesss/v2/nsesss.xsd">
+  <mets:metsHdr CREATEDATE="DATUM_VZNIKU" LASTMODDATE="DATUM_VZNIKU">
+    <mets:agent ID="agent_001" ROLE="CREATOR" TYPE="ORGANIZATION">
+      <mets:name>JMENO_PREDAVAJICIHO</mets:name>
+    </mets:agent>
+  </mets:metsHdr>
+  <mets:dmdSec ID="dmd_001">
+    <mets:mdWrap MIMETYPE="text/xml" MDTYPE="OTHER" OTHERMDTYPE="NSESSS" MDTYPEVERSION="2.0" LABEL="Schéma XML pro předávání dokumentů a jejich metadat do archivu">
+      <mets:xmlData>

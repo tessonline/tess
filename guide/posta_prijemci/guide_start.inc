@@ -1,0 +1,15 @@
+<?php
+session_start();
+/*
+  if (isset($JOIN_ID) && ($GUIDE_ID == 0)):
+    SetCookie("COOK_JOIN_ID", $JOIN_ID);
+  endif;  
+*/
+
+//    SetCookie("IDP2","", time() - 3600);
+if ($prijemci<>"") {
+  SetCookie("PRIJEMCI2",$prijemci);
+}
+if ($prijemci==",") {  SetCookie("PRIJEMCI2","");}
+
+?>

@@ -1,0 +1,133 @@
+--request
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:ful="http://iispp.npu.cz/FulltextSearch" xmlns:ser="http://iispp.npu.cz/ServiceAuth">
+  <SOAP-ENV:Header>
+    <ser:AuthToken>
+      <ser:username>proxy_T-WIST</ser:username>
+      <ser:password>xxxxxxxxx</ser:password>
+    </ser:AuthToken>
+  </SOAP-ENV:Header>
+  <SOAP-ENV:Body>
+    <ful:fulltextSearchRequest>
+      <uid >trdlikatova</uid>
+      <dotaz >98156</dotaz>
+      <maxVysledku >100</maxVysledku>
+      <jazyk >cs</jazyk>
+    </ful:fulltextSearchRequest>
+  </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+
+--response (vadna cestina jde za nami)
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <ns3:fulltextSearchResponse xmlns:ns2="http://iispp.npu.cz/ServiceAuth" xmlns:ns3="http://iispp.npu.cz/FulltextSearch">
+      <documentFound>
+        <id>50539790</id>
+        <jmeno>oltáø hlavní</jmeno>
+        <url>http://iispptest.npu.cz/katalog_ext?presenter=LegalStatesResults&amp;action=legalState&amp;legalState=50539790</url>
+        <relevance>4.0790467</relevance>
+        <uzemniIdentifikace>
+          <rozsahID>0</rozsahID>
+        </uzemniIdentifikace>
+        <metadata>
+          <nazev>typEntity</nazev>
+          <codebookID>1123</codebookID>
+          <codebookValue>8</codebookValue>
+          <hodnota>Památkový katalog - právní stav</hodnota>
+        </metadata>
+        <metadata>
+          <nazev>anotace</nazev>
+          <codebookID>0</codebookID>
+          <codebookValue>0</codebookValue>
+        </metadata>
+        <metadata>
+          <nazev>stavOchrany</nazev>
+          <codebookID>0</codebookID>
+          <codebookValue>0</codebookValue>
+          <hodnota>zapsáno do státního seznamu pøed r.1988</hodnota>
+        </metadata>
+        <metadata>
+          <nazev>upresneniTypuOchrany</nazev>
+          <codebookID>0</codebookID>
+          <codebookValue>0</codebookValue>
+          <hodnota>MOV</hodnota>
+        </metadata>
+        <metadata>
+          <nazev>stavOchrany</nazev>
+          <codebookID>0</codebookID>
+          <codebookValue>0</codebookValue>
+          <hodnota>34001671-&gt;34-1671</hodnota>
+        </metadata>
+        <metadata>
+          <nazev>stavOchrany</nazev>
+          <codebookID>0</codebookID>
+          <codebookValue>0</codebookValue>
+          <hodnota>zapsáno do státního seznamu pøed r.1988</hodnota>
+        </metadata>
+        <metadata>
+          <nazev>lokalita</nazev>
+          <codebookID>0</codebookID>
+          <codebookValue>0</codebookValue>
+        </metadata>
+      </documentFound>
+      <documentFound>
+        <id>1886898</id>
+        <jmeno>oltáø hlavní</jmeno>
+        <url>http://iispptest.npu.cz/katalog_ext?presenter=ElementsResults&amp;action=element&amp;element=1886898</url>
+        <popis></popis>
+        <relevance>0.8275668</relevance>
+        <uzemniIdentifikace>
+          <rozsahID>0</rozsahID>
+        </uzemniIdentifikace>
+        <vazbyIispp>
+          <appId>2</appId>
+          <appJmeno>MIS</appJmeno>
+          <vazebniAtribut>document_id</vazebniAtribut>
+        </vazbyIispp>
+        <metadata>
+          <nazev>typEntity</nazev>
+          <codebookID>1123</codebookID>
+          <codebookValue>5</codebookValue>
+          <hodnota>Památkový katalog - prvek</hodnota>
+        </metadata>
+        <metadata>
+          <nazev>anotace</nazev>
+          <codebookID>0</codebookID>
+          <codebookValue>0</codebookValue>
+          <hodnota></hodnota>
+        </metadata>
+        <metadata>
+          <nazev>popis</nazev>
+          <codebookID>0</codebookID>
+          <codebookValue>0</codebookValue>
+          <hodnota>Døevìný, støední velikosti, s èetnými plastikami, s cenným obrazem v nástavci.</hodnota>
+        </metadata>
+        <metadata>
+          <nazev>kategoriePrvku</nazev>
+          <codebookID>0</codebookID>
+          <codebookValue>0</codebookValue>
+          <hodnota>Objekt</hodnota>
+        </metadata>
+        <metadata>
+          <nazev>druhPrvku</nazev>
+          <codebookID>0</codebookID>
+          <codebookValue>0</codebookValue>
+          <hodnota>movitost/souèást nemovitosti</hodnota>
+        </metadata>
+        <metadata>
+          <nazev>pristup</nazev>
+          <codebookID>0</codebookID>
+          <codebookValue>0</codebookValue>
+          <hodnota>neveøejný</hodnota>
+          <typ>string</typ>
+        </metadata>
+        <metadata>
+          <nazev>lokalita</nazev>
+          <codebookID>0</codebookID>
+          <codebookValue>0</codebookValue>
+        </metadata>
+      </documentFound>
+    </ns3:fulltextSearchResponse>
+  </soap:Body>
+</soap:Envelope>

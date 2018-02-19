@@ -1,0 +1,21 @@
+DROP TABLE IF EXISTS public.posta_typovy_spis_typ_posty;
+
+CREATE TABLE public.posta_typovy_spis_typ_posty (
+	id serial,
+	id_typovy_spis int4 NOT NULL,
+	id_typ_posty int4 NOT null
+)
+WITH (
+	OIDS=TRUE
+);
+
+CREATE OR REPLACE FUNCTION posta_cis_typ_spis_soucasti_delete() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$DECLARE
+BEGIN
+  DELETE FROM posta_typovy_spis_typ_posty WHERE id_typovy_spis = OLD.id;
+  RETURN NEW;
+END;$$;
+
+CREATE TRIGGER posta_cis_typ_spis_soucasti_delete AFTER DELETE ON posta_cis_typ_spis_soucasti FOR EACH row execute procedure 
+posta_cis_typ_spis_soucasti_delete();

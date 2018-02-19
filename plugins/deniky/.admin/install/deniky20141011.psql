@@ -1,0 +1,14 @@
+create table posta_cis_deniky (
+  id serial,
+  nazev varchar(60),
+  zkratka varchar(5),
+  lhuta int4,
+  odbor int4,
+  typ_posty int4,
+  vec varchar(80),
+  skartace int4,
+  aktivni int2 default 0
+);
+
+
+select setval('posta_cis_deniky_id_seq',100);

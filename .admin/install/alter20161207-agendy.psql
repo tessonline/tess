@@ -1,0 +1,24 @@
+CREATE TABLE public.cis_posta_agenda (
+	id serial NOT NULL,
+	agenda varchar(50) NOT NULL
+)
+WITH (
+	OIDS=TRUE
+);
+
+CREATE UNIQUE INDEX cis_posta_agenda_id_key ON public.cis_posta_agenda (id);
+
+CREATE OR REPLACE FUNCTION cis_posta_agenda_delete() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$DECLARE
+BEGIN
+  DELETE FROM cis_posta_typ WHERE id_agendy = OLD.id;
+  RETURN NEW;
+END;$$;
+
+CREATE TRIGGER cis_posta_agenda_delete AFTER DELETE ON cis_posta_agenda FOR EACH row execute procedure 
+cis_posta_agenda_delete();
+
+alter table cis_posta_typ add id_agendy int;
+
+alter table cis_posta_typ add popis text;

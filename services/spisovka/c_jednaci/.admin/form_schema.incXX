@@ -1,0 +1,651 @@
+<?php
+include(FileUp2(".admin/config.inc"));
+$is_filter = In_Array($form_params["formtype"], array($f_filter, $f_filter_all));
+$is_filter_all = In_Array($form_params["formtype"], array($f_filter_all));
+$is_filter_simple = In_Array($form_params["formtype"], array($f_filter));
+$is_insert = In_Array($form_params["formtype"], array($f_insert));
+$is_update = In_Array($form_params["formtype"], array($f_insert, $f_edit));
+$is_edit = In_Array($form_params["formtype"], array($f_edit));
+$is_info = In_Array($form_params["formtype"], array($f_info));
+$is_new = In_Array($form_params["formtype"], array($f_insertfrom)); 
+
+If (!$is_filter)
+{
+?>
+<script language="JavaScript" type="text/javascript">
+<!--
+var vall;
+document.body.onload = TestROZH;
+function TestROZH(){
+ var obj = document.frm_edit.ODES_TYP.value;
+		 document.frm_edit.ODESL_ODD.style.backgroundColor = 'transparent';
+		 document.frm_edit.ODESL_ODD.disabled=true;
+		 document.frm_edit.ODESL_OSOBA.style.backgroundColor = 'transparent';
+		 document.frm_edit.ODESL_OSOBA.disabled=true;
+ if (obj == "A" && obj != ""){
+		 document.frm_edit.ODESL_PRIJMENI.style.backgroundColor = 'transparent';
+		 document.frm_edit.ODESL_PRIJMENI.value = 'anonym';
+		 document.frm_edit.ODESL_PRIJMENI.disabled=true;
+		 document.frm_edit.ODESL_JMENO.style.backgroundColor = 'transparent';
+		 document.frm_edit.ODESL_JMENO.disabled=true;
+		 document.frm_edit.ODESL_TITUL.style.backgroundColor = 'transparent';
+		 document.frm_edit.ODESL_TITUL.disabled=true;
+		 document.frm_edit.ODESL_ULICE.style.backgroundColor = 'transparent';
+		 document.frm_edit.ODESL_ULICE.disabled=true;
+		 document.frm_edit.ODESL_CP.style.backgroundColor = 'transparent';
+		 document.frm_edit.ODESL_CP.disabled=true;
+		 if (vall == null) vall = document.frm_edit.ODESL_PRIJMENI.value;
+ }
+ if (obj == "P" && obj != ""){
+		 document.frm_edit.ODESL_JMENO.style.backgroundColor = 'transparent';
+		 document.frm_edit.ODESL_JMENO.disabled=true;
+		 document.frm_edit.ODESL_TITUL.style.backgroundColor = 'transparent';
+		 document.frm_edit.ODESL_TITUL.disabled=true;
+		 document.frm_edit.ODESL_ODD.style.backgroundColor = 'white';
+		 document.frm_edit.ODESL_ODD.disabled=false;
+		 document.frm_edit.ODESL_OSOBA.style.backgroundColor = 'white';
+		 document.frm_edit.ODESL_OSOBA.disabled=false;
+		 document.frm_edit.ODESL_ICO.style.backgroundColor = 'white';
+		 document.frm_edit.ODESL_ICO.disabled=false;
+		 if (vall == null) vall = document.frm_edit.ODESL_PRIJMENI.value;
+
+if (obj == "F" && obj != ""){
+		 document.frm_edit.ODESL_PRIJMENI.style.backgroundColor = 'white';
+		 document.frm_edit.ODESL_PRIJMENI.disabled=false;
+		 document.frm_edit.ODESL_JMENO.style.backgroundColor = 'white';
+		 document.frm_edit.ODESL_JMENO.disabled=false;
+     document.frm_edit.ODESL_TITUL.style.backgroundColor = 'white';
+		 document.frm_edit.ODESL_TITUL.disabled=false;
+		 document.frm_edit.ODESL_ULICE.style.backgroundColor = 'white';
+		 document.frm_edit.ODESL_ULICE.disabled=false;
+		 document.frm_edit.ODESL_CP.style.backgroundColor = 'white';
+		 document.frm_edit.ODESL_CP.disabled=false;
+		 document.frm_edit.ODESL_ODD.style.backgroundColor = 'transparent';
+		 document.frm_edit.ODESL_ODD.disabled=true;
+		 document.frm_edit.ODESL_ICO.style.backgroundColor = 'white';
+		 document.frm_edit.ODESL_ICO.disabled=false;
+		 document.frm_edit.ODESL_OSOBA.style.backgroundColor = 'transparent';
+		 document.frm_edit.ODESL_OSOBA.disabled=true;
+  }
+ }
+}
+
+function ON_OFF_rozh(){
+		 document.frm_edit.ODESL_PRIJMENI.style.backgroundColor = 'white';
+		 document.frm_edit.ODESL_PRIJMENI.disabled=false;
+		 document.frm_edit.ODESL_JMENO.style.backgroundColor = 'white';
+		 document.frm_edit.ODESL_JMENO.disabled=false;
+     document.frm_edit.ODESL_TITUL.style.backgroundColor = 'white';
+		 document.frm_edit.ODESL_TITUL.disabled=false;
+		 document.frm_edit.ODESL_ULICE.style.backgroundColor = 'white';
+		 document.frm_edit.ODESL_ULICE.disabled=false;
+		 document.frm_edit.ODESL_CP.style.backgroundColor = 'white';
+		 document.frm_edit.ODESL_CP.disabled=false;
+		 document.frm_edit.ODESL_ODD.style.backgroundColor = 'transparent';
+		 document.frm_edit.ODESL_ODD.disabled=true;
+		 document.frm_edit.ODESL_ICO.style.backgroundColor = 'transparent';
+		 document.frm_edit.ODESL_ICO.disabled=true;
+		 document.frm_edit.ODESL_OSOBA.style.backgroundColor = 'transparent';
+		 document.frm_edit.ODESL_OSOBA.disabled=true;
+
+	if (event.srcElement.value == "F" && event.srcElement.value != ""){
+		 document.frm_edit.ODESL_PRIJMENI.style.backgroundColor = 'white';
+		 document.frm_edit.ODESL_PRIJMENI.value = '';
+		 document.frm_edit.ODESL_PRIJMENI.disabled=false;
+		 document.frm_edit.ODESL_JMENO.style.backgroundColor = 'white';
+		 document.frm_edit.ODESL_JMENO.disabled=false;
+     document.frm_edit.ODESL_TITUL.style.backgroundColor = 'white';
+		 document.frm_edit.ODESL_TITUL.disabled=false;
+		 document.frm_edit.ODESL_ULICE.style.backgroundColor = 'white';
+		 document.frm_edit.ODESL_ULICE.disabled=false;
+		 document.frm_edit.ODESL_CP.style.backgroundColor = 'white';
+		 document.frm_edit.ODESL_CP.disabled=false;
+		 document.frm_edit.ODESL_ODD.style.backgroundColor = 'transparent';
+		 document.frm_edit.ODESL_ODD.disabled=true;
+		 document.frm_edit.ODESL_ICO.style.backgroundColor = 'white';
+		 document.frm_edit.ODESL_ICO.disabled=false;
+		 document.frm_edit.ODESL_OSOBA.style.backgroundColor = 'transparent';
+		 document.frm_edit.ODESL_OSOBA.disabled=true;
+  }
+
+	if (event.srcElement.value == "P" && event.srcElement.value != ""){
+		 document.frm_edit.ODESL_TITUL.style.backgroundColor = 'transparent';
+		 document.frm_edit.ODESL_PRIJMENI.value = '';
+		 document.frm_edit.ODESL_TITUL.disabled=true;
+		 document.frm_edit.ODESL_JMENO.style.backgroundColor = 'transparent';
+		 document.frm_edit.ODESL_JMENO.disabled=true;
+		 document.frm_edit.ODESL_ODD.style.backgroundColor = 'white';
+		 document.frm_edit.ODESL_ODD.disabled=false;
+		 document.frm_edit.ODESL_OSOBA.style.backgroundColor = 'white';
+		 document.frm_edit.ODESL_OSOBA.disabled=false;
+		 document.frm_edit.ODESL_ICO.style.backgroundColor = 'white';
+		 document.frm_edit.ODESL_ICO.disabled=false;
+	}
+	if (event.srcElement.value == "A" && event.srcElement.value != ""){
+		 document.frm_edit.ODESL_PRIJMENI.style.backgroundColor = 'transparent';
+		 document.frm_edit.ODESL_PRIJMENI.value = 'anonym';
+		 document.frm_edit.ODESL_PRIJMENI.disabled=true;
+		 document.frm_edit.ODESL_JMENO.style.backgroundColor = 'transparent';
+		 document.frm_edit.ODESL_JMENO.disabled=true;
+		 document.frm_edit.ODESL_TITUL.style.backgroundColor = 'transparent';
+		 document.frm_edit.ODESL_TITUL.disabled=true;
+		 document.frm_edit.ODESL_ULICE.style.backgroundColor = 'transparent';
+		 document.frm_edit.ODESL_ULICE.disabled=true;
+		 document.frm_edit.ODESL_CP.style.backgroundColor = 'transparent';
+		 document.frm_edit.ODESL_CP.disabled=true;
+	}
+	else {
+	}	 
+}
+
+function Ares(){
+// && document.forms[0].ODESL_ICO.value!=valx
+  if (document.forms[0].ODESL_ICO.value){
+    newwindow = window.open('http://wwwinfo.mfcr.cz/ares/ares_fr.html.cz?JS=1&jazyk=cz&cestina=cestina&ico='+document.forms[0].ODESL_ICO.value, 'ODESL_ICO','height=600,width=800,left=10,top=10,scrollbars,resizable,toolbar,status,menubar,titlebar');
+    newwindow.focus();
+    var d = new Date();
+    value = window.showModalDialog("./get_values.php?ICO="+document.forms[0].ODESL_ICO.value+"&"+d.getTime(), "", "dialogHeight:1;dialogWidth:200px;dialogTop:100;");
+    if (value){
+       var arr_val = value.split("|",2);
+       document.forms[0].ODESL_PRIJMENI.value = arr_val[0];
+       document.forms[0].ODESL_POSTA.value = arr_val[1];
+       document.forms[0].ODESL_PRIJMENI.style.color='red';
+       document.forms[0].ODESL_POSTA.style.color='red';
+    }   
+  }else 
+    alert("Musí být zadáno IČO !")
+}
+//-->
+</script>
+
+
+<?php
+}
+// Jde o odpoved, proto je nutne vytvorit spis, pokud jeste neni!!! Pokud je, tak na to kaslem.
+
+// zjistime, jestli jsme vedouci-posta, pokud ano, pridelime referenta z nabidky ...
+If ($GLOBALS["POSTA_SECURITY"]->IsUserInGroups(array("posta-vedouci-odbor-r","posta-vedouci-odbor-ruid","posta-referent-r","posta-referent-ruid")))
+{
+  $USER_INFO = $GLOBALS["POSTA_SECURITY"]->GetUserInfo(); 
+  $GLOBALS["WHERE_ID_ODBOR"] = "WHERE group_id = ".$USER_INFO["GROUP_ID"]; 
+  $GLOBALS["ODBOR"] = $USER_INFO["GRP"]; 
+//  $GLOBALS["REFERENT"] = $USER_INFO["LNAME"];   
+}
+else
+{
+  $GLOBALS["WHERE_ID_ODBOR"] = ""; 
+}
+
+If ($GLOBALS["odeslana"]=="t"){$GLOBALS["ODESLANA_POSTA"]="t";}
+If ($is_new) $GLOBALS["ODESLANA_POSTA"]="t";
+
+if ($is_filter) { 
+
+$FORM_CONFIG["schema"][] = array( "elements"=>array(
+                   array( "type"=>"text", "name"=>"EV_CISLO"),
+                   array( "type"=>"text", "name"=>"ROK2","size"=>4)                   
+                   ),
+                   "format"=>"EV_CISLO...'/'...ROK2",
+                   "label"=>"Číslo podací:");
+                   
+  $FORM_CONFIG["schema"][] = array( "elements"=>array(
+              array( "type"=>"text", "name"=>"CISLO_SPISU1"),
+              array( "type"=>"text", "name"=>"CISLO_SPISU2"),
+               ),
+              "format"=>"CISLO_SPISU1...'/'...CISLO_SPISU2",
+              "label"=>$CONFIG["CISLO_SPISU"]);
+                   
+
+ $FORM_CONFIG["schema"][] = array("elements"=>array(
+            array( "type"=>"date", "name"=>"DATUM_PODATELNA_PRIJETI","insertdatebutton"=>true),   
+),
+            "label"=>"Datum přijetí:");		
+
+  $FORM_CONFIG["schema"][] = array("elements"=>array(
+            array( "type"=>"select_typ_posty", "name"=>"TYP_POSTY", "width"=>10,"insertnull"=>true)),
+            "label"=>"Druh pošty:");										 
+            
+
+$FORM_CONFIG["schema"][] = array( "elements"=>array(
+                   array( "type"=>"select_odbor", "name"=>"ODBOR","insertnull"=>true),
+            array( "type"=>"select_referent", "name"=>"REFERENT","insertnull"=>true,"label"=>"Referent","frozen"=>!$GLOBALS["POSTA_SECURITY"]->IsUserInGroups(array("posta-spravce-r","posta-spravce-ruid", "posta-vedouci-odbor-r","posta-vedouci-odbor-ruid"))),   
+                   ),
+              "format"=>"ODBOR...'&nbsp;&nbsp;&nbsp;Referent:&nbsp;'...REFERENT",
+              "label"=>"Odbor:");
+
+  $FORM_CONFIG["schema"][] = array("elements"=>array(
+           array( 
+                "type"=>"radio", 
+                "name"=>"ODESLANA_POSTA", 
+                "value"=>"",
+    					  "options"=>array(
+    						 "Pouze příchozí pošta"=>"f", 
+    						 "Pouze odchozí pošta"=>"t",
+                 ),
+)),
+        "label"=>"Druhy pošty:");										 
+ $FORM_CONFIG["schema"][] = array("elements"=>array(
+            array( "type"=>"text", "name"=>"ODESL_PRIJMENI","size"=>"40","label"=>"Příjmení"),   
+            array( "type"=>"text", "name"=>"ODESL_JMENO","size"=>"20","label"=>"Jméno"),
+            array( "type"=>"text", "name"=>"ODESL_TITUL","size"=>"5","label"=>"Titul")),
+            "format"=>"ODESL_PRIJMENI...'&nbsp;&nbsp;&nbsp;Jméno:&nbsp;'...ODESL_JMENO...'&nbsp;&nbsp;&nbsp;Titul:&nbsp;'...ODESL_TITUL",
+            "label"=>"Příjmení/Firma:");		
+
+ $FORM_CONFIG["schema"][] = array("elements"=>array(
+            array( "type"=>"text", "name"=>"ODESL_ICO","size"=>"20","label"=>"IČO"),   
+            array( "type"=>"text", "name"=>"ODESL_ODD","size"=>"20","label"=>"Oddělení"),   
+            array( "type"=>"text", "name"=>"ODESL_OSOBA","size"=>"20","label"=>"Osoba")),
+            "format"=>"ODESL_ICO...'&nbsp;&nbsp;&nbsp;&nbsp;Oddělení&nbsp;'...ODESL_ODD...'&nbsp;&nbsp;&nbsp;Kont. osoba&nbsp;'...ODESL_OSOBA",
+              "visible"=>!$is_filter_simple,
+            "label"=>"IČO:");		
+
+            
+ $FORM_CONFIG["schema"][] = array("elements"=>array(
+            array( "type"=>"text", "name"=>"ODESL_ULICE","size"=>"40"),   
+            array( "type"=>"text", "name"=>"ODESL_CP","label"=>"č.p.")),
+            "format"=>"ODESL_ULICE...'&nbsp;&nbsp;&nbsp;č.p.&nbsp;'...ODESL_CP",
+              "visible"=>!$is_filter_simple,
+            "label"=>"Ulice:");		
+
+ $FORM_CONFIG["schema"][] = array("elements"=>array(
+            array( "type"=>"text", "name"=>"ODESL_PSC"),   
+            array( "type"=>"text", "name"=>"ODESL_POSTA","size"=>"40","label"=>"Odesílací pota")),
+            "format"=>"ODESL_PSC...'&nbsp;&nbsp;&nbsp;Pošta&nbsp;'...ODESL_POSTA",
+              "visible"=>!$is_filter_simple,
+            "label"=>"PSČ:");		
+  
+
+}
+
+// příchozí pošta
+//!$is_filter)
+If (($GLOBALS["ODESLANA_POSTA"]<>"t"))
+{
+  $rok=date('20y');
+  
+  // pokud je to první spis, tak není mono měnit č. jednací!!!
+  // kdyz je to edit, tak zkontrolovat, jestli na to uz neni odpoved....
+  If ($is_edit)
+  {  
+    $xxxx=new DB_POSTA;
+    $sql="SELECT id_puvodni FROM posta WHERE id_puvodni='".$GLOBALS["ID"]."'";
+    $xxxx->query($sql);
+    $pocet=$xxxx->Num_Rows();
+    $UzJeNaToOdpoved=false;
+    If ($pocet>0) {$UzJeNaToOdpoved=true;}    
+  }
+  
+  If (($GLOBALS["PODCISLO_SPISU"]=="0") or ($UzJeNaToOdpoved)) {$Frozen=true;} else
+  {$Frozen=!$GLOBALS["POSTA_SECURITY"]->IsUserInGroups(array("posta-spravce-r","posta-spravce-ruid", "posta-referent-r","posta-referent-ruid","posta-vedouci-odbor-r","posta-vedouci-odbor-ruid"));}
+  If (($GLOBALS["PODCISLO_SPISU"]=="0") and ($GLOBALS["CISLO_SPISU1"]==""))
+  {$Frozen=!$GLOBALS["POSTA_SECURITY"]->IsUserInGroups(array("posta-spravce-r","posta-spravce-ruid", "posta-referent-r","posta-referent-ruid","posta-vedouci-odbor-r","posta-vedouci-odbor-ruid"));}
+/*  
+  If ($GLOBALS["PODCISLO_SPISU"]>0)  
+  {
+    $FORM_CONFIG["schema"][] = array( "elements"=>array(
+              array( "type"=>"text", "name"=>"CISLO_SPISU1","frozen"=>$Frozen),
+              array( "type"=>"text", "name"=>"CISLO_SPISU2","frozen"=>$Frozen),
+              array( "type"=>"text", "name"=>"PODCISLO_SPISU","frozen"=>true)),
+              "visible"=>$is_info or $is_edit,										 
+              "format"=>"CISLO_SPISU1...'/'...CISLO_SPISU2...'/'...PODCISLO_SPISU",
+              "label"=>"Číslo jednací:");
+  }
+  else
+  {
+    $FORM_CONFIG["schema"][] = array( "elements"=>array(
+              array( "type"=>"text", "name"=>"CISLO_SPISU1","frozen"=>$Frozen,"label"=>"Jednací č. před lomítkem"),
+              array( "type"=>"text", "name"=>"CISLO_SPISU2","frozen"=>$Frozen,"label"=>"Jednací č. za lomítkem"),
+              array( "type"=>"hidden", "name"=>"PODCISLO_SPISU")),
+              "visible"=>$is_info or $is_edit,										 
+              "format"=>"CISLO_SPISU1...'/'...CISLO_SPISU2...' '...PODCISLO_SPISU",
+              "label"=>"Číslo jednací:");
+  }            
+*/
+
+
+If ($GLOBALS["CISLO_SPISU1"]<>"") 
+{
+  $text="Přeřadit písmenost k jinému ".$CONFIG["CISLO_SPISU_2P"];
+  $cislo_spisu=$GLOBALS["CISLO_SPISU1"]."/".$GLOBALS["CISLO_SPISU2"];
+  If ($GLOBALS["PODCISLO_SPISU"]<>"") {$cislo_spisu.='/'.$GLOBALS["PODCISLO_SPISU"];}
+  $cislo_spisu.='&nbsp;&nbsp;';}
+else
+{$text="Přiřadit k ".$CONFIG["CISLO_SPISU_2P"];
+//$url="&nbsp;&nbsp;&nbsp;<input class=\"button\" type=\"button\" value=\"Vytvořit spis ".$GLOBALS["EV_CISLO"]."/".$GLOBALS["ROK"]."\" onclick=\"".
+            "window.open('guide.php?G_NAME=posta_spisy', 'guide', 'height=600px,width=600px,scrollbars,resizable');\">";
+            }
+
+
+$FORM_CONFIG["schema"][] = array( 
+  "elements"=>array(
+      "type"=>"hidden", 
+      "name"=>"NEM_ID",
+    ),
+  "format"=>"'<span id=\"OBJEKT_KOD_SPAN\" style=\"font-weight:bold;\">".$cislo_spisu."</span><input class=\"button\" type=\"button\" value=\"$text\" onclick=\"".
+            "window.open('guide.php?G_NAME=posta_spisy', 'guide', 'height=600px,width=600px,scrollbars,resizable');\">$url'",
+  "visible"=>!$Frozen and !$is_info and !$is_filter and !$is_insert,
+  "label"=>$CONFIG["CISLO_SPISU"]
+);
+
+$FORM_CONFIG["schema"][] = array( 
+  "elements"=>array(
+      "type"=>"hidden", 
+      "name"=>"NEM_ID",
+    ),
+  "format"=>"'<span id=\"OBJEKT_KOD_SPAN\" style=\"font-weight:bold;\">".$cislo_spisu."</span>'",
+  "visible"=>$is_info or $Frozen,
+  "label"=>$CONFIG["CISLO_SPISU"]
+);
+
+
+  $FORM_CONFIG["schema"][] = array("elements"=>array(
+              array( "type"=>"hidden", "name"=>"CISLO_SPISU1","value"=>$GLOBALS["CISLO_SPISU1"]),
+              array( "type"=>"hidden", "name"=>"CISLO_SPISU2","value"=>$GLOBALS["CISLO_SPISU2"]),
+              array( "type"=>"hidden", "name"=>"ID_PUVODNI","value"=>$GLOBALS["ID_PUVODNI"]),
+              ));
+
+
+  $FORM_CONFIG["schema"][] = array("elements"=>array(
+              array( "type"=>"hidden", "name"=>"OLD_CISLO_SPISU1","value"=>$GLOBALS["CISLO_SPISU1"]),
+              array( "type"=>"hidden", "name"=>"OLD_CISLO_SPISU2","value"=>$GLOBALS["CISLO_SPISU2"]),
+              array( "type"=>"hidden", "name"=>"EV_CISLO")));
+
+  $FORM_CONFIG["schema"][] = array("elements"=>array(
+            array( "type"=>"select_odbor", "name"=>"ODBOR","frozen"=>!$GLOBALS["POSTA_SECURITY"]->IsUserInGroups(array("posta-spravce-r","posta-spravce-ruid", "posta-podatelna-r","posta-podatelna-ruid","posta-vedouci-odbor-r","posta-vedouci-odbor-ruid"))),
+            ),
+            "visible"=>$is_edit or $is_info or $is_insert ,										 
+            "label"=>"Odbor:");										 
+
+  $FORM_CONFIG["schema"][] = array("elements"=>array(
+            array( "type"=>"text", "name"=>"VEC", "width"=>10,"required"=>"true"),
+            array( "type"=>"hidden", "name"=>"ROK","value"=>$rok),
+            ),
+            "visible"=>$is_edit or $is_info or $is_insert ,										 
+            "label"=>"Věc:");										 
+
+  $FORM_CONFIG["schema"][] = array("elements"=>array(
+            array( "type"=>"hidden", "name"=>"ODESLANA_POSTA", "value"=>"f")),
+            "visible"=>$is_edit or $is_info or $is_insert ,										 
+);
+
+  $FORM_CONFIG["schema"][] = array("elements"=>array(
+            array( "type"=>"select_typ_posty", "name"=>"TYP_POSTY", "width"=>10,"insertnull"=>true,"frozen"=>!$GLOBALS["POSTA_SECURITY"]->IsUserInGroups(array("posta-spravce-r","posta-spravce-ruid","posta-vedouci-odbor-r","posta-vedouci-odbor-ruid")))),
+            "visible"=>$is_edit or $is_info or $is_insert ,										 
+            "label"=>"Druh pošty:");										 
+
+  $FORM_CONFIG["schema"][] = array("elements"=>array(
+            array( "type"=>"select_odes_typ", "name"=>"ODES_TYP", "width"=>10,"required"=>"true", add=>"onChange=\"ON_OFF_rozh()\"")),
+            "visible"=>$is_edit or $is_info or $is_insert ,										 
+            "label"=>"Odesílatel:");										 
+				
+        
+ $FORM_CONFIG["schema"][] = array("elements"=>array(
+            array( "type"=>"text", "name"=>"ODESL_PRIJMENI","size"=>"40","label"=>"Příjmení","required"=>true),   
+            array( "type"=>"text", "name"=>"ODESL_JMENO","size"=>"20","label"=>"Jméno"),
+            array( "type"=>"text", "name"=>"ODESL_TITUL","size"=>"5","label"=>"Titul")),
+            "format"=>"ODESL_PRIJMENI...'&nbsp;&nbsp;&nbsp;Jméno:&nbsp;'...ODESL_JMENO...'&nbsp;&nbsp;&nbsp;Titul:&nbsp;'...ODESL_TITUL",
+            "visible"=>$is_edit or $is_info or $is_insert,										 
+            "label"=>"Příjmení&nbsp;/&nbsp;Firma:");		
+
+ $FORM_CONFIG["schema"][] = array("elements"=>array(
+            array( "type"=>"text", "name"=>"ODESL_ICO","size"=>"20","label"=>"IČO"),   
+            array( "type"=>"text", "name"=>"ODESL_ODD","size"=>"20","label"=>"Oddělení"),   
+            array( "type"=>"text", "name"=>"ODESL_OSOBA","size"=>"20","label"=>"Osoba")),
+            "format"=>"ODESL_ICO...'&nbsp;<a href=\"javascript:Ares()\"><img src=\"./../../.././images/ares.gif\" alt=\"ARES\" border=\"0\"></a>&nbsp;&nbsp;&nbsp;Oddělení&nbsp;'...ODESL_ODD...'&nbsp;&nbsp;&nbsp;Kont. osoba&nbsp;'...ODESL_OSOBA",
+            "visible"=>$is_edit or $is_info or $is_insert,										 
+            "label"=>"IČO:");		
+
+ $FORM_CONFIG["schema"][] = array("elements"=>array(
+            array( "type"=>"text", "name"=>"ODESL_ULICE","size"=>"40","label"=>"Ulice"),   
+            array( "type"=>"text", "name"=>"ODESL_CP","label"=>"č.p.")),
+            "format"=>"...ODESL_ULICE...'&nbsp;&nbsp;&nbsp;č.p.&nbsp;'...ODESL_CP",
+            "visible"=>$is_edit or $is_info or $is_insert ,										 
+            "label"=>"Ulice:");		
+
+ $FORM_CONFIG["schema"][] = array("elements"=>array(
+            array( "type"=>"text", "name"=>"ODESL_PSC","label"=>"PSČ","required"=>true),   
+            array( "type"=>"text", "name"=>"ODESL_POSTA","size"=>"40","label"=>"Odesílací pota")),
+            "format"=>"ODESL_PSC...'&nbsp;&nbsp;&nbsp;Pošta&nbsp;'...ODESL_POSTA",
+            "visible"=>$is_edit or $is_info or $is_insert,										 
+            "label"=>"PSČ:");		
+
+ $FORM_CONFIG["schema"][] = array("elements"=>array(
+            array( "type"=>"text", "name"=>"ODESL_REKOMANDO","size"=>"20","label"=>"Rekomando"),   
+            array( "type"=>"text", "name"=>"ODESL_POSTAODESL","size"=>"15","label"=>"Odesílací pota")),
+            "format"=>"ODESL_REKOMANDO...'&nbsp;&nbsp;&nbsp;Odesílací pošta&nbsp;'...ODESL_POSTAODESL",
+            "visible"=>$is_edit or $is_info or $is_insert ,										 
+            "label"=>"Rekomando:");		
+
+ $FORM_CONFIG["schema"][] = array("elements"=>array(
+            array( "type"=>"datetime_db", "name"=>"DATUM_PODATELNA_PRIJETI","insertdatebutton"=>true,"required"=>true,"frozen"=>!$GLOBALS["POSTA_SECURITY"]->IsUserInGroups(array("posta-spravce-r","posta-spravce-ruid", "posta-podatelna-r","posta-podatelna-ruid")))),   
+            "visible"=>$is_edit or $is_info or $is_insert,										 
+            "label"=>"Datum přijetí:");		
+
+							 
+ $FORM_CONFIG["schema"][] = array("elements"=>array(
+            array( "type"=>"select_referent", "name"=>"REFERENT","insertnull"=>true,"label"=>"Referent","frozen"=>!$GLOBALS["POSTA_SECURITY"]->IsUserInGroups(array("posta-spravce-r","posta-spravce-ruid", "posta-vedouci-odbor-r","posta-vedouci-odbor-ruid"))),   
+            array( "type"=>"datetime_db", "name"=>"DATUM_REFERENT_PRIJETI","label"=>"Referent přečetl","insertdatebutton"=>true,"frozen"=>!$GLOBALS["POSTA_SECURITY"]->IsUserInGroups(array("posta-spravce-r","posta-spravce-ruid", "posta-vedouci-odbor-r","posta-vedouci-odbor-ruid", "posta-referent-r","posta-referent-ruid"))),   
+),
+            "format"=>"REFERENT...'&nbsp;&nbsp;&nbsp;Referent přečetl&nbsp;'...DATUM_REFERENT_PRIJETI",
+            "visible"=>$is_edit or $is_info or $is_insert,										 
+            "label"=>"Referent:");		
+
+ $FORM_CONFIG["schema"][] = array("elements"=>array(
+            array( "type"=>"text", "name"=>"LHUTA","size"=>"5","frozen"=>!$GLOBALS["POSTA_SECURITY"]->IsUserInGroups(array("posta-spravce-r","posta-spravce-ruid", "posta-vedouci-odbor-r","posta-vedouci-odbor-ruid"))),   
+            array( "type"=>"datetime_db", "name"=>"DATUM_VYRIZENI","label"=>"Datum vyřízení","insertdatebutton"=>true,"frozen"=>!$GLOBALS["POSTA_SECURITY"]->IsUserInGroups(array("posta-spravce-r","posta-spravce-ruid", "posta-vedouci-odbor-r","posta-vedouci-odbor-ruid", "posta-referent-r","posta-referent-ruid"))),
+            ),
+            "format"=>"LHUTA...'&nbsp;&nbsp;&nbsp;Datum vyřízení&nbsp;'...DATUM_VYRIZENI",
+            "visible"=>$is_edit or $is_info or $is_insert,										 
+            "label"=>"Lhůta k vyřízení:");		
+
+ $FORM_CONFIG["schema"][] = array("elements"=>array(
+            array( "type"=>"text", "name"=>"VYRIZENO","size"=>"60","frozen"=>!$GLOBALS["POSTA_SECURITY"]->IsUserInGroups(array("posta-spravce-r","posta-spravce-ruid", "posta-vedouci-odbor-r","posta-vedouci-odbor-ruid", "posta-referent-r","posta-referent-ruid"))),   
+),
+            "visible"=>$is_edit or $is_info or $is_insert,										 
+            "label"=>"Způsob vyřízení:");		
+
+            
+ $FORM_CONFIG["schema"][] = array("elements"=>array(
+            array( "type"=>"select_skartace", "name"=>"SKARTACE","size"=>"1", "width"=>"15","frozen"=>!$GLOBALS["POSTA_SECURITY"]->IsUserInGroups(array("posta-spravce-r","posta-spravce-ruid", "posta-vedouci-odbor-r","posta-vedouci-odbor-ruid", "posta-referent-r","posta-referent-ruid"))),   
+),
+            "visible"=>$is_edit or $is_info or $is_insert,										 
+            "label"=>"Ukládání písemností:");		
+                        
+            
+}
+
+
+//******************************************
+// Odpoved na dopis, je nutno zalozit SPIS!!!!
+//******************************************
+
+
+if ($GLOBALS["ODESLANA_POSTA"]=="t") 
+{
+  $podcislo=$GLOBALS["PODCISLO_SPISU"];
+  If (($is_new) or ($is_insert)) 
+  { 
+    $podcislo="";
+    IF (!$GLOBALS["CISLO_SPISU1"]) 
+    {
+      $GLOBALS["CISLO_SPISU1"]=$GLOBALS["EV_CISLO"];
+      $GLOBALS["CISLO_SPISU2"]=$GLOBALS["ROK"];
+    } 
+  }
+  
+  $GLOBALS["EDITOVANE_ID"]=$GLOBALS["EDIT_ID"];
+
+  
+  If ($is_insert) {$Frozen=!$GLOBALS["POSTA_SECURITY"]->IsUserInGroups(array("posta-spravce-r","posta-spravce-ruid", "posta-referent-r","posta-referent-ruid","posta-vedouci-odbor-r","posta-vedouci-odbor-ruid"));}
+  else
+    {$Frozen=true;} 
+
+  If (($is_edit) and ($GLOBALS["CISLO_SPISU1"]=="") and ($GLOBALS["CISLO_SPISU2"]==""))
+  {$Frozen=!$GLOBALS["POSTA_SECURITY"]->IsUserInGroups(array("posta-spravce-r","posta-spravce-ruid", "posta-referent-r","posta-referent-ruid","posta-vedouci-odbor-r","posta-vedouci-odbor-ruid"));}
+  
+//  echo "SPIS: ".$GLOBALS["CISLO_SPISU"];
+    $rok=Date('20y');
+//echo "Podcislo je $podcislo X";
+If ($GLOBALS["CISLO_SPISU1"]<>"") 
+{
+  $text="Přeřadit písmenost k jinému ".$CONFIG["CISLO_SPISU_2P"];
+  $cislo_spisu=$GLOBALS["CISLO_SPISU1"]."/".$GLOBALS["CISLO_SPISU2"];
+  If ($GLOBALS["PODCISLO_SPISU"]<>"") {$cislo_spisu.='/'.$GLOBALS["PODCISLO_SPISU"];}
+  $cislo_spisu.='&nbsp;&nbsp;';
+}
+else
+{$text="Přiřadit k ".$CONFIG["CISLO_SPISU_2P"];
+//$url="&nbsp;&nbsp;&nbsp;<input class=\"button\" type=\"button\" value=\"Vytvořit spis ".$GLOBALS["EV_CISLO"]."/".$GLOBALS["ROK"]."\" onclick=\"".
+            "window.open('guide.php?G_NAME=posta_spisy', 'guide', 'height=600px,width=600px,scrollbars,resizable');\">$url";
+            }
+
+
+$FORM_CONFIG["schema"][] = array( 
+  "elements"=>array(
+      "type"=>"hidden", 
+      "name"=>"NEM_ID",
+    ),
+  "format"=>"'<span id=\"OBJEKT_KOD_SPAN\" style=\"font-weight:bold;\">".$cislo_spisu."</span><input class=\"button\" type=\"button\" value=\"$text\" onclick=\"".
+            "window.open('guide.php?G_NAME=posta_spisy', 'guide', 'height=600px,width=600px,scrollbars');\">'",
+  "visible"=>!$Frozen and !$is_info and !$is_filter and !$is_insert,
+  "label"=>$CONFIG["CISLO_SPISU"]
+);
+
+$FORM_CONFIG["schema"][] = array( 
+  "elements"=>array(
+      "type"=>"hidden", 
+      "name"=>"NEM_ID",
+    ),
+  "format"=>"'<span id=\"OBJEKT_KOD_SPAN\" style=\"font-weight:bold;\">".$cislo_spisu."</span>'",
+  "visible"=>$is_info or $Frozen,
+  "label"=>$CONFIG["CISLO_SPISU"]
+);
+
+  $FORM_CONFIG["schema"][] = array("elements"=>array(
+              array( "type"=>"hidden", "name"=>"CISLO_SPISU1","value"=>$GLOBALS["CISLO_SPISU1"]),
+              array( "type"=>"hidden", "name"=>"CISLO_SPISU2","value"=>$GLOBALS["CISLO_SPISU2"]),
+              array( "type"=>"hidden", "name"=>"ID_PUVODNI","value"=>$GLOBALS["ID_PUVODNI"]),
+              ));
+  
+    $FORM_CONFIG["schema"][] = array( "elements"=>array(
+              array( "type"=>"hidden", "name"=>"OLD_CISLO_SPISU1","value"=>$GLOBALS["CISLO_SPISU1"]),
+              array( "type"=>"hidden", "name"=>"OLD_CISLO_SPISU2","value"=>$GLOBALS["CISLO_SPISU2"]),
+            ),
+            "label"=>"");
+  
+
+
+       $FORM_CONFIG["schema"][] = array("elements"=>array(
+            array( "type"=>"hidden", "name"=>"EV_CISLO"),
+            array( "type"=>"hidden", "name"=>"ODESLANA_POSTA","value"=>'t'),
+            array( "type"=>"hidden", "name"=>"REFERENT","value"=>$GLOBALS["REFERENT"]),
+            array( "type"=>"hidden", "name"=>"ODBOR","value"=>$GLOBALS["ODBOR"]),
+            array( "type"=>"hidden", "name"=>"EDITOVANE_ID","value"=>$GLOBALS["EDITOVANE_ID"]),
+             array( "type"=>"hidden", "name"=>"ROK", "value"=>$rok),
+            ),
+            "format"=>"ODBOR",
+            "visible"=>$is_edit or $is_info or $is_insert or $is_new,	
+            "label"=>"");
+            										 
+  $FORM_CONFIG["schema"][] = array("elements"=>array(
+            array( "type"=>"text", "name"=>"VEC", "width"=>10,"required"=>"true")),
+            "visible"=>$is_edit or $is_info or $is_insert or $is_new,	
+            "label"=>"Věc:");										 
+
+  $FORM_CONFIG["schema"][] = array("elements"=>array(
+            array( "type"=>"select_typ_posty", "name"=>"TYP_POSTY", "width"=>10,"required"=>"true")),
+            "visible"=>$is_edit or $is_info or $is_insert or $is_new,	
+            "label"=>"Druh pošty:");										 
+
+  $FORM_CONFIG["schema"][] = array("elements"=>array(
+            array( "type"=>"select_odes_typ", "name"=>"ODES_TYP", "width"=>10,"required"=>"true",add=>"onChange=\"ON_OFF_rozh()\"")),
+            "visible"=>$is_edit or $is_info or $is_insert or $is_new,	
+            "label"=>"Odesílatel:");										 
+				
+        
+ $FORM_CONFIG["schema"][] = array("elements"=>array(
+            array( "type"=>"text", "name"=>"ODESL_PRIJMENI","size"=>"40","label"=>"Příjmení","required"=>true),   
+            array( "type"=>"text", "name"=>"ODESL_JMENO","size"=>"20","label"=>"Jméno"),
+            array( "type"=>"text", "name"=>"ODESL_TITUL","size"=>"5","label"=>"Titul")),
+            "format"=>"ODESL_PRIJMENI...'&nbsp;&nbsp;&nbsp;Jméno/IČO:&nbsp;'...ODESL_JMENO...'&nbsp;&nbsp;&nbsp;Titul:&nbsp;'...ODESL_TITUL",
+            "visible"=>$is_edit or $is_info or $is_insert or $is_new,	
+            "label"=>"Příjmení/Firma:");		
+
+ $FORM_CONFIG["schema"][] = array("elements"=>array(
+            array( "type"=>"text", "name"=>"ODESL_ICO","size"=>"20","label"=>"IČO"),   
+            array( "type"=>"text", "name"=>"ODESL_ODD","size"=>"20","label"=>"Oddělení"),   
+            array( "type"=>"text", "name"=>"ODESL_OSOBA","size"=>"20","label"=>"Osoba")),
+            "format"=>"ODESL_ICO...'&nbsp;<a href=\"javascript:Ares()\"><img src=\"./../../.././images/ares.gif\" alt=\"ARES\" border=\"0\"></a>&nbsp;&nbsp;&nbsp;Oddělení&nbsp;'...ODESL_ODD...'&nbsp;&nbsp;&nbsp;Kont. osoba&nbsp;'...ODESL_OSOBA",
+            "visible"=>$is_edit or $is_info or $is_insert or $is_new,										 
+            "label"=>"IČO:");		
+
+            
+ $FORM_CONFIG["schema"][] = array("elements"=>array(
+            array( "type"=>"text", "name"=>"ODESL_ULICE","size"=>"40"),   
+            array( "type"=>"text", "name"=>"ODESL_CP","label"=>"č.p.")),
+            "format"=>"ODESL_ULICE...'&nbsp;&nbsp;&nbsp;č.p.&nbsp;'...ODESL_CP",
+            "visible"=>$is_edit or $is_info or $is_insert or $is_new,	
+            "label"=>"Ulice:");		
+
+ $FORM_CONFIG["schema"][] = array("elements"=>array(
+            array( "type"=>"text", "name"=>"ODESL_PSC","required"=>true),   
+            array( "type"=>"text", "name"=>"ODESL_POSTA","size"=>"40","label"=>"Odesílací pota")),
+            "format"=>"ODESL_PSC...'&nbsp;&nbsp;&nbsp;Pošta&nbsp;'...ODESL_POSTA",
+            "visible"=>$is_edit or $is_info or $is_insert or $is_new,	
+            "label"=>"PSČ:");		
+
+ $FORM_CONFIG["schema"][] = array("elements"=>array(
+            array( "type"=>"checkbox", "name"=>"DOPORUCENE","value"=>"A"),   
+            array( "type"=>"checkbox", "name"=>"DORUCENKA","value"=>"A","label"=>"Doručenka"),   
+            array( "type"=>"checkbox", "name"=>"VLASTNICH_RUKOU","value"=>"A","label"=>"Do vlastních rukou")),
+            "format"=>"DOPORUCENE...'&nbsp;&nbsp;&nbsp;Doručenka&nbsp;'...DORUCENKA...'&nbsp;&nbsp;&nbsp;Do vlastních rukou&nbsp;'...VLASTNICH_RUKOU",
+            "visible"=>$is_edit or $is_info or $is_insert or $is_new,	
+            "label"=>"Doporučeně:");		
+If (($is_insert) or ($is_new)) Unset($GLOBALS["DATUM_PODATELNA_PRIJETI"]);
+ $FORM_CONFIG["schema"][] = array("elements"=>array(
+            array( "type"=>"datetime_db", "name"=>"DATUM_PODATELNA_PRIJETI","required"=>true,"insertdatebutton"=>true),
+            array( "type"=>"datetime_db", "name"=>"DATUM_DORUCENI","insertdatebutton"=>true,"label"=>"Datum doručení")),
+            "format"=>"DATUM_PODATELNA_PRIJETI...'&nbsp;&nbsp;&nbsp;Datum doručení&nbsp;'...DATUM_DORUCENI",
+            "visible"=>$is_edit or $is_info or $is_insert or $is_new,	
+            "label"=>"Datum odeslání:");		
+
+ $FORM_CONFIG["schema"][] = array("elements"=>array(
+            array( "type"=>"select_skartace", "name"=>"SKARTACE","size"=>"1", "width"=>"15","frozen"=>!$GLOBALS["POSTA_SECURITY"]->IsUserInGroups(array("posta-spravce-r","posta-spravce-ruid", "posta-vedouci-odbor-r","posta-vedouci-odbor-ruid", "posta-referent-r","posta-referent-ruid"))),   
+),
+            "visible"=>$is_new or $is_insert or $is_info or $is_edit,										 
+            "label"=>"Ukládání písemností:");		
+            
+
+  $prijemci=$GLOBALS["DALSI_PRIJEMCI"];
+  If ($prijemci<>"")
+  {
+    $prijemci=substr($prijemci,0,-1);
+    $sql='SELECT * FROM cis_posta_prijemci WHERE id IN ('.$prijemci.')';
+    $q->query($sql);
+    $i=1;
+    while($q->next_record())
+    {  
+      $prijmeni=$q->Record["ODESL_PRIJMENI"];
+      $jmeno=$q->Record["ODESL_JMENO"];
+      $psc=$q->Record["ODESL_PSC"];
+      $posta=$q->Record["ODESL_POSTA"];
+      $id=$q->Record["ID"];
+      //      die ($prijmeni);
+      $nazevpolozky="DALSI_PRIJEMCI{".$i."}";
+      $FORM_CONFIG["schema"][] = array("elements"=>array(
+            array( "type"=>"checkbox","name"=>"DALSI_PRIJEMCI","multiple"=>1,"array_val"=>"$id","add"=>"CHECKED")),
+            "format"=>"DALSI_PRIJEMCI...'&nbsp;&nbsp;$prijmeni $jmeno,&nbsp;$psc&nbsp;$posta'",
+            "visible"=>$is_insert or $is_new,	
+            "label"=>"Další příjemci:");
+       $i++;		
+    } 
+
+  }
+}
+
+
+
+include(FileUp2(".admin/el/urednik_id_zmena_dat_cas.inc"));
+
+
+?>

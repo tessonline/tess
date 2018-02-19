@@ -1,0 +1,13 @@
+update posta set status=5 WHERE 
+(stav<>2 or stav is null) AND (stornovano is null or stornovano like '') and (skartovano is null or skartovano like '')  
+ AND odeslana_posta='f' AND datum_vyrizeni IS NULL AND  DATUM_PODATELNA_PRIJETI+CAST( LHUTA-5 || ' days' AS interval ) < CURRENT_DATE  AND  DATUM_PODATELNA_PRIJETI+CAST( LHUTA || ' days' AS interval ) >= CURRENT_DATE;
+
+update posta set status=6 WHERE 
+(stav<>2 or stav is null) AND (stornovano is null or stornovano like '') and (skartovano is null or skartovano like '')  
+AND odeslana_posta='f' AND (datum_vyrizeni IS NULL) AND DATUM_PODATELNA_PRIJETI+CAST( LHUTA || ' days' AS interval ) < CURRENT_DATE;
+
+
+delete from posta_interface_log where to_timestamp(DATUM,'FMDD.FMMM.YYYY HH24:MI')+CAST( 30 || ' days' AS interval ) < CURRENT_DATE;
+
+
+vacuum posta_interface_log;

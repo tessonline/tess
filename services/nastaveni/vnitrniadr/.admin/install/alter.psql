@@ -1,0 +1,7 @@
+-- Table: posta_vnitrni_adresati_nastaveni
+-- Tabulka obsahuje zaznamy o vnitrnich adresatech dene skupiny
+
+ALTER TABLE posta_nastaveni_vnitrni_adresati ADD OWNER_ID int4;
+ALTER TABLE posta_nastaveni_vnitrni_adresati ADD LAST_USER_ID int4;
+ALTER TABLE posta_nastaveni_vnitrni_adresati ADD LAST_DATE date;
+ALTER TABLE posta_nastaveni_vnitrni_adresati ADD LAST_TIME varchar(10);

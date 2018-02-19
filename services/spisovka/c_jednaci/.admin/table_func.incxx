@@ -1,0 +1,193 @@
+<?php
+Function ChangeClassBarva($t)
+{
+
+$datumpodatelnaprijeti=$GLOBALS["DATUM_PODATELNA_PRIJETI"];
+$datumspravcerijeti=$GLOBALS["DATUM_SPRAVCE_PRIJETI"];
+$datumreferentrijeti=$GLOBALS["DATUM_REFERENT_PRIJETI"];
+$datumvyrizeni=$GLOBALS["DATUM_VYRIZENI"];
+$vyrizeno=$GLOBALS["VYRIZENO"];
+$referent=$GLOBALS["REFERENT"];
+$lhuta=$GLOBALS["LHUTA"];
+If ($lhuta==0) {$lhuta=99999999999999;}
+$ODESLANA=$GLOBALS["ODESLANA_POSTA"];
+
+$color="";
+  
+If ($ODESLANA=="f") 
+{
+$color="_black";
+  
+  If ($ODESLANA):
+      $color = "_violet";
+    endif;
+  
+  If ($datumpodatelnaprijeti<>""):
+      $color = "_green";
+    endif;
+  
+  If ($referent<>""):
+      $color = "_blue";
+    endif;
+  
+  If ($datumreferentrijeti<>""):
+      $color = "_black";
+    endif;
+  
+  If ($datumvyrizeni<>""):
+      $color = "_gray";
+    endif;
+  
+    $date1 =strtotime (czdate2eng($datumpodatelnaprijeti));
+    $dif = floor((strtotime("now") - $date1)/86400);
+    if ($dif>$lhuta && !$GLOBALS["DATUM_VYRIZENI"] && $GLOBALS["DATUM_REFERENT_PRIJETI"]): $color = "_red2"; endif;
+}
+else
+{
+// barvy pro odeslanou postu
+      $color = "_brown";
+  If (($GLOBALS["DATUM_DORUCENI"]<>"") or ($GLOBALS["DORUCENKA"]<>"1")):
+      $color = "_gray";
+    endif;
+}
+$color='_black';  
+  static $i=1;
+  if ($i):
+    $t->classname = "brow".$color;
+    $i = 0;
+  else:
+    $t->classname = "browdark".$color;
+    $i = 1;
+  endif;
+
+
+
+// tak vyhledame, pokud pocislo chybi...
+If (!(($GLOBALS["PODCISLO_SPISU"]=='') or ($GLOBALS["PODCISLO_SPISU"]=='0')))
+{
+  $GLOBALS["PUVODNI_PODCISLO"]=$GLOBALS["PUVODNI_PODCISLO"]+1;
+  If ($GLOBALS["PUVODNI_PODCISLO"]<>$GLOBALS["PODCISLO_SPISU"])
+    {
+    $b=new DB_POSTA;
+    $sql="select * from posta_h where cislo_spisu1=".$GLOBALS["CISLO_SPISU1"]." and cislo_spisu2=".$GLOBALS["CISLO_SPISU2"]." and podcislo_spisu=".$GLOBALS["PUVODNI_PODCISLO"]."";
+    $b->query($sql);
+    $b->next_Record();
+    $idcko=$b->Record["ID"];
+    If ($idcko<>'') { 
+      $sql="select * from posta where id=".$idcko;
+      $b->query($sql);
+      $b->next_Record();
+      If ($b->Record["ID"]<>"") {$spis=" bylo přesunuto pod číslo jednací ".$b->Record["CISLO_SPISU1"]."/".$b->Record["CISLO_SPISU2"].""; If (($b->Record["PODCISLO_SPISU"]<>'') or ($b->Record["PODCISLO_SPISU"]<>'0')) {"/".$b->Record["PODCISLO_SPISU"];}}
+      else {$spis=" bylo smazáno ";}
+    }
+      else {$spis=" bylo smazáno ";}
+        
+    echo"<tr class=brow>
+    <td colspan=8 class=brow_greenout>&nbsp;&nbsp;&nbsp;<i><b>Číslo jednací ".$GLOBALS["CISLO_SPISU1"]."/".$GLOBALS["CISLO_SPISU2"]."/".$GLOBALS["PUVODNI_PODCISLO"].$spis."</i></b> </td></tr>";//    $GLOBALS["VEC"]='NEUKAZOVAT';
+  $GLOBALS["PUVODNI_PODCISLO"]=$GLOBALS["PUVODNI_PODCISLO"]+1;
+    }
+}  
+}
+
+
+Function Ukaz($STAV)
+{
+If ($STAV=='t') 
+{$res="<img src=\"".FileUp2("images/left.gif")."\" alt=\"Odchozí pošta\">";}
+else {$res="<img src=\"".FileUp2("images/right.gif")."\" alt=\"Příchozí pošta\">";} 
+
+return $res;
+}
+
+Function Ukaz2($UZIVATEL)
+{
+switch ($UZIVATEL) {
+  case "P": 
+       $soubor='images/fabrika.gif';$text='Právnická osoba';
+       break;
+  case "F": 
+       $soubor='images/house.gif';$text='Fyzická osoba-podnikatel';
+       break;
+  case "O": 
+       $soubor='images/people.gif';$text='Fyzická osoba-občan';
+       break;
+  case "A": 
+       $soubor='images/people_no.gif';$text='Anonym';
+       break;
+  }
+$res="<img src=\"".FileUp2($soubor)."\" alt=\"$text\">";
+return $res;  
+  
+}
+Function UkazOdpoved($id)
+{
+  If ($GLOBALS["ODESLANA_POSTA"]<>"t") {
+    $res="<a href=\"javascript:newfrom(".$id.")\"><img src=\"".FileUp2('images/nova_z1.gif')."\" border=\"0\" alt=\"Odpovědět\"></a>";
+  }
+  else
+    {$res="";}
+  return $res;
+}
+
+Function DalsiPrijemci2($id,$prijemci)
+{
+  If ($GLOBALS["ODESLANA_POSTA"]<>"t") {
+
+  If ($prijemci=="") 
+  {$res="<a href=\"brow.php?ID=(".$id.")\"><img src=\"".FileUp2('images/group_people_gr2.gif')."\" border=\"0\" alt=\"Přidat další příjemce\"></a>";}
+      else
+    {
+    $pocetprijemcu=count(explode(",",$prijemci));
+    $res="<a href=\"brow.php?ID=(".$id.")\"><img src=\"".FileUp2('images/group_people.gif')."\" border=\"0\" alt=\"Počet dalších příjemců: $pocetprijemcu \"></a>";}
+  }
+  else
+    {$res="";}
+//  $res=$GLOBALS["ID"];
+//  $res=$GLOBALS["DALSI_PRIJEMCI"];
+  
+  return $res;
+}
+
+
+Function FormatSpis($id)
+{
+$res='&nbsp;';
+$GLOBALS["VYSLEDNA_ID"].=$id.",";
+If (($GLOBALS[PODCISLO_SPISU]<>0) and ($GLOBALS[CISLO_SPISU1]<>'')) 
+{$res='<b>'.$GLOBALS[CISLO_SPISU1]."/".$GLOBALS[CISLO_SPISU2]."/".$GLOBALS[PODCISLO_SPISU]."</b>";}
+//{$res='<a href="spis.php?id='.$id.'&cislo_spisu1='.$GLOBALS[CISLO_SPISU1].'&cislo_spisu2='.$GLOBALS[CISLO_SPISU2].'"><img src='.FileUp2("images/papers_full.gif").' border=0 alt="Spis"></a> <b>'.$GLOBALS[CISLO_SPISU1]."/".$GLOBALS[CISLO_SPISU2]."/".$GLOBALS[PODCISLO_SPISU]."</b>";}
+If (($GLOBALS[PODCISLO_SPISU]==0) and ($GLOBALS[CISLO_SPISU1]<>''))
+{$res='<b>'.$GLOBALS[CISLO_SPISU1]."/".$GLOBALS[CISLO_SPISU2]."</b>";}
+//<img src='.FileUp2("images/papers_full.gif").' border=0 alt="Spis">
+//{$res='<a href="spis.php?id='.$id.'&cislo_spisu1='.$GLOBALS[CISLO_SPISU1].'&cislo_spisu2='.$GLOBALS[CISLO_SPISU2].'"><img src='.FileUp2("images/papers_full.gif").' border=0 alt="Spis"></a> <b>'.$GLOBALS[CISLO_SPISU1]."/".$GLOBALS[CISLO_SPISU2]."</b>";}
+
+return $res;
+}
+
+Function UkazJmeno()
+{
+  If ($GLOBALS["ODES_TYP"]=="A") {$res='anonym';}
+  If ($GLOBALS["ODES_TYP"]=="P") {$res=$GLOBALS["ODESL_PRIJMENI"].', '; If ($GLOBALS["ODESL_ICO"]<>'') {$res.='IČO <a class="pages" href="http://wwwinfo.mfcr.cz/ares/ares_fr.html.cz?JS=1&jazyk=cz&cestina=cestina&ico='.$GLOBALS["ODESL_ICO"].'" target="ico">'.$GLOBALS["ODESL_ICO"].'</a>, ';} $res.=$GLOBALS["ODESL_ULICE"].' '.$GLOBALS["ODESL_CP"].', '.$GLOBALS["ODESL_PSC"].' '.$GLOBALS["ODESL_MESTO"];}
+  else
+  {
+  $res=$GLOBALS["ODESL_PRIJMENI"].' '.$GLOBALS["ODESL_JMENO"].', '; {$res.='IČO <a class="pages" href="http://wwwinfo.mfcr.cz/ares/ares_fr.html.cz?JS=1&jazyk=cz&cestina=cestina&ico='.$GLOBALS["ODESL_ICO"].'" target="ico">'.$GLOBALS["ODESL_ICO"].'</a>, ';} $res.=$GLOBALS["ODESL_ULICE"].' '.$GLOBALS["ODESL_CP"].', '.$GLOBALS["ODESL_PSC"].' '.$GLOBALS["ODESL_MESTO"];}
+//  If ($GLOBALS["ODES_TYP"]=="O") {$res=$GLOBALS["PRIJMENI"].' '.$GLOBALS["JMENO"].', '.$GLOBALS["ULICE"].' '.$GLOBALS["CP"].', '.$GLOBALS["PSC"].' '.$GLOBALS["MESTO"];}
+  return $res;
+}
+
+Function DatumPrijeti($datum)
+{
+  $res=substr($datum,0,strpos($datum," "));
+  return $res;
+}
+
+echo "<script>\n";
+echo "<!--\n";
+echo "  function newfrom(id) {\n";
+echo "  newwindow = window.open('edit.php?insertfrom&EDIT_ID='+id, 'agenda_nova', 'height=500,width=790,scrollbars,resizable');\n";
+echo "  newwindow.focus();\n";
+echo "  }\n";
+echo "//-->\n";
+echo "</script>\n";
+
+?>

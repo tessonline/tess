@@ -1,0 +1,49 @@
+CREATE TABLE posta_adresati (
+    id serial,
+    odes_typ character varying(1) NOT NULL,
+    odesl_adrkod integer DEFAULT 0 NOT NULL,
+    odesl_titul character varying(20),
+    odesl_prijmeni character varying(150),
+    odesl_jmeno character varying(100),
+    odesl_odd character varying(150),
+    odesl_osoba character varying(100),
+    odesl_ulice character varying(100),
+    odesl_cp character varying(15),
+    odesl_cor character varying(15),
+    odesl_ico character varying(10),
+    odesl_psc character varying(6),
+    odesl_posta character varying(100),
+    odesl_rc character varying(11),
+    odesl_email character varying(255),
+    odesl_datschranka character varying(20),
+    odesl_datnar date,
+    frozen character varying(1)
+);
+
+
+CREATE TABLE posta_adresati_h (
+    id int,
+    odes_typ character varying(1) NOT NULL,
+    odesl_adrkod integer DEFAULT 0 NOT NULL,
+    odesl_titul character varying(20),
+    odesl_prijmeni character varying(100),
+    odesl_jmeno character varying(100),
+    odesl_odd character varying(50),
+    odesl_osoba character varying(100),
+    odesl_ulice character varying(100),
+    odesl_cp character varying(15),
+    odesl_cor character varying(15),
+    odesl_ico character varying(10),
+    odesl_psc character varying(6),
+    odesl_posta character varying(100),
+    odesl_rc character varying(11),
+    odesl_email character varying(255),
+    odesl_datschranka character varying(20),
+    odesl_datnar date,
+    frozen character varying(1),
+    id_h serial
+);
+
+
+alter table posta add adresat_id int;
+alter table posta_h add adresat_id int;

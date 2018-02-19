@@ -1,0 +1,48 @@
+-- konfigurace jde nastavit pro ka�dou datab�zi, tzn. v ka�d� datab�zi, kde chceme pou��vat slovn�ky, je t�eba p��slu�nou novou konfiguraci vytvo�it
+CREATE TEXT SEARCH DICTIONARY cspell (template=ispell, dictfile = czech, afffile=czech, stopwords=czech);
+CREATE TEXT SEARCH CONFIGURATION cs (copy=english);
+ALTER TEXT SEARCH CONFIGURATION cs ALTER MAPPING FOR word, asciiword WITH cspell, simple;
+
+-- pridani sloupce s fulltextem
+ALTER TABLE posta ADD COLUMN tsv tsvector;
+
+-- create trigger
+//DROP TRIGGER posta_update ON posta;
+//CREATE TRIGGER posta_update BEFORE INSERT OR UPDATE ON posta FOR EACH ROW EXECUTE PROCEDURE
+//tsvector_update_trigger(tsv, 'public.cs', odesl_titul, odesl_prijmeni, odesl_jmeno, odesl_odd, odesl_osoba, odesl_ulice, odesl_cp, odesl_cor, odesl_ico, odesl_psc, odesl_posta, odesl_rc, odesl_email, odesl_datschranka,
+//vec,vyrizeno,odesl_osloveni,odesl_subj,odesl_email,odesl_body,odesl_datschranka,odesl_stat,odesl_titul_za,odesl_jine, datum_podatelna_prijeti::text);
+
+
+DROP TRIGGER posta_update ON posta;
+CREATE TRIGGER posta_update BEFORE INSERT OR UPDATE ON posta FOR EACH row execute procedure 
+posta_fulltext();
+   
+create or REPLACE FUNCTION posta_fulltext() RETURNS trigger
+    LANGUAGE plpgsql AS $$
+    declare stop_words text;
+    declare datum_prijeti text;
+begin
+	datum_prijeti = to_char(new.datum_podatelna_prijeti,'DD.MM.YYYY'); 
+    stop_words = concat(new.odesl_titul,' ',new.odesl_prijmeni,' ',new.odesl_jmeno,' ',new.odesl_odd,' ', new.odesl_osoba,' ', new.odesl_ulice,' ', new.odesl_cp,' ', new.odesl_cor,' ', new.odesl_ico,' ', 
+    new.odesl_psc,' ', new.odesl_posta,' ', new.odesl_rc,' ', new.odesl_email,' ', new.odesl_datschranka,' ', new.vec,' ', new.vyrizeno,' ', new.odesl_osloveni,' ', new.odesl_subj,' ', new.odesl_email,' ', 
+    new.odesl_body,' ', new.odesl_datschranka,' ', new.odesl_stat,' ', new.odesl_titul_za,' ', new.odesl_jine,' ', datum_prijeti);
+	new.tsv = to_tsvector('simple',stop_words);
+    return new;
+END;$$ ;
+
+--,odesl_datnar,datum_podatelna_prijeti
+
+-- prepocitani hodnot sloupce tsv zaridi trigger
+UPDATE posta SET tsv = '';
+
+-- vytvoreni indexu
+CREATE INDEX posta_fulltext_idx_tsv ON posta USING gin(tsv);
+
+-- example
+SELECT ts_rank(tsv, q.q) AS rank, p.*
+  FROM posta p, (SELECT to_tsquery('cs','jan:* & test:*') as q) q
+  WHERE p.tsv @@ q.q
+  ORDER BY rank DESC;
+
+
+

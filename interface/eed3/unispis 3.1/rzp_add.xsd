@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="urn:cz:isvs:rzp:schemas:erms:v1" elementFormDefault="qualified" xmlns="urn:cz:isvs:rzp:schemas:erms:v1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:bp="http://nsess.public.cz/erms/v_01_01" version="1.0" id="rzp_add">
+  <xs:annotation>
+    <xs:documentation>Doplňkové volitelné funkce pro komunikaci mezi 
+ESS a AIS v rámci vedení spisové služby
+
+Verze 1.0</xs:documentation>
+  </xs:annotation>
+  <xs:import schemaLocation="ermsTypes.xsd" namespace="http://nsess.public.cz/erms/v_01_01"/>
+  <xs:element name="FunkcniMistaRequest">
+    <xs:annotation>
+      <xs:documentation xml:lang="cs">Požadavek na zjištění funkčních míst konkrétního uživatele</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Autorizace" type="bp:tAutorizace"/>
+      </xs:sequence>
+      <xs:attribute name="Zdroj" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="CS">Identifikuje Zdroj volání - volajícího.
+Při propojení ESSS a více AIS je nutné odlišit, do službu volá. 
+Toto je promární identifikace volajícího systému.
+Pokud jsou XML data podepsána, potom podpis slouží jako další kontrola k této identifikaci volajícího.</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="Cil" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="CS">Identifikuje cíl volání - volaného. 
+Volaná strana je již jednoznačně určena svou URL.
+Tento údaj slouží pro dodatečnou kontrolu, zda není omylem volána jiná instalace webové služby a tím i jiný systém.
+K omylům může dojít především mezi ostrou, provozní instalací a testovací.
+Identifikace volajícího má zabránit záměně např. testovací a ostré instalace.</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FunkcniMistaResponse">
+    <xs:annotation>
+      <xs:documentation xml:lang="cs">Odpověď obsahuje seznam funkčních míst uživatele. Hlavní funkční místo by mělo 
+být na první pozici seznamu.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="FunkcniMista">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="FunkcniMisto" maxOccurs="unbounded" minOccurs="0" type="FunkcniMistoType"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="OperaceStatus" type="bp:tOperaceStatus"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="FunkcniMistoType">
+    <xs:annotation>
+      <xs:documentation xml:lang="cs">Funkční místo uživatele v organizačním schématu</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="FunkcniMistoNazev">
+        <xs:annotation>
+          <xs:documentation xml:lang="cs">Zobrazitelný název funkčního místa</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:maxLength value="128"/>
+            <xs:minLength value="1"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="FunkcniMistoKod">
+        <xs:annotation>
+          <xs:documentation xml:lang="cs">Jednoznačný identifikátor funkčního místa v organizaci</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:maxLength value="50"/>
+            <xs:minLength value="1"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

@@ -1,0 +1,40 @@
+1. vypnout trigger
+drop trigger posta_history on posta;
+
+2. Naplneni TEXT_CJ!
+
+1a. uprava_db.sq
+
+1b. historie_zaznamy.sq
+
+
+2. naplneni main_doc = 1 
+spustit main_doc.sq
+
+
+
+3. prevest spisy do tabulky posta_spis 
+spustit posta_spisy.php - spoustet po jednotlivych letech, je to o hodne rychlejsi!
+
+
+4. prevest cislo_jednaci do sloupce cislo_spisu
+cislo_spisu.sq
+
+5. migrace vnitrni posty 
+spustit vnitrni_posta.php
+
+6. migrace oddeleni do odboru 
+spustit oddeleni.sq
+
+7. prenastaveni triggeru 
+spustit function.sq
+
+8. prepocitani statusu (aspon rok 2015)
+
+9. pustit historizaci
+CREATE TRIGGER posta_history BEFORE UPDATE ON posta FOR EACH ROW EXECUTE PROCEDURE posta_history(); 
+
+
+
+mit moznost zalozit spis nad jednim cj
+do table pridat sloupec s cislem spisu (a nazvem)

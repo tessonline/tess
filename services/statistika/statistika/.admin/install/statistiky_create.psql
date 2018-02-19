@@ -1,0 +1,33 @@
+create view posta_w_statistika_skartace AS
+  select id, text as nazev ,(select count(*) from posta_view_spisy s where c.id=s.skartace) as pocet_uziti from cis_posta_skartace c ;
+
+create view posta_w_statistika_typ_posty AS
+  select id, nazev,(select count(*) from posta_view_spisy s where c.id=s.typ_posty) as pocet_uziti from cis_posta_typ c;
+
+create view posta_w_statistika_jine AS
+  select id, jine as nazev,(select count(*) from posta_view_spisy s where cast(c.id as varchar) like s.jine) as pocet_uziti from cis_posta_jine c;
+  
+
+create view posta_w_statistika_ukl_znacka AS
+  select idznacka as id, txtznacka as nazev,(select count(*) from posta_uklznacka s where c.idznacka = s.znacka_id) as pocet_uziti from npu_spisuklznac c;
+
+
+CREATE  INDEX "znacka_id_posta_uklznacka_key" on "posta_uklznacka" (znacka_id);
+
+CREATE  INDEX "idznacka_npu_spisuklznac_key" on "npu_spisuklznac" (idznacka);
+
+
+create view posta_w_statistika_subj AS
+  SELECT posta.odesl_prijmeni AS nazev, count(posta.adresat_id) AS pocet_uziti
+   FROM posta
+  GROUP BY posta.odesl_prijmeni;
+
+create view Viewposta_w_statistika_zpus_vyrizeni AS
+ SELECT posta.vyrizeno AS nazev, count(posta.id) AS pocet_uziti, posta_cis_vyrizeno.nazev AS nazev_ciselnik, posta_cis_vyrizeno.id, 
+        CASE
+            WHEN posta_cis_vyrizeno.nazev::text ~ '^\\d+$'::text AND posta_cis_vyrizeno.nazev::text <> NULL::text THEN posta_cis_vyrizeno.nazev
+            ELSE NULL::character varying
+        END AS "case"
+   FROM posta
+   LEFT JOIN posta_cis_vyrizeno ON posta.vyrizeno = posta_cis_vyrizeno.nazev::text
+  GROUP BY posta.vyrizeno, posta_cis_vyrizeno.nazev, posta_cis_vyrizeno.id;	

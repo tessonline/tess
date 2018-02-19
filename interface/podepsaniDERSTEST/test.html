@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <script src="https://vavdev.ders.cz/core/scripts/jquery-1.9.1.js" charset="utf-8"></script>
+  <script type="text/javascript">
+    var vr_pki_url_jnlp = 'https://ders.cz/pkisigner/launch.jnlp';
+//    var vr_pki_url_jnlp = '/scripts/launch.jnlp';
+
+  </script>
+
+  <script src="scripts/vrpki.js" charset="utf-8"></script>
+  <script type="text/javascript">
+
+  /* callback funkce START */
+    function vrpki_test_connected() {
+      vrpki_test_xml_1();
+    }
+
+   function vrpki_test_xml_1_signed(p_data) {
+      alert(p_data);
+    }
+
+    function vrpki_test_xml1_sent(){
+      alert('Odeslano');
+    }
+
+    function vrpki_test_xml_1() {
+      var xml = $('#xml1').val().replace(/\s+/g, ' ').trim();
+      var l_data = JSON.stringify(new WebSign(0, 0, "XML", xml));
+      vrpki_podepsat(
+        {id:'url', data: xml, akce: 'stahnout', typ: 'PDF', layout: null, nazev: 'xml1_signed.xml'},
+        g_websocket_url,
+        {connected: function(){console.log(111111);},success: vrpki_test_xml_1_signed, sent: vrpki_test_xml1_sent},
+        {index: 0, size: 0}
+      );
+
+    }
+
+
+  function vrpki_test_connect() {
+    console.log('ok, test connect');
+      vrpki_connect_ws('test_connect', null, null, {
+        connected:  vrpki_test_connected,
+        xml_signed: vrpki_test_xml_1,
+        websign_cant_connect: vrpki_cant_connect
+      })
+    }
+
+    /* Funkce volana pokud se nepodarilo pripojit */
+    function vrpki_cant_connect(){
+      console.log("Nepripojeno, snazim se nastartovat");
+      setTimeout(
+        function(){
+          console.log("-- zkousime, jestli uz muzeme komunikovat s WebSign:", g_ws.readyState, g_ws_alert_connection_showed);
+          if (g_ws.readyState !== 1){
+            console.log("--- Nejde to, zkusime to znovu za dve vteriny");
+            vrpki_test_connect()
+          }
+        }, 2000
+      );
+    }
+    /* callback funkce KONEC */
+
+
+
+  </script>
+
+</head>
+
+<body onload="vrpki_test_connect()">
+
+
+
+     <textarea name="xml1" rows="8" cols="60" id="xml1">
+        <?xml version="1.0" encoding="UTF-8"?>
+        <note>
+            <to>Tove</to>
+            <from>Jani</from>
+            <heading>Reminder</heading>
+            <body>Don't forget me this weekend!</body>
+        </note>
+      </textarea>
+
+</body>
+</html>

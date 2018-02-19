@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="urn:cz:isvs:rzp:schemas:erms_dopln:v1"
+    xmlns="urn:cz:isvs:rzp:schemas:erms_dopln:v1"
+    xmlns:dopln="urn:cz:isvs:rzp:schemas:erms_dopln:v1"
+    xmlns:bp="http://nsess.public.cz/erms/v_01_01"
+    elementFormDefault="qualified"
+    version="1.0" id="rzp_dopln_data">
+    <xsd:annotation>
+        <xsd:documentation xml:lang="cs">Specifikace doplňujících dat z IS RŽP</xsd:documentation>
+    </xsd:annotation>
+    <xsd:import schemaLocation="ermsTypes.xsd" namespace="http://nsess.public.cz/erms/v_01_01"/>
+    
+    <xsd:element name="DoplnujiciDataDokument" type="DoplnujiciDataDokumentStructure"/>
+    <xsd:element name="DoplnujiciDataSoubor" type="DoplnujiciDataSouborStructure"/>
+    
+    <xsd:complexType name="DoplnujiciDataDokumentStructure">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="cs">Doplňující údaje dokumentu</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="Klasifikace" minOccurs="0">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="CitliveOsobniUdaje" type="xsd:boolean" minOccurs="0">
+                            <xsd:annotation>
+                                <xsd:documentation xml:lang="cs">Příznak, zda dokument a nebo jeho přílohy obsahují citlivé osobní údaje</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="DoplnujiciDataSouborStructure">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="cs">Doplňují informace o souboru připojovanému k dokumentu</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="Digitalizace" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Údaje o převodu dokumentu z analogové podoby do digitální.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="Autorizace" type="bp:tAutorizace">
+                          <xsd:annotation>
+                              <xsd:documentation>Údaje kdo a kdy převedl analogový dokument do digitální podoby. provedlKdo obsahuje zaměsntnanecké číslo.</xsd:documentation>
+                          </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element minOccurs="0" maxOccurs="1" name="BarCode">
+                          <xsd:annotation>
+                            <xsd:documentation xml:lang="CS">Tento element je určen pro předání hodnoty čárového kódu dokumentu, ke kterému soubor patří
+                            </xsd:documentation>
+                          </xsd:annotation>
+                          <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                              <xsd:maxLength value="50" />
+                              <xsd:minLength value="1" />
+                            </xsd:restriction>
+                          </xsd:simpleType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

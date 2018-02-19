@@ -1,0 +1,36 @@
+CREATE TABLE posta_datova_zprava (
+    dmid character varying(20) NOT NULL,
+    dbidsender character varying(7),
+    dmsender character varying(100),
+    dmsenderaddress character varying(100),
+    dmsendertype integer,
+    dmrecipient character varying(100),
+    dmrecipientaddress character varying(100),
+    dmsenderorgunit character varying(255),
+    dmsenderorgunitnum integer,
+    dbidrecipient character varying(7),
+    dmrecipientorgunit character varying(255),
+    dmrecipientorgunitnum integer,
+    dmtohands character varying(255),
+    dmannotation character varying(255),
+    dmrecipientrefnumber character varying(50),
+    dmsenderrefnumber character varying(50),
+    dmrecipientident character varying(50),
+    dmsenderident character varying(50),
+    dmlegaltitlelaw character varying(50),
+    dmlegaltitleyear integer,
+    dmlegaltitlesect character varying(255),
+    dmlegaltitlepar character varying(255),
+    dmlegaltitlepoint character varying(255),
+    dmpersonaldelivery boolean,
+    dmallowsubstdelivery boolean,
+    dmmessagestatus integer,
+    dmattachmentsize integer,
+    dmdeliverytime timestamp without time zone,
+    dmacceptancetime timestamp without time zone
+);
+
+ ALTER TABLE ONLY posta_datova_zprava
+    ADD CONSTRAINT pk_datova_zprava PRIMARY KEY (dmid);
+
+ 

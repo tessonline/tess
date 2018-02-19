@@ -1,0 +1,222 @@
+<?xml version="1.0"?>
+<SpisovyPlan xmlns:nsesss="http://www.mvcr.cz/nsesss/v2" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mvcr.cz/nsesss/v2 D:\spis_sluzba\spis_plan sesss-plan.xsd">
+  <PlanVecnaSkupina>
+    <EvidencniUdaje>
+      <Identifikator>2488</Identifikator>
+      <Popis>Organizace, z&#xE1;le&#x17E;itosti veden&#xED; UK a jednotliv&#xFD;ch pracovi&#x161;&#x165;</Popis>
+      <Puvod>
+        <DatumVytvoreni>2016-09-23</DatumVytvoreni>
+      </Puvod>
+      <Trideni>
+        <JednoduchySpisovyZnak>A</JednoduchySpisovyZnak>
+        <PlneUrcenySpisovyZnak>A</PlneUrcenySpisovyZnak>
+      </Trideni>
+    </EvidencniUdaje>
+  </PlanVecnaSkupina>
+  <PlanVecnaSkupina>
+    <EvidencniUdaje>
+      <Identifikator>2489</Identifikator>
+      <Popis>Legislativa a organiza&#x10D;n&#xED; normy</Popis>
+      <Puvod>
+        <DatumVytvoreni>2016-09-23</DatumVytvoreni>
+      </Puvod>
+      <Trideni>
+        <JednoduchySpisovyZnak>AI</JednoduchySpisovyZnak>
+        <PlneUrcenySpisovyZnak>AI</PlneUrcenySpisovyZnak>
+      </Trideni>
+    </EvidencniUdaje>
+    <PlanVecnaSkupina>
+      <EvidencniUdaje>
+        <Identifikator>2490</Identifikator>
+        <Popis>Z&#xE1;kladn&#xED; p&#x159;edpisy UK a sou&#x10D;&#xE1;st&#xED; UK (statuty a vnit&#x159;n&#xED; p&#x159;edpisy podle V&#x160; z&#xE1;kona)</Popis>
+        <Puvod>
+          <DatumVytvoreni>2016-09-23</DatumVytvoreni>
+        </Puvod>
+        <Trideni>
+          <JednoduchySpisovyZnak>1</JednoduchySpisovyZnak>
+          <PlneUrcenySpisovyZnak>AI/1</PlneUrcenySpisovyZnak>
+        </Trideni>
+        <Vyrazovani>
+          <SkartacniRezim>
+            <Identifikator>2490</Identifikator>
+            <Nazev>AI/1</Nazev>
+            <Oduvodneni>Dle z&#xE1;kona</Oduvodneni>
+            <SkartacniZnak>A</SkartacniZnak>
+            <SkartacniLhuta>10</SkartacniLhuta>
+            <SpousteciUdalost>Vy&#x159;&#xED;zen&#xED; dokumentu,Uzav&#x159;en&#xED; spisu</SpousteciUdalost>
+          </SkartacniRezim>
+        </Vyrazovani>
+      </EvidencniUdaje>
+    </PlanVecnaSkupina>
+    <PlanVecnaSkupina>
+      <EvidencniUdaje>
+        <Identifikator>2491</Identifikator>
+        <Popis>Dal&#x161;&#xED; p&#x159;edpisy UK, fakult a dal&#x161;&#xED;ch sou&#x10D;&#xE1;st&#xED; UK (opat&#x159;en&#xED; rektora, kvestora, d&#x11B;kan&#x16F;, &#x159;editel&#x16F;....)</Popis>
+        <Puvod>
+          <DatumVytvoreni>2016-09-23</DatumVytvoreni>
+        </Puvod>
+        <Trideni>
+          <JednoduchySpisovyZnak>2</JednoduchySpisovyZnak>
+          <PlneUrcenySpisovyZnak>AI/2</PlneUrcenySpisovyZnak>
+        </Trideni>
+        <Vyrazovani>
+          <SkartacniRezim>
+            <Identifikator>2491</Identifikator>
+            <Nazev>AI/2</Nazev>
+            <Oduvodneni>Dle z&#xE1;kona</Oduvodneni>
+            <SkartacniZnak>V</SkartacniZnak>
+            <SkartacniLhuta>10</SkartacniLhuta>
+            <SpousteciUdalost>Vy&#x159;&#xED;zen&#xED; dokumentu,Uzav&#x159;en&#xED; spisu</SpousteciUdalost>
+          </SkartacniRezim>
+        </Vyrazovani>
+      </EvidencniUdaje>
+    </PlanVecnaSkupina>
+    <PlanVecnaSkupina>
+      <EvidencniUdaje>
+        <Identifikator>2492</Identifikator>
+        <Popis>Z&#x159;izov&#xE1;n&#xED; fakult, &#xFA;stav&#x16F; (institut&#x16F;), kateder a dal&#x161;&#xED;ch pracovi&#x161;&#x165;, jejich ru&#x161;en&#xED;, reorganizace</Popis>
+        <Puvod>
+          <DatumVytvoreni>2016-09-23</DatumVytvoreni>
+        </Puvod>
+        <Trideni>
+          <JednoduchySpisovyZnak>3</JednoduchySpisovyZnak>
+          <PlneUrcenySpisovyZnak>AI/3</PlneUrcenySpisovyZnak>
+        </Trideni>
+        <Vyrazovani>
+          <SkartacniRezim>
+            <Identifikator>2492</Identifikator>
+            <Nazev>AI/3</Nazev>
+            <Oduvodneni>Dle z&#xE1;kona</Oduvodneni>
+            <SkartacniZnak>A</SkartacniZnak>
+            <SkartacniLhuta>10</SkartacniLhuta>
+            <SpousteciUdalost>Vy&#x159;&#xED;zen&#xED; dokumentu,Uzav&#x159;en&#xED; spisu</SpousteciUdalost>
+          </SkartacniRezim>
+        </Vyrazovani>
+      </EvidencniUdaje>
+    </PlanVecnaSkupina>
+  </PlanVecnaSkupina>
+  <PlanVecnaSkupina>
+    <EvidencniUdaje>
+      <Identifikator>2493</Identifikator>
+      <Popis>AII Agenda akademick&#xFD;ch funkcion&#xE1;&#x159;&#x16F;</Popis>
+      <Puvod>
+        <DatumVytvoreni>2016-09-23</DatumVytvoreni>
+      </Puvod>
+      <Trideni>
+        <JednoduchySpisovyZnak>A</JednoduchySpisovyZnak>
+        <PlneUrcenySpisovyZnak>A</PlneUrcenySpisovyZnak>
+      </Trideni>
+    </EvidencniUdaje>
+  </PlanVecnaSkupina>
+  <PlanVecnaSkupina>
+    <EvidencniUdaje>
+      <Identifikator>2496</Identifikator>
+      <Popis>AIII Akademick&#xE9; sen&#xE1;ty</Popis>
+      <Puvod>
+        <DatumVytvoreni>2016-09-23</DatumVytvoreni>
+      </Puvod>
+      <Trideni>
+        <JednoduchySpisovyZnak>A</JednoduchySpisovyZnak>
+        <PlneUrcenySpisovyZnak>A</PlneUrcenySpisovyZnak>
+      </Trideni>
+    </EvidencniUdaje>
+  </PlanVecnaSkupina>
+  <PlanVecnaSkupina>
+    <EvidencniUdaje>
+      <Identifikator>2503</Identifikator>
+      <Popis>AIX Publicita a propagace UK</Popis>
+      <Puvod>
+        <DatumVytvoreni>2016-09-23</DatumVytvoreni>
+      </Puvod>
+      <Trideni>
+        <JednoduchySpisovyZnak>A</JednoduchySpisovyZnak>
+        <PlneUrcenySpisovyZnak>A</PlneUrcenySpisovyZnak>
+      </Trideni>
+    </EvidencniUdaje>
+  </PlanVecnaSkupina>
+  <PlanVecnaSkupina>
+    <EvidencniUdaje>
+      <Identifikator>2523</Identifikator>
+      <Popis>Person&#xE1;ln&#xED; agenda</Popis>
+      <Puvod>
+        <DatumVytvoreni>2016-09-23</DatumVytvoreni>
+      </Puvod>
+      <Trideni>
+        <JednoduchySpisovyZnak>B</JednoduchySpisovyZnak>
+        <PlneUrcenySpisovyZnak>B</PlneUrcenySpisovyZnak>
+      </Trideni>
+    </EvidencniUdaje>
+  </PlanVecnaSkupina>
+  <PlanVecnaSkupina>
+    <EvidencniUdaje>
+      <Identifikator>2525</Identifikator>
+      <Popis>Systemizace m&#xED;st</Popis>
+      <Puvod>
+        <DatumVytvoreni>2016-09-23</DatumVytvoreni>
+      </Puvod>
+      <Trideni>
+        <JednoduchySpisovyZnak>BI</JednoduchySpisovyZnak>
+        <PlneUrcenySpisovyZnak>BI</PlneUrcenySpisovyZnak>
+      </Trideni>
+    </EvidencniUdaje>
+  </PlanVecnaSkupina>
+  <PlanVecnaSkupina>
+    <EvidencniUdaje>
+      <Identifikator>2526</Identifikator>
+      <Popis>P&#x159;ij&#xED;m&#xE1;n&#xED; a hodnocen&#xED; zam&#x11B;stnanc&#x16F;</Popis>
+      <Puvod>
+        <DatumVytvoreni>2016-09-23</DatumVytvoreni>
+      </Puvod>
+      <Trideni>
+        <JednoduchySpisovyZnak>BII</JednoduchySpisovyZnak>
+        <PlneUrcenySpisovyZnak>BII</PlneUrcenySpisovyZnak>
+      </Trideni>
+    </EvidencniUdaje>
+    <PlanVecnaSkupina>
+      <EvidencniUdaje>
+        <Identifikator>2527</Identifikator>
+        <Popis>P&#x159;ij&#xED;m&#xE1;n&#xED; a vy&#x159;azov&#xE1;n&#xED; pracovn&#xED;k&#x16F; - obecn&#xE9; z&#xE1;le&#x17E;itosti (inzer&#xE1;ty, konkurzy, &#x17E;&#xE1;dosti o m&#xED;sto, nab&#xED;dky)</Popis>
+        <Puvod>
+          <DatumVytvoreni>2016-09-23</DatumVytvoreni>
+        </Puvod>
+        <Trideni>
+          <JednoduchySpisovyZnak>1</JednoduchySpisovyZnak>
+          <PlneUrcenySpisovyZnak>BII/1</PlneUrcenySpisovyZnak>
+        </Trideni>
+        <Vyrazovani>
+          <SkartacniRezim>
+            <Identifikator>2527</Identifikator>
+            <Nazev>BII/1</Nazev>
+            <Oduvodneni>Dle z&#xE1;kona</Oduvodneni>
+            <SkartacniZnak>V</SkartacniZnak>
+            <SkartacniLhuta>5</SkartacniLhuta>
+            <SpousteciUdalost>Vy&#x159;&#xED;zen&#xED; dokumentu,Uzav&#x159;en&#xED; spisu</SpousteciUdalost>
+          </SkartacniRezim>
+        </Vyrazovani>
+      </EvidencniUdaje>
+    </PlanVecnaSkupina>
+    <PlanVecnaSkupina>
+      <EvidencniUdaje>
+        <Identifikator>2528</Identifikator>
+        <Popis>Odborn&#xE9; hodnocen&#xED; pracovn&#xED;k&#x16F; - obecn&#xE9; z&#xE1;le&#x17E;itosti, souhrnn&#xE9; zpr&#xE1;vy</Popis>
+        <Puvod>
+          <DatumVytvoreni>2016-09-23</DatumVytvoreni>
+        </Puvod>
+        <Trideni>
+          <JednoduchySpisovyZnak>2</JednoduchySpisovyZnak>
+          <PlneUrcenySpisovyZnak>BII/2</PlneUrcenySpisovyZnak>
+        </Trideni>
+        <Vyrazovani>
+          <SkartacniRezim>
+            <Identifikator>2528</Identifikator>
+            <Nazev>BII/2</Nazev>
+            <Oduvodneni>Dle z&#xE1;kona</Oduvodneni>
+            <SkartacniZnak>V</SkartacniZnak>
+            <SkartacniLhuta>5</SkartacniLhuta>
+            <SpousteciUdalost>Vy&#x159;&#xED;zen&#xED; dokumentu,Uzav&#x159;en&#xED; spisu</SpousteciUdalost>
+          </SkartacniRezim>
+        </Vyrazovani>
+      </EvidencniUdaje>
+    </PlanVecnaSkupina>
+  </PlanVecnaSkupina>
+</SpisovyPlan>

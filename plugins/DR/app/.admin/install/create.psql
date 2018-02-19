@@ -1,0 +1,31 @@
+--drop table posta_plugins_dr_app;
+
+create table posta_plugins_dr_app (
+  id serial,
+  nazev varchar(100),
+  superodbor int4,
+  server_username varchar(100),
+  server_passwd varchar(100),
+  klient_url varchar(255),
+  klient_username varchar(100),
+  klient_passwd varchar(100),
+  last_date date,
+  last_time varchar(10),
+  last_user_id int4,
+  owner_id int4
+
+);
+
+
+create table posta_plugins_dr_app_dorucenky (
+  id serial,
+  posta_id int4,
+  dorucenka int4,
+  odz int4,
+  last_date date,
+  last_time varchar(10),
+  last_user_id int4,
+  owner_id int4
+
+);
+

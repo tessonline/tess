@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SpisZruseni xmlns="http://nsess.public.cz/erms/v_01_00" xmlns:ess="http://mvcr.cz/ess/v_1.0.0.0" xmlns:isds="http://isds.czechpoint.cz/v20" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://nsess.public.cz/erms/v_01_00/ermsAsynU.xsd" UdalostId="0">
+	<SpisId>
+		<Identifikator>
+			<ess:HodnotaID>String</ess:HodnotaID>
+			<ess:ZdrojID>String</ess:ZdrojID>
+		</Identifikator>
+		<DoplnujiciData/>
+	</SpisId>
+	<Autorizace>
+		<provedlKdo>String</provedlKdo>
+		<provedlKdy>2001-12-17T09:30:47-05:00</provedlKdy>
+	</Autorizace>
+	<DoplnujiciData>
+		<Duvod>String</Duvod>
+	</DoplnujiciData>
+</SpisZruseni>

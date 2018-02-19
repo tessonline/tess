@@ -1,0 +1,28 @@
+CREATE  INDEX "stornovano_posta_key" on "posta" (stornovano);
+CREATE  INDEX "cislo_jednaci1_posta_key" on "posta" (cislo_jednaci1);
+CREATE  INDEX "cislo_jednaci2_posta_key" on "posta" (cislo_jednaci2);
+
+ALTER TABLE posta ADD main_doc int2;
+ALTER TABLE posta_h ADD main_doc int2;
+
+
+CREATE VIEW posta_view_spisy AS (
+SELECT * FROM posta WHERE id IN (
+SELECT min(id)
+FROM posta 
+WHERE stornovano is NULL 
+GROUP BY cislo_jednaci1, cislo_jednaci2)
+);
+
+update posta set main_doc=1 where id in 
+
+update posta set main_doc=1 where id in (select id from posta_view_spisy);
+
+
+CREATE  INDEX "main_doc_posta_key" on "posta" (main_doc);
+
+
+DROP VIEW posta_view_spisy ;
+CREATE VIEW posta_view_spisy AS
+    SELECT posta.id, posta.ev_cislo, posta.rok, posta.odbor, posta.odes_typ, posta.odesl_adrkod, posta.odesl_prijmeni, posta.odesl_jmeno, posta.odesl_odd, posta.odesl_osoba, posta.odesl_titul, posta.odesl_ulice, posta.odesl_cp, posta.odesl_cor, posta.odesl_ico, posta.odesl_psc, posta.odesl_posta, posta.odesl_rekomando, posta.odesl_postaodesl, posta.lhuta, posta.datum_spravce_prijeti, posta.typ_posty, posta.referent, posta.vec, posta.vyrizeno, posta.datum_referent_prijeti, posta.odeslana_posta, posta.datum_vyrizeni, posta.odesl_osloveni, posta.doporucene, posta.vlastnich_rukou, posta.dorucenka, posta.cislo_spisu1, posta.cislo_spisu2, posta.podcislo_spisu, posta.skartace, posta.last_date, posta.last_time, posta.last_user_id, posta.owner_id, posta.datum_doruceni, posta.dalsi_prijemci, posta.id_puvodni, posta.puvodni_spis, posta.datum_podatelna_prijeti, posta.dalsi_id_agenda, posta.objekt_kod, posta.okres_kod, posta.skartovano, posta.poznamka, posta.frozen, posta.cislo_jednaci1, posta.cislo_jednaci2, posta.odbor_spisu, posta.hmotnost, posta.cena, posta.druh_zasilky, posta.druhe_dodani, posta.xertec_id, posta.pocet_priloh, posta.stav, posta.spis_vyrizen, posta.pocet_listu, posta.ulozeno, posta.oddeleni, posta.jine, posta.nazev_spisu, posta.druh_priloh, posta.zpusob_podani, posta.stornovano, posta.datum_vypraveni, posta.znacka, posta.podatelna_id, posta.obyvatel_kod, posta.odesl_rc, posta.prehled_spis, posta.datum_predani, posta.datum_predani_ven, posta.datum_pm, posta.odesl_otocit, posta.odesl_subj, posta.odesl_email, posta.odesl_body, posta.status, posta.obalka_nevracet, posta.obalka_10dni, posta.odesl_datschranka, posta.odesl_datnar, posta.zmocneni_zakon, posta.zmocneni_rok, posta.zmocneni_par, posta.zmocneni_odst, posta.zmocneni_pismeno, posta.jejich_cj, posta.text_cj, posta.spisovna_id, posta.private, posta.typ_dokumentu, posta.main_doc FROM posta WHERE (posta.main_doc = 1);
+ 

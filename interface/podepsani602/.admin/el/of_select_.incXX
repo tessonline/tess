@@ -1,0 +1,7 @@
+<?php
+if (!IsFileIncluded(__FILE__."user")):
+include_once($GLOBALS["TMAPY_LIB"]."/of_select_db.inc");
+include_once($GLOBALS["TMAPY_LIB"]."/of_select_db_add.inc");
+require_once(FileUp2("posta/.admin/el/of_selec.inc"));
+
+endif;

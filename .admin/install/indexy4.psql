@@ -1,0 +1,5 @@
+CREATE  INDEX "nadrazene_id_cis_posta_spisy_key" on "cis_posta_skartace" (nadrazene_id);
+CREATE  INDEX "typ_cis_posta_spisy_key" on "cis_posta_skartace" (typ);
+
+
+

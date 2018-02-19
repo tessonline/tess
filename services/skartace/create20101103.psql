@@ -1,0 +1,20 @@
+--drop table posta_spisovna_zapujcky;
+create table posta_spisovna_zapujcky (
+  id serial,
+  vytvoreno date,
+  vraceno date,
+  spisovna_id int4,
+  vytvoreno_kym int4,
+  pujceno_komu int4,
+  vraceno_komu int4,
+  stornovano varchar(255),
+  superodbor int4
+);
+
+create table posta_spisovna_zapujcky_id (
+  zapujcka_id int4,
+  posta_id int4
+ 
+);
+
+

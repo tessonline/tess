@@ -1,0 +1,606 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is Oracle JAX-WS 2.1.5. --><xs:schema xmlns:tns="http://isds.czechpoint.cz/v20" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" version="1.0" targetNamespace="http://isds.czechpoint.cz/v20">
+
+<xs:element name="AuthenticateMessage" type="tns:tAuthenticateMessageInput"/>
+
+<xs:element name="AuthenticateMessageResponse" type="tns:tAuthenticateMessageOutput"/>
+
+<xs:element name="ConfirmDelivery" type="tns:tIDMessInput"/>
+
+<xs:element name="ConfirmDeliveryResponse" type="tns:tConfirmDeliveryOutput"/>
+
+<xs:element name="CreateMessage" type="tns:tMessageCreateInput"/>
+
+<xs:element name="CreateMessageResponse" type="tns:tMessageCreateOutput"/>
+
+<xs:element name="CreateMultipleMessage" type="tns:tMultipleMessageCreateInput"/>
+
+<xs:element name="CreateMultipleMessageResponse" type="tns:tMultipleMessageCreateOutput"/>
+
+<xs:element name="DummyOperation" type="xs:string"/>
+
+<xs:element name="EraseMessage" type="tns:tEraseMessageIntput"/>
+
+<xs:element name="EraseMessageResponse" type="tns:tEraseMessageOutput"/>
+
+<xs:element name="GetDeliveryInfo" type="tns:tIDMessInput"/>
+
+<xs:element name="GetDeliveryInfoResponse" type="tns:tDeliveryMessageOutput"/>
+
+<xs:element name="GetListOfReceivedMessages" type="tns:tListOfFReceivedInput"/>
+
+<xs:element name="GetListOfReceivedMessagesResponse" type="tns:tListOfMessOutput"/>
+
+<xs:element name="GetListOfSentMessages" type="tns:tListOfSentInput"/>
+
+<xs:element name="GetListOfSentMessagesResponse" type="tns:tListOfMessOutput"/>
+
+<xs:element name="GetMessageAuthor" type="tns:tGetAuthorInput"/>
+
+<xs:element name="GetMessageAuthorResponse" type="tns:tGetAuthorOutput"/>
+
+<xs:element name="GetMessageStateChanges" type="tns:tGetStateChangesInput"/>
+
+<xs:element name="GetMessageStateChangesResponse" type="tns:tGetStateChangesOutput"/>
+
+<xs:element name="GetSignedDeliveryInfo" type="tns:tIDMessInput"/>
+
+<xs:element name="GetSignedDeliveryInfoResponse" type="tns:tSignDelivMessOutput"/>
+
+<xs:element name="MarkMessageAsDownloaded" type="tns:tIDMessInput"/>
+
+<xs:element name="MarkMessageAsDownloadedResponse" type="tns:tMarkMessOutput"/>
+
+<xs:element name="MessageDownload" type="tns:tIDMessInput"/>
+
+<xs:element name="MessageDownloadResponse" type="tns:tMessDownOutput"/>
+
+<xs:element name="MessageEnvelopeDownload" type="tns:tIDMessInput"/>
+
+<xs:element name="MessageEnvelopeDownloadResponse" type="tns:tMessEnvelDownOutput"/>
+
+<xs:element name="Re-signISDSDocument" type="tns:tResignDocInput"/>
+
+<xs:element name="Re-signISDSDocumentResponse" type="tns:tResignDocOutput"/>
+
+<xs:element name="SignedMessageDownload" type="tns:tIDMessInput"/>
+
+<xs:element name="SignedMessageDownloadResponse" type="tns:tSignedMessDownOutput"/>
+
+<xs:element name="SignedSentMessageDownload" type="tns:tIDMessInput"/>
+
+<xs:element name="SignedSentMessageDownloadResponse" type="tns:tSignedMessDownOutput"/>
+
+<xs:element name="VerifyMessage" type="tns:tIDMessInput"/>
+
+<xs:element name="VerifyMessageResponse" type="tns:tMessageVerifyOutput"/>
+
+<xs:element name="dmStatus" type="tns:tStatus"/>
+
+<xs:complexType name="tFilesArray">
+<xs:sequence>
+<xs:element name="dmFile" maxOccurs="unbounded">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="tns:tFile">
+<xs:sequence/>
+<xs:attribute name="dmMimeType" type="xs:string" use="required"/>
+<xs:attribute name="dmFileMetaType" type="xs:string" use="required"/>
+<xs:attribute name="dmFileGuid" type="xs:string"/>
+<xs:attribute name="dmUpFileGuid" type="xs:string"/>
+<xs:attribute name="dmFileDescr" type="xs:string" use="required"/>
+<xs:attribute name="dmFormat" type="xs:string"/>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="tFile">
+<xs:sequence>
+<xs:element name="dmEncodedContent" type="xs:base64Binary" minOccurs="0"/>
+<xs:element name="dmXMLContent" minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+<xs:any processContents="skip" namespace="##other"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="tReturnedMessage">
+<xs:sequence>
+<xs:element name="dmDm">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="dmID" type="xs:string"/>
+<xs:element name="dbIDSender" type="xs:string" nillable="true"/>
+<xs:element name="dmSender" type="xs:string" nillable="true"/>
+<xs:element name="dmSenderAddress" type="xs:string" nillable="true"/>
+<xs:element name="dmSenderType" type="xs:int"/>
+<xs:element name="dmRecipient" type="xs:string" nillable="true"/>
+<xs:element name="dmRecipientAddress" type="xs:string" nillable="true"/>
+<xs:element name="dmAmbiguousRecipient" type="xs:boolean"/>
+<xs:element name="dmSenderOrgUnit" type="xs:string" nillable="true"/>
+<xs:element name="dmSenderOrgUnitNum" type="xs:integer" nillable="true"/>
+<xs:element name="dbIDRecipient" type="xs:string" nillable="true"/>
+<xs:element name="dmRecipientOrgUnit" type="xs:string" nillable="true"/>
+<xs:element name="dmRecipientOrgUnitNum" type="xs:integer" nillable="true"/>
+<xs:element name="dmToHands" type="xs:string" nillable="true"/>
+<xs:element name="dmAnnotation" type="xs:string" nillable="true"/>
+<xs:element name="dmRecipientRefNumber" type="xs:string" nillable="true"/>
+<xs:element name="dmSenderRefNumber" type="xs:string" nillable="true"/>
+<xs:element name="dmRecipientIdent" type="xs:string" nillable="true"/>
+<xs:element name="dmSenderIdent" type="xs:string" nillable="true"/>
+<xs:element name="dmLegalTitleLaw" type="xs:integer" nillable="true"/>
+<xs:element name="dmLegalTitleYear" type="xs:integer" nillable="true"/>
+<xs:element name="dmLegalTitleSect" type="xs:string" nillable="true"/>
+<xs:element name="dmLegalTitlePar" type="xs:string" nillable="true"/>
+<xs:element name="dmLegalTitlePoint" type="xs:string" nillable="true"/>
+<xs:element name="dmPersonalDelivery" type="xs:boolean" nillable="true"/>
+<xs:element name="dmAllowSubstDelivery" type="xs:boolean" nillable="true"/>
+<xs:element name="dmFiles" type="tns:tFilesArray"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="dmHash" type="tns:tHash"/>
+<xs:element name="dmQTimestamp" type="xs:base64Binary"/>
+<xs:element name="dmDeliveryTime" type="xs:dateTime" nillable="true"/>
+<xs:element name="dmAcceptanceTime" type="xs:dateTime" nillable="true"/>
+<xs:element name="dmMessageStatus" type="xs:integer"/>
+<xs:element name="dmAttachmentSize" type="xs:integer" nillable="true"/>
+</xs:sequence>
+<xs:attribute name="dmType" type="xs:string"/>
+</xs:complexType>
+
+<xs:complexType name="tHash">
+<xs:simpleContent>
+<xs:extension base="xs:base64Binary">
+<xs:attribute name="algorithm" type="xs:string"/>
+</xs:extension>
+</xs:simpleContent>
+</xs:complexType>
+
+<xs:complexType name="tDelivery">
+<xs:sequence>
+<xs:element name="dmDm">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="dmID" type="xs:string"/>
+<xs:element name="dbIDSender" type="xs:string" nillable="true"/>
+<xs:element name="dmSender" type="xs:string" nillable="true"/>
+<xs:element name="dmSenderAddress" type="xs:string" nillable="true"/>
+<xs:element name="dmSenderType" type="xs:int"/>
+<xs:element name="dmRecipient" type="xs:string" nillable="true"/>
+<xs:element name="dmRecipientAddress" type="xs:string" nillable="true"/>
+<xs:element name="dmAmbiguousRecipient" type="xs:boolean"/>
+<xs:element name="dmSenderOrgUnit" type="xs:string" nillable="true"/>
+<xs:element name="dmSenderOrgUnitNum" type="xs:integer" nillable="true"/>
+<xs:element name="dbIDRecipient" type="xs:string" nillable="true"/>
+<xs:element name="dmRecipientOrgUnit" type="xs:string" nillable="true"/>
+<xs:element name="dmRecipientOrgUnitNum" type="xs:integer" nillable="true"/>
+<xs:element name="dmToHands" type="xs:string" nillable="true"/>
+<xs:element name="dmAnnotation" type="xs:string" nillable="true"/>
+<xs:element name="dmRecipientRefNumber" type="xs:string" nillable="true"/>
+<xs:element name="dmSenderRefNumber" type="xs:string" nillable="true"/>
+<xs:element name="dmRecipientIdent" type="xs:string" nillable="true"/>
+<xs:element name="dmSenderIdent" type="xs:string" nillable="true"/>
+<xs:element name="dmLegalTitleLaw" type="xs:integer" nillable="true"/>
+<xs:element name="dmLegalTitleYear" type="xs:integer" nillable="true"/>
+<xs:element name="dmLegalTitleSect" type="xs:string" nillable="true"/>
+<xs:element name="dmLegalTitlePar" type="xs:string" nillable="true"/>
+<xs:element name="dmLegalTitlePoint" type="xs:string" nillable="true"/>
+<xs:element name="dmPersonalDelivery" type="xs:boolean" nillable="true"/>
+<xs:element name="dmAllowSubstDelivery" type="xs:boolean" nillable="true"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="dmHash" type="tns:tHash"/>
+<xs:element name="dmQTimestamp" type="xs:base64Binary"/>
+<xs:element name="dmDeliveryTime" type="xs:dateTime" nillable="true"/>
+<xs:element name="dmAcceptanceTime" type="xs:dateTime" nillable="true"/>
+<xs:element name="dmMessageStatus" type="xs:integer"/>
+<xs:element name="dmEvents" type="tns:tEventsArray"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="tEventsArray">
+<xs:sequence>
+<xs:element name="dmEvent" type="tns:tEvent" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="tEvent">
+<xs:sequence>
+<xs:element name="dmEventTime" type="xs:dateTime" nillable="true"/>
+<xs:element name="dmEventDescr" type="xs:string" nillable="true"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="tReturnedMessageEnvelope">
+<xs:sequence>
+<xs:element name="dmDm">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="dmID" type="xs:string"/>
+<xs:element name="dbIDSender" type="xs:string" nillable="true"/>
+<xs:element name="dmSender" type="xs:string" nillable="true"/>
+<xs:element name="dmSenderAddress" type="xs:string" nillable="true"/>
+<xs:element name="dmSenderType" type="xs:int"/>
+<xs:element name="dmRecipient" type="xs:string" nillable="true"/>
+<xs:element name="dmRecipientAddress" type="xs:string" nillable="true"/>
+<xs:element name="dmAmbiguousRecipient" type="xs:boolean"/>
+<xs:element name="dmSenderOrgUnit" type="xs:string" nillable="true"/>
+<xs:element name="dmSenderOrgUnitNum" type="xs:integer" nillable="true"/>
+<xs:element name="dbIDRecipient" type="xs:string" nillable="true"/>
+<xs:element name="dmRecipientOrgUnit" type="xs:string" nillable="true"/>
+<xs:element name="dmRecipientOrgUnitNum" type="xs:integer" nillable="true"/>
+<xs:element name="dmToHands" type="xs:string" nillable="true"/>
+<xs:element name="dmAnnotation" type="xs:string" nillable="true"/>
+<xs:element name="dmRecipientRefNumber" type="xs:string" nillable="true"/>
+<xs:element name="dmSenderRefNumber" type="xs:string" nillable="true"/>
+<xs:element name="dmRecipientIdent" type="xs:string" nillable="true"/>
+<xs:element name="dmSenderIdent" type="xs:string" nillable="true"/>
+<xs:element name="dmLegalTitleLaw" type="xs:integer" nillable="true"/>
+<xs:element name="dmLegalTitleYear" type="xs:integer" nillable="true"/>
+<xs:element name="dmLegalTitleSect" type="xs:string" nillable="true"/>
+<xs:element name="dmLegalTitlePar" type="xs:string" nillable="true"/>
+<xs:element name="dmLegalTitlePoint" type="xs:string" nillable="true"/>
+<xs:element name="dmPersonalDelivery" type="xs:boolean" nillable="true"/>
+<xs:element name="dmAllowSubstDelivery" type="xs:boolean" nillable="true"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="dmHash" type="tns:tHash"/>
+<xs:element name="dmQTimestamp" type="xs:base64Binary"/>
+<xs:element name="dmDeliveryTime" type="xs:dateTime" nillable="true"/>
+<xs:element name="dmAcceptanceTime" type="xs:dateTime" nillable="true"/>
+<xs:element name="dmMessageStatus" type="xs:integer"/>
+<xs:element name="dmAttachmentSize" type="xs:integer" nillable="true"/>
+</xs:sequence>
+<xs:attribute name="dmType" type="xs:string"/>
+</xs:complexType>
+
+<xs:complexType name="tMultipleMessageCreateInput">
+<xs:sequence>
+<xs:element name="dmRecipients" type="tns:tMultipleMessageRecipients"/>
+<xs:element name="dmEnvelope">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="tns:tMultipleMessageEnvelopeSub">
+<xs:sequence/>
+<xs:attribute name="dmType" type="xs:string"/>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="dmFiles" type="tns:tFilesArray"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="tMultipleMessageRecipients">
+<xs:sequence>
+<xs:element name="dmRecipient" type="tns:tRecipients" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="tRecipients">
+<xs:sequence>
+<xs:element name="dbIDRecipient" type="xs:string"/>
+<xs:element name="dmRecipientOrgUnit" type="xs:string"/>
+<xs:element name="dmRecipientOrgUnitNum" type="xs:integer"/>
+<xs:element name="dmToHands" type="xs:string" nillable="true"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="tMultipleMessageEnvelopeSub">
+<xs:sequence>
+<xs:element name="dmSenderOrgUnit" type="xs:string" nillable="true"/>
+<xs:element name="dmSenderOrgUnitNum" type="xs:integer" nillable="true"/>
+<xs:element name="dmAnnotation" type="xs:string" nillable="true"/>
+<xs:element name="dmRecipientRefNumber" type="xs:string" nillable="true"/>
+<xs:element name="dmSenderRefNumber" type="xs:string" nillable="true"/>
+<xs:element name="dmRecipientIdent" type="xs:string" nillable="true"/>
+<xs:element name="dmSenderIdent" type="xs:string" nillable="true"/>
+<xs:element name="dmLegalTitleLaw" type="xs:integer" nillable="true"/>
+<xs:element name="dmLegalTitleYear" type="xs:integer" nillable="true"/>
+<xs:element name="dmLegalTitleSect" type="xs:string" nillable="true"/>
+<xs:element name="dmLegalTitlePar" type="xs:string" nillable="true"/>
+<xs:element name="dmLegalTitlePoint" type="xs:string" nillable="true"/>
+<xs:element name="dmPersonalDelivery" type="xs:boolean" nillable="true"/>
+<xs:element name="dmAllowSubstDelivery" type="xs:boolean" nillable="true"/>
+<xs:element name="dmOVM" type="xs:boolean"/>
+<xs:element name="dmPublishOwnID" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="tMessageCreateInput">
+<xs:sequence>
+<xs:element name="dmEnvelope">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="tns:tMessageEnvelopeSub">
+<xs:sequence/>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="dmFiles" type="tns:tFilesArray"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="tMessageEnvelopeSub">
+<xs:sequence>
+<xs:element name="dmSenderOrgUnit" type="xs:string" nillable="true"/>
+<xs:element name="dmSenderOrgUnitNum" type="xs:integer" nillable="true"/>
+<xs:element name="dbIDRecipient" type="xs:string" nillable="true"/>
+<xs:element name="dmRecipientOrgUnit" type="xs:string" nillable="true"/>
+<xs:element name="dmRecipientOrgUnitNum" type="xs:integer" nillable="true"/>
+<xs:element name="dmToHands" type="xs:string" nillable="true"/>
+<xs:element name="dmAnnotation" type="xs:string" nillable="true"/>
+<xs:element name="dmRecipientRefNumber" type="xs:string" nillable="true"/>
+<xs:element name="dmSenderRefNumber" type="xs:string" nillable="true"/>
+<xs:element name="dmRecipientIdent" type="xs:string" nillable="true"/>
+<xs:element name="dmSenderIdent" type="xs:string" nillable="true"/>
+<xs:element name="dmLegalTitleLaw" type="xs:integer" nillable="true"/>
+<xs:element name="dmLegalTitleYear" type="xs:integer" nillable="true"/>
+<xs:element name="dmLegalTitleSect" type="xs:string" nillable="true"/>
+<xs:element name="dmLegalTitlePar" type="xs:string" nillable="true"/>
+<xs:element name="dmLegalTitlePoint" type="xs:string" nillable="true"/>
+<xs:element name="dmPersonalDelivery" type="xs:boolean" nillable="true"/>
+<xs:element name="dmAllowSubstDelivery" type="xs:boolean" nillable="true"/>
+<xs:element name="dmOVM" type="xs:boolean"/>
+<xs:element name="dmPublishOwnID" type="xs:boolean"/>
+</xs:sequence>
+<xs:attribute name="dmType" type="xs:string"/>
+</xs:complexType>
+
+<xs:complexType name="tEraseMessageIntput">
+<xs:sequence>
+<xs:element name="dmID" type="xs:string"/>
+<xs:element name="dmIncoming" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="tSignDelivMessOutput">
+<xs:sequence>
+<xs:element name="dmSignature" type="xs:base64Binary" minOccurs="0"/>
+<xs:element name="dmStatus" type="tns:tStatus"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="tStatus">
+<xs:sequence>
+<xs:element name="dmStatusCode" type="xs:string"/>
+<xs:element name="dmStatusMessage" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="tListOfMessOutput">
+<xs:sequence>
+<xs:element name="dmRecords" type="tns:tRecordsArray"/>
+<xs:element name="dmStatus" type="tns:tStatus"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="tIDMessInput">
+<xs:sequence>
+<xs:element name="dmID" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="tMessageVerifyOutput">
+<xs:sequence>
+<xs:element name="dmHash" type="tns:tHash" minOccurs="0"/>
+<xs:element name="dmStatus" type="tns:tStatus"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="tGetStateChangesOutput">
+<xs:sequence>
+<xs:element name="dmRecords" type="tns:tStateChangesArray"/>
+<xs:element name="dmStatus" type="tns:tStatus"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="tMessageCreateOutput">
+<xs:sequence>
+<xs:element name="dmID" type="xs:string" minOccurs="0"/>
+<xs:element name="dmStatus" type="tns:tStatus"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="tResignDocOutput">
+<xs:sequence>
+<xs:element name="dmResultDoc" type="xs:base64Binary" nillable="true"/>
+<xs:element name="dmValidTo" type="xs:date" minOccurs="0"/>
+<xs:element name="dmStatus" type="tns:tStatus"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="tEraseMessageOutput">
+<xs:sequence>
+<xs:element name="dmStatus" type="tns:tStatus"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="tSignedMessDownOutput">
+<xs:sequence>
+<xs:element name="dmSignature" type="xs:base64Binary" minOccurs="0"/>
+<xs:element name="dmStatus" type="tns:tStatus" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="tMarkMessOutput">
+<xs:sequence>
+<xs:element name="dmStatus" type="tns:tStatus"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="tMessEnvelDownOutput">
+<xs:sequence>
+<xs:element name="dmReturnedMessageEnvelope" type="tns:tReturnedMessageEnvelope"/>
+<xs:element name="dmStatus" type="tns:tStatus"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="tGetStateChangesInput">
+<xs:sequence>
+<xs:element name="dmFromTime" type="xs:dateTime" nillable="true"/>
+<xs:element name="dmToTime" type="xs:dateTime" nillable="true"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="tResignDocInput">
+<xs:sequence>
+<xs:element name="dmDoc" type="xs:base64Binary"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="tListOfSentInput">
+<xs:sequence>
+<xs:element name="dmFromTime" type="xs:dateTime" nillable="true"/>
+<xs:element name="dmToTime" type="xs:dateTime" nillable="true"/>
+<xs:element name="dmSenderOrgUnitNum" type="xs:integer" nillable="true"/>
+<xs:element name="dmStatusFilter" type="xs:string"/>
+<xs:element name="dmOffset" type="xs:integer" nillable="true"/>
+<xs:element name="dmLimit" type="xs:integer" nillable="true"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="tConfirmDeliveryOutput">
+<xs:sequence>
+<xs:element name="dmStatus" type="tns:tStatus"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="tDeliveryMessageOutput">
+<xs:sequence>
+<xs:element name="dmDelivery" type="tns:tDelivery"/>
+<xs:element name="dmStatus" type="tns:tStatus" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="tGetAuthorInput">
+<xs:sequence>
+<xs:element name="dmID" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="tAuthenticateMessageOutput">
+<xs:sequence>
+<xs:element name="dmAuthResult" type="xs:boolean"/>
+<xs:element name="dmStatus" type="tns:tStatus"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="tMessDownOutput">
+<xs:sequence>
+<xs:element name="dmReturnedMessage" type="tns:tReturnedMessage"/>
+<xs:element name="dmStatus" type="tns:tStatus" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="tAuthenticateMessageInput">
+<xs:sequence>
+<xs:element name="dmMessage" type="xs:base64Binary"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="tListOfFReceivedInput">
+<xs:sequence>
+<xs:element name="dmFromTime" type="xs:dateTime" nillable="true"/>
+<xs:element name="dmToTime" type="xs:dateTime" nillable="true"/>
+<xs:element name="dmRecipientOrgUnitNum" type="xs:integer" nillable="true"/>
+<xs:element name="dmStatusFilter" type="xs:string"/>
+<xs:element name="dmOffset" type="xs:integer" nillable="true"/>
+<xs:element name="dmLimit" type="xs:integer" nillable="true"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="tMultipleMessageCreateOutput">
+<xs:sequence>
+<xs:element name="dmMultipleStatus" type="tns:tMultipleStatus"/>
+<xs:element name="dmStatus" type="tns:tStatus"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="tGetAuthorOutput">
+<xs:sequence>
+<xs:element name="userType" type="xs:string"/>
+<xs:element name="authorName" type="xs:string"/>
+<xs:element name="dmStatus" type="tns:tStatus"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="tMStatus">
+<xs:sequence>
+<xs:element name="dmID" type="xs:string" minOccurs="0"/>
+<xs:element name="dmStatus" type="tns:tStatus"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="tStateChangesArray">
+<xs:sequence>
+<xs:element name="dmRecord" type="tns:tStateChangesRecord" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="tStateChangesRecord">
+<xs:sequence>
+<xs:element name="dmID" type="xs:string"/>
+<xs:element name="dmEventTime" type="xs:dateTime"/>
+<xs:element name="dmMessageStatus" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="tRecordsArray">
+<xs:sequence>
+<xs:element name="dmRecord" type="tns:tRecord" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="tRecord">
+<xs:sequence>
+<xs:element name="dmOrdinal" type="xs:int" minOccurs="0"/>
+<xs:element name="dmID" type="xs:string" minOccurs="0"/>
+<xs:element name="dbIDSender" type="xs:string"/>
+<xs:element name="dmSender" type="xs:string"/>
+<xs:element name="dmSenderAddress" type="xs:string"/>
+<xs:element name="dmSenderType" type="xs:int" minOccurs="0"/>
+<xs:element name="dmRecipient" type="xs:string"/>
+<xs:element name="dmRecipientAddress" type="xs:string"/>
+<xs:element name="dmAmbiguousRecipient" type="xs:boolean"/>
+<xs:element name="dmSenderOrgUnit" type="xs:string"/>
+<xs:element name="dmSenderOrgUnitNum" type="xs:integer"/>
+<xs:element name="dbIDRecipient" type="xs:string"/>
+<xs:element name="dmRecipientOrgUnit" type="xs:string"/>
+<xs:element name="dmRecipientOrgUnitNum" type="xs:integer"/>
+<xs:element name="dmToHands" type="xs:string"/>
+<xs:element name="dmAnnotation" type="xs:string"/>
+<xs:element name="dmRecipientRefNumber" type="xs:string"/>
+<xs:element name="dmSenderRefNumber" type="xs:string"/>
+<xs:element name="dmRecipientIdent" type="xs:string"/>
+<xs:element name="dmSenderIdent" type="xs:string"/>
+<xs:element name="dmLegalTitleLaw" type="xs:integer"/>
+<xs:element name="dmLegalTitleYear" type="xs:integer"/>
+<xs:element name="dmLegalTitleSect" type="xs:string"/>
+<xs:element name="dmLegalTitlePar" type="xs:string"/>
+<xs:element name="dmLegalTitlePoint" type="xs:string"/>
+<xs:element name="dmPersonalDelivery" type="xs:boolean"/>
+<xs:element name="dmAllowSubstDelivery" type="xs:boolean"/>
+<xs:element name="dmMessageStatus" type="xs:integer" minOccurs="0"/>
+<xs:element name="dmAttachmentSize" type="xs:integer"/>
+<xs:element name="dmDeliveryTime" type="xs:anySimpleType"/>
+<xs:element name="dmAcceptanceTime" type="xs:anySimpleType"/>
+</xs:sequence>
+<xs:attribute name="dmType" type="xs:string"/>
+</xs:complexType>
+
+<xs:complexType name="tMultipleStatus">
+<xs:sequence>
+<xs:element name="dmSingleStatus" type="tns:tMStatus" nillable="true" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>

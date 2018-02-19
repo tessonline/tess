@@ -1,0 +1,2 @@
+alter table posta_plugins_dr_app add klient_muzo int2 default 0;
+

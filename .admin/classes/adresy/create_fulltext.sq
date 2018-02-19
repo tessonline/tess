@@ -1,0 +1,22 @@
+-- konfigurace jde nastavit pro kadou databázi, tzn. v kadé databázi, kde chceme pouívat slovníky, je třeba příslunou novou konfiguraci vytvořit
+CREATE TEXT SEARCH DICTIONARY cspell (template=ispell, dictfile = czech, afffile=czech, stopwords=czech);
+CREATE TEXT SEARCH CONFIGURATION cs (copy=english);
+ALTER TEXT SEARCH CONFIGURATION cs ALTER MAPPING FOR word, asciiword WITH cspell, simple;
+
+-- pridani sloupce s fulltextem
+ALTER TABLE posta_adresati ADD COLUMN tsv tsvector;
+
+-- create trigger
+CREATE TRIGGER posta_adresati_update BEFORE INSERT OR UPDATE ON posta_adresati FOR EACH ROW EXECUTE PROCEDURE tsvector_update_trigger(tsv, 'public.cs', odesl_titul, odesl_prijmeni, odesl_jmeno, odesl_odd, odesl_osoba, odesl_ulice, odesl_cp, odesl_cor, odesl_ico, odesl_psc, odesl_posta, odesl_rc, odesl_email, odesl_datschranka);
+
+-- prepocitani hodnot sloupce tsv zaridi trigger
+UPDATE posta_adresati SET tsv = '';
+
+-- vytvoreni indexu
+CREATE INDEX posta_adresati_fulltext_idx_tsv ON posta_adresati USING gin(tsv);
+
+-- example
+SELECT ts_rank(tsv, q.q) AS rank, p.*
+  FROM posta_adresati p, (SELECT to_tsquery('cs','úřad:* & bene:*') as q) q
+  WHERE p.tsv @@ q.q
+  ORDER BY rank DESC;

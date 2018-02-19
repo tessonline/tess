@@ -1,0 +1,1 @@
+\copy (select a.nazev as agenda,a.id_superodbor,t.nazev,s.kod from cis_posta_agenda a LEFT JOIN cis_posta_typ t ON a.id=t.id_agendy LEFT JOIN cis_posta_skartace s ON t.skartace_id=s.id order by a.id asc,t.id asc) to '/tmp/vystup.csv' WITH CSV DELIMITER ';';;

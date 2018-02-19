@@ -1,0 +1,9 @@
+CREATE TABLE posta_konfigurace_h (
+    id integer NOT NULL,
+    kategorie character varying(20),
+    typ character varying(20),
+    parametr character varying(255),
+    hodnota character varying(1024),
+    popis character varying(2550),
+    id_h serial
+);

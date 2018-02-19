@@ -1,0 +1,35 @@
+-- Table: posta_nastaveni_vnejsi_adresati_skupiny
+-- Tabulka obsahuje zaznamy o vnitrnich adresatech dene skupiny
+-- 1:N
+-- Table: posta_nastaveni_vnejsi_adresati
+-- Tabulka obsahuje zaznamy o vnitrnich adresatech dene skupiny
+
+CREATE TABLE posta_nastaveni_vnejsi_adresati_skupiny  (
+	id serial NOT NULL,
+	skupina_id serial NOT NULL,
+	nazev_skupiny character varying(150),
+	last_user_id integer,
+    last_date date,
+    last_time character varying(10)
+) WITH OIDS;
+
+CREATE TABLE posta_nastaveni_vnejsi_adresati (
+	id serial NOT NULL,
+	skupina_id integer,
+	adresat_id integer,
+	last_user_id integer,
+    last_date date,
+    last_time character varying(10)
+) WITH OIDS;
+
+
+
+
+ 
+
+
+
+
+
+
+

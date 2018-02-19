@@ -1,0 +1,1 @@
+update posta set cislo_spisu1=cislo_jednaci1, cislo_spisu2=cislo_jednaci2 where rok=2015;

@@ -1,0 +1,10 @@
+create table posta_czechpoint (
+  id serial,
+  user_id int4,
+  login varchar(50),
+  passwd varchar(50),
+  last_user_id int4,
+  owner_id int4,
+  last_date date,
+  last_time varchar(10)
+);

@@ -1,0 +1,3 @@
+#!/bin/bash
+
+/usr/bin/psql npu_spis -h dtess02.npudt.local npu_spis < /var/www/html/virtuals/npu-spis.tmapserver.cz/ost/posta/services/opravy/statusy_prosle.psql

@@ -1,0 +1,914 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2009 (http://www.altova.com) by Vladimir Dinus (ICZ) -->
+<!--
+	SchĂŠma definujĂ­cĂ­ udĂĄlosti a objekty vzniklĂŠ v jednom ERMS a pĹenĂĄĹĄejĂ­cĂ­ se do ERMS druhĂŠho.
+	Toto schĂŠma popisuje asynchronĂ­ vĂ˝mÄnu udĂĄlostĂ­, napĹ. formou dĂĄvek.
+-->
+<xs:schema xmlns="http://nsess.public.cz/erms/v_01_00" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ess="http://mvcr.cz/ess/v_1.0.0.0" xmlns:isds="http://isds.czechpoint.cz/v20" targetNamespace="http://nsess.public.cz/erms/v_01_00" elementFormDefault="qualified" id="ermsIFAsyn">
+	<xs:import namespace="http://mvcr.cz/ess/v_1.0.0.0" schemaLocation="ess_ns.xsd"/>
+	<xs:import namespace="http://isds.czechpoint.cz/v20" schemaLocation="dmBaseTypes.xsd"/>
+	<xs:include schemaLocation="ermsTypes.xsd"/>
+
+	<xs:element name="DokumentUprava" nillable="false">
+		<xs:annotation>
+			<xs:documentation>ZmÄna profilu existujĂ­cĂ­ho dokumentu</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="ProfilDokumentu" type="tProfilDokumentu" nillable="false"/>
+				<xs:element name="Autorizace" type="tAutorizace"/>
+			</xs:sequence>
+			<xs:attribute name="UdalostId" type="tUdalostId" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DokumentZruseni" nillable="false">
+		<xs:annotation>
+			<xs:documentation>ZruĹĄenĂ­ existujĂ­cĂ­ho dokumentu</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="DokumentZruseni" type="tIdDokument" nillable="false"/>
+				<xs:element name="Autorizace" type="tAutorizace"/>
+			</xs:sequence>
+			<xs:attribute name="UdalostId" type="tUdalostId" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DokumentOtevreni" nillable="false">
+		<xs:annotation>
+			<xs:documentation>Otevreni vyrizeneho dokumentu</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="DokumentOtevreni" type="tIdDokument" nillable="false"/>
+				<xs:element name="Autorizace" type="tAutorizace"/>
+			</xs:sequence>
+			<xs:attribute name="UdalostId" type="tUdalostId" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SpisZalozeni" nillable="false">
+		<xs:annotation>
+			<xs:documentation>Spis je zaloĹžen nad existujĂ­cĂ­m dokumentem. SpisovĂĄ znaĹžka je pĹidÄlovĂĄna jiĹž ve volajĂ­cĂ­m ERMS.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="ProfilSpisu" type="tProfilSpisu" nillable="false"/>
+				<xs:element name="DokumentyVlozene" nillable="false">
+					<xs:annotation>
+						<xs:documentation>Je-li pouĹžit element DokumentUplnyVlozeny, pak jsou jsou nejprve zaloĹženy dokumenty uvedenĂŠ v tomto elementu, potĂŠ je zaloĹžen spis kde iniciaÄnĂ­m dokumentem je ten, kterĂ˝ mĂĄ  PoradiVeSpisu rovno 1 a potĂŠ jsou do spisu vloĹženy i dalĹĄĂ­ dokumenty.
+			PĹi variantÄ DokumentIdVlozeny je pĹedpoklĂĄdĂĄno, Ĺže  je spis zĂĄklĂĄdĂĄn na jiĹž existujĂ­cĂ­m dokumentem (PoradiVeSpisu = 1), jsou-li uvedeny i jinĂŠ idDokument, jsou vloĹženy do zaloĹženĂŠho spisu.
+			</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence maxOccurs="unbounded">
+							<xs:choice>
+								<xs:element name="DokumentUplnyVlozeny">
+									<!--xs:annotation>Je-li pouĹžit element VlozenyDokumentUplny, pak jsou jsou nejprve zaloĹženy dokumenty uvedenĂŠ v tomto elementu, potĂŠ je zaloĹžen spis kde iniciaÄnĂ­m dokumentem je ten, kterĂ˝ mĂĄ  PoradiVeSpisu rovno 1 a potĂŠ jsou do spisu vloĹženy i dalĹĄĂ­ dokumenty.</xs:annotation-->
+									<xs:complexType>
+										<xs:sequence>
+											<xs:choice>
+												<xs:element name="VlastniDokument" type="tVlastniDokument"/>
+												<xs:element name="DorucenyDokument" type="tDorucenyDokument"/>
+											</xs:choice>
+                      <xs:element name="PoradiVeSpisu" nillable="false">
+                        <xs:annotation>
+                          <xs:documentation>PoĹadĂ­, v jakĂŠm byl dokument vloĹžen do spisu. ZaÄĂ­nĂĄ vĹždy od 1.</xs:documentation>
+                        </xs:annotation>
+                        <xs:simpleType>
+                          <xs:restriction base="xs:int">
+                            <xs:minInclusive value="1"/>
+                            <xs:maxInclusive value="2147483647"/>
+                          </xs:restriction>
+                        </xs:simpleType>
+                      </xs:element>
+                      <xs:element name="StavZarazeniDoSpisu">
+                        <xs:annotation>
+                          <xs:documentation>VĂ˝ÄtovĂ˝ typ, kterĂ˝ urÄuje, zda je dokument aktuĂĄlnÄ vloĹžen do spisu.</xs:documentation>
+                        </xs:annotation>
+                        <xs:simpleType>
+                          <xs:restriction base="xs:string">
+                            <xs:enumeration value="Vlozen"/>
+                            <xs:enumeration value="Vyjmut"/>
+                          </xs:restriction>
+                        </xs:simpleType>
+                      </xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="DokumentIdVlozeny">
+									<!--xs:annotation>PĹi tĂŠto variantÄ je pĹedpoklĂĄdĂĄno, Ĺže  je spis zĂĄklĂĄdĂĄn na jiĹž existujĂ­cĂ­m dokumentem (PoradiVeSpisu = 1), jsou-li uvedeny i jinĂŠ idDokument, jsou vloĹženy do zaloĹženĂŠho spisu.</xs:annotation-->
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="IdDokument" type="tIdDokument" nillable="false"/>
+                      <xs:element name="PoradiVeSpisu" nillable="false">
+                        <xs:annotation>
+                          <xs:documentation>PoĹadĂ­, v jakĂŠm byl dokument vloĹžen do spisu. ZaÄĂ­nĂĄ vĹždy od 1.</xs:documentation>
+                        </xs:annotation>
+                        <xs:simpleType>
+                          <xs:restriction base="xs:int">
+                            <xs:minInclusive value="1"/>
+                            <xs:maxInclusive value="2147483647"/>
+                          </xs:restriction>
+                        </xs:simpleType>
+                      </xs:element>
+                      <xs:element name="StavZarazeniDoSpisu">
+                        <xs:annotation>
+                          <xs:documentation>VĂ˝ÄtovĂ˝ typ, kterĂ˝ urÄuje, zda je dokument aktuĂĄlnÄ vloĹžen do spisu.</xs:documentation>
+                        </xs:annotation>
+                        <xs:simpleType>
+                          <xs:restriction base="xs:string">
+                            <xs:enumeration value="Vlozen"/>
+                            <xs:enumeration value="Vyjmut"/>
+                          </xs:restriction>
+                        </xs:simpleType>
+                      </xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+							</xs:choice>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Autorizace" type="tAutorizace"/>
+			</xs:sequence>
+			<xs:attribute name="UdalostId" type="tUdalostId" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DokumentVlozeniDoSpisu" nillable="false">
+		<xs:annotation>
+			<xs:documentation>VloĹženi dokumentu do existujĂ­cĂ­ho spisu</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="SpisId" type="tIdSpisu" nillable="false"/>
+				<xs:element name="DokumentyVlozene">
+					<xs:annotation>
+						<xs:documentation>Je-li pouĹžit element DokumentUplnyVlozeny, pak je jsou nejprve zaloĹženydokument uvedenĂ˝ v tomto elementu, potĂŠ je do spisu vloĹženy.
+PĹi variantÄ DokumentIdVlozeny je do spisu vloĹžen jiĹž existujĂ­cĂ­ dokument.
+			</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence maxOccurs="unbounded">
+							<xs:choice>
+								<xs:element name="DokumentUplnyVlozeny">
+									<!--xs:annotation>Je-li pouĹžit element DokumentUplnyVlozeny, pak jsou jsou nejprve zaloĹženy dokumenty uvedenĂŠ v tomto elementu, potĂŠ je zaloĹžen spis kde iniciaÄnĂ­m dokumentem je ten, kterĂ˝ mĂĄ  PoradiVeSpisu rovno 1 a potĂŠ jsou do spisu vloĹženy i dalĹĄĂ­ dokumenty.</xs:annotation-->
+									<xs:complexType>
+										<xs:sequence>
+											<xs:choice>
+												<xs:element name="VlastniDokument">
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="Identifikator" type="ess:tIdentifikator"/>
+															<xs:group ref="gSpolecneDokSpis"/>
+                              <xs:element name="CjOdesilatel" minOccurs="0">
+                                <xs:annotation>
+                                  <xs:documentation>ÄĂ­slo jednacĂ­ podĂĄnĂ­, pod kterĂ˝m byl dokument veden v systĂŠmu spisovĂŠ sluĹžby odesilatele (vaĹĄe znaÄka)</xs:documentation>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                  <xs:restriction base="xs:string">
+                                    <xs:maxLength value="50"/>
+                                  </xs:restriction>
+                                </xs:simpleType>
+                              </xs:element>
+															<xs:element name="DoplnujiciData" type="tDoplnujiciDataDokument" minOccurs="0"/>
+															<xs:element name="Vypraveni" type="tVypraveni" minOccurs="0" maxOccurs="unbounded">
+																<!--xs:complexType>
+																	<xs:sequence>
+																		<xs:element name="Adresat" type="ess:tAdresat" nillable="false"/>
+																		<xs:element name="ZasilkaInfo" type="tZasilkaInfo"/>
+																	</xs:sequence>
+																</xs:complexType-->
+															</xs:element>
+															<xs:element name="Soubory" type="isds:tFilesArray" minOccurs="0"/>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+												<xs:element name="DorucenyDokument">
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="Identifikator" type="ess:tIdentifikator"/>
+															<xs:group ref="gSpolecneDokSpis"/>
+                              <xs:element name="CjOdesilatel" minOccurs="0">
+                                <xs:annotation>
+                                  <xs:documentation>ÄĂ­slo jednacĂ­ podĂĄnĂ­, pod kterĂ˝m byl dokument veden v systĂŠmu spisovĂŠ sluĹžby odesilatele (vaĹĄe znaÄka)</xs:documentation>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                  <xs:restriction base="xs:string">
+                                    <xs:maxLength value="50"/>
+                                  </xs:restriction>
+                                </xs:simpleType>
+                              </xs:element>
+															<xs:element name="DoplnujiciData" type="tDoplnujiciDataDokument" minOccurs="0"/>
+															<xs:element name="Doruceni">
+																<xs:complexType>
+																	<xs:sequence>
+																		<xs:element name="Odesilatel" type="ess:tAdresat" nillable="false"/>
+																		<xs:element name="ZasilkaInfo" type="tZasilkaInfo"/>
+																	</xs:sequence>
+																</xs:complexType>
+															</xs:element>
+															<xs:element name="Soubory" type="isds:tFilesArray" minOccurs="0"/>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+											</xs:choice>
+                      <xs:element name="PoradiVeSpisu" nillable="false">
+                        <xs:annotation>
+                          <xs:documentation>PoĹadĂ­, v jakĂŠm byl dokument vloĹžen do spisu. ZaÄĂ­nĂĄ vĹždy od 1.</xs:documentation>
+                        </xs:annotation>
+                        <xs:simpleType>
+                          <xs:restriction base="xs:int">
+                            <xs:minInclusive value="1"/>
+                            <xs:maxInclusive value="2147483647"/>
+                          </xs:restriction>
+                        </xs:simpleType>
+                      </xs:element>
+                      <xs:element name="StavZarazeniDoSpisu">
+                        <xs:annotation>
+                          <xs:documentation>VĂ˝ÄtovĂ˝ typ, kterĂ˝ urÄuje, zda je dokument aktuĂĄlnÄ vloĹžen do spisu.</xs:documentation>
+                        </xs:annotation>
+                        <xs:simpleType>
+                          <xs:restriction base="xs:string">
+                            <xs:enumeration value="Vlozen"/>
+                            <xs:enumeration value="Vyjmut"/>
+                          </xs:restriction>
+                        </xs:simpleType>
+                      </xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="DokumentIdVlozeny">
+									<!--xs:annotation>PĹi tĂŠto variantÄ je pĹedpoklĂĄdĂĄno, Ĺže  je spis zĂĄklĂĄdĂĄn na jiĹž existujĂ­cĂ­m dokumentem (PoradiVeSpisu = 1), jsou-li uvedeny i jinĂŠ idDokument, jsou vloĹženy do zaloĹženĂŠho spisu.</xs:annotation-->
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="IdDokument" type="tIdDokument" nillable="false"/>
+                      <xs:element name="PoradiVeSpisu" nillable="false">
+                        <xs:annotation>
+                          <xs:documentation>PoĹadĂ­, v jakĂŠm byl dokument vloĹžen do spisu. ZaÄĂ­nĂĄ vĹždy od 1.</xs:documentation>
+                        </xs:annotation>
+                        <xs:simpleType>
+                          <xs:restriction base="xs:int">
+                            <xs:minInclusive value="1"/>
+                            <xs:maxInclusive value="2147483647"/>
+                          </xs:restriction>
+                        </xs:simpleType>
+                      </xs:element>
+                      <xs:element name="StavZarazeniDoSpisu">
+                        <xs:annotation>
+                          <xs:documentation>VĂ˝ÄtovĂ˝ typ, kterĂ˝ urÄuje, zda je dokument aktuĂĄlnÄ vloĹžen do spisu.</xs:documentation>
+                        </xs:annotation>
+                        <xs:simpleType>
+                          <xs:restriction base="xs:string">
+                            <xs:enumeration value="Vlozen"/>
+                            <xs:enumeration value="Vyjmut"/>
+                          </xs:restriction>
+                        </xs:simpleType>
+                      </xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+							</xs:choice>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Autorizace" type="tAutorizace"/>
+			</xs:sequence>
+			<xs:attribute name="UdalostId" type="tUdalostId" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DokumentVyjmutiZeSpisu" nillable="false">
+		<xs:annotation>
+			<xs:documentation>VyjmutĂ­ dokumentu ze spisu</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="SpisId" type="tIdSpisu" nillable="false"/>
+				<xs:element name="DokumentyVlozene">
+					<xs:complexType>
+						<xs:sequence maxOccurs="unbounded">
+							<xs:element name="DokumentIdVlozeny">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="IdDokument" type="tIdDokument" nillable="false"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<!-- xs:element name="PoradiVeSpisu" nillable="false">
+								<xs:annotation>
+									<xs:documentation>PoĹadĂ­, v jakĂŠm byl dokument vloĹžen do spisu. ZaÄĂ­nĂĄ vĹždy od 1.</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:int">
+										<xs:minInclusive value="1"/>
+										<xs:maxInclusive value="2147483647"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="StavZarazeniDoSpisu">
+								<xs:annotation>
+									<xs:documentation>VĂ˝ÄtovĂ˝ typ, kterĂ˝ urÄuje, zda je dokument aktuĂĄlnÄ vloĹžen do spisu.</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:enumeration value="Vlozen"/>
+										<xs:enumeration value="Vyjmut"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element -->
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Autorizace" type="tAutorizace"/>
+			</xs:sequence>
+			<xs:attribute name="UdalostId" type="tUdalostId" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SpisVyrizeni" nillable="false">
+		<xs:annotation>
+			<xs:documentation>VyĹĂ­zenĂ­ spisu</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="SpisId" type="tIdSpisu" nillable="false"/>
+				<xs:element name="Autorizace" type="tAutorizace"/>
+				<xs:element name="DoplnujiciData">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="ZpusobVyrizeni">
+								<xs:simpleType>
+									<xs:restriction base="xs:string"/>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="TerminVyrizeni">
+								<xs:simpleType>
+									<xs:restriction base="xs:dateTime"/>
+								</xs:simpleType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="UdalostId" type="tUdalostId" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SpisOtevreni" nillable="false">
+		<xs:annotation>
+			<xs:documentation>ZnovuotevĹenĂ­ spisu</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="SpisId" type="tIdSpisu" nillable="false"/>
+				<xs:element name="Autorizace" type="tAutorizace"/>
+				<xs:element name="DoplnujiciData">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Duvod">
+								<xs:simpleType>
+									<xs:restriction base="xs:string"/>
+								</xs:simpleType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="UdalostId" type="tUdalostId" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SpisZruseni" nillable="false">
+		<xs:annotation>
+			<xs:documentation>Zruseni spisu</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="SpisId" type="tIdSpisu" nillable="false"/>
+				<xs:element name="Autorizace" type="tAutorizace"/>
+				<xs:element name="DoplnujiciData" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Duvod">
+								<xs:simpleType>
+									<xs:restriction base="xs:string"/>
+								</xs:simpleType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="UdalostId" type="tUdalostId" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DoruceniUprava" nillable="false">
+		<xs:annotation>
+			<xs:documentation>Ăprava informacĂ­ o doruÄenĂ­ doruÄenĂŠho dokumentu.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="DokumentDoruceni">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="IdDokument" type="tIdDokument" nillable="false"/>
+							<xs:element name="DoplnujiciData" type="tDoplnujiciData" minOccurs="0"/>
+							<xs:element name="Doruceni" nillable="false">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="Odesilatel" type="ess:tAdresat" nillable="false"/>
+										<xs:element name="ZasilkaInfo" type="tZasilkaInfo"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Autorizace" type="tAutorizace"/>
+			</xs:sequence>
+			<xs:attribute name="UdalostId" type="tUdalostId" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="VypraveniZalozeni" nillable="false">
+		<xs:annotation>
+			<xs:documentation>ZaevidovĂĄnĂ­ novĂŠho vypravenĂ­ k dokumentu</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="DokumentZaevidovaniVypraveni">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="IdDokument" type="tIdDokument" nillable="false"/>
+							<xs:element name="DoplnujiciData" type="tDoplnujiciData" minOccurs="0"/>
+							<xs:element name="Vypraveni" type="tVypraveni" nillable="false" maxOccurs="unbounded">
+								<!--xs:complexType>
+									<xs:sequence>
+										<xs:element name="Identifikator" type="ess:tIdentifikator" nillable="false"/>
+										<xs:element name="Adresat" type="ess:tAdresat" nillable="false"/>
+										<xs:element name="ZasilkaInfo" type="tZasilkaInfo"/>
+									</xs:sequence>
+								</xs:complexType-->
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Autorizace" type="tAutorizace"/>
+			</xs:sequence>
+			<xs:attribute name="UdalostId" type="tUdalostId" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="VypraveniUprava" nillable="false">
+		<xs:annotation>
+			<xs:documentation>ZmÄna informacĂ­ o vypravenĂ­, vypravenĂ­ musĂ­ bĂ˝t pouze ve stavu pĹipravovĂĄno.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="DokumentUpravaVypraveni">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="IdDokument" type="tIdDokument" nillable="false"/>
+							<xs:element name="DoplnujiciData" type="tDoplnujiciData" minOccurs="0"/>
+							<xs:element name="Vypraveni" type="tVypraveni" nillable="false" maxOccurs="unbounded">
+								<!--xs:complexType>
+									<xs:sequence>
+										<xs:element name="Identifikator" type="ess:tIdentifikator" nillable="false"/>
+										<xs:element name="Adresat" type="ess:tAdresat" nillable="false"/>
+										<xs:element name="ZasilkaInfo" type="tZasilkaInfo"/>
+									</xs:sequence>
+								</xs:complexType-->
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Autorizace" type="tAutorizace"/>
+			</xs:sequence>
+			<xs:attribute name="UdalostId" type="tUdalostId" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="VypraveniVypraveno" nillable="false">
+		<xs:annotation>
+			<xs:documentation>ZĂĄpis informacĂ­ o vypravenĂ­ dokumentu.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:choice>
+					<xs:element name="DokumentVypravenoVypraveni">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="IdDokument" type="tIdDokument" nillable="false"/>
+								<xs:element name="DoplnujiciData" type="tDoplnujiciData" minOccurs="0"/>
+								<xs:element name="Vypraveni" nillable="false" maxOccurs="unbounded">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="Identifikator" type="ess:tIdentifikator" nillable="false"/>
+                      <xs:element name="ZasilkaInfo" type="tZasilkaInfo" nillable="false"/>
+											<!--xs:element name="DatumVypraveni" type="xs:date" nillable="false"/>
+											<xs:group ref="gStavVypraveneZasilky"/-->
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="Obalka" type="tObalka"/>
+				</xs:choice>
+				<xs:element name="Autorizace" type="tAutorizace"/>
+			</xs:sequence>
+			<xs:attribute name="UdalostId" type="tUdalostId" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="VypraveniDoruceno" nillable="false">
+		<xs:annotation>
+			<xs:documentation>ZĂĄpis informacĂ­ o doruÄenĂ­ vypravenĂ­ dokumentu.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:choice>
+					<xs:element name="DokumentDoruceniVypraveni">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="IdDokument" type="tIdDokument" nillable="false"/>
+								<xs:element name="DoplnujiciData" type="tDoplnujiciData" minOccurs="0"/>
+								<xs:element name="Vypraveni" nillable="false" maxOccurs="unbounded">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="Identifikator" type="ess:tIdentifikator" nillable="false"/>
+      								<xs:element name="ZasilkaInfo" type="tZasilkaInfo" nillable="false"/>
+											<!--xs:element name="DatumDoruceni" type="xs:date" nillable="false" minOccurs="0"/>
+											<xs:group ref="gStavVypraveneZasilky"/-->
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="Obalka" type="tObalka"/>
+				</xs:choice>
+				<xs:element name="Autorizace" type="tAutorizace"/>
+			</xs:sequence>
+			<xs:attribute name="UdalostId" type="tUdalostId" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="VypraveniZruseni" nillable="false">
+		<xs:annotation>
+			<xs:documentation>ZruĹĄenĂ­ vypravenĂ­ dokumentu.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="DokumentZruseniVypraveni">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="IdDokument" type="tIdDokument" nillable="false"/>
+							<xs:element name="DoplnujiciData" type="tDoplnujiciData" minOccurs="0"/>
+							<xs:element name="Vypraveni" nillable="false">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="Identifikator" type="ess:tIdentifikator" nillable="false"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Autorizace" type="tAutorizace"/>
+			</xs:sequence>
+			<xs:attribute name="UdalostId" type="tUdalostId" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="VypraveniPredatVypravne" nillable="false">
+		<xs:annotation>
+			<xs:documentation>PĹedĂĄnĂ­ jednotlivĂ˝ch vypravenĂ­, nebi obĂĄlek vĂ˝pravnÄ.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Vypraveni" nillable="false" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Identifikator" type="ess:tIdentifikator" nillable="false"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Obalka" type="tObalka" nillable="false" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="Autorizace" type="tAutorizace"/>
+			</xs:sequence>
+			<xs:attribute name="UdalostId" type="tUdalostId" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SouborZalozeni" nillable="false">
+		<xs:annotation>
+			<xs:documentation>ZaevidovĂĄnĂ­ novĂŠho souboru k dokumentu</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="DokumentZaevidovaniSouboru">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="IdDokument" type="tIdDokument" nillable="false"/>
+							<xs:element name="DoplnujiciData" type="tDoplnujiciData" minOccurs="0"/>
+							<xs:element name="Soubory" type="tFilesArray"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Autorizace" type="tAutorizace"/>
+			</xs:sequence>
+			<xs:attribute name="UdalostId" type="tUdalostId" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SouborNovaVerze" nillable="false">
+		<xs:annotation>
+			<xs:documentation>NĂĄhrada obsahu souboru</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="DokumentZaevidovaniSouboru">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="IdDokument" type="tIdDokument" nillable="false"/>
+							<xs:element name="DoplnujiciData" type="tDoplnujiciData" minOccurs="0"/>
+							<xs:element name="Soubory" type="tFilesArray"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Autorizace" type="tAutorizace"/>
+			</xs:sequence>
+			<xs:attribute name="UdalostId" type="tUdalostId" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SouborZruseni" nillable="false">
+		<xs:annotation>
+			<xs:documentation>ZruĹĄenĂ­ souboru evidovanĂŠho k dokumentu, dojde k jeho odstranÄnĂ­, nejenom rozpojenĂ­ vazby s dokumentem. </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="DokumentZruseniSouboru">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="IdDokument" type="tIdDokument" nillable="false"/>
+							<xs:element name="DoplnujiciData" type="tDoplnujiciData" minOccurs="0"/>
+							<xs:element name="Soubory" type="tFilesArrayID"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Autorizace" type="tAutorizace"/>
+			</xs:sequence>
+			<xs:attribute name="UdalostId" type="tUdalostId" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SouborVlozitKVypraveni" nillable="false">
+		<xs:annotation>
+			<xs:documentation>K existujĂ­cĂ­mĹŻ vypravenĂ­ pĹipojĂ­ el. pĹĂ­lohu - soubor. Je-li soubor specifikovĂĄn v elementu OdkazyNaSoubor/FileLink/@dmFileGuid, jednĂĄ se o pĹipojenĂ­ jiĹž zaevidovanĂŠho souboru k dokumentu. Je-li soubor specifikovĂĄn v elementu Soubory/dmFile, je souÄasnÄ zaevidovĂĄn k dokumentu a nĂĄslednÄ navĂĄzĂĄn na urÄenĂŠ vypravenĂ­.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="DokumentZaevidovaniSouboruVypraveni">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="IdDokument" type="tIdDokument" nillable="false"/>
+							<xs:element name="DoplnujiciData" type="tDoplnujiciData" minOccurs="0"/>
+							<xs:element name="Vypraveni" nillable="false" minOccurs="0">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="Identifikator" type="ess:tIdentifikator" nillable="false"/>
+										<xs:element name="ZasilkaInfo" type="tZasilkaInfo"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Autorizace" type="tAutorizace"/>
+			</xs:sequence>
+			<xs:attribute name="UdalostId" type="tUdalostId" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SouborVyjmoutZVypraveni" nillable="false">
+		<xs:annotation>
+			<xs:documentation>ZruĹĄenĂ­ vazby mezi souborem a navĂĄzanĂ˝m k vypravenĂ­m dokumentu. VlastnĂ­ soubor zĹŻstĂĄvĂĄ v dokumentu zachovĂĄn.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="DokumentZruseniSouboruVypraveni">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="IdDokument" type="tIdDokument" nillable="false"/>
+							<xs:element name="DoplnujiciData" type="tDoplnujiciData" minOccurs="0"/>
+							<xs:element name="Vypraveni" nillable="false">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="Identifikator" type="ess:tIdentifikator" nillable="false"/>
+										<xs:element name="ZasilkaInfo" nillable="false">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="Soubory" type="tFilesArrayID"/>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="UdalostId" type="tUdalostId" use="required"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Autorizace" type="tAutorizace"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DokumentZmenaZpracovatele" nillable="false">
+		<xs:annotation>
+			<xs:documentation>ZmÄna zpracovatele dokumentu. VlastnĂ­ proces zmÄny je ponechĂĄn na vnitĹĂ­ch procesech provĂĄdÄjĂ­cĂ­ho (cĂ­lovĂŠho) ERMS.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="DokumentPredani">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="IdDokument" type="tIdDokument" nillable="false"/>
+							<xs:element name="DoplnujiciData" type="tDoplnujiciData" minOccurs="0"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Prebirajici" type="tPrebirajici"/>
+				<xs:element name="Autorizace" type="tAutorizace"/>
+			</xs:sequence>
+			<xs:attribute name="UdalostId" type="tUdalostId" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SpisZmenaZpracovatele" nillable="false">
+		<xs:annotation>
+			<xs:documentation>ZmÄna zpracovatele spisu VlastnĂ­ proces zmÄny je ponechĂĄn na vnitĹĂ­ch procesech provĂĄdÄjĂ­cĂ­ho (cĂ­lovĂŠho) ERMS.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="SpisPredani">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="IdSpis" type="tIdSpisu" nillable="false"/>
+							<xs:element name="DoplnujiciData" type="tDoplnujiciData" minOccurs="0"/>
+						</xs:sequence>
+						<!--xs:attribute name="UdalostId" type="tUdalostId" use="required"/-->
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Prebirajici" type="tPrebirajici"/>
+				<xs:element name="Autorizace" type="tAutorizace"/>
+			</xs:sequence>
+			<xs:attribute name="UdalostId" type="tUdalostId" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DokumentPostoupeni" nillable="false">
+		<xs:annotation>
+			<xs:documentation>PostoupenĂ­ zpracovĂĄnĂ­ dokumentu do jinĂŠho ERMS.
+	V pĹŻvodnĂ­m ERMS je nad dokumentem vytvoĹen exclusivnĂ­ zĂĄmek, aby neĹĄel prostĹedky pĹŻvodnĂ­ho ERMS dokument mÄnit. 
+	Toto oprĂĄvnÄnĂ­ bude mĂ­t od tĂŠto chvĂ­le pouze novĂŠ ERMS.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:choice>
+					<xs:element name="DorucenyDokument" type="tDorucenyDokument" minOccurs="0"/>
+					<xs:element name="VlastniDokument" type="tVlastniDokument" minOccurs="0"/>
+				</xs:choice>
+				<xs:element name="Autorizace" type="tAutorizace"/>
+			</xs:sequence>
+			<xs:attribute name="UdalostId" type="tUdalostId" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SpisPostoupeni" nillable="false">
+		<xs:annotation>
+			<xs:documentation>PostoupenĂ­ zpracovĂĄnĂ­ spisu do jinĂŠho ERMS.
+	V pĹŻvodnĂ­m ERMS je nad spisem vytvoĹen exclusivnĂ­ zĂĄmek, aby neĹĄel prostĹedky pĹŻvodnĂ­ho ERMS spis mÄnit. 
+	Toto oprĂĄvnÄnĂ­ bude mĂ­t od tĂŠto chvĂ­le pouze novĂŠ ERMS.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="ProfilSpisu" type="tProfilSpisu" nillable="false"/>
+				<xs:element name="DokumentyVlozene" nillable="false">
+					<xs:complexType>
+						<xs:sequence maxOccurs="unbounded">
+							<xs:element name="DokumentUplnyVlozeny">
+								<!--xs:annotation>Je-li pouĹžit element DokumentUplnyVlozeny, pak jsou jsou nejprve zaloĹženy dokumenty uvedenĂŠ v tomto elementu, potĂŠ je zaloĹžen spis kde iniciaÄnĂ­m dokumentem je ten, kterĂ˝ mĂĄ  PoradiVeSpisu rovno 1 a potĂŠ jsou do spisu vloĹženy i dalĹĄĂ­ dokumenty.</xs:annotation-->
+								<xs:complexType>
+									<xs:sequence>
+										<xs:choice>
+											<xs:element name="VlastniDokument" type="tVlastniDokument"/>
+											<xs:element name="DorucenyDokument" type="tDorucenyDokument"/>
+										</xs:choice>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="PoradiVeSpisu" nillable="false">
+								<xs:annotation>
+									<xs:documentation>PoĹadĂ­, v jakĂŠm byl dokument vloĹžen do spisu. ZaÄĂ­nĂĄ vĹždy od 1.</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:int">
+										<xs:minInclusive value="1"/>
+										<xs:maxInclusive value="2147483647"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="StavZarazeniDoSpisu">
+								<xs:annotation>
+									<xs:documentation>VĂ˝ÄtovĂ˝ typ, kterĂ˝ urÄuje, zda je dokument aktuĂĄlnÄ vloĹžen do spisu.</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:enumeration value="Vlozen"/>
+										<xs:enumeration value="Vyjmut"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Autorizace" type="tAutorizace"/>
+			</xs:sequence>
+			<xs:attribute name="UdalostId" type="tUdalostId" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DokumentVraceni" nillable="false">
+		<xs:annotation>
+			<xs:documentation>VrĂĄcenĂ­ zpracovĂĄnĂ­ dokumentu do jinĂŠho ERMS.
+	ZpÄtnĂĄ udĂĄlost k DokumentPostoupeni.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="DokumentId" type="tIdDokument" nillable="false"/>
+				<xs:element name="Autorizace" type="tAutorizace"/>
+			</xs:sequence>
+			<xs:attribute name="UdalostId" type="tUdalostId" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SpisVraceni" nillable="false">
+		<xs:annotation>
+			<xs:documentation>VrĂĄcenĂ­ zpracovĂĄnĂ­ spisu do jinĂŠho ERMS.
+	ZpÄtnĂĄ udĂĄlost k SpisPostoupeni.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="SpisId" type="tIdSpisu" nillable="false"/>
+				<xs:element name="Autorizace" type="tAutorizace"/>
+			</xs:sequence>
+			<xs:attribute name="UdalostId" type="tUdalostId" use="required"/>
+		</xs:complexType>
+	</xs:element>
+
+  <xs:group name="gUdalost">
+    <xs:sequence>
+      <xs:choice>
+        <xs:element ref="DokumentUprava"/>
+        <xs:element ref="DokumentZruseni"/>
+        <xs:element ref="DokumentOtevreni"/>
+        <xs:element ref="SpisZalozeni"/>
+        <xs:element ref="DokumentVlozeniDoSpisu"/>
+        <xs:element ref="DokumentVyjmutiZeSpisu"/>
+        <xs:element ref="SpisVyrizeni"/>
+        <xs:element ref="SpisOtevreni"/>
+        <xs:element ref="SpisZruseni"/>
+        <xs:element ref="DoruceniUprava"/>
+        <xs:element ref="VypraveniZalozeni"/>
+        <xs:element ref="VypraveniUprava"/>
+        <xs:element ref="VypraveniVypraveno"/>
+        <xs:element ref="VypraveniDoruceno"/>
+        <xs:element ref="VypraveniZruseni"/>
+        <xs:element ref="VypraveniPredatVypravne"/>
+        <xs:element ref="SouborZalozeni"/>
+        <xs:element ref="SouborNovaVerze"/>
+        <xs:element ref="SouborZruseni"/>
+        <xs:element ref="SouborVlozitKVypraveni"/>
+        <xs:element ref="SouborVyjmoutZVypraveni"/>
+        <xs:element ref="DokumentZmenaZpracovatele"/>
+        <xs:element ref="SpisZmenaZpracovatele"/>
+        <xs:element ref="DokumentPostoupeni"/>
+        <xs:element ref="SpisPostoupeni"/>
+        <xs:element ref="DokumentVraceni"/>
+        <xs:element ref="SpisVraceni"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:group>
+
+
+	<xs:element name="Zprava" nillable="false">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Kod" nillable="false">
+					<xs:annotation>
+						<xs:documentation>NĂĄvratovĂ˝ kĂłd udĂĄlosti.</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="8"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="Popis" nillable="true">
+					<xs:annotation>
+						<xs:documentation>ÄeskĂ˝ popis vĂ˝sledku operace.</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="255"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="UdalostId" type="tUdalostId" use="required"/>
+			<xs:attribute name="Poradi" type="xs:int" use="required"/>
+			<xs:attribute name="DatumVzniku" type="xs:dateTime"/>
+		</xs:complexType>
+	</xs:element>
+
+</xs:schema>

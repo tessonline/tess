@@ -1,0 +1,314 @@
+<?php
+//@include(FileUp2("ost/.admin/lg/app_".$client_lang_all.".inc"));
+//@include(FileUp2(".admin/lg/app_".$GLOBALS["client_lang"].".inc")); 
+require_once(FileUp2(".admin/brow_.inc"));
+
+$GLOBALS[$PROPERTIES["AGENDA_ID"]] = $GLOBALS['HISTORY_ID'];
+
+/*
+PARAMETRY:
+  agenda_id
+  table_name
+  table_showinfo
+  table_sql
+  table_caption
+  table_schema_file
+  table_notshow
+  form_schema_file
+  nocaption
+  caption
+  noundo
+  noacceptfields   pole polozek, ktere ma ignorovat
+  notshowclosebutton
+*/
+
+//@include(FileUp2("ost/.admin/lg/db_".$client_lang_all.".inc"));
+//echo "lang:".$client_lang_all."<br>";
+//include(FileUp2("ost/.admin/lg/app_".$client_lang_all.".inc"));
+
+function History($table_params=array()) {
+  global $PROPERTIES;
+
+  if (HasAccessToRecord("read", $GLOBALS[$PROPERTIES["AGENDA_ID"]])) {
+  
+    $GLOBALS['TABLE_HISTORY']=true;
+    
+    if(!$table_params['table_notshow']){
+
+      Table(array(
+        "properties"=>$PROPERTIES,
+        "agenda"=>$PROPERTIES["AGENDA_IDENT"],
+        "showhistory"=>false,
+        "showedit"=>false,
+        "showdelete"=>false,
+        "showinfo"=>$table_params['table_showinfo'],
+        "setvars"=>1,
+        "noprint"=>true,
+        "noexport"=>true,
+        "no_top_menu"=>true,
+        "sql"=>$table_params['table_sql'],
+        "caption"=>$table_params['table_caption'],
+        "schema_file"=>$table_params['table_schema_file'],
+        "noshowrelation"=>true,
+        "noshowrelation"=>true,
+        "noshowinsert2clip"=>true,
+      ));
+      
+    }
+
+    $db = $PROPERTIES["DB_NAME"]?$PROPERTIES["DB_NAME"]:"DB_DEFAULT";
+    $q = new $db;
+
+    $agenda_table = $table_params['table_name']?$table_params['table_name']:$PROPERTIES["AGENDA_TABLE"];
+    $agenda_id = $table_params['agenda_id']?$table_params['agenda_id']:$PROPERTIES["AGENDA_ID"];
+
+    $metadata = $q->metadata($agenda_table);
+
+    $sql = "SELECT * FROM $agenda_table WHERE $agenda_id = ".$GLOBALS[$agenda_id];
+    $q->query($sql);
+    if ($q->next_record()) {
+      SetVarFromHash($q->Record);
+    }
+    echo '<div class="table table-striped table-hover dark-color">';
+    
+    if (!isset($table_params["nocaption"])||(!$table_params["nocaption"])):
+      echo "<div class=\"caption table-header\">".(isset($table_params["caption"])?$table_params["caption"]:$PROPERTIES['AGENDA_NAME']." - ".$GLOBALS['RESOURCE_STRING']['history'])."</div>\n";
+    endif;
+    
+    $name_history_table = $PROPERTIES["AGENDA_TABLE_HISTORY"]?$PROPERTIES["AGENDA_TABLE_HISTORY"]:($agenda_table.'_h');   
+    $sql = "SELECT * FROM $name_history_table WHERE $agenda_id = ".$GLOBALS[$agenda_id]." ORDER BY ID_H DESC";
+    $q->query($sql);
+
+    if (!$GLOBALS["USER_INFO"]) {
+      include_once(FileUp2(".admin/security_obj.inc"));
+    }
+      
+    $FLD_UPDATE_DATE = $GLOBALS["PROPERTIES"]["FIELD_UPDATE_DATE"]?$GLOBALS["PROPERTIES"]["FIELD_UPDATE_DATE"]:"LAST_DATE";
+    $FLD_UPDATE_TIME = $GLOBALS["PROPERTIES"]["FIELD_UPDATE_TIME"]?$GLOBALS["PROPERTIES"]["FIELD_UPDATE_TIME"]:"LAST_TIME";
+    $FLD_UPDATE_ID = $GLOBALS["PROPERTIES"]["FIELD_UPDATE_ID"]?$GLOBALS["PROPERTIES"]["FIELD_UPDATE_ID"]:"LAST_USER_ID";
+    
+    $img = FileUpURL("images/undo2.gif");
+    
+    $history = array();
+    $history_fields = array();
+    $i = 1;
+    while ($q->next_record()) {
+      reset ($metadata);
+      while (list(, $val) = each($metadata)) {
+        if (preg_match("/^LAST_/i", $val["name"])) continue;   
+        if (is_array($table_params["noacceptfields"]) && in_array($val["name"],$table_params["noacceptfields"])) continue;   
+        if ($GLOBALS[$val["name"]] != $q->Record[$val["name"]]) {
+          $history[$i]["field"] = $val["name"];
+          switch (strtolower($val["type"])) {
+            case "date":
+            case "datetime":
+            case "smalldatetime":
+              $history[$i]["old"] = $q->dbdate2str($q->Record[$val["name"]]);
+              $history[$i]["new"] = $q->dbdate2str($GLOBALS[$val["name"]]);
+            break;
+            default:
+              $history[$i]["old"] = $q->Record[$val["name"]];
+              $history[$i]["new"] = $GLOBALS[$val["name"]];
+            break;
+          }
+          $history[$i]["id"] = $q->Record["ID_H"];
+          $history[$i]["id_new"] = $GLOBALS["last_id"];
+          $history[$i]["date"] = $q->dbdate2str($GLOBALS[$FLD_UPDATE_DATE]);
+          $history[$i]["time"] = $GLOBALS[$FLD_UPDATE_TIME];
+          $ui = $GLOBALS["TMAPY_SECURITY"]->GetUserInfo($GLOBALS[$FLD_UPDATE_ID],false,false,1);
+          $history[$i]["user"] = $ui["LOGIN"]?$ui["LOGIN"]:'Neznámý';
+          $history_fields[$val["name"]] = $val["name"]; 
+          $i++;
+        }
+        $GLOBALS[$val["name"]] = $q->Record[$val["name"]];
+      }
+      reset ($metadata);
+      while (list(, $val) = each($metadata)) {
+        if (preg_match("/^LAST_/i", $val["name"]))   
+          $GLOBALS[$val["name"]] = $q->Record[$val["name"]];
+      }
+      $GLOBALS["last_id"] = $q->Record["ID_H"]; 
+    } 
+  }
+  
+  $history[$i] = $history[$i-1];
+  $history[$i]["date"] = $q->dbdate2str($GLOBALS[$FLD_UPDATE_DATE]);
+  $history[$i]["time"] = $GLOBALS[$FLD_UPDATE_TIME];
+  $ui = $GLOBALS["TMAPY_SECURITY"]->GetUserInfo($GLOBALS[$FLD_UPDATE_ID],false,false,1);
+  $history[$i]["user"] = $ui["LOGIN"]?$ui["LOGIN"]:$GLOBALS['RESOURCE_STRING']['unknown'];
+  $history[$i]["created"] = 1;
+  
+  
+  $form_params["formtype"] = 2; //$f_edit v souboru .admin/edit_.inc
+  $f_schema = $table_params['form_schema_file']?$table_params['form_schema_file']:FileUp2(".admin/form_schema.inc");
+  if ($f_schema && File_Exists($f_schema)) {
+    include_once $GLOBALS["TMAPY_LIB"]."/oohformsex.inc";
+    include_once(FileUp2(".admin/form_func.inc"));
+    include_once(Fileup2(".admin/agenda_func.inc"));
+    include_once(Fileup2(".admin/functions.inc"));
+    include_once(Fileup2(".admin/el/of_text_.inc"));
+    include_once(Fileup2(".admin/el/of_date_.inc"));
+    include_once(Fileup2(".admin/el/of_select_.inc"));
+    include_once(Fileup2(".admin/access_.inc"));
+    include($f_schema);
+    reset($FORM_CONFIG["schema"]);
+    while (list($key, $val) = each($FORM_CONFIG["schema"])) {
+      if (Is_Array($val["elements"])) {
+        reset($val["elements"]);
+        while (list($keyel,$el) = each($val["elements"])) {
+          if ($history_fields[$el["name"]]) {
+            if (!$el["label"]) $el["label"] = $val["label"];
+            $history_fields[$el["name"]] = $el;
+          }
+        }
+      }
+      
+    }
+  }
+  if (Count($history)) {
+  ?>
+  <table class="table-body" width="99%" class="brow" border="0" cellspacing="0">
+    <thead>
+      <tr class="brow">
+        <th class="brow" align="center"><?php echo $GLOBALS['RESOURCE_STRING']['when_who'];?></th>
+        <th class="brow" align="center"><?php echo $GLOBALS['RESOURCE_STRING']['description'];?></th>
+        <th class="brow" align="center"><?php echo $GLOBALS['RESOURCE_STRING']['original_value'];?></th>
+        <th class="brow" align="center"><?php echo $GLOBALS['RESOURCE_STRING']['new_value'];?></th>
+        <?php if(!$table_params["noundo"]){?>
+        <th class=b"row" align="center" width="1px">&nbsp;</th>
+        <?php }?> 
+     </tr>
+   </thead>
+   <tbody>
+   <?php
+    
+   $span = array();
+   $i = -1;  
+   reset($history);
+   while (list($key, $val) = each($history)) {
+     if ($update_date != $val["date"] || $update_time != $val["time"]) {
+       $update_date = $val["date"];
+       $update_time = $val["time"];
+       $i++;
+     }
+     $span[$i]++;
+   }
+
+   $update_date = -1; 
+   $update_time = -1;
+   $class = "dark"; 
+   $count = 0;
+   $span_id = -1;
+   $do_span = 1; 
+   reset($history);
+   while (list($key, $val) = each($history)) {
+
+//     $val["old"] = $val["old"]!=''?$val["old"]:"&nbsp;"; 
+//     $val["new"] = $val["new"]!=''?$val["new"]:"&nbsp;";
+   
+//     if ($update_date != $val["date"] || $update_time != $val["time"] || !$val["date"] || !$val["time"]) {
+     if ($update_date != $val["date"] || $update_time != $val["time"]) {
+       $update_date = $val["date"];
+       $update_time = $val["time"];
+       $class = $class?"":"dark"; 
+       $span_id++; 
+       $do_span = 1; 
+     }
+     if (is_array($history_fields[$val["field"]])) {
+       $hfield = $history_fields[$val["field"]];
+       $hfield["type"] = "of_".$hfield["type"];
+       $field = Str_Replace(":","", $hfield["label"]);
+       //For db date
+       $hfield["donotconvert"] = 1;
+       $hfield["values"] = $val;
+       // nefunguje spravne pro checkbox - nastavuje se checked v konstruktoru
+       // kde jeste neni nastavena hodnota - je tedy vzdy NE
+       // lumo 9.1.2008
+       $GLOBALS[$val['field']] = $val["new"];
+       $cls = new $hfield["type"]($hfield);
+       
+       $cls->value = $val["new"]; 
+       $GLOBALS["HISTORY_TABLE_IDENT_COLUM"]='NEW';
+       if (Method_Exists($cls, "self_get_frozen")) 
+         $val_get = $cls->self_get_frozen($val["new"], false, $count);
+       else
+         $val_get = $val["new"];
+       $val["new"] = preg_replace("#<b>(.*)</b>#i", "\\1", $val_get);
+       if (preg_match("/<b>/i", $val["new"])) 
+         $val["new"] = preg_replace("#<b>(.*)</b>#i", "\\1", $val["new"]);
+       if ($cls->value != '' && preg_match("/select/i", $hfield["type"])) 
+         $val["new"] .= " (".$cls->value.")";
+
+       // kvuli spravnemu zpracovani checkboxu musime znovu vytvorit objekt
+       // lumo 9.1.2008
+       $GLOBALS[$val['field']] = $val["old"];
+       $cls = new $hfield["type"]($hfield);
+
+       $cls->value = $val["old"]; 
+       $GLOBALS["HISTORY_TABLE_IDENT_COLUM"]='OLD';
+       if (Method_Exists($cls, "self_get_frozen")) 
+         $val_get = $cls->self_get_frozen($val["old"], false, $count);
+       else
+         $val_get = $val["old"];
+       $val["old"] = preg_replace("#<b>(.*)</b>#i", "\\1", $val_get);
+       if (preg_match("/<b>/i", $val["old"])) 
+         $val["old"] = preg_replace("#<b>(.*)</b>#i", "\\1", $val["old"]);
+       if ($cls->value != '' && preg_match("/select/i", $hfield["type"])) 
+         $val["old"] .= " (".$cls->value.")";
+         
+       unset($GLOBALS[$val['field']]);
+     } else {
+       $field = $val["field"];
+     }
+     if (trim($val["new"]) == '' || !isset($val["new"])) $val["new"] = '&nbsp;';
+     if (trim($val["old"]) == '' || !$val["old"]) $val["old"] = '&nbsp;';
+     if (trim($field == '') || !$field) $field = '&nbsp;';
+
+     echo "<tr class=brow>\n";
+     if ($do_span) {
+       echo "<td class=brow$class align=center";
+       echo ' rowspan="'.$span[$span_id].'"';
+       echo '><nobr>'.$val["date"]." ".$val["time"]."</nobr> &nbsp; ".$val["user"]."</td>\n";  
+     }
+     if ($val["created"]) {
+       if ($do_span) {
+         echo "<td class=brow$class align=center colspan=4\"><b>".$GLOBALS['RESOURCE_STRING']['record_creating']."</b></td>\n";
+       } else {  
+         echo "<td class=brow$class align=center colspan=3\"><b>".$GLOBALS['RESOURCE_STRING']['record_creating']."</b></td>\n";
+       }
+     } else {     
+       echo "<td class=brow$class align=center><b>".$field."</b></td>\n";  
+//     echo "<td class=brow$class align=center>".$val["field"]."</td>\n";  
+       echo "<td class=brow$class>".$val["old"]."</td>\n";  
+       echo "<td class=brow$class>".$val["new"]."</td>\n";
+       if ($do_span && !$table_params["noundo"]) {
+         echo "<td class=\"table-cell-btn\" width=\"1px\" class=image align=center";
+         echo ' rowspan="'.$span[$span_id].'"';
+         echo "><a href=\"edit.php?edit&EDIT_ID=".$GLOBALS[$PROPERTIES["AGENDA_ID"]].'&UNDO_ID='.$val["id"]."\"><image border=0 src=\"$img\" alt=\"Undo\"></a></td>\n";
+       }
+     }  
+     $do_span = false; 
+     echo "</tr>\n";
+   }
+   ?>
+   </tbody>
+  </table>
+  </div>
+  <?php
+  }
+  
+  if(!$table_params['notshowclosebutton']){
+  ?>
+  <form action="">
+  <table width="99%">
+  <tr>
+  <td align="right">
+  <input name='__' value='   <?php echo $GLOBALS["RESOURCE_STRING"]["menu_close"];?>   ' type='button' class='button btn' onclick='parent.$.fancybox.close()'>
+
+  </td>
+  </tr>
+  </table> 
+  </form>
+  <?php
+  }  
+}

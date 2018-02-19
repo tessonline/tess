@@ -1,0 +1,33 @@
+CREATE OR REPLACE FUNCTION posta_sort_status(integer) RETURNS integer
+AS
+$$
+DECLARE ret int;
+BEGIN
+  CASE $1
+    WHEN 5 THEN ret=1;
+    WHEN 8 THEN ret=2;
+    WHEN 12 THEN ret=3;
+    WHEN 7 THEN ret=4;
+    WHEN 2 THEN ret=5;
+    WHEN 6 THEN ret=6;
+    WHEN -2 THEN ret=7;
+    WHEN -1 THEN ret=8;
+    WHEN 1 THEN ret=9;
+    WHEN -5 THEN ret=10;
+    WHEN 101 THEN ret=11;
+    WHEN 11 THEN ret=12;
+    WHEN 4 THEN ret=13;
+    WHEN 9 THEN ret=14;
+    WHEN -3 THEN ret=15;
+    WHEN -4 THEN ret=16;
+    WHEN 3 THEN ret=17;
+    ELSE ret=20;
+  END CASE;
+  RETURN ret;
+END;
+$$
+LANGUAGE plpgsql IMMUTABLE;
+
+CREATE INDEX idx_posta_sort_status ON posta ((posta_sort_status(status)));
+
+

@@ -1,0 +1,99 @@
+<?php
+require("tmapy_config.inc");
+require(FileUp2(".admin/properties.inc"));
+require(FileUp2("html_header.inc"));
+require_once(FileUp2(".admin/db/db_default.inc"));
+
+function Win2Iso($str){
+  return StrTr($str,"šžťŠŽŤ","šžťŠŽŤ");
+}
+
+
+
+$fd = fopen("http://wwwinfo.mfcr.cz/cgi-bin/ares/ares_subj.cgi?JS=1&jazyk=cz&obch_jm=&ico=$ICO&cestina=&obec=&k_fu=&maxpoc=200&ulice=&cis_or=&cis_po=&setrid=ZADNE&id=1","r");
+while (!feof ($fd)) {
+    $line = fgets($fd, 1024);
+    //echo "\n<!--".$line."-->";
+    if ($res = stristr($line,"parent.pis_es"))break;
+}
+fclose ($fd);
+
+if ($res){
+  $start = strpos($res, "'", strpos($res,$ICO)+strlen($ICO)+1)+1;
+//  echo $start;
+  $next_start = strpos($res, "'", $start);
+  $next_start2 = strpos($res, "'", $next_start);
+  while($res[$next_start-1]=='\\') $next_start = strpos($res, "'", $next_start+1);
+  $obchod_nazev = substr($res, $start, $next_start-$start);
+  $start +=  strlen($obchod_nazev)+3;
+  $mesto1.= '|'.substr($res,$start,strpos($res,"'",$start)-$start);
+
+  $start +=  strlen(substr($res,$start,strpos($res,"'",$start)-$start))+5;
+  $cisloRES=substr($res,$start-3,strpos($res,",",$start)-$start+3);
+
+  require_once(FileUp2(".admin/http.inc"));
+  $http_connection = new http_class;
+  $error=$http_connection->Open(array("HostName"=>"wwwinfo.mfcr.cz", "HostPort"=>"80"));
+  if ($error) die("error HTTP Open: ".$error);
+  $html = "";
+  if($error==""):
+    $error=$http_connection->SendRequest(array(
+     "RequestMethod"=>"GET",
+     "RequestURI"=>"/cgi-bin/ares/ares_det.txt?prg=RES&text=text&jazyk=cz&pce=".$cisloRES."&por=1",
+     "Headers"=>array(
+     "User-Agent"=>"Mozilla/4.5 [en] (WinNT; I)",
+     "Pragma"=>"no-cache"
+     ),
+    ));
+    if ($error) die("error HTTP SendRequest: ".$error);
+    if($error==""):
+      while (true):
+        $error=$http_connection->ReadReplyBody(&$body,1000);
+        if($error!="" || strlen($body)==0) break;
+        $html .= $body;
+      endwhile;
+    endif;
+  endif;
+
+  //echo(Win2Iso($html));
+
+	$poziceod=strpos($html,'ulice');
+	$pozicedo=strpos($html,'PSČ')+12;
+  $adresa=trim(substr($html,$poziceod,$pozicedo-$poziceod));
+	$adresa=str_replace("PSČ:","|",$adresa);
+	$adresa=str_replace("ulice a číslo: ","|",$adresa);
+	$adresa=str_replace("obec:","|",$adresa);
+
+  $arr_adr=explode("|",$adresa);
+  $arr_ulice_cp=explode(' ',trim($arr_adr[1]));
+  $cp = trim(end($arr_ulice_cp));
+  if(ereg('([0-9]+)/?([0-9]*)(.?)',$cp,$reg)){
+    //die(print_r($reg));
+    $cp = $reg[1];
+    $cor = $reg[2];
+    $cor_pis = $reg[3];
+  }   
+  unset($arr_ulice_cp[count($arr_ulice_cp)-1]);
+  $ulice = implode(' ',$arr_ulice_cp); 
+  $psc=str_replace(" ","",$arr_adr[3]);	
+  $mesto2 = trim($arr_adr[2]); 
+  
+  $value = Win2Iso($obchod_nazev."|".($mesto2?$mesto2:$mesto1)."|".$ulice."|".$cp."|".$psc."|".$cor."|".$cor_pis);
+
+//  die($value);
+
+}else{
+  $value='';  
+}
+?>
+<script type="text/javascript">
+window.returnValue = '<?php echo $value;?>';
+window.close();
+</script>
+</head>
+<body>
+<br>
+<center>Prosím čekejte...</center>
+<?php
+require(FileUp2("html_footer.inc"));
+?>

@@ -1,0 +1,971 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2009 (http://www.altova.com) by Vladimir Dinus (ICZ) -->
+<xs:schema xmlns="http://nsess.public.cz/erms/v_01_00" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ess="http://mvcr.cz/ess/v_1.0.0.0" xmlns:isds="http://isds.czechpoint.cz/v20" targetNamespace="http://nsess.public.cz/erms/v_01_00" elementFormDefault="qualified" id="ermsIFTypes">
+	<xs:import namespace="http://mvcr.cz/ess/v_1.0.0.0" schemaLocation="ess_ns.xsd"/>
+	<xs:import namespace="http://isds.czechpoint.cz/v20" schemaLocation="dmBaseTypes.xsd"/>
+	<xs:complexType name="tAutorizace">
+		<xs:sequence>
+			<xs:element name="provedlKdo" nillable="false">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="50"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="provedlKdy" type="xs:dateTime" nillable="false"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tPrebirajici">
+		<xs:sequence>
+			<xs:element name="novyZpracovatel" nillable="false">
+				<xs:annotation>
+					<xs:documentation>OznaÄenĂ­ novĂŠho zpracovatele.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="8"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="predanoKdy" type="xs:dateTime" nillable="false" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:group name="gSpolecneDokSpis">
+		<xs:annotation>
+			<xs:documentation>Skupina metadat spoleÄnĂĄ jak pro popis dokumentu tak pro popis spisu. JednĂĄ se o kopii ze schĂŠmatu ess_ns.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Nazev">
+				<xs:annotation>
+					<xs:documentation>KrĂĄtkĂĄ vÄc vystihujĂ­cĂ­ obsah dokumentu nebo spisu.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="100"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Popis" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>PodrobnĂ˝ popis obsahu dokumentu nebo spisu.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="255"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="CisloJednaci" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>PoloĹžka "CisloJednaci" mĹŻĹže obsahovat i obecnou znaÄku dokumentu, napĹ. ÄĂ­slo faktury atd..
+	
+	NemusĂ­ se tedy jednat dĹŻslednÄ vĹždy pouze o ÄJ.
+	
+	MĹŻĹže se jednat o oznaÄenĂ­ dokumentu nebo spisu urÄitou znaÄkou, kterĂĄ v textovĂŠ podobÄ kombinuje rĹŻznĂŠ ÄĂ­selnĂŠ a jinĂŠ identifikaÄnĂ­ Ăşdaje zavedenĂŠ agendou nebo organizacĂ­ k systematickĂŠmu oznaÄovĂĄnĂ­ dokumentĹŻ v rĂĄmci rĹŻznĂ˝ch Ĺad, knih nebo jinĂ˝ch evidencĂ­.
+			  </xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="50"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="SpisovaZnacka" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>PoloĹžka vyjadĹuje oznaÄenĂ­ spisu.
+			  </xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="50"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="PodaciDenikPoradi" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>PoĹadĂ­ v rĂĄmci roku (zaÄĂ­nĂĄ od 1) a podacĂ­ho denĂ­ku (Äi jinĂŠ evidenÄnĂ­ pomĹŻcky)</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="1"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="PodaciDenikRok" type="xs:gYear" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Rok podacĂ­ho denĂ­ku.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PodaciDenik" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>OznaÄenĂ­ podacĂ­ho denĂ­ku Äi jinĂŠ evidenÄnĂ­ pomĹŻcky ( vÄtĹĄinou se pro oznaÄenĂ­ vyuĹžĂ­vĂĄ vĂ˝stiĹžnĂĄ zkratka )</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="12"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="DatumCasVytvoreni" type="xs:dateTime"/>
+			<xs:element name="TypDokumentu" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Popis typu dokumentu</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="100"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="SpisovyPlan" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>StruÄnĂ˝ popis/oznaÄenĂ­ spisovĂŠho a skartaÄnĂ­ho plĂĄnu</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="100"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="SpisovyZnak" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>OznaÄenĂ­ uklĂĄdacĂ­ho znaku (330.0) nebo popis znaku spisovĂŠho a  skartaÄnĂ­ho plĂĄnu</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="255"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="SkartacniZnak" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A-archivace, S-skartace, V-vytĹĂ­dÄnĂ­ na zĂĄkladÄ skartaÄnĂ­ho ĹĂ­zenĂ­</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:length value="1"/>
+						<xs:enumeration value="A"/>
+						<xs:enumeration value="S"/>
+						<xs:enumeration value="V"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="SkartacniLhuta" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>SkartaÄnĂ­ nebo archivaÄnĂ­ lhĹŻta v letech</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:unsignedShort">
+						<xs:minInclusive value="1"/>
+						<xs:maxInclusive value="999"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Poznamka" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="255"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Zmocneni" type="ess:tZmocneni" minOccurs="0"/>
+			<xs:element name="SouvisejiciSubjekty" type="ess:tSouvisejiciSubjekty" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Seznam subjektĹŻ, kterĂŠ nÄjak souvisĂ­ s dokumentem nebo spisem.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:group>
+	<xs:complexType name="tDoplnujiciData">
+		<xs:annotation>
+			<xs:documentation>JakĂĄkoliv dalĹĄĂ­ doprovodnĂĄ data, kterĂĄ nejsou souÄĂĄstĂ­ tĂŠto specifikace. NapĹ. zde mohou bĂ˝t data potĹebnĂĄ pro vĂ˝mÄnu informacĂ­ s agendovĂ˝m systĂŠmem.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:any processContents="skip" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tDoplnujiciDataSpis">
+		<xs:annotation>
+			<xs:documentation>JakĂĄkoliv dalĹĄĂ­ doprovodnĂĄ data, kterĂĄ nejsou souÄĂĄstĂ­ tĂŠto specifikace. NapĹ. zde mohou bĂ˝t data potĹebnĂĄ pro vĂ˝mÄnu informacĂ­ s agendovĂ˝m systĂŠmem.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ZpusobVedeni">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="Priorace"/>
+						<xs:enumeration value="SbernyArch"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:any processContents="skip" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tDoplnujiciDataDokument">
+		<xs:annotation>
+			<xs:documentation>JakĂĄkoliv dalĹĄĂ­ doprovodnĂĄ data, kterĂĄ nejsou souÄĂĄstĂ­ tĂŠto specifikace. NapĹ. zde mohou bĂ˝t data potĹebnĂĄ pro vĂ˝mÄnu informacĂ­ s agendovĂ˝m systĂŠmem.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence minOccurs="0">
+			<xs:element name="PocetListu" type="xs:int"/>
+			<xs:element name="PocetPriloh" type="xs:int"/>
+			<xs:element name="DruhPriloh" type="xs:string"/>
+			<xs:any processContents="skip" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tIdDokument">
+		<xs:sequence>
+			<xs:element name="Identifikator" type="ess:tIdentifikator" nillable="false"/>
+			<xs:element name="DoplnujiciData" type="tDoplnujiciData" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tProfilDokumentu">
+		<xs:sequence>
+			<xs:element name="Identifikator" type="ess:tIdentifikator" nillable="false"/>
+			<xs:group ref="gSpolecneDokSpis" minOccurs="0"/>
+			<xs:element name="CjOdesilatel" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>ÄĂ­slo jednacĂ­ podĂĄnĂ­, pod kterĂ˝m byl dokument veden v systĂŠmu spisovĂŠ sluĹžby odesilatele (vaĹĄe znaÄka)</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="50"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="DoplnujiciData" type="tDoplnujiciDataDokument" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tDorucenyDokument">
+		<xs:sequence>
+			<xs:element name="Identifikator" type="ess:tIdentifikator"/>
+			<xs:group ref="gSpolecneDokSpis"/>
+			<xs:element name="CjOdesilatel" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>ÄĂ­slo jednacĂ­ podĂĄnĂ­, pod kterĂ˝m byl dokument veden v systĂŠmu spisovĂŠ sluĹžby odesilatele (vaĹĄe znaÄka)</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="50"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="DoplnujiciData" type="tDoplnujiciDataDokument" minOccurs="0"/>
+			<xs:element name="Doruceni" nillable="false">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Odesilatel" type="ess:tAdresat" nillable="false"/>
+						<xs:element name="ZasilkaInfo" type="tZasilkaInfo"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Soubory" type="tFilesArray" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tVlastniDokument">
+		<xs:sequence>
+			<xs:element name="Identifikator" type="ess:tIdentifikator"/>
+			<xs:group ref="gSpolecneDokSpis"/>
+			<xs:element name="CjOdesilatel" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>ÄĂ­slo jednacĂ­ podĂĄnĂ­, pod kterĂ˝m byl dokument veden v systĂŠmu spisovĂŠ sluĹžby odesilatele (vaĹĄe znaÄka)</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="50"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="DoplnujiciData" type="tDoplnujiciDataDokument" minOccurs="0"/>
+			<xs:element name="Vypraveni" type="tVypraveni" nillable="false" minOccurs="0" maxOccurs="unbounded">
+				<!--xs:complexType>
+					<xs:sequence>
+						<xs:element name="Adresat" type="ess:tAdresat" nillable="false"/>
+						<xs:element name="ZasilkaInfo" type="tZasilkaInfo"/>
+					</xs:sequence>
+				</xs:complexType-->
+			</xs:element>
+			<xs:element name="Soubory" type="tFilesArray" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tProfilSpisu">
+		<xs:sequence>
+			<xs:element name="Identifikator" type="ess:tIdentifikator"/>
+			<xs:group ref="gSpolecneDokSpis"/>
+			<xs:element name="DoplnujiciData" type="tDoplnujiciDataSpis"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tIdSpisu">
+		<xs:sequence>
+			<xs:element name="Identifikator" type="ess:tIdentifikator" nillable="false"/>
+			<xs:element name="DoplnujiciData" type="tDoplnujiciData" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tFilesArray">
+		<xs:sequence>
+			<xs:element name="dmFile" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>El. soubor (pĹĂ­loha) navĂĄzanĂ˝ k dokumentu. JednĂĄ se o kopii ze schĂŠmatu dmBaseType pro isds. Kopie je vytvoĹena proto, Ĺže v pĹŻvodnĂ­m typu nenĂ­ povinnĂ˝ atribut dmFileGuid jakoĹžti identifikĂĄtor souboru, kterĂ˝ je nezbytnĂ˝ pro komunikaci mezi ERMS.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType mixed="false">
+					<xs:complexContent mixed="false">
+						<xs:extension base="isds:tFile">
+							<xs:sequence>
+								<xs:element name="Identifikator" type="ess:tIdentifikator"/>
+							</xs:sequence>
+							<xs:attribute name="dmMimeType" type="xs:string" use="required">
+								<xs:annotation>
+									<xs:documentation>typ pĂ­semnosti v MIME zĂĄpisu, napĹ. application/pdf nebo image/tiff</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+							<xs:attribute name="dmFileMetaType" use="required">
+								<xs:annotation>
+									<xs:documentation>vĂ˝Äet typĹŻ pĂ­semnostĂ­, main je pouze jedna</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:enumeration value="main"/>
+										<xs:enumeration value="enclosure"/>
+										<xs:enumeration value="signature"/>
+										<xs:enumeration value="meta"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:attribute>
+							<xs:attribute name="dmFileGuid" type="xs:string" use="optional">
+								<xs:annotation>
+									<xs:documentation>IdentifikĂĄtor souboru unikĂĄtnĂ­ v rĂĄmci vĹĄech ERMS organizace.</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+							<xs:attribute name="dmUpFileGuid" type="xs:string">
+								<xs:annotation>
+									<xs:documentation>nepovinnĂ˝ internĂ­ identifikĂĄtor nadĹĂ­zenĂŠho dokumentu (napĹ. pro vztah soubor - podpis aj.)</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+							<xs:attribute name="dmFileDescr" type="xs:string" use="required">
+								<xs:annotation>
+									<xs:documentation>mĹŻĹže obsahovat jmĂŠno souboru, pĹĂ­p. jinĂ˝ popis. ObjevĂ­ se v seznamu pĹĂ­loh na portĂĄle</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+							<xs:attribute name="dmFormat" type="xs:string" use="optional">
+								<xs:annotation>
+									<xs:documentation>nepovinnĂ˝ Ăşdaj - odkaz na definici formulĂĄĹe</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tFileLinksArray">
+		<xs:annotation>
+			<xs:documentation>Pole odkazĹŻ na mĂ­sta obsahujĂ­cĂ­ binĂĄrnĂ­ obrazy soubory.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="FileLink" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="ess:tFileLink">
+							<xs:sequence>
+								<xs:element name="Identifikator" type="ess:tIdentifikator"/>
+							</xs:sequence>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tFilesArrayID">
+		<xs:sequence>
+			<xs:element name="dmFileID" maxOccurs="unbounded">
+				<xs:complexType mixed="false">
+					<xs:sequence>
+						<xs:element name="tFile">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="Identifikator" type="ess:tIdentifikator"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:group name="gStavVypraveneZasilky">
+		<xs:sequence>
+			<xs:element name="StavZasilky">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:whiteSpace value="collapse"/>
+						<xs:enumeration value="nevypraveno">
+							<xs:annotation>
+								<xs:documentation>
+													Nevypraveno.
+												</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="vypraveno">
+							<xs:annotation>
+								<xs:documentation>
+													Vypraveno.
+												</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="doruceno">
+							<xs:annotation>
+								<xs:documentation>
+													DoruÄeno.
+												</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="vraceno-jiny-duvod-overeno">
+							<xs:annotation>
+								<xs:documentation>
+													VrĂĄceno - jinĂ˝ dĹŻvod (ovÄĹeno).
+												</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="vraceno-jiny-duvod-neovereno">
+							<xs:annotation>
+								<xs:documentation>
+													VrĂĄceno - jinĂ˝ dĹŻvod (neovÄĹeno).
+												</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="vraceno-adresat-neznamy">
+							<xs:annotation>
+								<xs:documentation>
+													VrĂĄceno - adresĂĄt neznĂĄmĂ˝.
+												</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="vraceno-adresat-se-odstehoval">
+							<xs:annotation>
+								<xs:documentation>
+													VrĂĄceno - adresĂĄt se odstÄhoval bez udĂĄnĂ­ adresy.
+												</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="vraceno-neprijato">
+							<xs:annotation>
+								<xs:documentation>
+													VrĂĄceno - nepĹijato.
+												</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="vraceno-nevyzadano">
+							<xs:annotation>
+								<xs:documentation>
+													VrĂĄceno - nevyĹžĂĄdĂĄno.
+												</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="nedoruceno-zpracovano">
+							<xs:annotation>
+								<xs:documentation>
+													NedoruÄeno - zpracovĂĄno.
+												</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="vraceno-adresa-nedostatecna">
+							<xs:annotation>
+								<xs:documentation>
+													VrĂĄceno - adresa nedostateÄnĂĄ.
+												</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="stornovano">
+							<xs:annotation>
+								<xs:documentation>
+													StornovĂĄno.
+												</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:group>
+	<xs:complexType name="tOperaceStatus">
+		<xs:sequence>
+			<xs:element name="Kod" nillable="false">
+				<xs:annotation>
+					<xs:documentation>NĂĄvratovĂ˝ kĂłd operace. Hodnota 0000 je pro korektnĂ­ dokonÄenĂ­ operace.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="20"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Popis" nillable="true">
+				<xs:annotation>
+					<xs:documentation>ÄeskĂ˝ popis vĂ˝sledku operace. Byla-li dokonÄena korektnÄ, mĹŻĹže bĂ˝t hodnota prĂĄzdnĂĄ.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="200"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tObalka">
+		<xs:sequence>
+			<xs:element name="Identifikator" type="ess:tIdentifikator" nillable="false"/>
+			<xs:element name="Adresat" type="ess:tAdresat" nillable="false"/>
+			<xs:element name="ZasilkaInfo" type="tZasilkaInfo"/>
+			<xs:element name="ObalkaObsah">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Vypraveni" nillable="false" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="Identifikator" type="ess:tIdentifikator" nillable="false"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tZasilkaInfo">
+		<xs:annotation>
+			<xs:documentation>Popis parametrĹŻ zĂĄsilky. Druh, zpĹŻsob zachĂĄzenĂ­, datum vypravenĂ­, stav doruÄenĂ­ atd..</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="TextAdresy" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>TextAdresy je nepovinnĂĄ ÄĂĄst, kterĂĄ umoĹžĹuje pĹenĂŠst z jednoho systĂŠmu do druhĂŠho poĹžadavek, jak mĂĄ bĂ˝t vytiĹĄtÄna obĂĄlkovĂĄ adresa. FormĂĄtovĂĄnĂ­ tisku obĂĄlkovĂŠ adresy nemusĂ­ pĹesnÄ odpovĂ­dat strukturovanĂŠmu popisu doruÄovacĂ­ adresy.
+
+Ădaje zadanĂŠ v strukturovanĂŠ ÄĂĄsti doruÄovacĂ­ adresy majĂ­ pĹednost pĹed Ăşdaji zadanĂ˝mi v tĂŠto ÄĂĄsti. Tato ÄĂĄst je spĂ­ĹĄe doplĹkovou informacĂ­ ke strukturovanĂŠ formÄ adresy a slouĹžĂ­ pouze pro ĹĂ­zenĂ­ tisku obĂĄlky, ne pro strojnĂ­ zpracovĂĄnĂ­ dat o subjetku a jeho doruÄovacĂ­ adrese.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="AdresaRadek1" nillable="true" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>PrvnĂ­ ĹĂĄdek zĂĄsilkovĂŠ adresy.
+
+VÄtĹĄinou oslovenĂ­</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:minLength value="0"/>
+									<xs:maxLength value="50"/>
+									<xs:whiteSpace value="collapse"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="AdresaRadek2" nillable="true" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>DruhĂ˝ ĹĂĄdek zĂĄsilkovĂŠ adresy.
+
+VÄtĹĄinou funkce nebo konkrĂŠtnĂ­ osoba ( u firem nebo organizacĂ­ )</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:minLength value="0"/>
+									<xs:maxLength value="50"/>
+									<xs:whiteSpace value="collapse"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="AdresaRadek3" nillable="true" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>TĹetĂ­ ĹĂĄdek zĂĄsilkovĂŠ adresy.
+
+VÄtĹĄinou obchodnĂ­ jmĂŠno nebo jmĂŠno a pĹĂ­jmenĂ­.</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:minLength value="0"/>
+									<xs:maxLength value="50"/>
+									<xs:whiteSpace value="collapse"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="AdresaRadek4" nillable="true" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>ÄtvrtĂ˝ ĹĂĄdek zĂĄsilkovĂŠ adresy.
+
+VÄtĹĄinou ulice.</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:minLength value="0"/>
+									<xs:maxLength value="50"/>
+									<xs:whiteSpace value="collapse"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="AdresaRadek5" nillable="true" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>PĂĄtĂ˝ ĹĂĄdek zĂĄsilkovĂŠ adresy.
+
+VÄtĹĄinou ÄĂĄsto obce</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:minLength value="0"/>
+									<xs:maxLength value="50"/>
+									<xs:whiteSpace value="collapse"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="AdresaRadek6" nillable="true" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Ĺ estĂ˝ ĹĂĄdek zĂĄsilkovĂŠ adresy.
+
+VÄtĹĄinou mÄsto.</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:minLength value="0"/>
+									<xs:maxLength value="50"/>
+									<xs:whiteSpace value="collapse"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="AdresaRadek7" nillable="true" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>SedmĂ˝ ĹĂĄdek zĂĄsilkovĂŠ adresy.
+
+VÄtĹĄinou PSÄ</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:minLength value="0"/>
+									<xs:maxLength value="50"/>
+									<xs:whiteSpace value="collapse"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="AdresaRadek8" nillable="true" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>OsmĂ˝ ĹĂĄdek zĂĄsilkovĂŠ adresy.
+
+VÄtĹĄinou stĂĄt</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:minLength value="0"/>
+									<xs:maxLength value="50"/>
+									<xs:whiteSpace value="collapse"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<!-- ZpusobManipulace -->
+			<xs:choice minOccurs="0">
+				<xs:element name="ZpusobManipulaceId">
+					<xs:annotation>
+						<xs:documentation>ZpusobManipulace vyjadĹuje, jakĂ˝m zpĹŻsobem byl dokumentu doruÄen.</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:enumeration value="Posta"/>
+							<xs:enumeration value="Osobne"/>
+							<xs:enumeration value="VerejnaVyhlaska"/>
+							<xs:enumeration value="DetasovanaPosta"/>
+							<xs:enumeration value="Kuryr"/>
+							<xs:enumeration value="DorucovaciSluzba"/>
+							<xs:enumeration value="ElektronickaPosta"/>
+							<xs:enumeration value="Fax"/>
+							<xs:enumeration value="DalnopisTelegram"/>
+							<xs:enumeration value="Telefon"/>
+							<xs:enumeration value="UstneDoProtokolu"/>
+							<xs:enumeration value="EPodatelnaNosic"/>
+							<xs:enumeration value="EPodatelnaWeb"/>
+							<xs:enumeration value="EPodatelnaMail"/>
+							<xs:enumeration value="EPodatelnaMailElPodpis"/>
+							<xs:enumeration value="Rep"/>
+							<xs:enumeration value="DatovaSchranka"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="ZpusobManipulaceText" type="xs:string">
+					<xs:annotation>
+						<xs:documentation>
+              PojmenovĂĄnĂ­ zpĹŻsobu manipulace.
+              Tento prvek se pouĹžije pouze v pĹĂ­padÄ, Ĺže nelze pouĹžĂ­t jednu z moĹžnostĂ­ uvedenou ve vĂ˝Ätu moĹžnĂ˝ch hodnot poloĹžky "ZpusobManipulaceId".
+            </xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
+			<!-- ZpusobZachazeni -->
+			<xs:choice minOccurs="0">
+				<xs:element name="ZpusobZachazeniId">
+					<xs:annotation>
+						<xs:documentation>ZpusobZachazeni vyjadĹuje zpĹŻsob zachĂĄzenĂ­ se zĂĄsilkou nesoucĂ­ danĂ˝ dokument</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:enumeration value="BezDoplnkoveSluzby"/>
+							<xs:enumeration value="Dodejka"/>
+							<xs:enumeration value="DodejkaModra"/>
+							<xs:enumeration value="DodejkaCervena"/>
+							<xs:enumeration value="Dodejka3D"/>
+							<xs:enumeration value="DodejkaModra3D"/>
+							<xs:enumeration value="DodejkaCervena3D"/>
+							<xs:enumeration value="Dodejka10D"/>
+							<xs:enumeration value="DodejkaModra10D"/>
+							<xs:enumeration value="DodejkaCervena10D"/>
+							<xs:enumeration value="Dodejka1M"/>
+							<xs:enumeration value="DodejkaModra1M"/>
+							<xs:enumeration value="DodejkaCervena1M"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="ZpusobZachazeniText" type="xs:string">
+					<xs:annotation>
+						<xs:documentation>
+              PojmenovĂĄnĂ­ zpĹŻsobu zachĂĄzenĂ­ se zĂĄsilkou.
+              Tento prvek se pouĹžije pouze v pĹĂ­padÄ, Ĺže nelze pouĹžĂ­t jednu z moĹžnostĂ­ uvedenou ve vĂ˝Ätu moĹžnĂ˝ch hodnot poloĹžky "ZpusobZachazeniId".
+            </xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
+			<!-- DruhZasilky -->
+			<xs:choice minOccurs="0">
+				<xs:element name="DruhZasilkyId">
+					<xs:annotation>
+						<xs:documentation>DruhZasilky vyjadĹuje jakĂ˝m druhem zĂĄsilky byl danĂ˝ dokument doruÄen</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:enumeration value="Balik"/>
+							<xs:enumeration value="CennePsani"/>
+							<xs:enumeration value="CennyBalik"/>
+							<xs:enumeration value="Psani"/>
+							<xs:enumeration value="SlepeckaZasilka"/>
+							<xs:enumeration value="PsaniStandard">
+								<xs:annotation>
+									<xs:documentation>
+                    Nelze pouĹžĂ­t jinĂ˝ ZpusobZachazeni neĹž OBYCEJNA.
+                  </xs:documentation>
+								</xs:annotation>
+							</xs:enumeration>
+							<xs:enumeration value="DoporucenaZasilkaStandard"/>
+							<!-- DOPORUCENA ZASILKA - STANDARD -->
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="DruhZasilkyText" type="xs:string">
+					<xs:annotation>
+						<xs:documentation>
+              PojmenovĂĄnĂ­ zpĹŻsobu zachĂĄzenĂ­ se zĂĄsilkou.
+              Tento prvek se pouĹžije pouze v pĹĂ­padÄ, Ĺže nelze pouĹžĂ­t jednu z moĹžnostĂ­ uvedenou ve vĂ˝Ätu moĹžnĂ˝ch hodnot poloĹžky "DruhZasilkyId".
+            </xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
+			<xs:element name="DatumVypraveni" type="xs:date" minOccurs="0"/>
+			<xs:element name="Vaha" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>VĂĄha zĂĄsilky</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="5"/>
+						<xs:fractionDigits value="3"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Poplatek" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Poplatek za odeslĂĄnĂ­ zĂĄsilky</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="7"/>
+						<xs:fractionDigits value="2"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="PodaciCislo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>PodacĂ­ ÄĂ­slo poĹĄty, kterĂĄ pĂ­semnost pĹijala.
+									</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="0"/>
+						<xs:maxLength value="30"/>
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="IdZasilky" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Pro snadnÄjĹĄĂ­ dohledĂĄnĂ­ zĂĄsilky pĹi, napĹ. nĂĄvratu doruÄenky, bĂ˝vajĂ­ obĂĄlky opatĹeny textem, kterĂ˝ slouĹžĂ­ pro identifikaci zĂĄsilky. </xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="0"/>
+						<xs:maxLength value="30"/>
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="StavZasilky" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:whiteSpace value="collapse"/>
+						<xs:enumeration value="nevypraveno">
+							<xs:annotation>
+								<xs:documentation>
+													Nevypraveno.
+												</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="vypraveno">
+							<xs:annotation>
+								<xs:documentation>
+													Vypraveno.
+												</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="doruceno">
+							<xs:annotation>
+								<xs:documentation>
+													DoruÄeno.
+												</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="vraceno-jiny-duvod-overeno">
+							<xs:annotation>
+								<xs:documentation>
+													VrĂĄceno - jinĂ˝ dĹŻvod (ovÄĹeno).
+												</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="vraceno-jiny-duvod-neovereno">
+							<xs:annotation>
+								<xs:documentation>
+													VrĂĄceno - jinĂ˝ dĹŻvod (neovÄĹeno).
+												</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="vraceno-adresat-neznamy">
+							<xs:annotation>
+								<xs:documentation>
+													VrĂĄceno - adresĂĄt neznĂĄmĂ˝.
+												</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="vraceno-adresat-se-odstehoval">
+							<xs:annotation>
+								<xs:documentation>
+													VrĂĄceno - adresĂĄt se odstÄhoval bez udĂĄnĂ­ adresy.
+												</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="vraceno-neprijato">
+							<xs:annotation>
+								<xs:documentation>
+													VrĂĄceno - nepĹijato.
+												</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="vraceno-nevyzadano">
+							<xs:annotation>
+								<xs:documentation>
+													VrĂĄceno - nevyĹžĂĄdĂĄno.
+												</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="nedoruceno-zpracovano">
+							<xs:annotation>
+								<xs:documentation>
+													NedoruÄeno - zpracovĂĄno.
+												</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="vraceno-adresa-nedostatecna">
+							<xs:annotation>
+								<xs:documentation>
+													VrĂĄceno - adresa nedostateÄnĂĄ.
+												</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="stornovano">
+							<xs:annotation>
+								<xs:documentation>
+													StornovĂĄno.
+												</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Poznamka" type="xs:string" minOccurs="0"/>
+			<xs:element name="DatumDoruceni" type="xs:date" minOccurs="0"/>
+			<xs:choice>
+				<xs:element name="Soubory" type="tFilesArray" minOccurs="0"/>
+				<xs:element name="OdkazyNaSoubory" type="tFileLinksArray" minOccurs="0"/>
+			</xs:choice>
+			<xs:element name="dmID" type="isds:tIdDm" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>ID datovĂŠ zprĂĄvy</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="tUdalostId">
+		<xs:annotation>
+			<xs:documentation>JednoznaÄnĂĄ identifikace udĂĄlosti v rĂĄmci dĂĄvky.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:int"/>
+	</xs:simpleType>
+	<xs:attributeGroup name="gUdalostId">
+		<xs:annotation>
+			<xs:documentation>JednoznaÄnĂĄ identifikace udĂĄlosti v rĂĄmci dĂĄvky.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="UdalostId" type="xs:int" use="required"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="gDavkaInfo">
+		<xs:attribute name="Poradi" type="xs:int" use="required">
+			<xs:annotation>
+				<xs:documentation>PoĹadĂ­ dĂĄvky udĂĄlostĂ­ vygenerovanĂŠ v rĂĄmci komunikace mezi dvÄma ERMS. PoĹadĂ­ bude z vzestupnĂŠ nepĹeruĹĄovanĂŠ Ĺady v rĂĄmci jednoho zĂĄkaznĂ­ka a kombinace ERMS (zdroj) - ERMS (cĂ­l).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Zdroj" use="required">
+			<xs:annotation>
+				<xs:documentation>KĂłdovĂŠ oznaÄenĂ­ toho ERMS, kterĂŠ dĂĄvku udĂĄlostĂ­ pĹipravuje. KĂłd by mÄl bĂ˝t shodnĂ˝ s oznaÄenĂ­m ERMS pĹi generovĂĄnĂ­ jednoznaÄnĂ˝ch identifikĂĄtorĹŻ, tedy jej pĹidÄluje pĹŻvodce.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:maxLength value="6"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="Cil">
+			<xs:annotation>
+				<xs:documentation>KĂłdovĂŠ oznaÄenĂ­ toho ERMS, kterĂŠ dĂĄvku udĂĄlostĂ­ zpracovĂĄvĂĄ. KĂłd by mÄl bĂ˝t shodnĂ˝ s oznaÄenĂ­m ERMS pĹi generovĂĄnĂ­ jednoznaÄnĂ˝ch identifikĂĄtorĹŻ, tedy jej pĹidÄluje pĹŻvodce.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:maxLength value="6"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="DatumVzniku" type="xs:dateTime">
+			<xs:annotation>
+				<xs:documentation>Datum vzniku dĂĄvky udĂĄlostĂ­.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:complexType name="tVypraveni">
+		<xs:sequence>
+			<xs:element name="Identifikator" type="ess:tIdentifikator" nillable="false"/>
+			<xs:element name="Adresat" type="ess:tAdresat" nillable="false"/>
+			<xs:element name="ZasilkaInfo" type="tZasilkaInfo"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

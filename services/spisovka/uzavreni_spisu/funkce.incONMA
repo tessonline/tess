@@ -1,0 +1,422 @@
+<?php
+include_once(FileUp2('.admin/security_name.inc'));
+include_once(FileUp2(".admin/status.inc"));
+include_once(FileUp2(".admin/schvalovani.inc"));
+
+Function VratPrvotniSpis($spis1)
+{
+  $q=new DB_POSTA;
+  $vyslednespisy=array();
+  $pocet=0;
+  $sql="select * from cis_posta_spisy where puvodni_spis='".$spis1."' or novy_spis='".$spis1."' order by id asc";
+  $q->query ($sql);
+  $q->next_record();
+    $puvodnispis=$q->Record["PUVODNI_SPIS"];
+  return $puvodnispis;
+}
+Function VyhledejDalsiSpisy($spis1)
+{
+  If (HasRole('spravce')||HasRole('vedouci-odbor')) $vedouci=true; 
+    else $vedouci=false;
+
+  $USER_INFO = $GLOBALS["POSTA_SECURITY"]->GetUserInfo(); 
+  $referent = $USER_INFO["ID"]; 
+  $odbor = $USER_INFO["GROUP_ID"];
+  $q=new DB_POSTA;
+  $a=new DB_POSTA;
+  $vyslednespisy=array();
+  $pocet=0;
+  $sql="select * from cis_posta_spisy where puvodni_spis='".$spis1."' or novy_spis='%".$spis1."' order by id asc";
+  $q->query ($sql);
+  while($q->next_record())
+  {
+    $IDspisu=$q->Record["ID"];
+    $puvodnispis=$q->Record["PUVODNI_SPIS"];
+    $novyspis=$q->Record["NOVY_SPIS"];
+    if (substr_count($novyspis,'/')==2) {
+      $novyspis_temp = explode('/',$novyspis);
+      $novyspis = $novyspis_temp[1].'/'.$novyspis_temp[2];
+    }
+    $ownerid=$q->Record["OWNER_ID"];
+    /*
+    $sql="select group_id from security_user where id IN (".$ownerid.")";
+    $a->query ($sql);
+    while($a->next_record())
+    {
+      $skupina=$a->Record["GROUP_ID"];
+    }
+    */
+    If (($puvodnispis==$spis1) or ($novyspis==$spis1))
+    {
+      // nalezen dalsi spis, ulozime do pole
+      If ($puvodnispis<>$spis1) 
+      {
+        If ($referent==$ownerid) {$vyslednespisy[$pocet]["id"]=$IDspisu;}
+        If (($vedouci) and ($skupina==$odbor)) {$vyslednespisy[$pocet]["id"]=$IDspisu;}
+        $vyslednespisy[$pocet]["user"]=$ownerid;
+        $vyslednespisy[$pocet]["spis"]=$puvodnispis;
+        $pocet++;
+      }
+      else
+      {
+        If ($referent==$ownerid) {$vyslednespisy[$pocet]["id"]=$IDspisu;}
+        If (($vedouci) and ($skupina==$odbor)) {$vyslednespisy[$pocet]["id"]=$IDspisu;}
+        $vyslednespisy[$pocet]["user"]=$ownerid;
+        $vyslednespisy[$pocet]["spis"]=$novyspis;
+        $pocet++;
+      } 
+    }
+  } 
+  // tak mame v poli vsechna cisla spisu, ktera byla prirazena k jednacimu cislu zadanemu ve spis1, problem ale nastal, ze muze vzniknout vazba, ze dalsi spisy muzou vazat na opet dalsi spisy..., jasny. ne?
+
+  
+  return $vyslednespisy; 
+}
+
+
+// ukazeme spis, hledame, jestli v nem jsou prava nebo ne....
+Function UkazSpis($spis1,$user,$where)
+{
+  $rozhodspis=explode("/",$spis1);
+  If ($user<>'0')
+  {
+    $nazev="Dokumenty k ".$GLOBALS["CONFIG"]["CISLO_SPISU_3P"]." ".$rozhodspis[0]."/".$rozhodspis[1]." <i><font size=2>(vazbu vytvořil(a) ".UkazUsera($user).")</font></i>";
+//    $doc_id=$GLOBALS['doc_id'];
+//    require_once(GetAgendaPath('POSTA',false,false).'/.admin/classes/EedCj.inc');
+//    $cj_obj = new EedCj($doc_id);
+//    $where = $cj_obj->GetWhereForCJ($doc_id);
+  } 
+  else 
+  {
+    $nazev="Dokumenty k ".$GLOBALS["CONFIG"]["CISLO_SPISU_3P"]." ".$rozhodspis[0]."/".$rozhodspis[1];
+  }
+    $where=" CISLO_SPISU1=".$rozhodspis[0]." AND CISLO_SPISU2=".$rozhodspis[1]." AND superodbor=".$rozhodspis[2]." ";
+//  UNSET($GLOBALS['REFENRENT']);
+  $nazevtabulky=$rozhodspis[0].$rozhodspis[1];
+  Table(array(
+  "tablename"=>"$nazevtabulky",
+  "agenda"=>"POSTA",
+  "sql"=>"select * from posta WHERE ".$where." order by id desc",
+  "showaccess"=>true,
+  "caption"=>$nazev,
+  "showupload"=>false,
+  "modaldialogs"=>false,
+  "setvars"=>true,
+  "showhistory"=>true,
+  "appendwhere"=>$where,
+  "select_id"=>"ID" ,
+  "unsetvars"=>array("except"=>array("CISLO_SPISU1", "CISLO_SPISU2")),
+  "unsetvars"=>true ,
+  ));
+}
+
+Function UkazSpis_Obj($spis_id,$user,$my_table=array())
+{
+  require_once(GetAgendaPath('POSTA',false,false).'/.admin/classes/EedCj.inc');
+  $cj_obj = new EedCj($spis_id);
+  $cj_info = $cj_obj->GetCjInfo($spis_id,1);
+
+  $where = $cj_obj->GetWhereForCJ($spis_id);
+  If ($user<>'0')
+  {
+    $nazev="Dokumenty k ".$cj_info['CISLO_SPISU1']."/".$cj_info['CISLO_SPISU2']." <i><font size=2>(vazbu vytvořil(a) ".UkazUsera($user).")</font></i>";
+  } 
+  else 
+  {
+    $nazev="Dokumenty k ".$cj_info['CELY_NAZEV']."";
+  }
+    Table(array(
+  "tablename"=>$spis_id,
+  "agenda"=>"POSTA",
+  "sql"=>"select * from posta WHERE ".$where." order by id desc",
+  "showaccess"=>true,
+  "showupload"=>false,
+  "modaldialogs"=>false,
+  "caption"=>$nazev,
+  "setvars"=>true,
+  "showhistory"=>true,
+  "appendwhere"=>$where,
+  "select_id"=>"ID" ,
+  "unsetvars"=>array("except"=>array("CISLO_SPISU1", "CISLO_SPISU2")),
+  "unsetvars"=>true ,
+  "showinfo"=>isset($my_table['showinfo'])?$my_table['showinfo']:true,
+  "showedit"=>isset($my_table['showedit'])?$my_table['showedit']:$my_table['showedit'],
+  "showdelete"=>isset($my_table['showdelete'])?$my_table['showdelete']:true,
+  ));
+}
+
+Function HistorieSpisu($spis1,$spis2,$spis_id)
+{
+  $sql="select * from cis_posta_predani where spis_id=".$spis_id."";
+  $aa=new DB_POSTA;
+  $aa->query($sql);
+  $pocet=$aa->Num_Rows();
+  
+  If ($pocet>0)
+  {
+    echo "<p class=text><b>Historie předání:</b><br/>";
+    while($aa->next_record())
+    {
+      
+      $radek=$CONFIG["CISLO_SPISU"]." <b>".$spis1."/".$spis2."</b> předáno dne <b>".$aa->Record["DATUM"]."</b> od referenta <b>".UkazUsera($aa->Record["OLD_REFERENT"]);
+      If ($aa->Record["OLD_ODBOR"]<>$aa->Record["ODBOR"]) {
+//        $radek.="</b> z odboru <b>".UkazOdbor($aa->Record["OLD_ODBOR"])."</b> na odbor <b>".UkazOdbor($aa->Record["ODBOR"]);
+        $radek.="</b> na odbor <b>".UkazOdbor($aa->Record["ODBOR"]);
+      }
+      else $radek.="</b> v daném odboru";
+      $radek.="</b> referentovi <b>".UkazUsera($aa->Record["REFERENT"]);
+      If ($aa->Record["POZNAMKA"]<>"") {$radek.="</b> - pozn.- <b>".$aa->Record["POZNAMKA"];}
+      echo $radek."</b><br/>";
+    }
+    echo "</p>";
+  }
+}
+
+Function CZdate($engdatum)
+{
+  $datumkod=explode("-",$engdatum);
+  $czdatum=$datumkod[2].". ".$datumkod[1].". ".$datumkod[0];
+	$nowd=$czdatum; 
+//  $nowd = EReg_Replace("[. ]0"," ", $czdatum);
+//  $nowd = EReg_Replace("^0","", $nowd);
+  If ($engdatum=="") {$nowd="";}
+  return $nowd;
+}
+
+Function JeUzavrenSpis($spis1,$spis2,$referent)
+{
+  If ($spis1<>'')
+  {
+    $a=new DB_POSTA;
+    
+    If ($spis2<>'ID')
+    $sql='select spis_vyrizen from posta where cislo_spisu1='.$spis1.' and cislo_spisu2='.$spis2.' order by ID ASC ';
+    else
+    $sql='select spis_vyrizen from posta where ID='.$spis1;
+    
+    $a->query($sql);
+    $a->Next_Record();
+    //echo "a ".$sql;
+    If (trim($a->Record["SPIS_VYRIZEN"])=="") 
+      return false; 
+    else 
+      return CZDate($a->Record["SPIS_VYRIZEN"]);
+  }
+  else
+     return false;  
+}
+
+Function LzeUzavritSpis($spis1,$spis2,$referent)
+{
+  $res=false;
+  If ($spis1<>'')
+  {
+    $where_spis="(cislo_spisu1=".$spis1." and cislo_spisu2=".$spis2.")";
+    $dalsi_spisy= VyhledejDalsiSpisy($spis1."/".$spis2);
+    while (list($key,$val)=each($dalsi_spisy))
+    {
+      list($cj1,$cj2)=explode('/',$val['spis']);
+      $where_spis.=" OR (cislo_spisu1=".$cj1." and cislo_spisu2=".$cj2.")";
+    }
+
+    $a=new DB_POSTA;
+    $sql="select * from posta WHERE 
+    (
+     (odeslana_posta='f' and (datum_vyrizeni is null or vyrizeno is null) and spis_vyrizen is null)
+     or 
+     (odeslana_posta='t' and doporucene in ('3','4','5','Z') and datum_doruceni is null)
+    ) AND (".$where_spis.") 
+    and stornovano is null ";
+    $a->query($sql);
+    $pocet=$a->Num_Rows();
+    If ($pocet==0)
+      $res=true;
+    else
+      $res=false;   
+    $idcka=VratDokumentyKeSpisu($spis1,$spis2);      
+    while (list($key,$val)=each($idcka))
+    {
+    
+      if (JeVeSchvaleni($val)) $res=false;
+    }
+  
+  }
+  else
+     $res=false;
+  return $res;
+}
+Function LzeUzavritSpis_Obj($spis_id)
+{
+  require_once(GetAgendaPath('POSTA',false,false).'/.admin/classes/EedCj.inc');
+  $cj_obj = new EedCj($spis_id);
+  $docs = $cj_obj->GetDocsInCj($spis_id,1);
+  $ret = true;
+  if (count($docs>0))
+  while (list($key,$doc)=each($docs))
+  {
+    $doc_info=$cj_obj->GetDocInfo($doc);
+    if ($doc_info['STATUS']>1 && $doc_info['STATUS']<>9) $ret = false;
+//    if ($doc_info['STATUS']==-3) $ret = false;
+  }
+  return $ret;
+}
+
+Function VratDokumentyKeSpisu($spis1,$spis2,$referent=0)
+{
+  $aa=new DB_POSTA;
+  $where_spis="(cislo_spisu1=".$spis1." and cislo_spisu2=".$spis2.")";
+  $dalsi_spisy= VyhledejDalsiSpisy($spis1."/".$spis2);
+  while (list($key,$val)=each($dalsi_spisy))
+  {
+    list($cj1,$cj2)=explode('/',$val['spis']);
+    $where_spis.=" OR (cislo_spisu1=".$cj1." and cislo_spisu2=".$cj2.")";
+  }
+
+//  if ($referent==0)
+    $sql="select id from posta WHERE (".$where_spis.") and stornovano is null";
+//  else
+//    $sql="select id from posta WHERE cislo_spisu1=".$spis1." and cislo_spisu2=".$spis2." and referent=".$referent." and stornovano is null";
+//echo $sql;
+  $aa->query($sql);
+  $res=array();
+  while ($aa->Next_Record())
+    $res[]=$aa->Record["ID"];
+  return $res;
+}
+
+Function UzavritSpis($spis_id)
+{
+  require_once(FileUp2('.admin/uzavreni_cj.inc'));
+  $USER_INFO = $GLOBALS["POSTA_SECURITY"]->GetUserInfo();
+  $id_user=$USER_INFO["ID"];
+  $LAST_USER_ID=$id_user;
+  $OWNER_ID=$id_user;
+  $LAST_TIME=Date('H:i:s');
+  $LAST_DATE=Date('Y-m-d');
+  $add_info="last_date='$LAST_DATE',last_time='$LAST_TIME',last_user_id=".$LAST_USER_ID;
+  $aa=new DB_POSTA;
+  $chyba=0; $chyba_text=array();
+  require_once(GetAgendaPath('POSTA',false,false).'/.admin/classes/EedCj.inc');
+  $cj_obj = new EedCj($spis_id);
+  $docs = $cj_obj->GetDocsInCj($spis_id,1);
+  $where_spis = "ID IN (".implode(',',$docs).")";
+
+  $cj_info = $cj_obj->GetCjInfo($spis_id);
+  $skartace=$cj_info["SKARTACE"];
+  if ($skartace<1) {
+     $chyba_text[]='<b>Chyba:</b> Dokument id <b>$spis_id</b>:</b> U inicializačního dokumentu není vyplněna položka <b>Ukládání dokumentů</b>. Opravte to<br/>';
+     $chyba=1;
+  }
+  $sql="select datum_archivace_odhad from posta_spis WHERE spis_id=".$spis_id." order by id asc limit 1";
+  $aa->query($sql); $aa->Next_Record(); $odhad=$aa->Record['DATUM_ARCHIVACE_ODHAD'];
+  if ($odhad==1)
+  {
+     $chyba_text[]='<b>Chyba:</b> Je zadán odhad u datumu archivace. Prosím stanovte přesné datum počátku archivace a odeberte příznak odhadu.<br/>';
+     $chyba=1;
+  }
+
+  $kontroly = LzeUzavritCj($spis_id);
+  if (count($kontroly)>0) {
+    $chyba = 1;
+    while (list($key,$val)=each($kontroly)) $chyba_text[] = "<b>Chyba:</b> Dokument id <b>$spis_id</b>: " . $GLOBALS['chyby'][$val] . "<br/>";
+  }  
+  if ($chyba==1) {
+    require(FileUp2("html_header_posta.inc"));
+    echo "<p><span class='caption'>Kontrola uzavření čj. (spisu)</span></p>";
+    echo implode('<br/>',$chyba_text);
+    echo '<input type="button" class="button"value="   Zavřít okno   " onclick="window.close()">';
+    require(FileUp2("html_footer.inc"));
+    Die();
+  }
+  $sql="update posta set skartace='$skartace',$add_info where  (".$where_spis.") and (skartace is null or skartace=0)";
+  $aa->query($sql);
+  $LAST_DATE=Date('Y-m-d');
+  $sql="update posta set spis_vyrizen='$LAST_DATE',$add_info where ".$where_spis."";
+  $aa->query($sql);
+  while (list($key,$doc)=each($docs))
+    NastavStatus($doc);
+}
+
+Function OtevritSpis($spis_id)
+{
+$USER_INFO = $GLOBALS["POSTA_SECURITY"]->GetUserInfo();
+$id_user=$USER_INFO["ID"];
+$LAST_USER_ID=$id_user;
+$OWNER_ID=$id_user;
+$LAST_TIME=Date('H:i:s');
+$LAST_DATE=Date('Y-m-d');
+$add_info="last_date='$LAST_DATE',last_time='$LAST_TIME',last_user_id=".$LAST_USER_ID;
+  require_once(GetAgendaPath('POSTA',false,false).'/.admin/classes/EedCj.inc');
+  $cj_obj = new EedCj($spis_id);
+  $docs = $cj_obj->GetDocsInCj($spis_id,1);
+
+  $aa=new DB_POSTA;
+
+  $where_spis = "ID IN (".implode(',',$docs).")";
+  $sql="update posta set spis_vyrizen=NULL,$add_info where ".$where_spis."";
+//  $sql="update posta set spis_vyrizen=NULL where cislo_spisu1=".$spis1." and cislo_spisu2=".$spis2."";
+  $aa->query($sql);
+  while (list($key,$doc)=each($docs))
+    NastavStatus($doc);
+}
+
+Function StavPisemnosti($id)
+{
+  If ($id<>'')
+  {
+    $a=new DB_POSTA;
+    $sql="select stav from posta where id=".$id;
+    $a->query($sql);
+    $a->Next_Record();
+    return $a->Record["STAV"];
+  }
+  else
+    return false;
+}
+
+Function JeSkartovan($id)
+{
+  If ($id<>'')
+  {
+    $a=new DB_POSTA;
+    $sql="select skartovano from posta where id=".$id;
+    $a->query($sql);
+    $a->Next_Record();
+    return $a->Record["SKARTOVANO"];
+  }
+  else
+    return false;
+}
+Function JeStornovan($id)
+{
+  If ($id<>'')
+  {
+    $a=new DB_POSTA;
+    $sql="select stornovano from posta where id=".$id;
+    $a->query($sql);
+    $a->Next_Record();
+    If ($a->Record["STORNOVANO"]=='') return false;
+    else return $a->Record["STORNOVANO"];
+  }
+  else
+    return false;
+}
+Function StatusSpisu_Obj($spisid)
+{
+  require_once(GetAgendaPath('POSTA',false,false).'/.admin/classes/EedCj.inc');
+  $cj_obj = new EedCj($spis_id);
+  $cj_info = $cj_obj->GetCjInfo($spis_id);
+  $res=$cj_info["STATUS"];
+  return $res;
+}
+
+Function MajitelSpisu($spis_id)
+{
+  require_once(GetAgendaPath('POSTA',false,false).'/.admin/classes/EedCj.inc');
+  $cj_obj = new EedCj($spis_id);
+  $cj_info = $cj_obj->GetCjInfo($spis_id);
+  $res=$cj_info["REFERENT"];
+  return $res;
+}
+
+?>

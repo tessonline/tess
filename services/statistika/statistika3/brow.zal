@@ -1,0 +1,203 @@
+<?php
+require("tmapy_config.inc");
+require(FileUp2(".admin/nocache.inc"));
+require(FileUp2(".admin/brow_.inc"));
+require(FileUp2(".admin/brow_func.inc"));
+require(FileUp2(".admin/config.inc"));
+require(FileUp2(".admin/security_name.inc"));
+require(FileUp2("security/.admin/security_func.inc"));
+include_once($GLOBALS["TMAPY_LIB"]."/oohforms.inc");
+include_once($GLOBALS["TMAPY_LIB"]."/of_select.inc");
+require_once(GetAgendaPath('POSTA',false,false)."/.admin/el/of_select_.inc");
+require(FileUp2("html_header_posta.inc"));
+
+while (list($key,$val)=each($GLOBALS["CONFIG"]["TYP_ODESLANI"]))
+{
+  $id=$val['VALUE'];
+  $doporucene[$id] = $val['LABEL'];
+}
+$GLOBALS["DOPORUCENE"]=$doporucene;
+
+If ($GLOBALS["MESIC"]=="") {$GLOBALS["MESIC"]='%';}
+If ($GLOBALS["ROK"]=="") {$GLOBALS["ROK"]=date('Y');}
+If ($ODBOR>0) {$GLOBALS["ODBOR"]=$ODBOR;}
+if ($ODDELENI && !$ODBOR) 
+{
+   $jaky_odbor=UkazOdbor($ODD,0,0,1);
+   $ODBOR= VratOdbor(GetParentGroup($jaky_odbor));
+}
+
+if ($GLOBALS["HISTORIE"]) $text="(včetně archívu)";
+
+If ($GLOBALS["MESIC"]=="%") {  echo "<center><span class=\"caption\">Statistika evidence písemností za celý rok ".$GLOBALS["ROK"]." $text</span></center>";
+}
+else
+{
+echo "<center><span class=\"caption\">Statistika evidence dokumentů za ".$GLOBALS["MESIC"].". měsíc ".$GLOBALS["ROK"]." $text</span></center>";
+}
+echo "<br/>";
+
+
+$a=new DB_POSTA;
+
+// tabulka za cely MU
+if (!$GLOBALS["ODBOR"])
+{
+  $caption.="Celkem za úřad";
+  $data=NactiData($GLOBALS["MESIC"],$GLOBALS["ROK"],'','',0,0,$GLOBALS["HISTORIE"]);
+  $POSTA_STATISTIKA_DATA=$data;
+  echo "<table><tr><td align=left colspan=3><span class='caption'>".$caption."</span></td></tr><tr><td>";
+  $count = Table(array("showaccess" => true, "maxnumrows"=>1000,"showcount"=>false,"showself"=>false,"showinfo"=>false, "unsetvars"=>true,"showedit"=>false,"showdelete"=>false,"nopaging"=>($GLOBALS["strankovat"]?false:true),nocaption=>true));
+  $ukaz_obalka_pocet=0; $ukaz_obalka_text='';
+  $ukaz_doruceni_pocet=0; $ukaz_doruceni_text='';
+  while (list($key,$val)=each($data))
+  {
+    if ($val[id]=='a' && $val["POCET"]<>0) {$ukaz_obalka_pocet.=$val["POCET"].","; $ukaz_obalka_text.=$val["TEXT_GRAF"].",";}
+    if ($val[id]=='b' && $val["POCET"]<>0) {$ukaz_doruceni_pocet.=$val["POCET"].","; $ukaz_doruceni_text.=$val["TEXT_GRAF"].",";}
+  }
+  $url_add="data=$ukaz_obalka_pocet&name=$ukaz_obalka_text&nadpis=Druhy obálek";
+  echo "</td><td>";
+  echo "<img src='graph.php?".$url_add."'>";
+  $url_add="data=$ukaz_doruceni_pocet&name=$ukaz_doruceni_text&nadpis=Způsob doručení";
+  echo "</td><td>";
+  echo "<img src='graph.php?".$url_add."'>";
+  echo "</td></tr></table>";
+}
+
+// tabulka za jednotlive odbory
+if (!$GLOBALS["ODBOR"])
+{
+  $odbor_vypis=getSelectData(new of_select_superodbor(array()));
+  while (list($key_odbor,$val_odbor)=each($odbor_vypis))
+  {
+    echo "<hr/>";
+    $odd=''; $odbor_xx=$key_odbor;
+    $caption="";
+    if ($GLOBALS["CONFIG"]["ODDELENI"])
+      $caption="<a title=\"Zobrazit statistiky podle oddělení tohoto odboru\" href=\"brow.php?ODBOR=".$odbor_xx."&MESIC=".$GLOBALS["MESIC"]."&ROK=".$GLOBALS["ROK"]."\"><img src=\"".FileUp2('images/self.gif')."\" border=0 alt=\"Zobrazit statistiky podle oddělení tohoto odboru\"></a>&nbsp;";
+    $caption.="<a title=\"Zobrazit statistiky podle referentů tohoto odboru\" href=\"brow.php?ODBOR=".$odbor_xx."&ODDELENI=-1&MESIC=".$GLOBALS["MESIC"]."&ROK=".$GLOBALS["ROK"]."\"><img src=\"".FileUp2('images/two_people.gif')."\" border=0 alt=\"Zobrazit statistiky podle referentů tohoto odboru\"></a>&nbsp;";
+    $caption.="Celkem za: ".$val_odbor;
+    $data=NactiData($GLOBALS["MESIC"],$GLOBALS["ROK"],$odbor_xx,$oddeleni,'',0,$GLOBALS["HISTORIE"]);
+    $POSTA_STATISTIKA_DATA=$data;
+    echo "<table><tr><td align=left colspan=3><span class='caption'>".$caption."</span></td></tr><tr><td NOWRAP>";
+    $count = Table(array("showaccess" => true, "maxnumrows"=>1000,"showcount"=>false,"showself"=>false,"showinfo"=>false, "unsetvars"=>true,"showedit"=>false,"showdelete"=>false,"nopaging"=>true,"nocaption"=>true,"modaldialogs"=>true));
+    $ukaz_obalka_pocet=0; $ukaz_obalka_text='';
+    $ukaz_doruceni_pocet=0; $ukaz_doruceni_text='';
+    while (list($key,$val)=each($data))
+    {
+      if ($val[id]=='a' && $val["POCET"]<>0) {$ukaz_obalka_pocet.=$val["POCET"].","; $ukaz_obalka_text.=$val["TEXT_GRAF"].",";}
+      if ($val[id]=='b' && $val["POCET"]<>0) {$ukaz_doruceni_pocet.=$val["POCET"].","; $ukaz_doruceni_text.=$val["TEXT_GRAF"].",";}
+    }
+    $url_add="data=$ukaz_obalka_pocet&name=$ukaz_obalka_text&nadpis=Druhy obálek";
+    echo "</td><td>";
+    echo "<img src='graph.php?".$url_add."'>";
+    $url_add="data=$ukaz_doruceni_pocet&name=$ukaz_doruceni_text&nadpis=Způsob doručení";
+    echo "</td><td>";
+    echo "<img src='graph.php?".$url_add."'>";
+    echo "</td></tr></table>";
+    Flush();
+  }
+}
+if ($GLOBALS["CONFIG"]["ODDELENI"] && $GLOBALS["ODBOR"] && !$GLOBALS["ODDELENI"]) {
+  //jdeme vypsat oddeleni
+  $sql="SELECT DISTINCT o.id,g.name FROM cis_posta_odbory o LEFT JOIN security_group g ON g.id=o.id_odbor WHERE g.parent_group_id=".UkazOdbor($GLOBALS["ODBOR"],0,0,1)." ORDER BY g.name";
+//  echo $sql;
+  $a->query($sql);
+  $pocet_odd=0;
+  while ($a->Next_Record())
+  {
+    $pocet_odd++;
+    echo "<hr/>";
+    $odd=$a->Record["ID"]; $odbor2=$GLOBALS["ODBOR"];
+    $caption="<a href=\"brow.php?ODBOR=".$GLOBALS["ODBOR"]."&ODDELENI=".$odd."&MESIC=".$GLOBALS["MESIC"]."&ROK=".$GLOBALS["ROK"]."\"><img src=\"".FileUp2('images/two_people.gif')."\" border=0 alt=\"Zobrazit statistiky podle referentů tohoto odboru\"></a>&nbsp;";
+    $caption.="Celkem za: ".$a->Record["NAME"];
+    $data=NactiData($GLOBALS["MESIC"],$GLOBALS["ROK"],'',$odd,'',0,$GLOBALS["HISTORIE"]);
+    $POSTA_STATISTIKA_DATA=$data;
+    echo "<table><tr><td align=left colspan=3><span class='caption'>".$caption."</span></td></tr><tr><td NOWRAP>";
+    $count = Table(array("showaccess" => true, "maxnumrows"=>1000,"showcount"=>false,"showself"=>false,"showinfo"=>false, "unsetvars"=>true,"showedit"=>false,"showdelete"=>false,"nopaging"=>true,"nocaption"=>true,"modaldialogs"=>true));
+    $ukaz_obalka_pocet=0; $ukaz_obalka_text='';
+    $ukaz_doruceni_pocet=0; $ukaz_doruceni_text='';
+    while (list($key,$val)=each($data))
+    {
+      if ($val[id]=='a' && $val["POCET"]<>0) {$ukaz_obalka_pocet.=$val["POCET"].","; $ukaz_obalka_text.=$val["TEXT_GRAF"].",";}
+      if ($val[id]=='b' && $val["POCET"]<>0) {$ukaz_doruceni_pocet.=$val["POCET"].","; $ukaz_doruceni_text.=$val["TEXT_GRAF"].",";}
+    }
+    $url_add="data=$ukaz_obalka_pocet&name=$ukaz_obalka_text&nadpis=Druhy obálek";
+    echo "</td><td>";
+    echo "<img src='graph.php?".$url_add."'>";
+    $url_add="data=$ukaz_doruceni_pocet&name=$ukaz_doruceni_text&nadpis=Způsob doručení";
+    echo "</td><td>";
+    echo "<img src='graph.php?".$url_add."'>";
+    echo "</td></tr></table>";
+    Flush();
+  }
+	
+}
+
+if (($GLOBALS["ODBOR"] && $GLOBALS["CONFIG"]["ODDELENI"] && ($GLOBALS["ODDELENI"] || $pocet_odd==0)) or ($GLOBALS["ODBOR"] && !$GLOBALS["CONFIG"]["ODDELENI"] ))
+{
+  If ($GLOBALS["ODBOR"] && $GLOBALS["ODDELENI"]>0)
+  {
+    //ukazeme lidi z oddeleni
+    $aa=UkazOdbor($GLOBALS["ODDELENI"],0,0,1);
+  }
+  else
+  {
+    //ukazeme lidi z odboru
+    $aa=UkazOdbor($GLOBALS["ODBOR"],0,0,1);
+  }
+
+  if ($GLOBALS["REFERENT"]) $where_ref=" AND u.id=".$GLOBALS["REFERENT"];
+  $sql="SELECT u.id,u.lname,u.fname FROM security_user u LEFT JOIN security_group g ON u.group_id=g.id where g.id=".$aa." $where_ref and active ORDER BY lname";
+  $a->query($sql);
+  while ($a->Next_Record())
+  {
+    echo "<hr/>";
+//    $caption="<a href=\"brow.php?ODBOR=".$GLOBALS["ODBOR"]."&ODDELENI=".$odd."&MESIC=".$GLOBALS["MESIC"]."&ROK=".$GLOBALS["ROK"]."\"><img src=\"".FileUp2('images/self.gif')."\" border=0 alt=\"Zobrazit statistiky podle referentů tohoto odboru\"></a>&nbsp;";
+    $caption="Celkem za: ".$a->Record["FNAME"]." ".$a->Record["LNAME"];
+    $ref=$a->Record["ID"];
+    $data=NactiData($GLOBALS["MESIC"],$GLOBALS["ROK"],'','',$ref,0,$GLOBALS["HISTORIE"]);
+    $POSTA_STATISTIKA_DATA=$data;
+    echo "<table><tr><td align=left colspan=3><span class='caption'>".$caption."</span></td></tr><tr><td NOWRAP>";
+    $count = Table(array("showaccess" => true, "maxnumrows"=>1000,"showcount"=>false,"showself"=>false,"showinfo"=>false, "unsetvars"=>true,"showedit"=>false,"showdelete"=>false,"nopaging"=>true,"nocaption"=>true,"modaldialogs"=>true));
+    $ukaz_obalka_pocet=0; $ukaz_obalka_text='';
+    $ukaz_doruceni_pocet=0; $ukaz_doruceni_text='';
+    while (list($key,$val)=each($data))
+    {
+      if ($val[id]=='a' && $val["POCET"]<>0) {$ukaz_obalka_pocet.=$val["POCET"].","; $ukaz_obalka_text.=$val["TEXT_GRAF"].",";}
+      if ($val[id]=='b' && $val["POCET"]<>0) {$ukaz_doruceni_pocet.=$val["POCET"].","; $ukaz_doruceni_text.=$val["TEXT_GRAF"].",";}
+    }
+    $url_add="data=$ukaz_obalka_pocet&name=$ukaz_obalka_text&nadpis=Druhy obálek";
+    echo "</td><td>";
+    echo "<img src='graph.php?".$url_add."'>";
+    $url_add="data=$ukaz_doruceni_pocet&name=$ukaz_doruceni_text&nadpis=Způsob doručení";
+    echo "</td><td>";
+    echo "<img src='graph.php?".$url_add."'>";
+    echo "</td></tr>";
+
+    $data=NactiData($GLOBALS["MESIC"],$GLOBALS["ROK"],'','',$ref,1,$GLOBALS["HISTORIE"]);
+    $POSTA_STATISTIKA_DATA=$data;
+    echo "<tr><td NOWRAP>";
+    $count = Table(array("showaccess" => true, "maxnumrows"=>1000,"showcount"=>false,"showself"=>false,"showinfo"=>false, "unsetvars"=>true,"showedit"=>false,"showdelete"=>false,"nopaging"=>true,"caption"=>"Druh dokumentu","modaldialogs"=>true));
+    $ukaz_obalka_pocet=0; $ukaz_obalka_text='';
+    $ukaz_doruceni_pocet=0; $ukaz_doruceni_text='';
+    while (list($key,$val)=each($data))
+    {
+      if ($val[id]=='c' && $val["POCET"]<>0) {$ukaz_obalka_pocet.=$val["POCET"].","; $ukaz_obalka_text.=$val["TEXT_GRAF"].",";}
+    }
+    $url_add="data=$ukaz_obalka_pocet&name=$ukaz_obalka_text&nadpis=Druhy dokumentů";
+    echo "</td><td>";
+    echo "<img src='graph.php?".$url_add."'>";
+    echo "</td><td>";
+    //echo "<img src='graph.php?".$url_add."'>";
+    echo "</td></tr></table>";
+    Flush();
+
+  }
+}
+   
+echo '<hr/>';
+echo '<center><font face=verdana size=1>vytištěno v programu Evidence dokumentů, (c) T-MAPY spol. s r.o., tisk dne '.Date("d.m.Y H:m").'</font></center>';
+
+require(FileUp2("html_footer.inc"));
+?>

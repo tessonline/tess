@@ -1,0 +1,14 @@
+      </mets:xmlData>
+    </mets:mdWrap>
+  </mets:dmdSec>
+  ADD_FILES
+  <mets:structMap>
+    <mets:div TYPE="spisový plán" DMDID="DMDIDSP">
+        <mets:div TYPE="věcná skupina" DMDID="DMDIDVS">
+          <mets:div TYPE="spis" DMDID="DMDIDSPISID">
+                EEDDOCS
+        </mets:div>
+      </mets:div>
+    </mets:div>
+  </mets:structMap>
+</mets:mets>

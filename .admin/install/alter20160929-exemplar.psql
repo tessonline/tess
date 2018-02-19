@@ -1,0 +1,2 @@
+alter table posta add exemplar int;
+alter table posta_h add exemplar int;

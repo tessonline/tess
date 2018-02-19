@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.4.3.final using JasperReports Library version 6.4.3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="statistika_dokumentu" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8e9c6c77-80fb-4776-b985-6319865b4ffb">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+	<parameter name="P_TYP_DOKUMENTU" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select p.superodbor,p.typ_dokumentu,g.name,count(*) 
+as pocet from posta p 
+left join security_group g on g.id=p.superodbor 
+where name is not null and p.typ_dokumentu= $P{P_TYP_DOKUMENTU} 
+group by p.superodbor, p.typ_dokumentu,g.name;]]>
+	</queryString>
+	<field name="superodbor" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="superodbor"/>
+	</field>
+	<field name="typ_dokumentu" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="typ_dokumentu"/>
+	</field>
+	<field name="name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="name"/>
+	</field>
+	<field name="pocet" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="pocet"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="20" width="550" height="41" uuid="8850e6b8-4650-4bf0-826b-3335dea82556"/>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Sans" size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Počet dokumentů dle odborů a typu dokumentu]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20" uuid="e5a462c6-f266-4adc-b6a9-6bcbba2dadc1">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="57104253-b5da-455d-b5cc-e4cb788331a4"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Odbor číslo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="340" y="0" width="100" height="20" uuid="c32d4275-5f34-45a7-aaa0-60d08351b607">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0aeec278-9cc3-42df-ad78-e1b1565b9189"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Typ dokumentu]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="440" y="0" width="110" height="20" uuid="0c094227-4e12-4550-af86-f6a84857bf88">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c7a0f1ec-372d-4c70-9775-ba349be8fd34"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Počet dokumentů]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="0" width="240" height="20" uuid="f872725a-32f0-445c-a2f9-74851fbf14bf">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="366af6fe-d8ad-478d-b344-1169c9ebfcad"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Odbor jméno]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<textField>
+				<reportElement x="0" y="0" width="100" height="20" uuid="e470794d-6a4e-4cc7-a27b-4df6b4dce693">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="57104253-b5da-455d-b5cc-e4cb788331a4"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{superodbor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="340" y="0" width="100" height="20" uuid="2a45120f-54d4-4f76-aa51-e476031ab6c1">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0aeec278-9cc3-42df-ad78-e1b1565b9189"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{typ_dokumentu}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="240" height="20" uuid="84f3dd9e-9f21-476f-a1c6-370f1bc75dcc">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="366af6fe-d8ad-478d-b344-1169c9ebfcad"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans"/>
+					<paragraph lineSpacing="Proportional" leftIndent="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.###;(#,##0.###-)">
+				<reportElement x="440" y="0" width="110" height="20" uuid="2bab6d1e-cb5e-4b92-99b5-d0ae17b1c92b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c7a0f1ec-372d-4c70-9775-ba349be8fd34"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pocet}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="315">
+			<pie3DChart>
+				<chart evaluationTime="Report">
+					<reportElement x="0" y="20" width="550" height="295" uuid="feb520d9-2e04-48de-8be1-62b9fd669f80"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<pieDataset>
+					<keyExpression><![CDATA[$F{name}]]></keyExpression>
+					<valueExpression><![CDATA[$F{pocet}]]></valueExpression>
+				</pieDataset>
+				<pie3DPlot>
+					<plot/>
+					<itemLabel/>
+				</pie3DPlot>
+			</pie3DChart>
+		</band>
+	</summary>
+</jasperReport>

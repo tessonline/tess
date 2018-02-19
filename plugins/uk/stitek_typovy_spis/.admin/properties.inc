@@ -1,0 +1,2 @@
+<?php 
+$PROPERTIES = array("ACCESS_IDENT" => "POSTA",'AGENDA_TABLE' => 'POSTA','AGENDA_ID'    => 'ID');

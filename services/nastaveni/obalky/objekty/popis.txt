@@ -1,0 +1,15 @@
+Obalky
+
+id
+velikost papiru
+otoceni papiru
+nazev
+aktivni
+
+
+objekty
+id
+velikost fontu
+x a y souradnice
+velikost pole
+radkovani

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SouborVyjmoutZVypraveni xmlns="http://nsess.public.cz/erms/v_01_00" xmlns:ess="http://mvcr.cz/ess/v_1.0.0.0" xmlns:isds="http://isds.czechpoint.cz/v20" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://nsess.public.cz/erms/v_01_00/ermsAsynU.xsd">
+	<DokumentZruseniSouboruVypraveni UdalostId="0">
+		<IdDokument>
+			<Identifikator>
+				<ess:HodnotaID>String</ess:HodnotaID>
+				<ess:ZdrojID>String</ess:ZdrojID>
+			</Identifikator>
+			<DoplnujiciData/>
+		</IdDokument>
+		<DoplnujiciData/>
+		<Vypraveni>
+			<Identifikator>
+				<ess:HodnotaID>String</ess:HodnotaID>
+				<ess:ZdrojID>String</ess:ZdrojID>
+			</Identifikator>
+			<ZasilkaInfo>
+				<Soubory>
+					<dmFileID>
+						<tFile>
+							<Identifikator>
+								<ess:HodnotaID>String</ess:HodnotaID>
+								<ess:ZdrojID>String</ess:ZdrojID>
+							</Identifikator>
+						</tFile>
+					</dmFileID>
+				</Soubory>
+			</ZasilkaInfo>
+		</Vypraveni>
+	</DokumentZruseniSouboruVypraveni>
+	<Autorizace>
+		<provedlKdo>String</provedlKdo>
+		<provedlKdy>2001-12-17T09:30:47-05:00</provedlKdy>
+	</Autorizace>
+</SouborVyjmoutZVypraveni>

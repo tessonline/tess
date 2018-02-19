@@ -1,0 +1,13 @@
+<?php
+$PROPERTIES_ACCESS['POSTA_DOKUMENTACE'] = array(
+  'rightgroups' => array(
+    'access_all' => array(
+      'desc' => 'Plný přístup k aplikaci',
+      'contains' => array('all_read', 'all_insert', 'all_update', 'all_delete')
+    ),
+    'dokumentace-zapis' => array(
+      'desc' => 'Zápis do dokumentace',
+      'contains' => array('all_read', 'all_insert', 'all_update', 'all_delete')
+    )
+  ),
+);

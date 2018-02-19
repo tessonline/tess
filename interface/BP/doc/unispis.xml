@@ -1,0 +1,374 @@
+-- zalozeni spisu
+<?xml version="1.0" encoding="utf-8" ?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+  <SOAP-ENV:Header/>
+  <SOAP-ENV:Body>
+    <uni:SpisZalozeniRequest xmlns:ess="http://mvcr.cz/ess/v_1.0.0.0" xmlns:isds="http://isds.czechpoint.cz/v20" xmlns:uni="http://nsess.public.cz/erms/v_01_00">
+      <uni:ProfilSpisu>
+        <uni:Identifikator>
+          <ess:HodnotaID>10408</ess:HodnotaID>
+          <ess:ZdrojID>SDP2</ess:ZdrojID>
+        </uni:Identifikator>
+        <uni:Nazev>Vec - inicialni dokument</uni:Nazev>
+        <uni:Popis>Vec inicialniho dokumentu podrobne.</uni:Popis>
+        <uni:DatumCasVytvoreni>2011-11-11T14:14:39.321+01:00</uni:DatumCasVytvoreni>
+        <uni:TypDokumentu>SDP2 dokument</uni:TypDokumentu>
+        <uni:SpisovyPlan/>
+        <uni:SpisovyZnak>632.7</uni:SpisovyZnak>
+        <uni:SkartacniZnak/>
+        <uni:Poznamka>Poznamka</uni:Poznamka>
+        <uni:DoplnujiciData>
+          <uni:ZpusobVedeni>Priorace</uni:ZpusobVedeni>
+        </uni:DoplnujiciData>
+      </uni:ProfilSpisu>
+      <uni:DokumentyVlozene>
+        <uni:DokumentUplnyVlozeny>
+          <uni:VlastniDokument>
+            <uni:Identifikator>
+              <ess:HodnotaID>10408</ess:HodnotaID>
+              <ess:ZdrojID>SDP2</ess:ZdrojID>
+            </uni:Identifikator>
+            <uni:Nazev>Vec - inicialni dokument</uni:Nazev>
+            <uni:Popis>Vec inicialniho dokumentu podrobne.</uni:Popis>
+            <uni:DatumCasVytvoreni>2011-11-11T14:14:39.321+01:00</uni:DatumCasVytvoreni>
+            <uni:TypDokumentu>SDP2 dokument</uni:TypDokumentu>
+            <uni:SpisovyPlan/>
+            <uni:SpisovyZnak>632.7</uni:SpisovyZnak>
+            <uni:SkartacniZnak/>
+            <uni:Poznamka>PoznĂˇmka</uni:Poznamka>
+            <uni:DoplnujiciData>
+              <uni:PocetListu>1</uni:PocetListu>
+              <uni:PocetPriloh>0</uni:PocetPriloh>
+              <uni:DruhPriloh>iii</uni:DruhPriloh>
+            </uni:DoplnujiciData>
+          </uni:VlastniDokument>
+          <uni:PoradiVeSpisu>1</uni:PoradiVeSpisu>
+          <uni:StavZarazeniDoSpisu>Vlozen</uni:StavZarazeniDoSpisu>
+        </uni:DokumentUplnyVlozeny>
+      </uni:DokumentyVlozene>
+      <uni:Autorizace>
+        <uni:provedlKdo>123456</uni:provedlKdo>
+        <uni:provedlKdy>2011-11-11T14:14:39.331+01:00</uni:provedlKdy>
+      </uni:Autorizace>
+    </uni:SpisZalozeniRequest>
+  </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/">
+  <SOAP-ENV:Body>
+    <SpisZalozeniResponse xmlns="http://nsess.public.cz/erms/v_01_00" xmlns:ess="http://mvcr.cz/ess/v_1.0.0.0">
+      <ProfilSpisu>
+        <Identifikator>
+          <ess:HodnotaID>10408</ess:HodnotaID>
+          <ess:ZdrojID>TMAPES</ess:ZdrojID>
+        </Identifikator>
+        <Nazev>Vec - inicialni dokument</Nazev>
+        <CisloJednaci>EKO/30822/2011/--</CisloJednaci>
+        <SpisovaZnacka>30822/2011</SpisovaZnacka>
+        <PodaciDenikPoradi>30945</PodaciDenikPoradi>
+        <PodaciDenikRok>2011</PodaciDenikRok>
+        <DatumCasVytvoreni>2011-11-11T14:14:00</DatumCasVytvoreni>
+        <SpisovyZnak>632.7</SpisovyZnak>
+        <SkartacniZnak>A</SkartacniZnak>
+        <SkartacniLhuta>12</SkartacniLhuta>
+        <Poznamka></Poznamka>
+        <DoplnujiciData>
+          <ZpusobVedeni>Priorace</ZpusobVedeni>
+        </DoplnujiciData>
+      </ProfilSpisu>
+      <DokumentyVlozene>
+        <DokumentZkracenyVlozeny>
+          <IdDokument>
+            <Identifikator>
+              <ess:HodnotaID>10408</ess:HodnotaID>
+              <ess:ZdrojID>TMAPES</ess:ZdrojID>
+            </Identifikator>
+          </IdDokument>
+          <CisloJednaci>EKO/30822/2011/--</CisloJednaci>
+          <PodaciDenikPoradi>30945</PodaciDenikPoradi>
+          <PodaciDenikRok>2011</PodaciDenikRok>
+        </DokumentZkracenyVlozeny>
+      </DokumentyVlozene>
+      <OperaceStatus>
+        <Kod>0000</Kod>
+        <Popis>OK - Spis byl zalozen</Popis>
+      </OperaceStatus>
+    </SpisZalozeniResponse>
+  </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+
+
+-- vytvoreni vlastniho dokumentu (zatim be spisu)
+<?xml version="1.0" encoding="utf-8" ?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+  <SOAP-ENV:Header/>
+  <SOAP-ENV:Body>
+    <uni:VlastniDokumentZalozeniRequest xmlns:ess="http://mvcr.cz/ess/v_1.0.0.0" xmlns:isds="http://isds.czechpoint.cz/v20" xmlns:uni="http://nsess.public.cz/erms/v_01_00">
+      <uni:VlastniDokument>
+        <uni:Identifikator>
+          <ess:HodnotaID>10409</ess:HodnotaID>
+          <ess:ZdrojID>SDP2</ess:ZdrojID>
+        </uni:Identifikator>
+        <uni:Nazev>Test SDP2</uni:Nazev>
+        <uni:Popis>Vec podrobne</uni:Popis>
+        <uni:DatumCasVytvoreni>2011-11-11T14:14:42.225+01:00</uni:DatumCasVytvoreni>
+        <uni:TypDokumentu>SDP2 dokument</uni:TypDokumentu>
+        <uni:SpisovyPlan/>
+        <uni:SpisovyZnak>632.7</uni:SpisovyZnak>
+        <uni:SkartacniZnak/>
+        <uni:Poznamka>poznamka</uni:Poznamka>
+        <uni:DoplnujiciData>
+          <uni:PocetListu>1</uni:PocetListu>
+          <uni:PocetPriloh>0</uni:PocetPriloh>
+          <uni:DruhPriloh>iii</uni:DruhPriloh>
+        </uni:DoplnujiciData>
+      </uni:VlastniDokument>
+      <uni:Autorizace>
+        <uni:provedlKdo>123456</uni:provedlKdo>
+        <uni:provedlKdy>2011-11-11T14:14:42.225+01:00</uni:provedlKdy>
+      </uni:Autorizace>
+    </uni:VlastniDokumentZalozeniRequest>
+  </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/">
+  <SOAP-ENV:Body>
+    <VlastniDokumentZalozeniResponse xmlns="http://nsess.public.cz/erms/v_01_00" xmlns:ess="http://mvcr.cz/ess/v_1.0.0.0">
+      <VlastniDokument>
+        <Identifikator>
+          <ess:HodnotaID>10409</ess:HodnotaID>
+          <ess:ZdrojID>TMAPES</ess:ZdrojID>
+        </Identifikator>
+        <Nazev>Test SDP2</Nazev>
+        <CisloJednaci>EKO/30823/2011/--</CisloJednaci>
+        <PodaciDenikPoradi>30946</PodaciDenikPoradi>
+        <PodaciDenikRok>2011</PodaciDenikRok>
+        <DatumCasVytvoreni>2011-11-11T14:14:00</DatumCasVytvoreni>
+        <SpisovyZnak>632.7</SpisovyZnak>
+        <SkartacniZnak>A</SkartacniZnak>
+        <SkartacniLhuta>12</SkartacniLhuta>
+        <Poznamka></Poznamka>
+        <DoplnujiciData>
+          <PocetListu>1</PocetListu>
+          <PocetPriloh>0</PocetPriloh>
+          <DruhPriloh>iii</DruhPriloh>
+        </DoplnujiciData>
+      </VlastniDokument>
+      <OperaceStatus>
+        <Kod>0000</Kod>
+        <Popis>OK - Dokument byl vytvoren</Popis>
+      </OperaceStatus>
+    </VlastniDokumentZalozeniResponse>
+  </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+
+
+-- vlozeni prvotniho dokumentu do spisu
+<?xml version="1.0" encoding="utf-8" ?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+  <SOAP-ENV:Header/>
+  <SOAP-ENV:Body>
+    <uni:UdalostiRequest xmlns:ess="http://mvcr.cz/ess/v_1.0.0.0" xmlns:isds="http://isds.czechpoint.cz/v20" xmlns:uni="http://nsess.public.cz/erms/v_01_00">
+      <uni:Udalosti>
+        <uni:DokumentVlozeniDoSpisu UdalostId="1">
+          <uni:SpisId>
+            <uni:Identifikator>
+              <ess:HodnotaID>10408</ess:HodnotaID>
+              <ess:ZdrojID>SDP2</ess:ZdrojID>
+            </uni:Identifikator>
+          </uni:SpisId>
+          <uni:DokumentyVlozene>
+            <uni:DokumentIdVlozeny>
+              <uni:IdDokument>
+                <uni:Identifikator>
+                  <ess:HodnotaID>10409</ess:HodnotaID>
+                  <ess:ZdrojID>SDP2</ess:ZdrojID>
+                </uni:Identifikator>
+              </uni:IdDokument>
+              <uni:PoradiVeSpisu>1</uni:PoradiVeSpisu>
+              <uni:StavZarazeniDoSpisu>Vlozen</uni:StavZarazeniDoSpisu>
+            </uni:DokumentIdVlozeny>
+          </uni:DokumentyVlozene>
+          <uni:Autorizace>
+            <uni:provedlKdo>123456</uni:provedlKdo>
+            <uni:provedlKdy>2011-11-11T14:14:44.288+01:00</uni:provedlKdy>
+          </uni:Autorizace>
+        </uni:DokumentVlozeniDoSpisu>
+      </uni:Udalosti>
+    </uni:UdalostiRequest>
+  </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/">
+  <SOAP-ENV:Body>
+    <UdalostiResponse xmlns="http://nsess.public.cz/erms/v_01_00" xmlns:ess="http://mvcr.cz/ess/v_1.0.0.0">
+      <Zpravy>
+        <Zprava UdalostId="1" Poradi="0" DatumVzniku="2011-11-11T14:14:00">
+          <Kod>0000</Kod>
+          <Popis>OK - Do spisu byl vlozen dokument</Popis>
+        </Zprava>
+      </Zpravy>
+    </UdalostiResponse>
+  </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+
+
+-- prilozeni el. prilohy k dokumentu
+<?xml version="1.0" encoding="utf-8" ?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+  <SOAP-ENV:Header/>
+  <SOAP-ENV:Body>
+    <uni:UdalostiRequest xmlns:ess="http://mvcr.cz/ess/v_1.0.0.0" xmlns:isds="http://isds.czechpoint.cz/v20" xmlns:uni="http://nsess.public.cz/erms/v_01_00">
+      <uni:Udalosti>
+        <uni:SouborZalozeni UdalostId="1">
+          <uni:DokumentZaevidovaniSouboru>
+            <uni:IdDokument>
+              <uni:Identifikator>
+                <ess:HodnotaID>10409</ess:HodnotaID>
+                <ess:ZdrojID>SDP2</ess:ZdrojID>
+              </uni:Identifikator>
+            </uni:IdDokument>
+            <uni:Soubory>
+              <uni:dmFile dmFileDescr="priloha.pdf - Testovaci dokument" dmFileMetaType="main" dmMimeType="application/pdf">
+                <isds:dmEncodedContent>VmtkV2VtUkhPVEpaVjA1d1NVYzVhV015Um05SlIxSjJZVE5XZEZwWE5UQmtVelJuZUVwMlJtOWpVMDU0WWpkR2JXTlBPWGMyTTBSeFVXODk=</isds:dmEncodedContent>
+                <uni:Identifikator>
+                  <ess:HodnotaID>10410</ess:HodnotaID>
+                  <ess:ZdrojID>SDP2</ess:ZdrojID>
+                </uni:Identifikator>
+              </uni:dmFile>
+            </uni:Soubory>
+          </uni:DokumentZaevidovaniSouboru>
+          <uni:Autorizace>
+            <uni:provedlKdo>123456</uni:provedlKdo>
+            <uni:provedlKdy>2011-11-11T14:14:46.371+01:00</uni:provedlKdy>
+          </uni:Autorizace>
+        </uni:SouborZalozeni>
+      </uni:Udalosti>
+    </uni:UdalostiRequest>
+  </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/">
+  <SOAP-ENV:Body>
+    <UdalostiResponse xmlns="http://nsess.public.cz/erms/v_01_00" xmlns:ess="http://mvcr.cz/ess/v_1.0.0.0">
+      <Zpravy>
+        <Zprava UdalostId="1" Poradi="0" DatumVzniku="2011-11-11T14:14:00">
+          <Kod>0000</Kod>
+          <Popis>OK - Byl pripojen el. obsah souboru k dokumentu</Popis>
+        </Zprava>
+      </Zpravy>
+    </UdalostiResponse>
+  </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+
+
+-- aktualizace el. prilohy u dokumentu
+<?xml version="1.0" encoding="utf-8" ?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+  <SOAP-ENV:Header/>
+  <SOAP-ENV:Body>
+    <uni:UdalostiRequest xmlns:ess="http://mvcr.cz/ess/v_1.0.0.0" xmlns:isds="http://isds.czechpoint.cz/v20" xmlns:uni="http://nsess.public.cz/erms/v_01_00">
+      <uni:Udalosti>
+        <uni:SouborNovaVerze UdalostId="1">
+          <uni:DokumentZaevidovaniSouboru>
+            <uni:IdDokument>
+              <uni:Identifikator>
+                <ess:HodnotaID>10409</ess:HodnotaID>
+                <ess:ZdrojID>SDP2</ess:ZdrojID>
+              </uni:Identifikator>
+            </uni:IdDokument>
+            <uni:Soubory>
+              <uni:dmFile dmFileDescr="priloha.pdf - Testovaci dokument" dmFileMetaType="main" dmMimeType="application/pdf">
+                <isds:dmEncodedContent>VmtkV2VtUkhPVEpaVjA1d1NVYzVhV015Um05SlIxSjJZVE5XZEZwWE5UQmtVelJuZUVwMlJtOWpVMDU0WWpkR2JXTlBPWGMyTTBSeFVXODk=</isds:dmEncodedContent>
+                <uni:Identifikator>
+                  <ess:HodnotaID>10410</ess:HodnotaID>
+                  <ess:ZdrojID>SDP2</ess:ZdrojID>
+                </uni:Identifikator>
+              </uni:dmFile>
+            </uni:Soubory>
+          </uni:DokumentZaevidovaniSouboru>
+          <uni:Autorizace>
+            <uni:provedlKdo>123456</uni:provedlKdo>
+            <uni:provedlKdy>2011-11-11T14:14:47.893+01:00</uni:provedlKdy>
+          </uni:Autorizace>
+        </uni:SouborNovaVerze>
+      </uni:Udalosti>
+    </uni:UdalostiRequest>
+  </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/">
+  <SOAP-ENV:Body>
+    <UdalostiResponse xmlns="http://nsess.public.cz/erms/v_01_00" xmlns:ess="http://mvcr.cz/ess/v_1.0.0.0">
+      <Zpravy>
+        <Zprava UdalostId="1" Poradi="0" DatumVzniku="2011-11-11T14:14:00">
+          <Kod>0000</Kod>
+          <Popis>OK - obsah souboru byl aktualizovan</Popis>
+        </Zprava>
+      </Zpravy>
+    </UdalostiResponse>
+  </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+
+-- vypraveni (pripraveni obalky v EED) dokumentu
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+    <SOAP-ENV:Header/>
+    <SOAP-ENV:Body>
+        <uni:UdalostiRequest xmlns:ess="http://mvcr.cz/ess/v_1.0.0.0" xmlns:isds="http://isds.czechpoint.cz/v20" xmlns:uni="http://nsess.public.cz/erms/v_01_00">
+            <uni:Udalosti>
+                <uni:VypraveniZalozeni UdalostId="1">
+                    <uni:DokumentZaevidovaniVypraveni>
+                        <uni:IdDokument>
+                            <uni:Identifikator>
+                                <ess:HodnotaID>105/120517/33</ess:HodnotaID>
+                                <ess:ZdrojID>SDP2</ess:ZdrojID>
+                            </uni:Identifikator>
+                        </uni:IdDokument>
+                        <uni:Vypraveni>
+                            <uni:Identifikator>
+                                <ess:HodnotaID>105/120517/36</ess:HodnotaID>
+                                <ess:ZdrojID>SDP2</ess:ZdrojID>
+                            </uni:Identifikator>
+                            <uni:Adresat>
+                                <ess:Subjekt>
+                                    <ess:TypSubjektu>Fyzicka</ess:TypSubjektu>
+                                    <ess:DatumNarozeni>1989-10-27T00:00:00.000+01:00</ess:DatumNarozeni>
+                                    <ess:Jmeno>Petr</ess:Jmeno>
+                                    <ess:Prijmeni>Rychly</ess:Prijmeni>
+                                </ess:Subjekt>
+                                <ess:Adresa>
+                                    <ess:AdresaPostovni>
+                                        <ess:Obec>Praha 9</ess:Obec>
+                                        <ess:Ulice>Dlouha</ess:Ulice>
+                                        <ess:PopisneCislo>123</ess:PopisneCislo>
+                                        <ess:Psc>19000</ess:Psc>
+                                        <ess:TypAdresy>Dorucovaci</ess:TypAdresy>
+                                    </ess:AdresaPostovni>
+                                </ess:Adresa>
+                            </uni:Adresat>
+                            <uni:ZasilkaInfo>
+                                <uni:ZpusobManipulaceId>Posta</uni:ZpusobManipulaceId>
+                                <uni:ZpusobZachazeniId>DodejkaModra</uni:ZpusobZachazeniId>
+                                <uni:DruhZasilkyId>Psani</uni:DruhZasilkyId>
+                                <uni:DatumVypraveni>2012-05-17T15:48:02.453+02:00</uni:DatumVypraveni>
+                                <uni:Vaha>50.0</uni:Vaha>
+                                <uni:Poplatek>39.9</uni:Poplatek>
+                                <uni:StavZasilky>nevypraveno</uni:StavZasilky>
+                            </uni:ZasilkaInfo>
+                        </uni:Vypraveni>
+                    </uni:DokumentZaevidovaniVypraveni>
+                    <uni:Autorizace>
+                        <uni:provedlKdo>143</uni:provedlKdo>
+                        <uni:provedlKdy>2012-05-17T15:48:02.453+02:00</uni:provedlKdy>
+                    </uni:Autorizace>
+                </uni:VypraveniZalozeni>
+            </uni:Udalosti>
+        </uni:UdalostiRequest>
+    </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

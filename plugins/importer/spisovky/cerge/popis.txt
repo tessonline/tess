@@ -1,0 +1,82 @@
+CERGE
+
+tabulka
+cerge_pracovnici
+id
+puvodni_id
+cerge_id
+nhu_id
+- nutny prepocet z osoba -> osoba_id -> user_id
+
+
+S3_spisovy_znak
+PODLE NAZEV
+cerge_id
+kod_id
+skartace_id
+
+
+
+
+
+s3_dokument
+id
+dokument_typ_id - s3_dokument_typ - ODESLANA_POSTA
+zpusob_doruceni_id - s3_zpusob_doruceni - PRIJETI
+cislo_jednaci_id - DB s3_cislo_jednaci - TEXT_CJ + REFERENT
+zpusob_vyrizeni_id - s3_zpusob_vyrizeni - VYRIZENO
+zmocneni_id - NIC
+spousteci_udalost_id - NIC
+jid - NIC
+nazev - VEEC
+popis - add to poznamka
+cislo_jednaci - TEXT_CJ
+poradi - PROVERIT
+cislo_jednaci_odesilatele - JEJICH_CJ
+podaci_denik - NIC
+podaci_denik_poradi - CISLO_SPISU1
+podaci_denik_rok - CISLO_SPISU2
+spisovy_plan - NIC
+spisovy_znak_id - S3_spisovy_znak
+skartacni_znak - NIC
+skartacni_lhuta - NIC
+poznamka - ADD to poznamka
+lhuta - LHUTA
+epodatelna_id - NIC
+stav - jen kontrola?
+md5_hash NIC
+date_created - NIC
+user_created - OWNER_ID
+date_modified - LAST_DATE
+user_modified - LAST_USER_ID
+datum_vzniku - DATUM_PODATELNA_PRIJETI
+pocet_listu - POCET_LISTU
+pocet_priloh - POCET_PRILOH
+typ_prilohy - DRUH_PRILOH
+vyrizeni_pocet_listu - NIC
+vyrizeni_pocet_priloh - NIC
+vyrizeni_typ_prilohy - NIC
+ulozeni_dokumentu- spisovna?
+datum_vyrizeni - DATUM_VYRIZENI
+poznamka_vyrizeni - ADD to POZNAMKA
+datum_spousteci_udalosti - spisovna?
+cislo_doporuceneho_dopisu - REKOMANDO
+
+
+
+
+DORESIT
+log_spis
+log_dokument
+
+
+
+
+931
+934
+938
+943
+944
+
+
+

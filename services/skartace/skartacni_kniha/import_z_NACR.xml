@@ -1,0 +1,28 @@
+﻿<Seznam>
+    <EntitaSeznamu>
+        <Identifikator>26037951</Identifikator>
+        <IdentifikatorDA>DADA26037951</IdentifikatorDA>
+        <Operace>vyĹadit z vĂ˝bÄru</Operace>
+    </EntitaSeznamu>
+    <EntitaSeznamu>
+        <Identifikator>26031735</Identifikator>
+        <IdentifikatorDA>DADA26031735</IdentifikatorDA>
+        <Operace>zniÄit</Operace>
+    </EntitaSeznamu>
+    <EntitaSeznamu>
+        <Identifikator>26031740</Identifikator>
+        <Operace>vyĹadit z vĂ˝bÄru</Operace>
+    </EntitaSeznamu>
+    <EntitaSeznamu>
+        <Identifikator>26031782</Identifikator>
+        <Operace>vybrat za archivĂĄlii</Operace>
+    </EntitaSeznamu>
+    <EntitaSeznamu>
+        <Identifikator>26037949</Identifikator>
+        <Operace>zniÄit</Operace>
+    </EntitaSeznamu>
+    <EntitaSeznamu>
+        <Identifikator>26056626</Identifikator>
+        <Operace>pĹedloĹžit k vĂ˝bÄru</Operace>
+    </EntitaSeznamu>
+</Seznam>

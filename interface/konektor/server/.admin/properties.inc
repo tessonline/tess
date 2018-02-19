@@ -1,0 +1,5 @@
+<?php
+$PROPERTIES = array(
+  "AGENDA_IDENT" => "POSTA_KONEKTOR",
+  "ACCESS_IDENT" => "POSTA_KONEKTOR",
+);

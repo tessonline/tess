@@ -1,0 +1,32 @@
+#2007-05-08
+zaveden changelog
+#2007-05-08
+přidán parametr a_typdor - kdo bude doručovat obálku
+opravena funkce pro zápis LOG souboru - v případě, e nejde soubor otevřít, nevypisuje chyby
+#2007-07-11
+přidán parametr a_odbor_id - pokud se zada, pak se vytvori vnitrni posta
+přidán parametr a_druh_dokumentu - parametr, kterym se zada druh dokumentu
+přidán parametr a_spisznak - pokud se zada, pak se hodnota a_spisznak (je v nem skartacni kod) prepocita na ID
+přidány skripty:
+dokumenty.php - vraci typy dokumentu evidovane ve spisovce.
+doruceni.php - vraci zpusoby doruceni dokumentu
+skartace.php - vraci skartacni kody
+#2007-07-20
+opraven parametr na oddeleni - prepocet na odbor u urednika
+#2008-01-30
+oprava pri prirazeni oddeleni - pokud byl clovek jenom v odboru, pak to vracelo chybu
+#2008-02-04
+oprava pri ulozeni - parametr a_prijobyv se kontroluje na delku a pripadne orizne na 100znaku
+#2008-07-10
+novy soubor dorucenky.php - Vita nam zasle datum z dorucenky, nemusi se tedy zadavat 2x (do vity a do EED)
+upravn skript zaloz_pisemnost, u update se zapisuji datum a cas posledni zmeny
+#2009-02-19
+upraven skript zaloz_pisemnost.php tak, e nově očekává parametry, a_spisid (hodnotou je id kteréhokoliv dokumentu v daném spisu) a a_prac (hodnotou je identifikátor pracovníka, na kterého se má spis prevést).
+
+#2010-04-14
+upraven zaloz_pisemnost, pri udpdate zaznamu se nezapisovaly doplnkove sluzby + prepsany doplnkove sluzby na eregi
+#2010-04-20
+upraven zaloz_pisemnost, pri uzavreni spisu se kontroluje, jestli se muze spis uzavrit nebo ne (kontrola na dorucenky)
+
+#2016-06-06
+upraven dorucenky.php, cte a_cp i podle zaslaneho kodu

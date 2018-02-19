@@ -1,0 +1,12 @@
+create table posta_log (
+  id serial,
+  agenda_id bigint,
+  text text,
+  chyba int2 default 0,
+  last_date date,
+  last_time varchar(10),
+  last_user_id int,
+  owner_id int
+);
+
+create index "agenda_id_posta_log_key" on posta_log(agenda_id);

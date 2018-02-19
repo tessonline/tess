@@ -1,0 +1,306 @@
+<?php
+
+/*echo "Puvodni ".$GUIDE_NAME."<br/>";
+echo "Nove ".$GUIDE_NAME_MOJE;
+*/
+
+
+$is_filter = In_Array($form_params["formtype"], array($f_filter, $f_filter_all));
+$is_filter_all = In_Array($form_params["formtype"], array($f_filter_all));
+$is_filter_simple = In_Array($form_params["formtype"], array($f_filter));
+$is_insert = In_Array($form_params["formtype"], array($f_insert));
+$is_update = In_Array($form_params["formtype"], array($f_insert, $f_edit));
+$is_edit = In_Array($form_params["formtype"], array($f_edit));
+$is_info = In_Array($form_params["formtype"], array($f_info));
+$is_new = In_Array($form_params["formtype"], array($f_insertfrom)); 
+
+
+If ($GLOBALS["CONFIG"]["KONTROLA_UIR"]) $KONTROLA_UIR="<input type='button' class='button' onclick=\"javascript:UirAdr(3714)\" value='UIRADR-okres'>&nbsp;&nbsp;&nbsp;<input type='button' class='button' onclick=\"javascript:UirAdr(0)\" value='UIRADR-ČR'>";
+else
+{
+  $KONTROLNI_PANEL="";	
+  $KONTROLNI_PANEL_ROB="<input type='button' class='button' onclick=\"javascript:Rob()\" value='R'>";	
+}
+
+If (!$is_filter)
+{
+?>
+<script language="JavaScript" type="text/javascript">
+<!--
+var vall;
+document.body.onload = TestROZH;
+function TestROZH(){
+ var obj = document.frm_edit_prijemce.ODES_TYP.value;
+//		 if (vall == null) vall = document.frm_edit_prijemce.ODESL_PRIJMENI.value;
+
+		 document.frm_edit_prijemce.ODESL_ODD.style.backgroundColor = 'transparent';
+		 document.frm_edit_prijemce.ODESL_ODD.disabled=true;
+		 document.frm_edit_prijemce.ODESL_OSOBA.style.backgroundColor = 'transparent';
+		 document.frm_edit_prijemce.ODESL_OSOBA.disabled=true;
+ if (obj == "A" && obj != ""){
+		 document.frm_edit_prijemce.ODESL_PRIJMENI.style.backgroundColor = 'transparent';
+		 document.frm_edit_prijemce.ODESL_PRIJMENI.disabled=true;
+		 document.frm_edit_prijemce.ODESL_JMENO.style.backgroundColor = 'transparent';
+		 document.frm_edit_prijemce.ODESL_JMENO.disabled=true;
+		 document.frm_edit_prijemce.ODESL_TITUL.style.backgroundColor = 'transparent';
+		 document.frm_edit_prijemce.ODESL_TITUL.disabled=true;
+		 document.frm_edit_prijemce.ODESL_ULICE.style.backgroundColor = 'transparent';
+		 document.frm_edit_prijemce.ODESL_ULICE.disabled=true;
+		 document.frm_edit_prijemce.ODESL_CP.style.backgroundColor = 'transparent';
+		 document.frm_edit_prijemce.ODESL_CP.disabled=true;
+ }
+ if (obj == "P" && obj != ""){
+		 document.frm_edit_prijemce.ODESL_JMENO.style.backgroundColor = 'transparent';
+		 document.frm_edit_prijemce.ODESL_JMENO.disabled=true;
+		 document.frm_edit_prijemce.ODESL_TITUL.style.backgroundColor = 'transparent';
+		 document.frm_edit_prijemce.ODESL_TITUL.disabled=true;
+		 document.frm_edit_prijemce.ODESL_ODD.style.backgroundColor = 'white';
+		 document.frm_edit_prijemce.ODESL_ODD.disabled=false;
+		 document.frm_edit_prijemce.ODESL_OSOBA.style.backgroundColor = 'white';
+		 document.frm_edit_prijemce.ODESL_OSOBA.disabled=false;
+		 document.frm_edit_prijemce.ODESL_ICO.style.backgroundColor = 'white';
+		 document.frm_edit_prijemce.ODESL_ICO.disabled=false;
+ }
+if (obj == "F" && obj != ""){
+		 document.frm_edit_prijemce.ODESL_PRIJMENI.style.backgroundColor = 'white';
+		 document.frm_edit_prijemce.ODESL_PRIJMENI.disabled=false;
+		 document.frm_edit_prijemce.ODESL_JMENO.style.backgroundColor = 'white';
+		 document.frm_edit_prijemce.ODESL_JMENO.disabled=false;
+     document.frm_edit_prijemce.ODESL_TITUL.style.backgroundColor = 'white';
+		 document.frm_edit_prijemce.ODESL_TITUL.disabled=false;
+		 document.frm_edit_prijemce.ODESL_ULICE.style.backgroundColor = 'white';
+		 document.frm_edit_prijemce.ODESL_ULICE.disabled=false;
+		 document.frm_edit_prijemce.ODESL_CP.style.backgroundColor = 'white';
+		 document.frm_edit_prijemce.ODESL_CP.disabled=false;
+		 document.frm_edit_prijemce.ODESL_ODD.style.backgroundColor = 'transparent';
+		 document.frm_edit_prijemce.ODESL_ODD.disabled=true;
+		 document.frm_edit_prijemce.ODESL_ICO.style.backgroundColor = 'white';
+		 document.frm_edit_prijemce.ODESL_ICO.disabled=false;
+		 document.frm_edit_prijemce.ODESL_OSOBA.style.backgroundColor = 'transparent';
+		 document.frm_edit_prijemce.ODESL_OSOBA.disabled=true;
+  }
+if (obj == "O" && obj != ""){
+		 document.frm_edit_prijemce.ODESL_PRIJMENI.style.backgroundColor = 'white';
+		 document.frm_edit_prijemce.ODESL_PRIJMENI.disabled=false;
+		 document.frm_edit_prijemce.ODESL_JMENO.style.backgroundColor = 'white';
+		 document.frm_edit_prijemce.ODESL_JMENO.disabled=false;
+     document.frm_edit_prijemce.ODESL_TITUL.style.backgroundColor = 'white';
+		 document.frm_edit_prijemce.ODESL_TITUL.disabled=false;
+		 document.frm_edit_prijemce.ODESL_ULICE.style.backgroundColor = 'white';
+		 document.frm_edit_prijemce.ODESL_ULICE.disabled=false;
+		 document.frm_edit_prijemce.ODESL_CP.style.backgroundColor = 'white';
+		 document.frm_edit_prijemce.ODESL_CP.disabled=false;
+		 document.frm_edit_prijemce.ODESL_ODD.style.backgroundColor = 'transparent';
+		 document.frm_edit_prijemce.ODESL_ODD.disabled=true;
+		 document.frm_edit_prijemce.ODESL_ICO.style.backgroundColor = 'transparent';
+		 document.frm_edit_prijemce.ODESL_ICO.disabled=true;
+		 document.frm_edit_prijemce.ODESL_OSOBA.style.backgroundColor = 'transparent';
+		 document.frm_edit_prijemce.ODESL_OSOBA.disabled=true;
+  }
+
+}
+
+function ON_OFF_rozh(){
+		 document.frm_edit_prijemce.ODESL_PRIJMENI.style.backgroundColor = 'white';
+		 document.frm_edit_prijemce.ODESL_PRIJMENI.value = '';
+ 		 document.frm_edit_prijemce.ODESL_PRIJMENI.disabled=false;
+		 document.frm_edit_prijemce.ODESL_JMENO.style.backgroundColor = 'white';
+		 document.frm_edit_prijemce.ODESL_JMENO.disabled=false;
+     document.frm_edit_prijemce.ODESL_TITUL.style.backgroundColor = 'white';
+		 document.frm_edit_prijemce.ODESL_TITUL.disabled=false;
+		 document.frm_edit_prijemce.ODESL_ULICE.style.backgroundColor = 'white';
+		 document.frm_edit_prijemce.ODESL_ULICE.disabled=false;
+		 document.frm_edit_prijemce.ODESL_CP.style.backgroundColor = 'white';
+		 document.frm_edit_prijemce.ODESL_CP.disabled=false;
+		 document.frm_edit_prijemce.ODESL_ODD.style.backgroundColor = 'transparent';
+		 document.frm_edit_prijemce.ODESL_ODD.disabled=true;
+		 document.frm_edit_prijemce.ODESL_ICO.style.backgroundColor = 'transparent';
+		 document.frm_edit_prijemce.ODESL_ICO.disabled=true;
+		 document.frm_edit_prijemce.ODESL_OSOBA.style.backgroundColor = 'transparent';
+		 document.frm_edit_prijemce.ODESL_OSOBA.disabled=true;
+
+	if (event.srcElement.value == "F" && event.srcElement.value != ""){
+		 document.frm_edit_prijemce.ODESL_PRIJMENI.style.backgroundColor = 'white';
+		 document.frm_edit_prijemce.ODESL_PRIJMENI.value = '';
+		 document.frm_edit_prijemce.ODESL_PRIJMENI.disabled=false;
+		 document.frm_edit_prijemce.ODESL_JMENO.style.backgroundColor = 'white';
+		 document.frm_edit_prijemce.ODESL_JMENO.disabled=false;
+     document.frm_edit_prijemce.ODESL_TITUL.style.backgroundColor = 'white';
+		 document.frm_edit_prijemce.ODESL_TITUL.disabled=false;
+		 document.frm_edit_prijemce.ODESL_ULICE.style.backgroundColor = 'white';
+		 document.frm_edit_prijemce.ODESL_ULICE.disabled=false;
+		 document.frm_edit_prijemce.ODESL_CP.style.backgroundColor = 'white';
+		 document.frm_edit_prijemce.ODESL_CP.disabled=false;
+		 document.frm_edit_prijemce.ODESL_ODD.style.backgroundColor = 'transparent';
+		 document.frm_edit_prijemce.ODESL_ODD.disabled=true;
+		 document.frm_edit_prijemce.ODESL_ICO.style.backgroundColor = 'white';
+		 document.frm_edit_prijemce.ODESL_ICO.disabled=false;
+		 document.frm_edit_prijemce.ODESL_OSOBA.style.backgroundColor = 'transparent';
+		 document.frm_edit_prijemce.ODESL_OSOBA.disabled=true;
+  }
+
+	if (event.srcElement.value == "P" && event.srcElement.value != ""){
+		 document.frm_edit_prijemce.ODESL_TITUL.style.backgroundColor = 'transparent';
+		 document.frm_edit_prijemce.ODESL_PRIJMENI.value = '';
+		 document.frm_edit_prijemce.ODESL_TITUL.disabled=true;
+		 document.frm_edit_prijemce.ODESL_JMENO.style.backgroundColor = 'transparent';
+		 document.frm_edit_prijemce.ODESL_JMENO.disabled=true;
+		 document.frm_edit_prijemce.ODESL_ODD.style.backgroundColor = 'white';
+		 document.frm_edit_prijemce.ODESL_ODD.disabled=false;
+		 document.frm_edit_prijemce.ODESL_OSOBA.style.backgroundColor = 'white';
+		 document.frm_edit_prijemce.ODESL_OSOBA.disabled=false;
+		 document.frm_edit_prijemce.ODESL_ICO.style.backgroundColor = 'white';
+		 document.frm_edit_prijemce.ODESL_ICO.disabled=false;
+	}
+	if (event.srcElement.value == "A" && event.srcElement.value != ""){
+		 document.frm_edit_prijemce.ODESL_PRIJMENI.style.backgroundColor = 'transparent';
+		 document.frm_edit_prijemce.ODESL_PRIJMENI.value = 'anonym';
+		 document.frm_edit_prijemce.ODESL_PRIJMENI.disabled=true;
+		 document.frm_edit_prijemce.ODESL_JMENO.style.backgroundColor = 'transparent';
+		 document.frm_edit_prijemce.ODESL_JMENO.disabled=true;
+		 document.frm_edit_prijemce.ODESL_TITUL.style.backgroundColor = 'transparent';
+		 document.frm_edit_prijemce.ODESL_TITUL.disabled=true;
+		 document.frm_edit_prijemce.ODESL_ULICE.style.backgroundColor = 'transparent';
+		 document.frm_edit_prijemce.ODESL_ULICE.disabled=true;
+		 document.frm_edit_prijemce.ODESL_CP.style.backgroundColor = 'transparent';
+		 document.frm_edit_prijemce.ODESL_CP.disabled=true;
+	}
+	else {
+	}	 
+}
+function UirAdr(okres)
+{
+  newwindow = window.open('../../guide.php?G_NAME=posta_adresy&okrkod='+okres+'&ULICE='+document.forms[0].ODESL_ULICE.value+'&cp='+document.forms[0].ODESL_CP.value+'&co='+document.forms[0].ODESL_COR.value+'&psc='+document.forms[0].ODESL_PSC.value+'&mesto='+document.forms[0].ODESL_POSTA.value+'', 'uiradr', 'height=600px,width=600px,scrollbars,resizable');
+  newwindow.focus();
+}
+
+function Ares(){
+// && document.forms[0].ODESL_ICO.value!=valx
+  if (document.forms[0].ODESL_ICO.value){
+    newwindow = window.open('http://wwwinfo.mfcr.cz/ares/ares_fr.html.cz?JS=1&jazyk=cz&cestina=cestina&ico='+document.forms[0].ODESL_ICO.value, 'ODESL_ICO','height=600,width=800,left=10,top=10,scrollbars,resizable,toolbar,status,menubar,titlebar');
+    newwindow.focus();
+    var d = new Date();
+    value = window.showModalDialog("../../get_values.php?ICO="+document.forms[0].ODESL_ICO.value+"&"+d.getTime(), "", "dialogHeight:1;dialogWidth:200px;dialogTop:100;");
+    if (value){
+       var arr_val = value.split("|",2);
+       document.forms[0].ODESL_PRIJMENI.value = arr_val[0];
+       document.forms[0].ODESL_POSTA.value = arr_val[1];
+       document.forms[0].ODESL_PRIJMENI.style.color='red';
+       document.forms[0].ODESL_POSTA.style.color='red';
+    }   
+  }else 
+    alert("Musí být zadáno IČO !")
+}
+function Rob()
+{
+  if (document.forms[0].ODESL_PRIJMENI.value){
+  newwindow = window.open('guide.php?G_NAME=obyvatele&GUIDE_NR=2&prijmeni='+document.forms[0].ODESL_PRIJMENI.value+'&typ='+document.forms[0].ODES_TYP.value, 'ROB', 'height=600px,width=600px,left=1,top=1,scrollbars,resizable');
+  newwindow.focus();
+  }else 
+    alert("Musí být zadán výraz pro vyhledávání !")
+}
+
+function PSC(){
+// && document.forms[0].ODESL_ICO.value!=valx
+  if (document.forms[0].ODESL_PSC.value){
+    newwindow = window.open('../adresy/posta.php?PSC='+document.forms[0].ODESL_PSC.value, 'ODESL_PSC','height=100,width=100,left=10,top=10,scrollbars=0,resizable=0,toolbar=0,status=0,menubar=0,titlebar=0');
+
+  }
+  else 
+    alert("Musí být zadáno PSČ !")
+}
+//-->
+</script>
+
+
+<?php
+}
+
+If ($is_filter)
+{
+ $FORM_CONFIG["schema"][] = array("elements"=>array(
+            array( "type"=>"text", "name"=>"ODESL_PRIJMENI","size"=>"40")),   
+						"label"=>"Příjmení/Název firmy:");		
+
+}
+else
+{
+
+  $FORM_CONFIG["schema"][] = array("elements"=>array(
+            array( "type"=>"select_odes_typ", "name"=>"ODES_TYP", "width"=>10, add=>"onChange=\"ON_OFF_rozh()\"")),
+            "label"=>"Příjemce:");										 
+				    
+ $FORM_CONFIG["schema"][] = array("elements"=>array(
+            array( "type"=>"text", "name"=>"ODESL_PRIJMENI","size"=>"40","label"=>"Příjmení","required"=>true),   
+            array( "type"=>"text", "name"=>"ODESL_JMENO","size"=>"20","label"=>"Jméno"),
+            array( "type"=>"text", "name"=>"ODESL_TITUL","size"=>"5","label"=>"Titul")),
+            "format"=>"ODESL_PRIJMENI...'&nbsp;&nbsp;$KONTROLNI_PANEL_ROB&nbsp;&nbsp;&nbsp;Jméno:&nbsp;'...ODESL_JMENO...'&nbsp;&nbsp;&nbsp;Titul:&nbsp;'...ODESL_TITUL",
+            "visible"=>$is_edit or $is_insert or $is_new,										 
+            "label"=>"Příjmení&nbsp;/&nbsp;Firma:");		
+
+ $FORM_CONFIG["schema"][] = array("elements"=>array(
+            array( "type"=>"text", "name"=>"ODESL_PRIJMENI","size"=>"40","label"=>"Příjmení","required"=>true),   
+            array( "type"=>"text", "name"=>"ODESL_JMENO","size"=>"20","label"=>"Jméno"),
+            array( "type"=>"text", "name"=>"ODESL_TITUL","size"=>"5","label"=>"Titul")),
+            "format"=>"ODESL_TITUL...'&nbsp;'...ODESL_JMENO...'&nbsp;'...ODESL_PRIJMENI",
+            "visible"=>$is_info,										 
+            "label"=>"Adresa:");		
+
+ $FORM_CONFIG["schema"][] = array("elements"=>array(
+            array( "type"=>"text", "name"=>"ODESL_ICO","size"=>"15","label"=>"IČO"),   
+            array( "type"=>"text", "name"=>"ODESL_ODD","size"=>"20","label"=>"Oddělení"),   
+            array( "type"=>"text", "name"=>"ODESL_OSOBA","size"=>"18","label"=>"Osoba")),
+            "format"=>"ODESL_ICO...'&nbsp;<input type='button' class='button' onclick=\"javascript:Ares()\" value='ARES'>&nbsp;&nbsp;&nbsp;Oddělení&nbsp;'...ODESL_ODD...'&nbsp;&nbsp;&nbsp;Kont. osoba&nbsp;'...ODESL_OSOBA",
+            "visible"=>$is_edit or $is_insert or $is_new,										 
+            "label"=>"IČO:");		
+ $FORM_CONFIG["schema"][] = array("elements"=>array(
+            array( "type"=>"text", "name"=>"ODESL_ICO","size"=>"15","label"=>"IČO"),   
+            array( "type"=>"text", "name"=>"ODESL_ODD","size"=>"20","label"=>"Oddělení"),   
+            array( "type"=>"text", "name"=>"ODESL_OSOBA","size"=>"18","label"=>"Osoba")),
+            "format"=>"ODESL_ICO...'&nbsp;'...ODESL_ODD...'&nbsp;'...ODESL_OSOBA",
+            "visible"=>$is_info,										 
+            "label"=>"");		
+
+ $FORM_CONFIG["schema"][] = array("elements"=>array(
+            array( "type"=>"text", "name"=>"ODESL_ULICE","size"=>"40","label"=>"Ulice"),   
+            array( "type"=>"text_number", "name"=>"ODESL_CP","label"=>"č.p."),
+            array( "type"=>"text_number", "name"=>"ODESL_COR","label"=>"č.orient.")),
+            "format"=>"...ODESL_ULICE...'&nbsp;&nbsp;&nbsp;č.p.&nbsp;'...ODESL_CP...'&nbsp;&nbsp;&nbsp;č.orient.&nbsp;'...ODESL_COR",
+            "visible"=>$is_edit or $is_insert or $is_new,										 
+            "label"=>"Ulice:");		
+ $FORM_CONFIG["schema"][] = array("elements"=>array(
+            array( "type"=>"text", "name"=>"ODESL_ULICE","size"=>"40","label"=>"Ulice"),   
+            array( "type"=>"text", "name"=>"ODESL_CP","label"=>"č.p."),
+            array( "type"=>"text", "name"=>"ODESL_COR","label"=>"č.orient.")),
+            "format"=>"...ODESL_ULICE...'&nbsp;'...ODESL_CP...'&nbsp;'...ODESL_COR",
+            "visible"=>$is_info,										 
+            "label"=>"");		
+ $FORM_CONFIG["schema"][] = array("elements"=>array(
+            array( "type"=>"text", "name"=>"ODESL_PSC","label"=>"PSČ","size"=>"5","required"=>true),   
+            array( "type"=>"text", "name"=>"ODESL_POSTA","size"=>"40","label"=>"Město")),
+            "format"=>"ODESL_PSC...'&nbsp;<input type='button' class='button' value='?' onclick='javascript:PSC()'></a>&nbsp;&nbsp;Město&nbsp;'...ODESL_POSTA...'&nbsp;&nbsp;&nbsp;$KONTROLA_UIR'",
+            "visible"=>$is_edit or $is_insert or $is_new,										 
+            "label"=>"PSČ:");		
+
+ $FORM_CONFIG["schema"][] = array("elements"=>array(
+            array( "type"=>"text", "name"=>"ODESL_PSC","label"=>"PSČ","required"=>true),   
+            array( "type"=>"text", "name"=>"ODESL_POSTA","size"=>"40","label"=>"Město")),
+            "format"=>"ODESL_PSC...'&nbsp;'...ODESL_POSTA",
+            "visible"=>$is_info,										 
+            "label"=>"");		
+
+ $FORM_CONFIG["schema"][] = array("elements"=>array(
+            array( "type"=>"hidden", "name"=>"ODESL_ADRKOD","value"=>$GLOBALS["ODESL_ADRKOD"]),
+            array( "type"=>"hidden", "name"=>"OBYVATEL_KOD"),
+            array( "type"=>"hidden", "name"=>"ODESL_RC"),
+            array( "type"=>"hidden", "name"=>"FROZEN"),
+            array( "type"=>"hidden", "name"=>"OBJEKT_KOD")),
+            "label"=>"");		
+
+
+ $FORM_CONFIG["schema"][] = array("elements"=>array(
+            array( "type"=>"hidden", "name"=>"ODESL_ADRESAT","value"=>$GLOBALS["ODESL_ADRESAT"])),
+            "label"=>"");		
+}
+
+?>

@@ -1,0 +1,32 @@
+@import url('//ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/themes/base/jquery-ui.css');
+  
+.ui-autocomplete-loading {
+  background: white url('../images/ui-anim_basic_16x16.gif') right center no-repeat;
+}
+
+.ui-autocomplete {
+  border-radius: 0;
+  font-family: tahoma;
+  font-size: 11px;
+  max-height: 300px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.ui-autocomplete a {
+  border-radius: 0;
+}
+
+* html .ui-autocomplete {
+  height: 300px;
+}
+
+.placeholder {
+  color: #888;
+}
+
+.autocomplete-help {
+  margin: 0 0 0 4.5em;
+  line-height: 1.6em;
+  color: #888;
+}

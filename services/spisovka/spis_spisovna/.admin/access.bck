@@ -1,0 +1,96 @@
+<?php
+
+$PROPERTIES_ACCESS = array(
+"all_read"        => array(array("access_all","posta-podatelna-r","posta-vedouci-odbor-r","posta-vedouci-oddeleni-r","posta-referent-r","posta-spravce-r","access_all","posta-podatelna-ruid","posta-podatelna-odbor-r","posta-podatelna-odbor-ruid","posta-vedouci-odbor-ruid","posta-vedouci-oddeleni-ruid","
+posta-referent-ruid","posta-spravce-ruid"),array()),
+
+"all_read"        => array(array("access_all","posta-podatelna-r","posta-vedouci-odbor-r","posta-vedouci-oddeleni-r","posta-referent-r","posta-spravce-r","access_all","posta-podatelna-ruid","posta-podatelna-odbor-r","posta-podatelna-odbor-ruid","posta-vedouci-odbor-ruid","posta-vedouci-oddeleni-ruid","posta-referent-ruid","posta-spravce-ruid"),array()),
+
+"all_insert"      => array(array("access_all","posta-podatelna-ruid","posta-vedouci-odbor-ruid","posta-vedouci-oddeleni-r","posta-vedouci-oddeleni-ruid","posta-referent-ruid","posta-spravce-ruid","posta-podatelna-odbor-ruid"),array()),
+"all_update"      => "all_insert",
+"all_delete"      => array(array("access_all","posta-spravce-ruid","posta-vedouci-odbor-ruid","posta-vedouci-oddeleni-ruid","posta-spisovna-ruid"),array()),
+
+"podatelna"=> array(array("posta-podatelna-r","posta-podatelna-ruid","posta-podatelna-odbor-r","posta-podatelna-odbor-ruid"),array()),
+
+"export"       => true,
+
+"podatelna" => array(array("posta-podatelna-ruid")),
+"podatelna-odbor" => array(array("posta-podatelna-odbor-ruid")),
+"vedouci-odbor" => array(array("posta-vedouci-odbor-ruid")),
+"sekretariat" => array(array("posta-sekretariat-uzlu-ruid")), //toto pravo ukaze nejblizsi spisovy uzel
+"zpracovatel" => array(array("posta-referent-ruid")),
+"omezeni-zpracovatele" => array(array("posta-omezit-referent")),
+"spravce" => array(array("posta-spravce-ruid","access_all")),
+"muze-razitko" => array(array("posta-spravce-ruid","access_all","posta-prideleni-ts")),
+
+"zmena-odboru" => array(array("posta-zmena-odboru","posta-vedouci-odbor-ruid")),
+"zmena-odboru-nahoru"=>array(array("posta-zmena-odboru"),array("krizovaa")),
+
+ "spisovna" => array(array("posta-spisovna-ruid"),array()),
+
+"zmena-referenta" => array(array("posta-zmena-odboru"),array("slaby")),
+
+);
+if (strpos($_SERVER[SCRIPT_NAME],'interface/')) $PROPERTIES_ACCESS[all_read]=true;
+if (strpos($_SERVER[SCRIPT_NAME],'interface/')) $PROPERTIES_ACCESS[all_update]=true;
+if (strpos($_SERVER[SCRIPT_NAME],'interface/')) $PROPERTIES_ACCESS[all_insert]=true;
+if (strpos($_SERVER[SCRIPT_NAME],'interface/')) $PROPERTIES_ACCESS[all_delete]=true;
+
+if (strpos($_SERVER[SCRIPT_NAME],'elo')) $PROPERTIES_ACCESS[all_read]=true;
+if (strpos($_SERVER[SCRIPT_NAME],'elo')) $PROPERTIES_ACCESS[all_update]=true;
+if (strpos($_SERVER[SCRIPT_NAME],'elo')) $PROPERTIES_ACCESS[all_insert]=true;
+if (strpos($_SERVER[SCRIPT_NAME],'elo')) $PROPERTIES_ACCESS[all_delete]=true;
+
+if (strpos($_SERVER[SCRIPT_NAME],'ug_file.php')) $PROPERTIES_ACCESS[all_delete]=true;
+if (strpos($_SERVER[SCRIPT_NAME],'ug_file.php') && $GLOBALS['RECORD_ID']>1)
+{
+  $q=new DB_POSTA;
+  $sql='select * from posta where id='.$GLOBALS['RECORD_ID'];
+  $q->query($sql); $q->Next_Record(); $data=$q->Record;
+  $file_read_only = false;
+  
+  //if (JeVeSchvaleni($GLOBALS['RECORD_ID']))
+  //$file_read_only=true;
+  
+  if (SchvalenoKladne($GLOBALS['RECORD_ID']))
+  $file_read_only=true;
+  
+  //pokud jde o prichozidokument prijaty elektronicky, pak zamezime moznosti smazani dokumentu
+  if ($data['ODESLANA_POSTA']=='f' && $data['ZPUSOB_PODANI']=='3')
+  $file_read_only=true;
+  //pokud jde o odchozi dokument a je uz odeslan, pak zamezime moznosti smazani dokumentu
+  if ($data['ODESLANA_POSTA']=='t' && $data['DATUM_VYPRAVENI']<>'')
+  $file_read_only=true;
+  //pokud je vyrizen spis
+  if ($data['SPIS_VYRIZEN']<>'')
+  $file_read_only=true;
+  //pokud jsou nejak vyrizene dokumenty
+  if ($data['STATUS']<2)
+  $file_read_only=true;
+  //prichozi vnitrni posta - nejde menit
+  if ($data['ODESLANA_POSTA']=='f' && $data['ODES_TYP']=='X')
+  $file_read_only=true;
+  
+  if ($file_read_only)
+  {
+    $PROPERTIES_ACCESS[all_insert]=false;
+    $PROPERTIES_ACCESS[all_update]=false;
+    $PROPERTIES_ACCESS[all_delete]=false;
+  }
+}
+
+//print_r($PROPERTIES_ACCESS);
+/*
+
+$PROPERTIES_ACCESS = array(
+"all_read"        => array(array("access_all"),array()),
+"all_insert"      => array(array("access_all"),array()),
+"all_update"      => "all_insert",
+"all_delete"      => array(array("access_all"),array()),
+
+//"podatelna"=> array(array("posta-podatelna-r","posta-podatelna-ruid","posta-podatelna-odbor-r","posta-podatelna-odbor-ruid"),array()),
+
+);
+
+*/
+?>

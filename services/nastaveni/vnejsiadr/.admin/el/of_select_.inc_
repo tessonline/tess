@@ -1,0 +1,24 @@
+<?php
+//include_once($GLOBALS['TMAPY_LIB'].'/of_select_db.inc');
+
+/*
+class of_select_nazev extends of_select {
+
+  function of_select_nazev($a) {
+    $this->setup_element($a);
+    if($a['insertnull']) $this->options[] = array('value'=>'', 'label'=>'');
+    $this->options[] = array('value'=>1, 'label'=>'');
+    $this->options[] = array('value'=>2, 'label'=>'');
+  }
+}
+
+class of_select_nazev2 extends of_select_db {
+  // Constructor
+  function of_select_nazev2($a) {
+    $this->setup_element($a);
+    $this->DB_Sql = new DB_DEFAULT;
+    $this->DB_Sql->query('SELECT sl1, sl2 FROM tabulka ORDER BY sl3');
+    $this->init_db();
+  }
+}  
+*/

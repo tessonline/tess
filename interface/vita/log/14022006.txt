@@ -1,0 +1,11 @@
+14:55:32 - insert into posta (ev_cislo,rok,odbor,typ_posty,odes_typ,vec,odesl_prijmeni,odesl_jmeno,odesl_titul,odesl_ico,odesl_ulice,odesl_cp,odesl_cor,
+odesl_psc,  odesl_posta,datum_podatelna_prijeti,referent,odeslana_posta,doporucene,vlastnich_rukou,dorucenka,cislo_spisu1,cislo_spisu2,id_puvodni,
+odesl_odd,  odesl_osoba,last_date,last_time,last_user_id,owner_id,skartace,dalsi_prijemci,cislo_jednaci1,cislo_jednaci2,odbor_spisu,obyvatel_kod)  values 
+(0,2006,999,0,'0','','','','','','','','',
+'','','',700,'t','','1','',0,0,0,
+'','','2006-02-14','14:02',700,700,'','',0,0,'',0)14:56:08 - insert into posta (ev_cislo,rok,odbor,typ_posty,odes_typ,vec,odesl_prijmeni,odesl_jmeno,odesl_titul,odesl_ico,odesl_ulice,odesl_cp,odesl_cor,
+odesl_psc,  odesl_posta,datum_podatelna_prijeti,referent,odeslana_posta,doporucene,vlastnich_rukou,dorucenka,cislo_spisu1,cislo_spisu2,id_puvodni,
+odesl_odd,  odesl_osoba,last_date,last_time,last_user_id,owner_id,skartace,dalsi_prijemci,cislo_jednaci1,cislo_jednaci2,odbor_spisu,obyvatel_kod)  values 
+(0,2006,999,0,'0','','','','','','','','',
+'','','14.02.2006 10:13',700,'t','','1','',0,0,0,
+'','','2006-02-14','14:02',700,700,'','',0,0,'',0)

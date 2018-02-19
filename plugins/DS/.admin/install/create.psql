@@ -1,0 +1,14 @@
+drop table posta_epodatelna;
+
+create table posta_epodatelna (
+
+  id serial,
+  mailbox varchar(50),
+  smer varchar(1),
+  uid int4,
+  record_uid varchar(100),
+  dokument_id int4,
+  last_date date,
+  last_time varchar(50),
+  last_user_id int4
+);

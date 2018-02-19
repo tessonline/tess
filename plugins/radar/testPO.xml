@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ess:Spisy xmlns:ess="http://mvcr.cz/ess/v_1.0.0.0">
+  <ess:Spis>
+    <ess:Nazev/>
+    <ess:DatumCasVytvoreni>2017-08-01T10:37:17</ess:DatumCasVytvoreni>
+    <ess:SouvisejiciSubjekty>
+      <ess:SouvisejiciSubjekt>
+        <ess:Subjekt>
+          <ess:TypSubjektu>Pravnicka</ess:TypSubjektu>
+          <ess:ObchodniNazev>GE CAPITAL MULTISERVIS A S</ess:ObchodniNazev>
+          <ess:IC>49241150</ess:IC>
+          <ess:Adresy>
+            <ess:AdresaPostovni>
+              <ess:Obec>PRAHA 4</ess:Obec>
+              <ess:CastObce/>
+              <ess:MestskaCast/>
+              <ess:Ulice>VYSKOCILOVA</ess:Ulice>
+              <ess:OrientacniCislo/>
+              <ess:PopisneCislo>1422</ess:PopisneCislo>
+              <ess:Psc>14000</ess:Psc>
+              <ess:Zeme>CZ</ess:Zeme>
+            </ess:AdresaPostovni>
+            <ess:AdresaDS>
+              <ess:IdDb/>
+            </ess:AdresaDS>
+          </ess:Adresy>
+          <ess:DoplnujiciData>
+            <pr:Role xmlns:pr="http://www.vitasw.cz/NS/Prestupky">Provozovatel</pr:Role>
+          </ess:DoplnujiciData>
+        </ess:Subjekt>
+      </ess:SouvisejiciSubjekt>
+    </ess:SouvisejiciSubjekty>
+    <ess:DoplnujiciData>
+      <pr:Prestupek xmlns:pr="http://www.vitasw.cz/NS/Prestupky">
+        <pr:RZ>1L25307</pr:RZ>
+        <pr:Rychlost>
+          <pr:Namerena>74</pr:Namerena>
+          <pr:Tolerance jednotka="kmh">3</pr:Tolerance>
+          <pr:Vypoctena>71</pr:Vypoctena>
+        </pr:Rychlost>
+        <pr:Spachano>2016-10-03T15:42</pr:Spachano>
+        <pr:Popis>oznámení přestupku proti bezpečnosti a plynulosti provozu na pozemních komunikacích, kterého se měl dopustit neznámý řidič motorového vozidla , RZ: 1L25307, tím, ·e dne v 15:42 hod. na vozovce pozemní komunikace v obci Poděbrady, ulice Kovanická,silnice I/38 směr Kolín, překročil maximální povolenou rychlost jízdy v obci o 21 km.h-1 (po odečtení tolerance měřícího zařízení +/- 3 km.h-1), kdy· byla uvedenému vozidlu automatizovaným technickým prostředkem pou·ívaným bez obsluhy naměřena rychlost jízdy 74 km.h-1.</pr:Popis>
+        <pr:Misto>
+          <pr:Text/>
+          <pr:RuianKod/>
+          <pr:Obec>Poděbrady</pr:Obec>
+          <pr:CastObce/>
+          <pr:CisloDomovni/>
+          <pr:TypStavebnihoObjektu/>
+          <pr:Ulice>Kovanická</pr:Ulice>
+          <pr:CisloOrientacni/>
+          <pr:CisloOrientacniPismeno/>
+        </pr:Misto>
+        <pr:PravniKvalifikaceSeznam>
+          <pr:PravniKvalifikace typ="prestupek">
+            <pr:Zakon>361/2000</pr:Zakon>
+            <pr:Paragraf>125c</pr:Paragraf>
+            <pr:Odstavec>1</pr:Odstavec>
+            <pr:Pismeno>f</pr:Pismeno>
+            <pr:Bod>3</pr:Bod>
+          </pr:PravniKvalifikace>
+          <pr:PravniKvalifikace typ="doplneni">
+            <pr:Zakon>361/2000</pr:Zakon>
+            <pr:Paragraf>18</pr:Paragraf>
+            <pr:Odstavec>4</pr:Odstavec>
+            <pr:Bod/>
+          </pr:PravniKvalifikace>
+        </pr:PravniKvalifikaceSeznam>
+      </pr:Prestupek>
+      <pr:Sankce xmlns:pr="http://www.vitasw.cz/NS/Prestupky">
+        <pr:Pokuta>
+          <pr:Castka/>
+          <pr:Predepsano/>
+          <pr:Splatnost/>
+        </pr:Pokuta>
+      </pr:Sankce>
+      <sx:Prubeh xmlns:sx="http://www.vitasw.cz/NS/Rizeni">
+        <sx:Udalost>
+          <sx:Typ/>
+          <sx:Datum/>
+        </sx:Udalost>
+      </sx:Prubeh>
+    </ess:DoplnujiciData>
+    <ess:VlozeneDokumenty>
+      <ess:VlozenyDokument>
+        <ess:Dokument>
+          <ess:Identifikator>
+            <ess:HodnotaId>B06</ess:HodnotaId>
+            <ess:ZdrojId>1007</ess:ZdrojId>
+          </ess:Identifikator>
+          <ess:Nazev>Oznámení přestupku RZ:1L25307</ess:Nazev>
+          <ess:CisloJednaci>0000228/Městs/2017/SPR</ess:CisloJednaci>
+          <ess:DatumCasVytvoreni>2017-08-01T10:37:17</ess:DatumCasVytvoreni>
+        </ess:Dokument>
+      </ess:VlozenyDokument>
+    </ess:VlozeneDokumenty>
+  </ess:Spis>
+</ess:Spisy>

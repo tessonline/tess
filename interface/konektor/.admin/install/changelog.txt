@@ -1,0 +1,13 @@
+#2009-03-25|onma
+- pridany sluzby getdoc (vcetne souboru)
+
+
+//pridat funkce
+
+del_dokument (udelat storno)
+del_file
+spis_zalozit (pokud dokument_id dokumentu nebo cisla spisu, pak se dokument prida)
+spis_uzavrit 
+spis_otevrit
+spis_zrusit 
+zapsat_dorucenku

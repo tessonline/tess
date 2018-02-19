@@ -1,0 +1,19 @@
+create table posta_interface_login
+  (
+    cas int4,
+    sw varchar(50),
+    session_id varchar(50)
+  );
+
+create table posta_interface_log
+  (
+    id serial,
+    datum varchar(50),
+    sw varchar(50),
+    chyba int,
+    popis text,
+    request text,
+    response text,  
+    session_id varchar(50)
+    
+  );
